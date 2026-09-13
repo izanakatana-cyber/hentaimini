@@ -1,22 +1,15 @@
 const express = require("express");
-const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const { execFile } = require("child_process");
-const { promisify } = require("util");
-
-const execFileAsync = promisify(execFile);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const ROOT = __dirname;
 const PUBLIC = path.join(ROOT, "public");
-const UPLOADS = path.join(ROOT, "uploads");
-const THUMBS = path.join(ROOT, "uploads", "thumbs");
 const DATA = path.join(ROOT, "videos.json");
 
-for (const dir of [UPLOADS, PUBLIC, THUMBS]) {
+for (const dir of [PUBLIC]) {
   fs.mkdirSync(dir, { recursive: true });
 }
 if (!fs.existsSync(DATA)) {
@@ -25,40 +18,7 @@ if (!fs.existsSync(DATA)) {
 
 app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true }));
-app.use("/uploads", express.static(UPLOADS, {
-  setHeaders: (res, filePath) => {
-    if (/\.(mp4|webm|ogg|mov|mkv)$/i.test(filePath)) {
-      res.setHeader("Accept-Ranges", "bytes");
-    }
-  }
-}));
 app.use(express.static(PUBLIC));
-
-const allowedExt = [".mp4", ".webm", ".ogg", ".mov", ".mkv", ".avi"];
-
-const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, UPLOADS),
-  filename: (_req, file, cb) => {
-    const ext = path.extname(file.originalname).toLowerCase() || ".mp4";
-    const safeExt = allowedExt.includes(ext) ? ext : ".mp4";
-    cb(null, `${Date.now()}-${crypto.randomBytes(6).toString("hex")}${safeExt}`);
-  }
-});
-
-const upload = multer({
-  storage,
-  limits: { fileSize: 2 * 1024 * 1024 * 1024 },
-  fileFilter: (_req, file, cb) => {
-    if (file.mimetype && file.mimetype.startsWith("video/")) {
-      return cb(null, true);
-    }
-    const ext = path.extname(file.originalname).toLowerCase();
-    if (allowedExt.includes(ext)) {
-      return cb(null, true);
-    }
-    cb(new Error("Desteklenmeyen video formatı. MP4, WebM, OGG, MOV, MKV kullan."));
-  }
-});
 
 function readVideos() {
   try {
@@ -74,28 +34,15 @@ function writeVideos(videos) {
   fs.writeFileSync(DATA, JSON.stringify(videos, null, 2), "utf8");
 }
 
-async function makeThumbnail(videoPath, thumbPath) {
-  // 1. saniyeden kare al; başarısız olursa 0.saniyeyi dene
-  const attempts = ["00:00:01.000", "00:00:00.500", "00:00:00.000"];
-  for (const ss of attempts) {
-    try {
-      await execFileAsync("ffmpeg", [
-        "-y",
-        "-ss", ss,
-        "-i", videoPath,
-        "-frames:v", "1",
-        "-q:v", "3",
-        "-vf", "scale=640:-1",
-        thumbPath
-      ], { timeout: 30000 });
-      if (fs.existsSync(thumbPath) && fs.statSync(thumbPath).size > 100) {
-        return true;
-      }
-    } catch (e) {
-      // dene bir sonraki
-    }
-  }
-  return false;
+/** Gömme src'sini temizle ve doğrula */
+function sanitizeEmbedSrc(raw) {
+  let src = String(raw || "").trim();
+  if (!src) return null;
+  if (src.startsWith("//")) src = "https:" + src;
+  if (!/^https?:\/\//i.test(src)) return null;
+  // Çok uzun URL'leri reddet
+  if (src.length > 2000) return null;
+  return src;
 }
 
 app.get("/api/videos", (_req, res) => {
@@ -106,71 +53,59 @@ app.get("/api/videos", (_req, res) => {
 });
 
 app.post("/api/upload", (req, res) => {
-  upload.single("video")(req, res, async (err) => {
-    if (err) {
-      console.error("Upload error:", err.message);
-      return res.status(400).json({ error: err.message || "Yükleme başarısız." });
-    }
-    if (!req.file) {
+  try {
+    const title =
+      String(req.body.title || "Yeni video")
+        .trim()
+        .slice(0, 160) || "Yeni video";
+    const description = String(req.body.description || "").trim().slice(0, 3000);
+    let category = String(req.body.category || "Yeni").trim().slice(0, 60);
+    if (category === "all" || category === "Tümü" || !category) category = "Yeni";
+
+    const tags = String(req.body.tags || "")
+      .split(",")
+      .map((x) => x.trim())
+      .filter(Boolean)
+      .slice(0, 20);
+
+    const embedSrc = sanitizeEmbedSrc(req.body.embedSrc || req.body.url);
+    if (!embedSrc) {
       return res.status(400).json({
-        error: "Video dosyası gerekli. Form-data ile 'video' alanı gönder."
+        error: "Geçerli bir gömme URL’si (embedSrc) gerekli. iframe src veya doğrudan https URL gönder."
       });
     }
 
-    try {
-      const title =
-        String(req.body.title || path.parse(req.file.originalname).name)
-          .trim()
-          .slice(0, 160) || "Yeni video";
-      const description = String(req.body.description || "").trim().slice(0, 3000);
-      let category = String(req.body.category || "Yeni").trim().slice(0, 60);
-      if (category === "all" || category === "Tümü" || !category) category = "Yeni";
+    // Opsiyonel ham kod (sadece saklanır, oynatmada src kullanılır)
+    const embedCode = String(req.body.embedCode || "").trim().slice(0, 4000) || null;
 
-      const tags = String(req.body.tags || "")
-        .split(",")
-        .map((x) => x.trim())
-        .filter(Boolean)
-        .slice(0, 20);
+    const item = {
+      id: crypto.randomUUID(),
+      title,
+      description,
+      category,
+      tags,
+      type: "embed",
+      embedSrc,
+      url: embedSrc,
+      embedCode,
+      thumbnail: null,
+      duration: "Embed",
+      rating: "Yeni",
+      size: 0,
+      mimeType: "embed/iframe",
+      createdAt: new Date().toISOString()
+    };
 
-      const baseName = path.parse(req.file.filename).name;
-      const thumbFile = `${baseName}.jpg`;
-      const thumbPath = path.join(THUMBS, thumbFile);
-      let thumbnail = null;
+    const videos = readVideos();
+    videos.push(item);
+    writeVideos(videos);
 
-      const ok = await makeThumbnail(req.file.path, thumbPath);
-      if (ok) {
-        thumbnail = `/uploads/thumbs/${encodeURIComponent(thumbFile)}`;
-      }
-
-      const item = {
-        id: crypto.randomUUID(),
-        title,
-        description,
-        category,
-        tags,
-        filename: req.file.filename,
-        url: `/uploads/${encodeURIComponent(req.file.filename)}`,
-        thumbnail,
-        originalName: req.file.originalname,
-        size: req.file.size,
-        mimeType: req.file.mimetype || "video/mp4",
-        createdAt: new Date().toISOString()
-      };
-
-      const videos = readVideos();
-      videos.push(item);
-      writeVideos(videos);
-
-      console.log(`Video yüklendi: ${item.title} (${item.filename}) thumb=${!!thumbnail}`);
-      res.status(201).json(item);
-    } catch (e) {
-      console.error(e);
-      try {
-        if (req.file && fs.existsSync(req.file.path)) fs.unlinkSync(req.file.path);
-      } catch {}
-      res.status(500).json({ error: "Video kaydedilemedi: " + e.message });
-    }
-  });
+    console.log(`Embed eklendi: ${item.title} → ${item.embedSrc}`);
+    res.status(201).json(item);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: "Video kaydedilemedi: " + e.message });
+  }
 });
 
 app.delete("/api/videos/:id", (req, res) => {
@@ -178,18 +113,6 @@ app.delete("/api/videos/:id", (req, res) => {
   const item = videos.find((v) => v.id === req.params.id);
   if (!item) {
     return res.status(404).json({ error: "Video bulunamadı." });
-  }
-
-  const file = path.join(UPLOADS, item.filename);
-  if (fs.existsSync(file)) {
-    try { fs.unlinkSync(file); } catch (e) { console.error("Dosya silinemedi:", e.message); }
-  }
-  if (item.thumbnail) {
-    const thumbName = path.basename(decodeURIComponent(item.thumbnail));
-    const tpath = path.join(THUMBS, thumbName);
-    if (fs.existsSync(tpath)) {
-      try { fs.unlinkSync(tpath); } catch {}
-    }
   }
   writeVideos(videos.filter((v) => v.id !== req.params.id));
   res.json({ ok: true });
@@ -199,7 +122,7 @@ app.get("/api/health", (_req, res) => {
   res.json({
     ok: true,
     videos: readVideos().length,
-    uploadsDir: UPLOADS
+    mode: "embed-only"
   });
 });
 
@@ -213,7 +136,6 @@ app.use((err, _req, res, _next) => {
 });
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`HentaiMini çalışıyor: http://localhost:${PORT}`);
-  console.log(`Uploads: ${UPLOADS}`);
+  console.log(`HentaiMini (embed-only) çalışıyor: http://localhost:${PORT}`);
   console.log(`Data: ${DATA}`);
 });
