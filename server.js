@@ -3,15 +3,20 @@ const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
+const { execFile } = require("child_process");
+const { promisify } = require("util");
+
+const execFileAsync = promisify(execFile);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const ROOT = __dirname;
 const PUBLIC = path.join(ROOT, "public");
 const UPLOADS = path.join(ROOT, "uploads");
+const THUMBS = path.join(ROOT, "uploads", "thumbs");
 const DATA = path.join(ROOT, "videos.json");
 
-for (const dir of [UPLOADS, PUBLIC]) {
+for (const dir of [UPLOADS, PUBLIC, THUMBS]) {
   fs.mkdirSync(dir, { recursive: true });
 }
 if (!fs.existsSync(DATA)) {
@@ -69,6 +74,30 @@ function writeVideos(videos) {
   fs.writeFileSync(DATA, JSON.stringify(videos, null, 2), "utf8");
 }
 
+async function makeThumbnail(videoPath, thumbPath) {
+  // 1. saniyeden kare al; başarısız olursa 0.saniyeyi dene
+  const attempts = ["00:00:01.000", "00:00:00.500", "00:00:00.000"];
+  for (const ss of attempts) {
+    try {
+      await execFileAsync("ffmpeg", [
+        "-y",
+        "-ss", ss,
+        "-i", videoPath,
+        "-frames:v", "1",
+        "-q:v", "3",
+        "-vf", "scale=640:-1",
+        thumbPath
+      ], { timeout: 30000 });
+      if (fs.existsSync(thumbPath) && fs.statSync(thumbPath).size > 100) {
+        return true;
+      }
+    } catch (e) {
+      // dene bir sonraki
+    }
+  }
+  return false;
+}
+
 app.get("/api/videos", (_req, res) => {
   const list = readVideos().sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -77,7 +106,7 @@ app.get("/api/videos", (_req, res) => {
 });
 
 app.post("/api/upload", (req, res) => {
-  upload.single("video")(req, res, (err) => {
+  upload.single("video")(req, res, async (err) => {
     if (err) {
       console.error("Upload error:", err.message);
       return res.status(400).json({ error: err.message || "Yükleme başarısız." });
@@ -103,6 +132,16 @@ app.post("/api/upload", (req, res) => {
         .filter(Boolean)
         .slice(0, 20);
 
+      const baseName = path.parse(req.file.filename).name;
+      const thumbFile = `${baseName}.jpg`;
+      const thumbPath = path.join(THUMBS, thumbFile);
+      let thumbnail = null;
+
+      const ok = await makeThumbnail(req.file.path, thumbPath);
+      if (ok) {
+        thumbnail = `/uploads/thumbs/${encodeURIComponent(thumbFile)}`;
+      }
+
       const item = {
         id: crypto.randomUUID(),
         title,
@@ -111,6 +150,7 @@ app.post("/api/upload", (req, res) => {
         tags,
         filename: req.file.filename,
         url: `/uploads/${encodeURIComponent(req.file.filename)}`,
+        thumbnail,
         originalName: req.file.originalname,
         size: req.file.size,
         mimeType: req.file.mimetype || "video/mp4",
@@ -121,7 +161,7 @@ app.post("/api/upload", (req, res) => {
       videos.push(item);
       writeVideos(videos);
 
-      console.log(`Video yüklendi: ${item.title} (${item.filename})`);
+      console.log(`Video yüklendi: ${item.title} (${item.filename}) thumb=${!!thumbnail}`);
       res.status(201).json(item);
     } catch (e) {
       console.error(e);
@@ -142,10 +182,13 @@ app.delete("/api/videos/:id", (req, res) => {
 
   const file = path.join(UPLOADS, item.filename);
   if (fs.existsSync(file)) {
-    try {
-      fs.unlinkSync(file);
-    } catch (e) {
-      console.error("Dosya silinemedi:", e.message);
+    try { fs.unlinkSync(file); } catch (e) { console.error("Dosya silinemedi:", e.message); }
+  }
+  if (item.thumbnail) {
+    const thumbName = path.basename(decodeURIComponent(item.thumbnail));
+    const tpath = path.join(THUMBS, thumbName);
+    if (fs.existsSync(tpath)) {
+      try { fs.unlinkSync(tpath); } catch {}
     }
   }
   writeVideos(videos.filter((v) => v.id !== req.params.id));

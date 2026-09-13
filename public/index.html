@@ -101,12 +101,16 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 .card{min-width:0;background:#111019;border:1px solid #24202c;border-radius:15px;overflow:hidden;cursor:pointer;transition:.28s;animation:cardIn .5s both}
 .card:hover{transform:translateY(-5px);border-color:#46384c;box-shadow:0 16px 40px rgba(0,0,0,.4)}
 .thumb{aspect-ratio:16/9;position:relative;overflow:hidden;background:linear-gradient(135deg,#21182a,#11131e)}
-.thumb:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(255,63,145,.38),transparent 30%),linear-gradient(135deg,transparent,#09080d)}
-.thumb-art{position:absolute;inset:0;display:grid;place-items:center;font-size:44px;color:rgba(255,255,255,.18)}
-.card:nth-child(2n) .thumb{background:linear-gradient(135deg,#191a2d,#261328)}.card:nth-child(3n) .thumb{background:linear-gradient(135deg,#271722,#121b26)}.card:nth-child(4n) .thumb{background:linear-gradient(135deg,#17242a,#211526)}
-.duration,.quality{position:absolute;bottom:8px;padding:4px 6px;border-radius:5px;background:rgba(0,0,0,.78);font-size:9px;font-weight:800}
+.thumb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1;transition:opacity .2s}
+.thumb-preview{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;z-index:2;background:#000;pointer-events:none}
+.thumb.has-preview:hover .thumb-preview{display:block}
+.thumb.has-preview:hover .thumb-img{opacity:0}
+.thumb.has-preview:hover .play{opacity:0}
+.thumb-art{position:absolute;inset:0;display:grid;place-items:center;font-size:44px;color:rgba(255,255,255,.18);z-index:0}
+.thumb:not(.has-thumb) .thumb-art{z-index:1}
+.duration,.quality{position:absolute;bottom:8px;padding:4px 6px;border-radius:5px;background:rgba(0,0,0,.78);font-size:9px;font-weight:800;z-index:3}
 .duration{right:8px}.quality{left:8px;color:#fff}
-.play{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:.2s}.play span{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:rgba(255,63,145,.92);box-shadow:0 0 30px rgba(255,63,145,.5)}.card:hover .play{opacity:1}
+.play{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:.2s;z-index:3;pointer-events:none}.play span{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:rgba(255,63,145,.92);box-shadow:0 0 30px rgba(255,63,145,.5)}.card:hover .play{opacity:1}
 .info{padding:11px 12px 13px}.title{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:7px}.meta{display:flex;align-items:center;gap:8px;color:#716a79;font-size:9px}.tag{color:#b9b1c2}.rating{margin-left:auto;color:#e7c65d}.heart{color:#686171;cursor:pointer;margin-left:8px;font-size:11px}.heart.active{color:var(--pink)}
 
 .empty{padding:45px;text-align:center;border:1px dashed #302a37;border-radius:18px;color:#716a79;display:none}.empty i{font-size:30px;margin-bottom:12px;color:#4b4351}.empty h3{color:#d8d2df;font-size:15px;margin-bottom:6px}.empty p{font-size:11px}
@@ -114,11 +118,10 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 .modal{position:fixed;inset:0;z-index:500;background:rgba(3,2,5,.84);backdrop-filter:blur(15px);display:none;place-items:center;padding:20px}.modal.open{display:grid}
 .modal-box{width:min(950px,100%);background:#0e0d13;border:1px solid #332b3b;border-radius:20px;box-shadow:0 30px 100px #000;padding:18px;animation:modalIn .3s}
 .modal-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.modal-top h3{font-size:14px}.close{width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer}
-.player{aspect-ratio:16/9;max-height:70vh;background:#050507;border-radius:13px;display:flex;align-items:center;justify-content:center;border:1px solid #211d26;position:relative;overflow:hidden}
-.player video{position:relative;z-index:2;width:100%;height:100%;max-height:70vh;object-fit:contain;background:#000;display:block}
-.player:before{content:"";position:absolute;z-index:0;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,63,145,.16),transparent 65%);animation:float 5s infinite;pointer-events:none}
+.player{aspect-ratio:16/9;background:#050507;border-radius:13px;display:grid;place-items:center;border:1px solid #211d26;position:relative;overflow:hidden}
+.player:before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,63,145,.16),transparent 65%);animation:float 5s infinite}
 .big-play{position:relative;z-index:2;width:70px;height:70px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--pink),var(--purple));font-size:23px;box-shadow:0 0 50px rgba(255,63,145,.4);cursor:pointer}
-.player-label{position:absolute;top:14px;left:14px;z-index:3;background:#17131e;border:1px solid #33283b;border-radius:7px;padding:5px 8px;font-size:9px;font-weight:800;color:#c8bdce}
+.player-label{position:absolute;top:14px;left:14px;background:#17131e;border:1px solid #33283b;border-radius:7px;padding:5px 8px;font-size:9px;font-weight:800;color:#c8bdce}
 .modal-meta{padding:15px 3px 3px;display:flex;justify-content:space-between;gap:12px}.modal-meta p{font-size:11px;color:#81798a;line-height:1.6}.modal-meta b{color:#fff;font-size:15px}
 
 .toast{position:fixed;right:25px;bottom:25px;z-index:800;background:#17141d;border:1px solid #3a3040;padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);font-size:11px;transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s}.toast.show{transform:none;opacity:1}.toast i{color:var(--green);margin-right:7px}
@@ -252,10 +255,18 @@ function render() {
   const grid = document.getElementById("grid");
   const empty = document.getElementById("empty");
 
-  grid.innerHTML = list.map((v, i) => `
-    <article class="card" style="animation-delay:${i * 35}ms" onclick="openPlayer('${v.id}')">
-      <div class="thumb">
-        <div class="thumb-art"><i class="fa-solid ${v.icon || "fa-film"}"></i></div>
+  grid.innerHTML = list.map((v, i) => {
+    const hasThumb = !!v.thumbnail;
+    const thumbCls = "thumb" + (hasThumb ? " has-thumb has-preview" : "");
+    const thumbMedia = hasThumb
+      ? `<img class="thumb-img" src="${escapeHtml(v.thumbnail)}" alt="" loading="lazy" onerror="this.style.display='none'">
+         <video class="thumb-preview" muted loop playsinline preload="metadata" data-src="${escapeHtml(v.url)}"></video>`
+      : `<div class="thumb-art"><i class="fa-solid ${v.icon || "fa-film"}"></i></div>`;
+    return `
+    <article class="card" style="animation-delay:${i * 35}ms" onclick="openPlayer('${v.id}')"
+      onmouseenter="startPreview(this)" onmouseleave="stopPreview(this)">
+      <div class="${thumbCls}">
+        ${thumbMedia}
         <span class="quality">HD</span>
         <span class="duration">${escapeHtml(v.duration || "Video")}</span>
         <div class="play"><span><i class="fa-solid fa-play"></i></span></div>
@@ -271,8 +282,8 @@ function render() {
              onclick="event.stopPropagation(); toggleFavorite('${v.id}')"></i>
         </div>
       </div>
-    </article>
-  `).join("");
+    </article>`;
+  }).join("");
 
   empty.style.display = list.length ? "none" : "block";
   if (!list.length && document.getElementById("sectionTitle").textContent === "Favoriler") {
@@ -332,6 +343,95 @@ document.addEventListener("keydown", e => {
   }
 });
 
+
+
+async function captureFrame(url) {
+  return new Promise((resolve) => {
+    const video = document.createElement("video");
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = "auto";
+    video.crossOrigin = "anonymous";
+    let done = false;
+    const finish = (val) => { if (done) return; done = true; resolve(val); };
+    video.onloadeddata = () => {
+      try {
+        video.currentTime = Math.min(1, (video.duration || 2) * 0.1);
+      } catch { finish(null); }
+    };
+    video.onseeked = () => {
+      try {
+        const canvas = document.createElement("canvas");
+        const w = video.videoWidth || 640;
+        const h = video.videoHeight || 360;
+        canvas.width = 640;
+        canvas.height = Math.round(640 * (h / w));
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        finish(canvas.toDataURL("image/jpeg", 0.82));
+      } catch {
+        finish(null);
+      }
+      video.src = "";
+    };
+    video.onerror = () => finish(null);
+    setTimeout(() => finish(null), 8000);
+    video.src = url;
+  });
+}
+
+async function ensureClientThumbs() {
+  for (const v of videos) {
+    if (v.thumbnail) continue;
+    if (!v.url) continue;
+    const dataUrl = await captureFrame(v.url);
+    if (dataUrl) {
+      v.thumbnail = dataUrl;
+      // kartı güncelle
+      const card = document.querySelector(`article.card[onclick*="${v.id}"]`);
+      if (card) {
+        const thumb = card.querySelector(".thumb");
+        if (thumb && !thumb.classList.contains("has-thumb")) {
+          thumb.classList.add("has-thumb", "has-preview");
+          const art = thumb.querySelector(".thumb-art");
+          if (art) art.remove();
+          const img = document.createElement("img");
+          img.className = "thumb-img";
+          img.src = dataUrl;
+          img.alt = "";
+          const prev = document.createElement("video");
+          prev.className = "thumb-preview";
+          prev.muted = true;
+          prev.loop = true;
+          prev.playsInline = true;
+          prev.preload = "metadata";
+          prev.dataset.src = v.url;
+          thumb.insertBefore(prev, thumb.firstChild);
+          thumb.insertBefore(img, thumb.firstChild);
+        }
+      }
+    }
+  }
+}
+
+function startPreview(card) {
+  const vid = card.querySelector(".thumb-preview");
+  if (!vid) return;
+  if (!vid.src && vid.dataset.src) {
+    vid.src = vid.dataset.src;
+  }
+  vid.currentTime = 0;
+  const p = vid.play();
+  if (p && p.catch) p.catch(() => {});
+}
+
+function stopPreview(card) {
+  const vid = card.querySelector(".thumb-preview");
+  if (!vid) return;
+  vid.pause();
+  try { vid.currentTime = 0; } catch {}
+}
+
 function toggleFavorite(id) {
   if (favorites.has(id)) {
     favorites.delete(id);
@@ -355,13 +455,15 @@ async function loadVideos() {
       type: "Yeni",
       icon: "fa-film",
       duration: formatSize(v.size) || "Video",
-      rating: "Yeni"
+      rating: "Yeni",
+      thumbnail: v.thumbnail || null
     })));
     const countEl = document.querySelector(".stats div:nth-child(3) b");
     if (countEl) countEl.textContent = videos.length;
     document.getElementById("sectionDesc").textContent =
       videos.length ? `${videos.length} video bulundu` : "Henüz video eklenmedi";
     render();
+    ensureClientThumbs();
   } catch (error) {
     console.error(error);
     showToast(error.message || "API'ye ulaşılamadı. node server.js ile başlat.");
@@ -408,8 +510,7 @@ function openPlayer(id) {
 
   const playerBox = document.getElementById("playerBox");
   playerBox.innerHTML = `
-    <video controls autoplay playsinline preload="metadata"
-      style="width:100%;height:100%;max-height:70vh;object-fit:contain;background:#000;display:block;">
+    <video controls autoplay playsinline style="width:100%;height:100%;background:#000;object-fit:contain">
       <source src="${escapeHtml(v.url)}" type="${escapeHtml(v.mimeType || "video/mp4")}">
       Tarayıcınız bu videoyu desteklemiyor.
     </video>`;
