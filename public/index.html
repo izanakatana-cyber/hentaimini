@@ -118,10 +118,11 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 .modal{position:fixed;inset:0;z-index:500;background:rgba(3,2,5,.84);backdrop-filter:blur(15px);display:none;place-items:center;padding:20px}.modal.open{display:grid}
 .modal-box{width:min(950px,100%);background:#0e0d13;border:1px solid #332b3b;border-radius:20px;box-shadow:0 30px 100px #000;padding:18px;animation:modalIn .3s}
 .modal-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.modal-top h3{font-size:14px}.close{width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer}
-.player{aspect-ratio:16/9;background:#050507;border-radius:13px;display:grid;place-items:center;border:1px solid #211d26;position:relative;overflow:hidden}
-.player:before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,63,145,.16),transparent 65%);animation:float 5s infinite}
+.player{aspect-ratio:16/9;max-height:min(70vh,720px);background:#050507;border-radius:13px;display:flex;align-items:center;justify-content:center;border:1px solid #211d26;position:relative;overflow:hidden}
+.player video{position:relative;z-index:2;width:100%;height:100%;object-fit:contain!important;object-position:center center;background:#000;display:block}
+.player:before{content:"";position:absolute;z-index:0;pointer-events:none;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,63,145,.16),transparent 65%);animation:float 5s infinite}
 .big-play{position:relative;z-index:2;width:70px;height:70px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--pink),var(--purple));font-size:23px;box-shadow:0 0 50px rgba(255,63,145,.4);cursor:pointer}
-.player-label{position:absolute;top:14px;left:14px;background:#17131e;border:1px solid #33283b;border-radius:7px;padding:5px 8px;font-size:9px;font-weight:800;color:#c8bdce}
+.player-label{position:absolute;top:14px;left:14px;z-index:3;background:#17131e;border:1px solid #33283b;border-radius:7px;padding:5px 8px;font-size:9px;font-weight:800;color:#c8bdce}
 .modal-meta{padding:15px 3px 3px;display:flex;justify-content:space-between;gap:12px}.modal-meta p{font-size:11px;color:#81798a;line-height:1.6}.modal-meta b{color:#fff;font-size:15px}
 
 .toast{position:fixed;right:25px;bottom:25px;z-index:800;background:#17141d;border:1px solid #3a3040;padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);font-size:11px;transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s}.toast.show{transform:none;opacity:1}.toast i{color:var(--green);margin-right:7px}
@@ -510,7 +511,8 @@ function openPlayer(id) {
 
   const playerBox = document.getElementById("playerBox");
   playerBox.innerHTML = `
-    <video controls autoplay playsinline style="width:100%;height:100%;background:#000;object-fit:contain">
+    <video controls autoplay playsinline preload="metadata"
+      style="width:100%;height:100%;object-fit:contain;object-position:center;background:#000;display:block;">
       <source src="${escapeHtml(v.url)}" type="${escapeHtml(v.mimeType || "video/mp4")}">
       Tarayıcınız bu videoyu desteklemiyor.
     </video>`;
