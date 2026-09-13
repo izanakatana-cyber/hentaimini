@@ -126,6 +126,11 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 .modal-meta{padding:15px 3px 3px;display:flex;justify-content:space-between;gap:12px}.modal-meta p{font-size:11px;color:#81798a;line-height:1.6}.modal-meta b{color:#fff;font-size:15px}
 
 .toast{position:fixed;right:25px;bottom:25px;z-index:800;background:#17141d;border:1px solid #3a3040;padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);font-size:11px;transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s}.toast.show{transform:none;opacity:1}.toast i{color:var(--green);margin-right:7px}
+.dmca-box{width:min(640px,100%);background:#0e0d13;border:1px solid #332b3b;border-radius:20px;box-shadow:0 30px 100px #000;padding:28px;max-height:85vh;overflow:auto}
+.dmca-box h3{font-size:18px;margin-bottom:12px}
+.dmca-box p,.dmca-box li{font-size:13px;color:#a7a0ae;line-height:1.65;margin-bottom:10px}
+.dmca-box ul{padding-left:18px;margin-bottom:14px}
+.dmca-box a{color:var(--pink);text-decoration:underline}
 
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(12px)}}@keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}@keyframes modalIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
 
@@ -146,7 +151,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <div class="age-logo"><i class="fa-solid fa-18"></i></div>
     <h1>HentaiMini</h1>
     <p>Bu platform yetişkinlere yönelik <strong>18+</strong> anime/video içerikleri için tasarlanmıştır.</p>
-    <div class="age-warning"><i class="fa-solid fa-triangle-exclamation"></i> Devam ederek 18 yaşında veya daha büyük olduğunuzu ve bulunduğunuz yerdeki yasalara uygun hareket edeceğinizi onaylarsınız.</div>
+    <div class="age-warning"><i class="fa-solid fa-triangle-exclamation"></i> Devam ederek 18 yaşında veya daha büyük olduğunuzu ve bulunduğunuz yerdeki yasalara uygun hareket edeceğinizi onaylarsınız. Telif hakkı ihlali, yasadışı içerik ve 18 yaş altı materyal kesinlikle yasaktır.</div>
     <div class="age-actions">
       <button class="primary" onclick="enterSite()">18+ Giriş Yap</button>
       <button class="secondary" onclick="leaveSite()">Çıkış</button>
@@ -172,7 +177,12 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <a href="#" data-filter="Fantezi"><i class="fa-solid fa-wand-magic-sparkles"></i> Fantezi</a>
     <a href="#" data-filter="Komedi"><i class="fa-solid fa-face-laugh"></i> Komedi</a>
   </nav>
-  <div class="sidebar-bottom"><strong>18+ içerik modu</strong><p>Yetişkin içerikleri için hazırlanmış katalog arayüzü.</p><div class="status">Sistem hazır</div></div>
+  <div class="nav-label">Yasal</div>
+  <nav class="nav">
+    <a href="#" onclick="openDmca(); return false;"><i class="fa-solid fa-scale-balanced"></i> DMCA / Telif</a>
+    <a href="mailto:dmca.hentaimini@gmail.com"><i class="fa-solid fa-envelope"></i> Şikayet</a>
+  </nav>
+  <div class="sidebar-bottom"><strong>18+ içerik modu</strong><p>Yetişkin içerikleri için hazırlanmış katalog arayüzü. Telifli veya yasadışı içerik yüklemek yasaktır.</p><div class="status">Sistem hazır</div></div>
 </aside>
 
 <main>
@@ -218,6 +228,25 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 </div>
 
 <div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span></span></div>
+
+<div class="modal" id="dmcaModal">
+  <div class="dmca-box">
+    <button class="close" onclick="closeDmca()" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
+    <h3>DMCA / Telif Hakkı Politikası</h3>
+    <p>HentaiMini, telif haklarına saygı duyar. Platforma yüklenen içeriklerden kullanıcılar sorumludur.</p>
+    <p><strong>Yasaklar:</strong></p>
+    <ul>
+      <li>Başkasının telifli eserini izinsiz yüklemek</li>
+      <li>18 yaş altı (gerçek veya kurgusal) cinsel içerik</li>
+      <li>Yasadışı içerik</li>
+    </ul>
+    <p>Telif sahibi olduğunuzu ve içeriğinizin izinsiz kullanıldığını düşünüyorsanız aşağıdaki adrese geçerli bir bildirim gönderin. Geçerli bildirimler incelenir ve ihlal tespit edilirse içerik kaldırılır.</p>
+    <p><strong>DMCA / Telif Bildirim Adresi:</strong><br>
+    <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    <p style="font-size:12px;color:#777">Bildirimde mümkünse: eserin tanımı, ihlal eden URL, iletişim bilgileriniz ve iyi niyet beyanı yer almalıdır. Tekrarlayan ihlalcilerin erişimi kısıtlanabilir.</p>
+    <p style="font-size:11px;color:#666;margin-top:16px">Bu platform kullanıcı tarafından yüklenen içerikler için aracı konumundadır. İçerik sorumluluğu yükleyene aittir.</p>
+  </div>
+</div>
 
 <script>
 const videos = [];
@@ -576,6 +605,16 @@ function leaveSite() {
     '<div style="min-height:100vh;display:grid;place-items:center;color:#aaa;font-family:Inter,sans-serif;background:#09080d;text-align:center;padding:30px"><div><h2 style="color:#fff;margin-bottom:10px">Çıkış yapıldı</h2><p>Bu sayfayı kapatabilirsiniz.</p></div></div>';
 }
 
+function openDmca() {
+  const m = document.getElementById("dmcaModal");
+  if (m) m.classList.add("open");
+}
+
+function closeDmca() {
+  const m = document.getElementById("dmcaModal");
+  if (m) m.classList.remove("open");
+}
+
 if (localStorage.getItem("hm_age_ok") === "1") {
   document.getElementById("ageGate").style.display = "none";
 }
@@ -593,6 +632,19 @@ uploadInput.onchange = async (event) => {
   if (!isVideo) {
     showToast("Lütfen geçerli bir video dosyası seç (MP4, WebM vb.).");
     uploadInput.value = "";
+    return;
+  }
+
+  const ok = confirm(
+    "ÖNEMLİ UYARI\n\n" +
+    "• Sadece kendi ürettiğin veya yasal iznin olan içerik yükle.\n" +
+    "• Telifli / çalıntı içerik yüklemek yasaktır.\n" +
+    "• 18 yaş altı içerik kesinlikle yasaktır.\n\n" +
+    "Devam edersen bu kuralları kabul etmiş sayılırsın.\n\nYüklemek istiyor musun?"
+  );
+  if (!ok) {
+    uploadInput.value = "";
+    showToast("Yükleme iptal edildi.");
     return;
   }
 
@@ -631,6 +683,10 @@ document.addEventListener("click", (e) => {
   const modal = document.getElementById("videoModal");
   if (modal && modal.classList.contains("open") && e.target === modal) {
     closePlayer();
+  }
+  const dmca = document.getElementById("dmcaModal");
+  if (dmca && dmca.classList.contains("open") && e.target === dmca) {
+    closeDmca();
   }
 });
 
