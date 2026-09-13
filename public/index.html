@@ -216,13 +216,14 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 
 <script>
 const videos=[];
+let activeVideo=null;
 let currentFilter="Tümü", favorites=new Set(JSON.parse(localStorage.getItem("hm_favorites")||"[]"));
 
 function render(){
  const q=document.getElementById("search").value.toLowerCase().trim();
  const list=videos.filter(v=>(currentFilter==="Tümü"||v.cat===currentFilter||v.type===currentFilter)&&(!q||(v.title+" "+v.cat).toLowerCase().includes(q)));
  const grid=document.getElementById("grid"), empty=document.getElementById("empty");
- grid.innerHTML=list.map((v,i)=>`<article class="card" style="animation-delay:${i*35}ms" onclick="openPlayer('${escapeHtml(v.title)}')">
+ grid.innerHTML=list.map((v,i)=>`<article class="card" style="animation-delay:${i*35}ms" onclick="openPlayer('${v.id}')">
    <div class="thumb"><div class="thumb-art"><i class="fa-solid ${v.icon}"></i></div><span class="quality">HD</span><span class="duration">${v.duration}</span><div class="play"><span><i class="fa-solid fa-play"></i></span></div></div>
    <div class="info"><div class="title">${escapeHtml(v.title)}</div><div class="meta"><span class="tag">${v.cat}</span><span>•</span><span>18+</span><span class="rating"><i class="fa-solid fa-star"></i> ${v.rating}</span><i class="${favorites.has(v.title)?'fa-solid active':'fa-regular'} fa-heart heart" onclick="event.stopPropagation();toggleFavorite('${escapeHtml(v.title)}')"></i></div></div>
  </article>`).join("");
@@ -248,16 +249,49 @@ document.getElementById("search").addEventListener("input",render);
 document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();document.getElementById("search").focus()}});
 function toggleFavorite(title){showToast('Favoriler sonraki aşamada eklenebilir.')}
 
-function handleUpload(event){
-  const file=event.target.files?.[0];
-  if(!file) return;
-  if(!file.type.startsWith('video/')){
-    showToast('Lütfen bir video dosyası seç.');
-    return;
+async function loadVideos(){
+  try {
+    const response = await fetch("/api/videos");
+    if (!response.ok) throw new Error("Videolar yüklenemedi.");
+    const data = await response.json();
+    videos.splice(0, videos.length, ...data.map(v => ({
+      ...v,
+      cat: v.category || "Yeni",
+      type: "Yeni",
+      icon: "fa-film",
+      duration: "Video",
+      rating: "Yeni"
+    })));
+    document.querySelector(".stats div:nth-child(3) b").textContent = videos.length;
+    document.getElementById("sectionDesc").textContent = videos.length ? `${videos.length} video bulundu` : "Henüz video eklenmedi";
+    render();
+  } catch (error) {
+    console.error(error);
+    showToast(error.message);
   }
-  showToast('Video seçildi: '+file.name+' — sunucu bağlantısı sonraki aşamada yapılacak.');
-  event.target.value='';
 }
+
+function openPlayer(id){
+  const v=videos.find(x=>x.id===id);
+  if(!v) return;
+  let modal=document.getElementById("videoModal");
+  if(!modal){
+    modal=document.createElement("div");
+    modal.id="videoModal";
+    modal.className="modal";
+    modal.innerHTML='<div class="modal-box"><div class="modal-top"><h3 id="playerTitle"></h3><button class="close" onclick="closePlayer()"><i class="fa-solid fa-xmark"></i></button></div><div class="player" id="playerBox"></div></div>';
+    document.body.appendChild(modal);
+  }
+  document.getElementById("playerTitle").textContent=v.title;
+  document.getElementById("playerBox").innerHTML=`<video controls autoplay style="width:100%;height:100%;background:#000"><source src="${v.url}" type="${v.mimeType}">Tarayıcınız videoyu desteklemiyor.</video>`;
+  modal.classList.add("open");
+}
+function closePlayer(){
+  const m=document.getElementById("videoModal");
+  if(m){m.classList.remove("open");document.getElementById("playerBox").innerHTML="";}
+}
+
+function handleUpload(event){} // inline onchange ikinci listener ile çakışmasın
 
 function randomPick(){showToast('Henüz video eklenmedi. İlk videoyu sen yükleyebilirsin.')}
 function showToast(msg){const t=document.getElementById("toast");t.querySelector("span").textContent=msg;t.classList.add("show");clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove("show"),2600)}
@@ -265,40 +299,28 @@ function toggleSidebar(){document.getElementById("sidebar").classList.toggle("op
 function enterSite(){localStorage.setItem("hm_age_ok","1");document.getElementById("ageGate").style.display="none"}
 function leaveSite(){document.body.innerHTML='<div style="min-height:100vh;display:grid;place-items:center;color:#aaa;font-family:Inter,sans-serif;background:#09080d;text-align:center;padding:30px"><div><h2 style="color:#fff;margin-bottom:10px">Çıkış yapıldı</h2><p>Bu sayfayı kapatabilirsiniz.</p></div></div>'}
 if(localStorage.getItem("hm_age_ok")==="1")document.getElementById("ageGate").style.display="none";
-render();
+loadVideos();
 </script>
 
 <script>
-(() => {
-  const input = document.getElementById("uploadInput");
-  if (!input) return;
-
-  input.addEventListener("change", async (event) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    const title = file.name.replace(/\.[^/.]+$/, "");
-    const form = new FormData();
-    form.append("video", file);
-    form.append("title", title);
-
-    try {
-      const response = await fetch("/api/upload", { method: "POST", body: form });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Yükleme başarısız.");
-
-      if (typeof showToast === "function") showToast("Video başarıyla yüklendi.");
-      else alert("Video başarıyla yüklendi.");
-
-      if (typeof loadVideos === "function") await loadVideos();
-    } catch (error) {
-      if (typeof showToast === "function") showToast(error.message);
-      else alert(error.message);
-    } finally {
-      input.value = "";
-    }
-  });
-})();
+const uploadInput = document.getElementById("uploadInput");
+uploadInput.onchange = async (event) => {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  if (!file.type.startsWith("video/")) { showToast("Lütfen geçerli bir video dosyası seç."); return; }
+  const form = new FormData();
+  form.append("video", file);
+  form.append("title", file.name.replace(/\.[^/.]+$/, ""));
+  try {
+    showToast("Video yükleniyor...");
+    const response = await fetch("/api/upload", { method:"POST", body:form });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Yükleme başarısız.");
+    showToast("Video başarıyla yüklendi.");
+    await loadVideos();
+  } catch (error) { showToast(error.message || "Yükleme başarısız."); }
+  finally { uploadInput.value=""; }
+};
 </script>
 
 </body>
