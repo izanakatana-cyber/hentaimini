@@ -195,6 +195,9 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
   </nav>
   <div class="nav-label">Yasal</div>
   <nav class="nav">
+    <a href="#" onclick="openLegal('termsModal'); return false;"><i class="fa-solid fa-file-contract"></i> Şartlar</a>
+    <a href="#" onclick="openLegal('privacyModal'); return false;"><i class="fa-solid fa-user-shield"></i> Gizlilik</a>
+    <a href="#" onclick="openLegal('modal2257'); return false;"><i class="fa-solid fa-id-card"></i> 2257</a>
     <a href="#" onclick="openDmca(); return false;"><i class="fa-solid fa-scale-balanced"></i> DMCA / Telif</a>
     <a href="mailto:dmca.hentaimini@gmail.com"><i class="fa-solid fa-envelope"></i> Şikayet</a>
   </nav>
@@ -243,6 +246,22 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 </main>
 </div>
 
+<!-- ALT FOOTER (hentaicity tarzı) -->
+<footer style="width:100%; text-align:center; padding:28px 16px 40px; color:#716a79; font-size:12px; line-height:1.8; border-top:1px solid #272331; margin-top:10px;">
+  <div style="max-width:720px; margin:0 auto;">
+    <div style="margin-bottom:6px;">
+      <a href="javascript:void(0)" onclick="openLegal('termsModal')" style="color:#716a79; text-decoration:none;">Şartlar ve Koşullar</a>
+      &nbsp;·&nbsp;
+      <a href="javascript:void(0)" onclick="openLegal('privacyModal')" style="color:#716a79; text-decoration:none;">Gizlilik Politikası</a>
+      &nbsp;·&nbsp;
+      <a href="javascript:void(0)" onclick="openLegal('modal2257')" style="color:#716a79; text-decoration:none;">2257</a>
+      &nbsp;·&nbsp;
+      <a href="javascript:void(0)" onclick="openDmca()" style="color:#716a79; text-decoration:none;">DMCA</a>
+    </div>
+    <div style="opacity:0.7;">© 2026 HentaiMini</div>
+  </div>
+</footer>
+
 <div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span></span></div>
 
 <!-- Embed ekleme modalı -->
@@ -287,18 +306,90 @@ https://ornek.com/embed/video123'></textarea>
   <div class="dmca-box">
     <button class="close" onclick="closeDmca()" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
     <h3>DMCA / Telif Hakkı Politikası</h3>
-    <p>HentaiMini, telif haklarına saygı duyar. Platforma yüklenen içeriklerden kullanıcılar sorumludur.</p>
+    <p><strong>Son güncelleme:</strong> 14 Eylül 2026</p>
+    <p>HentaiMini, telif haklarına saygı duyar. Platforma yüklenen içeriklerden kullanıcılar sorumludur. Platform aracı konumundadır.</p>
     <p><strong>Yasaklar:</strong></p>
     <ul>
       <li>Başkasının telifli eserini izinsiz yüklemek</li>
       <li>18 yaş altı (gerçek veya kurgusal) cinsel içerik</li>
       <li>Yasadışı içerik</li>
     </ul>
-    <p>Telif sahibi olduğunuzu ve içeriğinizin izinsiz kullanıldığını düşünüyorsanız aşağıdaki adrese geçerli bir bildirim gönderin. Geçerli bildirimler incelenir ve ihlal tespit edilirse içerik kaldırılır.</p>
+    <p><strong>DMCA Bildirimi nasıl yapılır?</strong><br>
+    Telif sahibi olduğunuzu ve içeriğinizin izinsiz kullanıldığını düşünüyorsanız aşağıdaki bilgileri içeren geçerli bir bildirim gönderin:</p>
+    <ol style="padding-left:18px;margin-bottom:14px;color:#a7a0ae;font-size:13px;line-height:1.65">
+      <li>İhlal edildiğini iddia ettiğiniz telifli eserin tanımı</li>
+      <li>İhlal eden materyalin sitedeki konumu (URL)</li>
+      <li>İletişim bilgileriniz (ad, e-posta, adres)</li>
+      <li>İyi niyetle, kullanımın yetkisiz olduğuna inandığınıza dair beyan</li>
+      <li>Bilgilerin doğru olduğuna ve telif sahibi veya yetkili temsilci olduğunuza dair yeminli beyan (penalty of perjury)</li>
+      <li>Fiziksel veya elektronik imza</li>
+    </ol>
     <p><strong>DMCA / Telif Bildirim Adresi:</strong><br>
     <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    <p style="font-size:12px;color:#777">Bildirimde mümkünse: eserin tanımı, ihlal eden URL, iletişim bilgileriniz ve iyi niyet beyanı yer almalıdır. Tekrarlayan ihlalcilerin erişimi kısıtlanabilir.</p>
+    <p>Geçerli bildirimler incelenir. İhlal tespit edilirse içerik kaldırılır veya erişim engellenir. Tekrarlayan ihlalcilerin erişimi kısıtlanabilir.</p>
+    <p><strong>Karşı bildirim (Counter-Notice):</strong><br>
+    İçeriğinizin hatalı kaldırıldığını düşünüyorsanız karşı bildirim gönderebilirsiniz.</p>
     <p style="font-size:11px;color:#666;margin-top:16px">Bu platform kullanıcı tarafından yüklenen içerikler için aracı konumundadır. İçerik sorumluluğu yükleyene aittir.</p>
+  </div>
+</div>
+
+<!-- Şartlar ve Koşullar -->
+<div class="modal" id="termsModal">
+  <div class="dmca-box">
+    <button class="close" onclick="closeLegal('termsModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
+    <h3>Şartlar ve Koşullar</h3>
+    <p><strong>Son güncelleme:</strong> 14 Eylül 2026</p>
+    <p>HentaiMini platformunu kullanarak aşağıdaki şartları kabul etmiş sayılırsınız.</p>
+    <p><strong>1. Hizmetin niteliği</strong><br>
+    HentaiMini, kullanıcıların gömme kodu ile video ekleyebildiği bir 18+ anime/video platformudur. Platform aracı konumundadır; içeriklerin sahibi ve sorumlusu yükleyen kullanıcıdır.</p>
+    <p><strong>2. Yaş sınırı</strong><br>
+    Siteyi kullanmak için 18 yaşında veya daha büyük olmalısınız.</p>
+    <p><strong>3. Yasak içerikler</strong><br>
+    • 18 yaş altı (gerçek veya kurgusal) cinsel içerik<br>
+    • Telif hakkı ihlali içeren materyal<br>
+    • Yasa dışı faaliyetler, şiddet teşviki, nefret söylemi<br>
+    • Spam, malware</p>
+    <p><strong>4. Kullanıcı sorumluluğu</strong><br>
+    Yüklediğiniz her içerikten yalnızca siz sorumlusunuz. Bildirim üzerine ihlal içeren içerikler kaldırılabilir.</p>
+    <p><strong>5. Sorumluluk sınırlaması</strong><br>
+    Platform “olduğu gibi” sunulur. Kullanıcı içeriklerinden doğan zararlardan platform sorumlu tutulamaz.</p>
+    <p><strong>6. Değişiklikler</strong><br>
+    Bu şartlar güncellenebilir. Güncel metin sitede yayınlandığı andan itibaren geçerlidir.</p>
+  </div>
+</div>
+
+<!-- Gizlilik Politikası -->
+<div class="modal" id="privacyModal">
+  <div class="dmca-box">
+    <button class="close" onclick="closeLegal('privacyModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
+    <h3>Gizlilik Politikası</h3>
+    <p><strong>Son güncelleme:</strong> 14 Eylül 2026</p>
+    <p>HentaiMini olarak gizliliğinize saygı duyuyoruz.</p>
+    <p><strong>1. Toplanan veriler</strong><br>
+    • Teknik veriler: tarayıcı localStorage (yaş onayı, favoriler)<br>
+    • İçerik: sizin eklediğiniz gömme kodları / videolar</p>
+    <p><strong>2. Verilerin kullanımı</strong><br>
+    Veriler yalnızca hizmetin sunulması, güvenlik ve yasal yükümlülükler için kullanılır. Reklam amaçlı satılmaz.</p>
+    <p><strong>3. Saklama</strong><br>
+    Favoriler ve yaş onayı tarayıcınızda tutulur. Sunucu tarafında video metadata’sı saklanabilir.</p>
+    <p><strong>4. Çerezler / Yerel depolama</strong><br>
+    Zorunlu teknik depolama dışında izleme çerezi kullanılmaz.</p>
+    <p><strong>5. Haklarınız</strong><br>
+    Tarayıcı verilerinizi temizleyerek favorileri ve yaş onayını silebilirsiniz.</p>
+  </div>
+</div>
+
+<!-- 2257 -->
+<div class="modal" id="modal2257">
+  <div class="dmca-box">
+    <button class="close" onclick="closeLegal('modal2257')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
+    <h3>18 U.S.C. § 2257 Exemption</h3>
+    <p><strong>18 U.S.C. § 2257 &amp; 28 C.F.R. Part 75 Exemption Statement</strong></p>
+    <p>Bu sitede görüntülenen tüm görsel içerikler (çizimler, animasyonlar, bilgisayar üretimi görseller, kullanıcı gömmeleri dahil) kurgusal niteliktedir veya kullanıcılar tarafından sağlanmıştır.</p>
+    <p>Platform, gerçek insan performansçıların yer aldığı birincil üretici (primary producer) konumunda değildir. Gerçek kişilerin cinsel içerikli görüntülerinin kayıt tutma yükümlülüğü, içeriği yükleyen / sağlayan tarafa aittir.</p>
+    <p>Bu nedenle 18 U.S.C. § 2257 ve ilgili düzenlemeler kapsamındaki kayıt tutma, kimlik doğrulama ve etiketleme yükümlülükleri bu platform için geçerli değildir / muaf tutulmuştur.</p>
+    <p>Tüm karakterlerin ve tasvirlerin 18 yaş ve üzeri olarak tasarlandığı kabul edilir. 18 yaş altı (gerçek veya kurgusal) cinsel içerik kesinlikle yasaktır ve derhal kaldırılır.</p>
+    <p>Platform aracı konumundadır. İçerik sorumluluğu yükleyen / sağlayan kullanıcıdadır.</p>
   </div>
 </div>
 
@@ -585,6 +676,16 @@ function closeDmca() {
   if (m) m.classList.remove("open");
 }
 
+function openLegal(id) {
+  const m = document.getElementById(id);
+  if (m) m.classList.add("open");
+}
+
+function closeLegal(id) {
+  const m = document.getElementById(id);
+  if (m) m.classList.remove("open");
+}
+
 function openEmbedModal() {
   document.getElementById("embedTitle").value = "";
   document.getElementById("embedCode").value = "";
@@ -710,6 +811,10 @@ document.addEventListener("click", (e) => {
   if (emb && emb.classList.contains("open") && e.target === emb) {
     closeEmbedModal();
   }
+  ["termsModal","privacyModal","modal2257"].forEach(id => {
+    const m = document.getElementById(id);
+    if (m && m.classList.contains("open") && e.target === m) closeLegal(id);
+  });
 });
 
 loadVideos();
