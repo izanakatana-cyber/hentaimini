@@ -308,7 +308,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
       <h3>Video / Gömme Kodu Ekle</h3>
       <button class="icon" onclick="closeEmbedModal()" style="width:32px;height:32px"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <p class="hint">İframe gömme kodunu veya doğrudan video URL'sini yapıştırın. Sistem otomatik olarak videonun ortalarından kapak ve öz izleme seçenekleri oluşturur.</p>
+    <p class="hint">İframe gömme kodunu veya doğrudan video URL'sini yapıştırın. Sistem videonun farklı kesitlerini kapak olarak yakalayacaktır.</p>
     
     <div class="embed-field">
       <label for="embedTitle">Video Başlığı</label>
@@ -333,9 +333,9 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     </div>
 
     <div class="embed-field">
-      <label>Kapak Görseli Seçimi (Videonun orta anlarından otomatik)</label>
+      <label>Kapak Görseli Kesit Seçimi (Videonun farklı anlarından)</label>
       <div class="thumb-options" id="autoThumbnails">
-        <span style="font-size:11px;color:var(--muted);grid-column:1/-1">Video kaynağı girildiğinde seçenekler burada belirecektir.</span>
+        <span style="font-size:11px;color:var(--muted);grid-column:1/-1">Video kaynağı girildiğinde kesitler burada belirecektir.</span>
       </div>
       <input type="hidden" id="thumbInput">
       <input type="hidden" id="previewInput">
@@ -388,7 +388,7 @@ function getLocalVideos() {
         title: "Cyber Neon Fantasy - Bölüm 1",
         category: "Romantik",
         embedSrc: "https://www.w3schools.com/html/mov_bbb.mp4",
-        thumbnail: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=60",
+        thumbnail: "https://www.w3schools.com/html/mov_bbb.mp4#t=2",
         preview: "https://www.w3schools.com/html/mov_bbb.mp4",
         duration: "03:45",
         rating: "4.9",
@@ -399,7 +399,7 @@ function getLocalVideos() {
         title: "Starlight Academy - Özel Sürüm",
         category: "Aksiyon",
         embedSrc: "https://www.w3schools.com/html/mov_bbb.mp4",
-        thumbnail: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop&q=60",
+        thumbnail: "https://www.w3schools.com/html/mov_bbb.mp4#t=5",
         preview: "https://www.w3schools.com/html/mov_bbb.mp4",
         duration: "04:12",
         rating: "4.8",
@@ -446,9 +446,17 @@ function render() {
   grid.innerHTML = list.map((v, i) => {
     const hasThumb = !!v.thumbnail;
     const thumbCls = "thumb" + (hasThumb ? " has-thumb" : "");
-    const thumbMedia = hasThumb
-      ? `<img class="thumb-img" src="${escapeHtml(v.thumbnail)}" alt="" loading="lazy" onerror="this.style.display='none'">`
-      : `<div class="thumb-art"><i class="fa-solid fa-film"></i></div>`;
+    
+    let thumbMedia = "";
+    if (hasThumb) {
+      if (v.thumbnail.endsWith(".mp4") || v.thumbnail.includes(".mp4#t=")) {
+        thumbMedia = `<video class="thumb-img" src="${escapeHtml(v.thumbnail)}" muted preload="metadata"></video>`;
+      } else {
+        thumbMedia = `<img class="thumb-img" src="${escapeHtml(v.thumbnail)}" alt="" loading="lazy" onerror="this.style.display='none'">`;
+      }
+    } else {
+      thumbMedia = `<div class="thumb-art"><i class="fa-solid fa-film"></i></div>`;
+    }
     
     const previewSrc = v.preview || v.embedSrc || "";
     const previewMedia = previewSrc && (previewSrc.endsWith(".mp4") || previewSrc.endsWith(".webm") || previewSrc.includes("mov_bbb.mp4"))
@@ -457,8 +465,8 @@ function render() {
 
     return `
     <article class="card" style="animation-delay:${i * 35}ms" 
-             onmouseenter="const vEl=this.querySelector('video'); if(vEl){vEl.play().catch(()=>{})}" 
-             onmouseleave="const vEl=this.querySelector('video'); if(vEl){vEl.pause();vEl.currentTime=0}"
+             onmouseenter="const vEl=this.querySelector('video.thumb-preview'); if(vEl){vEl.play().catch(()=>{})}" 
+             onmouseleave="const vEl=this.querySelector('video.thumb-preview'); if(vEl){vEl.pause();vEl.currentTime=0}"
              onclick="openWatchView('${v.id}')">
       <div class="${thumbCls}">
         ${thumbMedia}
@@ -674,7 +682,7 @@ function openEmbedModal() {
   document.getElementById("embedCode").value = "";
   document.getElementById("thumbInput").value = "";
   document.getElementById("previewInput").value = "";
-  document.getElementById("autoThumbnails").innerHTML = '<span style="font-size:11px;color:var(--muted);grid-column:1/-1">Video kaynağı girildiğinde otomatik kapak seçenekleri burada görünür.</span>';
+  document.getElementById("autoThumbnails").innerHTML = '<span style="font-size:11px;color:var(--muted);grid-column:1/-1">Video kaynağı girildiğinde kesitler burada belirir.</span>';
   selectedThumbUrl = "";
   document.getElementById("embedModal").classList.add("open");
 }
@@ -709,21 +717,21 @@ function handleSourceInput() {
   if (src.endsWith(".mp4") || src.endsWith(".webm") || src.includes("mov_bbb.mp4")) {
     container.innerHTML = `
       <div class="thumb-opt" onclick="selectAutoThumb('${escapeHtml(src)}#t=2', this)"><video src="${escapeHtml(src)}#t=2" muted preload="metadata"></video></div>
+      <div class="thumb-opt" onclick="selectAutoThumb('${escapeHtml(src)}#t=5', this)"><video src="${escapeHtml(src)}#t=5" muted preload="metadata"></video></div>
       <div class="thumb-opt" onclick="selectAutoThumb('${escapeHtml(src)}#t=10', this)"><video src="${escapeHtml(src)}#t=10" muted preload="metadata"></video></div>
-      <div class="thumb-opt" onclick="selectAutoThumb('${escapeHtml(src)}#t=20', this)"><video src="${escapeHtml(src)}#t=20" muted preload="metadata"></video></div>
     `;
     if (!document.getElementById("previewInput").value) {
       document.getElementById("previewInput").value = src;
     }
   } else {
-    const defaultCovers = [
-      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=60",
-      "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop&q=60",
-      "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop&q=60"
-    ];
-    container.innerHTML = defaultCovers.map(url => `
-      <div class="thumb-opt" onclick="selectAutoThumb('${url}', this)"><img src="${url}" alt="Kapak"></div>
-    `).join("");
+    // Harici iframe veya video linkleri için doğrudan kendi kaynağından kesit/önizleme simülasyonu
+    container.innerHTML = `
+      <div class="thumb-opt selected" onclick="selectAutoThumb('${escapeHtml(src)}', this)"><div style="display:grid;place-items:center;height:100%;font-size:10px;color:#fff;background:#222">Kaynak Önizleme 1</div></div>
+      <div class="thumb-opt" onclick="selectAutoThumb('${escapeHtml(src)}', this)"><div style="display:grid;place-items:center;height:100%;font-size:10px;color:#fff;background:#1a1a1a">Kaynak Önizleme 2</div></div>
+      <div class="thumb-opt" onclick="selectAutoThumb('${escapeHtml(src)}', this)"><div style="display:grid;place-items:center;height:100%;font-size:10px;color:#fff;background:#111">Kaynak Önizleme 3</div></div>
+    `;
+    selectedThumbUrl = src;
+    document.getElementById("thumbInput").value = src;
   }
 }
 
@@ -752,7 +760,7 @@ async function submitEmbed() {
     return;
   }
 
-  const thumbnail = customThumb || selectedThumbUrl || "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=60";
+  const thumbnail = customThumb || selectedThumbUrl || embedSrc;
   const preview = customPreview || embedSrc;
 
   try {
@@ -787,7 +795,7 @@ async function submitEmbed() {
     
     showToast("Video başarıyla eklendi.");
     closeEmbedModal();
-    await loadVideos();
+    loadVideos();
   } catch (err) {
     showToast(err.message || "Ekleme başarısız.");
   }
