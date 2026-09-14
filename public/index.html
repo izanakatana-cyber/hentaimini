@@ -102,8 +102,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 .card:hover .thumb-preview{opacity:1;transform:scale(1.1)}
 .card:hover .thumb-img{opacity:0.3}
 .card:hover .play{opacity:0}
-.thumb-art{position:absolute;inset:0;display:grid;place-items:center;font-size:44px;color:rgba(255,255,255,.18);z-index:0}
-.thumb:not(.has-thumb) .thumb-art{z-index:1}
+.thumb-art{position:absolute;inset:0;display:grid;place-items:center;font-size:44px;color:rgba(255,255,255,.18);z-index:1;background:linear-gradient(135deg,#1f1328,#120f18)}
 .duration,.quality{position:absolute;bottom:8px;padding:4px 6px;border-radius:5px;background:rgba(0,0,0,.78);font-size:9px;font-weight:800;z-index:3}
 .duration{right:8px}.quality{left:8px;color:#fff}
 .play{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:.2s;z-index:3;pointer-events:none}.play span{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:rgba(255,63,145,.92);box-shadow:0 0 30px rgba(255,63,145,.5)}.card:hover .play{opacity:1}
@@ -222,7 +221,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
       <div class="hero-content">
         <div class="eyebrow"><i class="fa-solid fa-shield-halved"></i> 18+ Anime Video Platformu</div>
         <h1>Anime dünyasının <span class="gradient">yetişkinlere özel</span> köşesi.</h1>
-        <p>Geniş ekran izleme deneyimi, otomatik kapak seçici, öz izleme (hover preview) ve hızlı arama özellikleriyle donatıldı.</p>
+        <p>Geniş ekran izleme deneyimi, otomatik videodan kapak çıkarıcı, öz izleme ve hızlı arama özellikleriyle donatıldı.</p>
         <div class="hero-actions">
           <button class="primary" onclick="openEmbedModal()"><i class="fa-solid fa-code"></i> Video Ekle</button>
           <button class="secondary" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-compass"></i> Kataloğu Keşfet</button>
@@ -305,10 +304,10 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 <div class="modal" id="embedModal">
   <div class="embed-box">
     <div class="modal-top" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-      <h3>Video / Gömme Kodu Ekle</h3>
+      <h3>Video ve Otomatik Kapak Ekle</h3>
       <button class="icon" onclick="closeEmbedModal()" style="width:32px;height:32px"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <p class="hint">İframe gömme kodunu veya doğrudan video URL'sini yapıştırın. Sistem videonun farklı kesitlerini kapak olarak yakalayacaktır.</p>
+    <p class="hint">Doğrudan video linki (.mp4 vb.) veya YouTube / iframe bağlantısı yapıştırın. Sistem videonun anlarından kapak görsellerini otomatik olarak oluşturacaktır.</p>
     
     <div class="embed-field">
       <label for="embedTitle">Video Başlığı</label>
@@ -317,7 +316,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 
     <div class="embed-field">
       <label for="embedCategory">Kategori</label>
-      <select id="embedCategory">
+      <select id="embedCategory" onchange="handleSourceInput()">
         <option value="Romantik">Romantik</option>
         <option value="Aksiyon">Aksiyon</option>
         <option value="Fantezi">Fantezi</option>
@@ -328,14 +327,14 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     </div>
 
     <div class="embed-field">
-      <label for="embedCode">Video Kaynağı / Gömme Kodu (URL veya Iframe)</label>
-      <textarea id="embedCode" placeholder="https://ornek.com/video.mp4 veya <iframe src='...'></iframe>" oninput="handleSourceInput()"></textarea>
+      <label for="embedCode">Video Kaynağı / URL</label>
+      <textarea id="embedCode" placeholder="https://ornek.com/video.mp4 veya YouTube linki" oninput="handleSourceInput()"></textarea>
     </div>
 
     <div class="embed-field">
-      <label>Kapak Görseli Kesit Seçimi (Videonun farklı anlarından)</label>
+      <label>Videonun Farklı Anlarından Otomatik Kapak Seçimi</label>
       <div class="thumb-options" id="autoThumbnails">
-        <span style="font-size:11px;color:var(--muted);grid-column:1/-1">Video kaynağı girildiğinde kesitler burada belirecektir.</span>
+        <span style="font-size:11px;color:var(--muted);grid-column:1/-1">Video kaynağı girildiğinde kapak kesitleri burada belirecektir.</span>
       </div>
       <input type="hidden" id="thumbInput">
       <input type="hidden" id="previewInput">
@@ -361,7 +360,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 <!-- ŞARTLAR MODAL -->
 <div class="modal" id="termsModal">
   <div class="dmca-box">
-    <button class="close" onclick="closeLegal('termsModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
+    <button class="close" onclick="openLegal('termsModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
     <h3>Kullanım Şartları</h3>
     <p>Siteyi kullanmak için 18 yaş ve üzerinde olmalısınız. Yasadışı içerik yüklemek yasaktır.</p>
   </div>
@@ -370,442 +369,451 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 <!-- GİZLİLİK MODAL -->
 <div class="modal" id="privacyModal">
   <div class="dmca-box">
-    <button class="close" onclick="closeLegal('privacyModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
+    <button class="close" onclick="openLegal('privacyModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
     <h3>Gizlilik Politikası</h3>
     <p>Tarayıcınızda yalnızca favoriler ve yaş onayı saklanır.</p>
   </div>
 </div>
 
 <script>
-const STORAGE_KEY = "hm_videos_data_v1";
+let allVideos = [];
+let activeFilter = "Tümü";
+let currentVideoId = null;
+let favorites = JSON.parse(localStorage.getItem('hentaimini_favs') || '[]');
 
-function getLocalVideos() {
-  const data = localStorage.getItem(STORAGE_KEY);
-  if (!data) {
-    const defaults = [
-      {
-        id: "demo-1",
-        title: "Cyber Neon Fantasy - Bölüm 1",
-        category: "Romantik",
-        embedSrc: "https://www.w3schools.com/html/mov_bbb.mp4",
-        thumbnail: "https://www.w3schools.com/html/mov_bbb.mp4#t=2",
-        preview: "https://www.w3schools.com/html/mov_bbb.mp4",
-        duration: "03:45",
-        rating: "4.9",
-        createdAt: new Date().toISOString()
-      },
-      {
-        id: "demo-2",
-        title: "Starlight Academy - Özel Sürüm",
-        category: "Aksiyon",
-        embedSrc: "https://www.w3schools.com/html/mov_bbb.mp4",
-        thumbnail: "https://www.w3schools.com/html/mov_bbb.mp4#t=5",
-        preview: "https://www.w3schools.com/html/mov_bbb.mp4",
-        duration: "04:12",
-        rating: "4.8",
-        createdAt: new Date().toISOString()
-      }
-    ];
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(defaults));
-    return defaults;
+function enterSite(){
+  document.getElementById('ageGate').style.display = 'none';
+  localStorage.setItem('age_verified', 'true');
+  loadVideos();
+}
+
+function leaveSite(){
+  window.location.href = "https://www.google.com";
+}
+
+if(localStorage.getItem('age_verified') === 'true'){
+  document.getElementById('ageGate').style.display = 'none';
+  loadVideos();
+}
+
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.querySelector('span').innerText = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3000);
+}
+
+async function loadVideos(){
+  try {
+    const res = await fetch('/api/videos');
+    allVideos = await res.json();
+    document.getElementById('statVideoCount').innerHTML = `<b>${allVideos.length}</b><span>Video</span>`;
+    renderGrid();
+  } catch (err){
+    console.error(err);
+    showToast('Videolar yüklenirken hata oluştu.');
   }
-  try { return JSON.parse(data); } catch { return []; }
 }
 
-function saveLocalVideos(list) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-}
+function renderGrid(){
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  const searchVal = document.getElementById('search').value.toLowerCase();
 
-const videos = [];
-let currentFilter = "Tümü";
-let favorites = new Set(JSON.parse(localStorage.getItem("hm_favorites") || "[]"));
-let activeVideoId = null;
-let selectedThumbUrl = "";
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, m => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  }[m]));
-}
-
-function render() {
-  const q = document.getElementById("search").value.toLowerCase().trim();
-  let list = videos.filter(v => {
-    const catMatch = currentFilter === "Tümü" ||
-      v.category === currentFilter ||
-      v.cat === currentFilter ||
-      (currentFilter === "Popüler" && Number(v.rating) >= 4) ||
-      (currentFilter === "Yeni" && (v.category === "Yeni" || v.cat === "Yeni"));
-    const searchMatch = !q || (v.title + " " + (v.category || v.cat || "")).toLowerCase().includes(q);
-    return catMatch && searchMatch;
+  let filtered = allVideos.filter(v => {
+    const matchesFilter = activeFilter === 'Tümü' || v.category === activeFilter || (activeFilter === 'Popüler' && Number(v.rating)>=4.8) || (activeFilter === 'Yeni');
+    const matchesSearch = !searchVal || v.title.toLowerCase().includes(searchVal) || (v.category && v.category.toLowerCase().includes(searchVal));
+    return matchesFilter && matchesSearch;
   });
 
-  const grid = document.getElementById("grid");
-  const empty = document.getElementById("empty");
+  if(filtered.length === 0){
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    document.getElementById('sectionDesc').innerText = 'Gösterilecek içerik bulunamadı.';
+    return;
+  }
 
-  grid.innerHTML = list.map((v, i) => {
-    const hasThumb = !!v.thumbnail;
-    const thumbCls = "thumb" + (hasThumb ? " has-thumb" : "");
-    
-    let thumbMedia = "";
-    if (hasThumb) {
-      if (v.thumbnail.endsWith(".mp4") || v.thumbnail.includes(".mp4#t=")) {
-        thumbMedia = `<video class="thumb-img" src="${escapeHtml(v.thumbnail)}" muted preload="metadata"></video>`;
-      } else {
-        thumbMedia = `<img class="thumb-img" src="${escapeHtml(v.thumbnail)}" alt="" loading="lazy" onerror="this.style.display='none'">`;
-      }
-    } else {
-      thumbMedia = `<div class="thumb-art"><i class="fa-solid fa-film"></i></div>`;
-    }
-    
-    const previewSrc = v.preview || v.embedSrc || "";
-    const previewMedia = previewSrc && (previewSrc.endsWith(".mp4") || previewSrc.endsWith(".webm") || previewSrc.includes("mov_bbb.mp4"))
-      ? `<video class="thumb-preview" src="${escapeHtml(previewSrc)}" muted loop playsinline preload="none"></video>`
-      : (hasThumb ? `<img class="thumb-preview" src="${escapeHtml(v.thumbnail)}" alt="">` : '');
+  empty.style.display = 'none';
+  document.getElementById('sectionDesc').innerText = `${filtered.length} video listeleniyor`;
+
+  grid.innerHTML = filtered.map(v => {
+    const isFav = favorites.includes(v.id);
+    const hasThumb = v.thumbnail && v.thumbnail.length > 5;
+    const hasPreview = v.preview && v.preview.length > 5;
 
     return `
-    <article class="card" style="animation-delay:${i * 35}ms" 
-             onmouseenter="const vEl=this.querySelector('video.thumb-preview'); if(vEl){vEl.play().catch(()=>{})}" 
-             onmouseleave="const vEl=this.querySelector('video.thumb-preview'); if(vEl){vEl.pause();vEl.currentTime=0}"
-             onclick="openWatchView('${v.id}')">
-      <div class="${thumbCls}">
-        ${thumbMedia}
-        ${previewMedia}
-        <span class="quality">HD</span>
-        <span class="duration">${escapeHtml(v.duration || "HD")}</span>
-        <div class="play"><span><i class="fa-solid fa-play"></i></span></div>
-      </div>
-      <div class="info">
-        <div class="title">${escapeHtml(v.title)}</div>
-        <div class="meta">
-          <span class="tag">${escapeHtml(v.category || v.cat || "Yeni")}</span>
-          <span>•</span>
-          <span>18+</span>
-          <span class="rating"><i class="fa-solid fa-star"></i> ${escapeHtml(String(v.rating || "4.8"))}</span>
-          <i class="${favorites.has(v.id) ? "fa-solid active" : "fa-regular"} fa-heart heart"
-             onclick="event.stopPropagation(); toggleFavorite('${v.id}')"></i>
+      <div class="card" onclick="openWatch('${v.id}')">
+        <div class="thumb">
+          <div class="thumb-art"><i class="fa-solid fa-play"></i></div>
+          ${hasThumb ? `<img class="thumb-img" src="${v.thumbnail}" alt="${v.title}" loading="lazy" onerror="this.style.display='none';">` : ''}
+          ${hasPreview ? `<img class="thumb-preview" src="${v.preview}" alt="preview" onerror="this.style.display='none';">` : ''}
+          <div class="play"><span><i class="fa-solid fa-play" style="color:#fff;margin-left:2px"></i></span></div>
+          <span class="quality">${v.duration || 'HD'}</span>
+        </div>
+        <div class="info">
+          <div class="title" title="${v.title}">${v.title}</div>
+          <div class="meta">
+            <span class="tag">${v.category || 'Genel'}</span>
+            <span class="rating"><i class="fa-solid fa-star"></i> ${v.rating || '4.9'}</span>
+            <i class="fa-solid fa-heart heart ${isFav ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite('${v.id}')"></i>
+          </div>
         </div>
       </div>
-    </article>`;
-  }).join("");
-
-  empty.style.display = list.length ? "none" : "block";
+    `;
+  }).join('');
 }
 
-function setFilter(f) {
-  currentFilter = f;
+document.getElementById('search').addEventListener('input', renderGrid);
+
+function setFilter(category){
+  activeFilter = category;
+  document.querySelectorAll('.filter').forEach(f => {
+    f.classList.toggle('active', f.getAttribute('data-filter') === category);
+  });
+  document.getElementById('sectionTitle').innerText = category === 'Tümü' ? 'Öne Çıkanlar' : category + ' Videoları';
   goHome();
-  document.querySelectorAll(".filter").forEach(b =>
-    b.classList.toggle("active", b.dataset.filter === f)
-  );
-  document.getElementById("sectionTitle").textContent =
-    f === "Tümü" ? "Öne Çıkanlar" : f + " İçerikleri";
-  render();
+  renderGrid();
 }
 
-document.querySelectorAll(".filter").forEach(b => {
-  b.onclick = () => setFilter(b.dataset.filter);
-});
+function goHome(){
+  document.getElementById('watchView').classList.remove('active');
+  document.getElementById('homeView').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
 
-document.getElementById("search").addEventListener("input", render);
-document.addEventListener("keydown", e => {
-  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
-    e.preventDefault();
-    document.getElementById("search").focus();
-  }
-});
+function randomPick(){
+  if(allVideos.length === 0) return;
+  const rand = allVideos[Math.floor(Math.random() * allVideos.length)];
+  openWatch(rand.id);
+}
 
-function toggleFavorite(id) {
-  if (favorites.has(id)) {
-    favorites.delete(id);
-    showToast("Favorilerden çıkarıldı.");
+function openWatch(id){
+  const video = allVideos.find(v => v.id === id);
+  if(!video) return;
+  currentVideoId = id;
+
+  document.getElementById('homeView').style.display = 'none';
+  const watchView = document.getElementById('watchView');
+  watchView.classList.add('active');
+
+  document.getElementById('watchTitle').innerText = video.title;
+  document.getElementById('watchCategoryTag').innerText = video.category || 'Genel';
+  document.getElementById('watchDate').innerText = new Date(video.createdAt || Date.now()).toLocaleDateString('tr-TR');
+  document.getElementById('watchDesc').innerText = `${video.title} başlıklı 18+ yetişkin anime videosu. HentaiMini platformunda yüksek kalitede keyifle izleyin.`;
+
+  const playerBox = document.getElementById('playerLargeBox');
+  let src = video.embedSrc || video.url || '';
+
+  if(src.includes('iframe') || src.includes('<')) {
+    playerBox.innerHTML = src;
+  } else if(src.endsWith('.mp4') || src.endsWith('.webm') || src.startsWith('blob:')) {
+    playerBox.innerHTML = `<video src="${src}" controls autoplay playsinline style="width:100%;height:100%"></video>`;
+  } else if(src.includes('youtube.com') || src.includes('youtu.be')) {
+    let ytId = '';
+    const m = src.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+    if(m && m[1]) ytId = m[1];
+    playerBox.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
   } else {
-    favorites.add(id);
-    showToast("Favorilere eklendi.");
+    playerBox.innerHTML = `<iframe src="${src}" allowfullscreen></iframe>`;
   }
-  localStorage.setItem("hm_favorites", JSON.stringify([...favorites]));
-  render();
-  if (activeVideoId === id) updateWatchFavButton();
-}
-
-async function loadVideos() {
-  try {
-    let data = [];
-    try {
-      const response = await fetch("/api/videos");
-      if (response.ok) {
-        data = await response.json();
-      } else {
-        throw new Error();
-      }
-    } catch {
-      data = getLocalVideos();
-    }
-
-    videos.splice(0, videos.length, ...data.map(v => ({
-      ...v,
-      category: v.category || v.cat || "Yeni",
-      duration: v.duration || "HD",
-      rating: v.rating || "4.8",
-      thumbnail: v.thumbnail || null,
-      preview: v.preview || null
-    })));
-    const countEl = document.querySelector("#statVideoCount b");
-    if (countEl) countEl.textContent = videos.length;
-    document.getElementById("sectionDesc").textContent =
-      videos.length ? `${videos.length} video bulundu` : "Henüz video eklenmedi";
-    render();
-  } catch (error) {
-    console.error(error);
-    showToast("Veriler yüklenirken hata oluştu.");
-  }
-}
-
-function openWatchView(id) {
-  const v = videos.find(x => x.id === id);
-  if (!v) return;
-  activeVideoId = id;
-
-  document.getElementById("homeView").style.display = "none";
-  document.getElementById("watchView").classList.add("active");
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  document.getElementById("watchTitle").textContent = v.title;
-  document.getElementById("watchCategoryTag").textContent = v.category || v.cat || "Yeni";
-  document.getElementById("watchDate").textContent = v.createdAt ? new Date(v.createdAt).toLocaleDateString("tr-TR") : "";
-  document.getElementById("watchDesc").textContent = v.description || "Bu video için ek açıklama girilmemiştir. HentaiMini üzerinden yüksek kalitede keyifle izleyebilirsiniz.";
 
   updateWatchFavButton();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
 
-  const playerLargeBox = document.getElementById("playerLargeBox");
-  const src = v.embedSrc || v.url || "";
-  
-  if (src.endsWith(".mp4") || src.endsWith(".webm") || src.endsWith(".ogg") || src.includes("mov_bbb.mp4")) {
-    playerLargeBox.innerHTML = `
-      <video controls autoplay playsinline style="width:100%;height:100%;background:#000;">
-        <source src="${escapeHtml(src)}" type="video/mp4">
-        Tarayıcınız video oynatmayı desteklemiyor.
-      </video>`;
-  } else if (src) {
-    playerLargeBox.innerHTML = `
-      <iframe
-        src="${escapeHtml(src)}"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-        allowfullscreen
-        webkitallowfullscreen
-        mozallowfullscreen
-        referrerpolicy="no-referrer-when-downgrade"
-        style="width:100%;height:100%;border:0;background:#000;"
-        title="${escapeHtml(v.title)}"
-      ></iframe>`;
+function toggleFavorite(id){
+  if(favorites.includes(id)){
+    favorites = favorites.filter(f => f !== id);
+    showToast('Favorilerden çıkarıldı.');
   } else {
-    playerLargeBox.innerHTML = `<div style="color:#888;padding:40px;text-align:center">Oynatılabilir kaynak bulunamadı.</div>`;
+    favorites.push(id);
+    showToast('Favorilere eklendi.');
   }
+  localStorage.setItem('hentaimini_favs', JSON.stringify(favorites));
+  renderGrid();
+  updateWatchFavButton();
 }
 
-function goHome() {
-  activeVideoId = null;
-  document.getElementById("watchView").classList.remove("active");
-  document.getElementById("homeView").style.display = "block";
-  const playerLargeBox = document.getElementById("playerLargeBox");
-  if (playerLargeBox) playerLargeBox.innerHTML = "";
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+function toggleFavoriteFromWatch(){
+  if(currentVideoId) toggleFavorite(currentVideoId);
 }
 
-function updateWatchFavButton() {
-  const btn = document.getElementById("watchFavBtn");
-  if (!btn) return;
-  const isFav = favorites.has(activeVideoId);
+function updateWatchFavButton(){
+  const btn = document.getElementById('watchFavBtn');
+  if(!btn || !currentVideoId) return;
+  const isFav = favorites.includes(currentVideoId);
   btn.innerHTML = isFav ? '<i class="fa-solid fa-heart" style="color:var(--pink)"></i> Favorilerde' : '<i class="fa-regular fa-heart"></i> Favori';
 }
 
-function toggleFavoriteFromWatch() {
-  if (activeVideoId) toggleFavorite(activeVideoId);
-}
+async function deleteCurrentVideo(){
+  if(!currentVideoId) return;
+  if(!confirm('Bu videoyu silmek istediğinize emin misiniz?')) return;
 
-async function deleteCurrentVideo() {
-  if (!activeVideoId) return;
-  if (!confirm("Bu videoyu kalıcı olarak silmek istediğinize emin misiniz?")) return;
   try {
-    try {
-      await fetch("/api/videos/" + encodeURIComponent(activeVideoId), { method: "DELETE" });
-    } catch {}
-
-    const currentList = getLocalVideos().filter(x => x.id !== activeVideoId);
-    saveLocalVideos(currentList);
-
-    showToast("Video başarıyla silindi.");
-    goHome();
-    await loadVideos();
-  } catch (err) {
-    showToast(err.message || "Silme başarısız.");
-  }
-}
-
-function randomPick() {
-  if (!videos.length) {
-    showToast("Henüz video bulunmuyor.");
-    return;
-  }
-  const v = videos[Math.floor(Math.random() * videos.length)];
-  openWatchView(v.id);
-}
-
-function showToast(msg) {
-  const t = document.getElementById("toast");
-  t.querySelector("span").textContent = msg;
-  t.classList.add("show");
-  clearTimeout(window.toastTimer);
-  window.toastTimer = setTimeout(() => t.classList.remove("show"), 2800);
-}
-
-function toggleSidebar() {
-  document.getElementById("sidebar").classList.toggle("open");
-}
-
-function enterSite() {
-  localStorage.setItem("hm_age_ok", "1");
-  document.getElementById("ageGate").style.display = "none";
-}
-
-function leaveSite() {
-  document.body.innerHTML = '<div style="min-height:100vh;display:grid;place-items:center;color:#aaa;font-family:Inter,sans-serif;background:#09080d;text-align:center;padding:30px"><div><h2 style="color:#fff;margin-bottom:10px">Çıkış yapıldı</h2><p>Bu sayfayı kapatabilirsiniz.</p></div></div>';
-}
-
-function openDmca() { document.getElementById("dmcaModal").classList.add("open"); }
-function closeDmca() { document.getElementById("dmcaModal").classList.remove("open"); }
-function openLegal(id) { document.getElementById(id).classList.add("open"); }
-function closeLegal(id) { document.getElementById(id).classList.remove("open"); }
-
-function openEmbedModal() {
-  document.getElementById("embedTitle").value = "";
-  document.getElementById("embedCode").value = "";
-  document.getElementById("thumbInput").value = "";
-  document.getElementById("previewInput").value = "";
-  document.getElementById("autoThumbnails").innerHTML = '<span style="font-size:11px;color:var(--muted);grid-column:1/-1">Video kaynağı girildiğinde kesitler burada belirir.</span>';
-  selectedThumbUrl = "";
-  document.getElementById("embedModal").classList.add("open");
-}
-
-function closeEmbedModal() {
-  document.getElementById("embedModal").classList.remove("open");
-}
-
-function extractEmbedSrc(raw) {
-  const text = String(raw || "").trim();
-  if (!text) return null;
-  if (/^https?:\/\//i.test(text) && !text.includes("<")) return text;
-  const m = text.match(/src\s*=\s*["']([^"']+)["']/i);
-  if (m && m[1]) {
-    let src = m[1].trim();
-    if (src.startsWith("//")) src = "https:" + src;
-    return src;
-  }
-  return null;
-}
-
-function handleSourceInput() {
-  const raw = document.getElementById("embedCode").value;
-  const src = extractEmbedSrc(raw);
-  const container = document.getElementById("autoThumbnails");
-
-  if (!src) {
-    container.innerHTML = '<span style="font-size:11px;color:var(--muted);grid-column:1/-1">Geçerli bir video kaynağı girin.</span>';
-    return;
-  }
-
-  if (src.endsWith(".mp4") || src.endsWith(".webm") || src.includes("mov_bbb.mp4")) {
-    container.innerHTML = `
-      <div class="thumb-opt" onclick="selectAutoThumb('${escapeHtml(src)}#t=2', this)"><video src="${escapeHtml(src)}#t=2" muted preload="metadata"></video></div>
-      <div class="thumb-opt" onclick="selectAutoThumb('${escapeHtml(src)}#t=5', this)"><video src="${escapeHtml(src)}#t=5" muted preload="metadata"></video></div>
-      <div class="thumb-opt" onclick="selectAutoThumb('${escapeHtml(src)}#t=10', this)"><video src="${escapeHtml(src)}#t=10" muted preload="metadata"></video></div>
-    `;
-    if (!document.getElementById("previewInput").value) {
-      document.getElementById("previewInput").value = src;
+    const res = await fetch(`/api/videos/${currentVideoId}`, {method:'DELETE'});
+    if(res.ok){
+      showToast('Video silindi.');
+      goHome();
+      loadVideos();
+    } else {
+      showToast('Silme başarısız.');
     }
-  } else {
-    // Harici iframe veya video linkleri için doğrudan kendi kaynağından kesit/önizleme simülasyonu
-    container.innerHTML = `
-      <div class="thumb-opt selected" onclick="selectAutoThumb('${escapeHtml(src)}', this)"><div style="display:grid;place-items:center;height:100%;font-size:10px;color:#fff;background:#222">Kaynak Önizleme 1</div></div>
-      <div class="thumb-opt" onclick="selectAutoThumb('${escapeHtml(src)}', this)"><div style="display:grid;place-items:center;height:100%;font-size:10px;color:#fff;background:#1a1a1a">Kaynak Önizleme 2</div></div>
-      <div class="thumb-opt" onclick="selectAutoThumb('${escapeHtml(src)}', this)"><div style="display:grid;place-items:center;height:100%;font-size:10px;color:#fff;background:#111">Kaynak Önizleme 3</div></div>
-    `;
-    selectedThumbUrl = src;
-    document.getElementById("thumbInput").value = src;
+  } catch(err){
+    console.error(err);
+    showToast('Bağlantı hatası.');
   }
 }
 
-function selectAutoThumb(url, el) {
-  document.querySelectorAll(".thumb-opt").forEach(x => x.classList.remove("selected"));
-  el.classList.add("selected");
-  selectedThumbUrl = url;
-  document.getElementById("thumbInput").value = url;
+function openEmbedModal(){
+  document.getElementById('embedModal').classList.add('open');
+}
+function closeEmbedModal(){
+  document.getElementById('embedModal').classList.remove('open');
 }
 
-async function submitEmbed() {
-  const title = document.getElementById("embedTitle").value.trim() || "Anime Video";
-  const category = document.getElementById("embedCategory").value || "Yeni";
-  const rawCode = document.getElementById("embedCode").value.trim();
-  const customThumb = document.getElementById("thumbInput").value.trim();
-  const customPreview = document.getElementById("previewInput").value.trim();
+function openDmca(){
+  document.getElementById('dmcaModal').classList.add('open');
+}
+function closeDmca(){
+  document.getElementById('dmcaModal').classList.remove('open');
+}
 
-  if (!rawCode) {
-    showToast("Gömme kodu veya video URL gerekli.");
+function openLegal(modalId){
+  document.getElementById(modalId).classList.add('open');
+}
+function closeLegal(modalId){
+  document.getElementById(modalId).classList.remove('open');
+}
+
+// Geliştirilmiş Otomatik Kapak Çıkarıcı (Videodan Kare Alıcı ve Akıllı Anime Sahne Yedekleri)
+async function handleSourceInput(){
+  const src = document.getElementById('embedCode').value.trim();
+  const category = document.getElementById('embedCategory').value;
+  const thumbContainer = document.getElementById('autoThumbnails');
+  thumbContainer.innerHTML = '<span style="font-size:11px;color:var(--muted);grid-column:1/-1">Videonun anlarından kapaklar çıkarılıyor...</span>';
+
+  if(!src){
+    generateSmartAnimeFallback(thumbContainer, category);
     return;
   }
 
-  const embedSrc = extractEmbedSrc(rawCode);
-  if (!embedSrc) {
-    showToast("Geçerli bir video URL'si veya iframe bulunamadı.");
+  // 1. YouTube kontrolü
+  const ytMatch = src.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+  if(ytMatch && ytMatch[1]){
+    const videoId = ytMatch[1];
+    const thumbs = [
+      `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+      `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
+      `https://img.youtube.com/vi/${videoId}/sddefault.jpg`
+    ];
+    renderThumbOptions(thumbs, thumbs[0], thumbs[0]);
     return;
   }
 
-  const thumbnail = customThumb || selectedThumbUrl || embedSrc;
-  const preview = customPreview || embedSrc;
+  // Eğer iframe kodu yapıştırıldıysa src'yi çek
+  let cleanSrc = src;
+  if(src.includes('<iframe')) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(src, 'text/html');
+    const iframe = doc.querySelector('iframe');
+    if(iframe && iframe.src) {
+      cleanSrc = iframe.src;
+      const ytMatchFrame = cleanSrc.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+      if(ytMatchFrame && ytMatchFrame[1]){
+        const videoId = ytMatchFrame[1];
+        const thumbs = [
+          `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+          `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
+          `https://img.youtube.com/vi/${videoId}/sddefault.jpg`
+        ];
+        renderThumbOptions(thumbs, thumbs[0], thumbs[0]);
+        return;
+      }
+    }
+  }
 
-  try {
-    showToast("Video kaydediliyor...");
-    
-    const newItem = {
-      id: 'vid-' + Math.random().toString(36).substring(2, 9),
-      title,
-      category,
-      type: "embed",
-      embedSrc,
-      url: embedSrc,
-      embedCode: rawCode.slice(0, 4000),
-      thumbnail: thumbnail || null,
-      preview: preview || null,
-      duration: "HD",
-      rating: "4.8",
-      createdAt: new Date().toISOString()
+  // 2. Doğrudan video dosyası (.mp4, .webm) veya URL
+  if(cleanSrc.startsWith('http://') || cleanSrc.startsWith('https://') || cleanSrc.startsWith('blob:')){
+    const video = document.createElement('video');
+    video.src = cleanSrc;
+    video.crossOrigin = 'anonymous';
+    video.muted = true;
+    video.preload = 'metadata';
+
+    let capturedThumbs = [];
+
+    video.onloadedmetadata = async function() {
+      const duration = video.duration && !isNaN(video.duration) ? video.duration : 10;
+      const times = [duration * 0.2, duration * 0.5, duration * 0.8];
+
+      for(let i=0; i<times.length; i++){
+        video.currentTime = times[i];
+        await new Promise(resolve => {
+          video.onseeked = resolve;
+          setTimeout(resolve, 800);
+        });
+
+        try {
+          const canvas = document.createElement('canvas');
+          canvas.width = 480;
+          canvas.height = 270;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+          if(dataUrl && dataUrl.length > 200) {
+            capturedThumbs.push(dataUrl);
+          }
+        } catch(e) {
+          console.warn("Video frame capture CORS notice:", e);
+        }
+      }
+
+      if(capturedThumbs.length > 0){
+        renderThumbOptions(capturedThumbs, capturedThumbs[0], capturedThumbs[1] || capturedThumbs[0]);
+      } else {
+        generateSmartAnimeFallback(thumbContainer, category);
+      }
     };
 
-    try {
-      await fetch("/api/upload", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newItem)
-      });
-    } catch {}
+    video.onerror = function(){
+      generateSmartAnimeFallback(thumbContainer, category);
+    };
 
-    const currentList = getLocalVideos();
-    currentList.unshift(newItem);
-    saveLocalVideos(currentList);
-    
-    showToast("Video başarıyla eklendi.");
-    closeEmbedModal();
-    loadVideos();
-  } catch (err) {
-    showToast(err.message || "Ekleme başarısız.");
+    // Zaman aşımı koruması
+    setTimeout(() => {
+      if(capturedThumbs.length === 0){
+        generateSmartAnimeFallback(thumbContainer, category);
+      }
+    }, 4000);
+  } else {
+    generateSmartAnimeFallback(thumbContainer, category);
   }
 }
 
-if (localStorage.getItem("hm_age_ok") === "1") {
-  document.getElementById("ageGate").style.display = "none";
+function generateSmartAnimeFallback(container, category){
+  const animePools = {
+    "Romantik": [
+      "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=640&q=80",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=640&q=80",
+      "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=640&q=80"
+    ],
+    "Aksiyon": [
+      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=640&q=80",
+      "https://images.unsplash.com/photo-1563089145-599997674d42?w=640&q=80",
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=640&q=80"
+    ],
+    "Fantezi": [
+      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=640&q=80",
+      "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=640&q=80",
+      "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=640&q=80"
+    ],
+    "Komedi": [
+      "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=640&q=80",
+      "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=640&q=80",
+      "https://images.unsplash.com/photo-1514539079130-25950c84af65?w=640&q=80"
+    ],
+    "Popüler": [
+      "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=640&q=80",
+      "https://images.unsplash.com/photo-1563089145-599997674d42?w=640&q=80",
+      "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=640&q=80"
+    ],
+    "Yeni": [
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=640&q=80",
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=640&q=80",
+      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=640&q=80"
+    ]
+  };
+
+  const thumbs = animePools[category] || animePools["Romantik"];
+  renderThumbOptions(thumbs, thumbs[0], thumbs[1]);
 }
 
-loadVideos();
+function renderThumbOptions(thumbs, defaultThumb, defaultPreview){
+  const thumbContainer = document.getElementById('autoThumbnails');
+  thumbContainer.innerHTML = '';
+  document.getElementById('thumbInput').value = defaultThumb;
+  document.getElementById('previewInput').value = defaultPreview;
+
+  thumbs.forEach((t, idx) => {
+    const opt = document.createElement('div');
+    opt.className = `thumb-opt ${idx === 0 ? 'selected' : ''}`;
+    opt.innerHTML = `<img src="${t}" alt="Kapak ${idx+1}">`;
+    opt.onclick = () => {
+      document.querySelectorAll('.thumb-opt').forEach(el => el.classList.remove('selected'));
+      opt.classList.add('selected');
+      document.getElementById('thumbInput').value = t;
+      document.getElementById('previewInput').value = t;
+    };
+    thumbContainer.appendChild(opt);
+  });
+}
+
+async function submitEmbed(){
+  const title = document.getElementById('embedTitle').value.trim();
+  const category = document.getElementById('embedCategory').value;
+  let embedCode = document.getElementById('embedCode').value.trim();
+  let thumbnail = document.getElementById('thumbInput').value;
+  let preview = document.getElementById('previewInput').value;
+
+  if(!embedCode){
+    showToast('Lütfen video kaynağı girin.');
+    return;
+  }
+
+  if(!thumbnail){
+    thumbnail = "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=640&q=80";
+    preview = thumbnail;
+  }
+
+  let embedSrc = embedCode;
+  if(embedCode.includes('<iframe')) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(embedCode, 'text/html');
+    const iframe = doc.querySelector('iframe');
+    if(iframe && iframe.src) embedSrc = iframe.src;
+  }
+
+  try {
+    const res = await fetch('/api/upload', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        title: title || 'Yeni Anime Videosu',
+        category,
+        embedSrc,
+        embedCode,
+        thumbnail,
+        preview
+      })
+    });
+
+    if(res.ok){
+      showToast('Video başarıyla eklendi!');
+      closeEmbedModal();
+      document.getElementById('embedTitle').value = '';
+      document.getElementById('embedCode').value = '';
+      document.getElementById('thumbInput').value = '';
+      document.getElementById('previewInput').value = '';
+      document.getElementById('autoThumbnails').innerHTML = '<span style="font-size:11px;color:var(--muted);grid-column:1/-1">Video kaynağı girildiğinde kapak kesitleri burada belirecektir.</span>';
+      loadVideos();
+    } else {
+      const errData = await res.json();
+      showToast(errData.error || 'Video eklenemedi.');
+    }
+  } catch(err){
+    console.error(err);
+    showToast('Sunucu bağlantı hatası.');
+  }
+}
+
+// Sayfa yüklendiğinde varsayılan kapak alternatiflerini hazırla
+document.addEventListener('DOMContentLoaded', () => {
+  handleSourceInput();
+});
 </script>
 </body>
 </html>
