@@ -127,6 +127,12 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 .player-label{position:absolute;top:14px;left:14px;z-index:3;background:#17131e;border:1px solid #33283b;border-radius:7px;padding:5px 8px;font-size:9px;font-weight:800;color:#c8bdce}
 .modal-meta{padding:15px 3px 3px;display:flex;justify-content:space-between;gap:12px}.modal-meta p{font-size:11px;color:#81798a;line-height:1.6}.modal-meta b{color:#fff;font-size:15px}
 
+
+.video-page{width:min(1250px,100%);background:#0b0a10;border:1px solid #272331;border-radius:24px;padding:20px}
+.video-related{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:20px}
+.related-title{font-size:18px;margin:25px 0 12px}
+@media(max-width:900px){.video-related{grid-template-columns:repeat(2,1fr)}}
+
 .toast{position:fixed;right:25px;bottom:25px;z-index:800;background:#17141d;border:1px solid #3a3040;padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);font-size:11px;transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s}.toast.show{transform:none;opacity:1}.toast i{color:var(--green);margin-right:7px}
 .dmca-box{width:min(640px,100%);background:#0e0d13;border:1px solid #332b3b;border-radius:20px;box-shadow:0 30px 100px #000;padding:28px;max-height:85vh;overflow:auto}
 .dmca-box h3{font-size:18px;margin-bottom:12px}
