@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
+const mongoose = require("mongoose");
 
 const app = express();
 
@@ -20,7 +21,40 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(PUBLIC));
 
-function readVideos() {
+// MongoDB Bağlantısı (Varsa bulut veritabanı kullanılır, yoksa yerel JSON dosyası)
+let isMongoConnected = false;
+const MONGO_URI = process.env.MONGO_URI;
+
+let VideoModel = null;
+if (MONGO_URI) {
+  mongoose.connect(MONGO_URI)
+    .then(() => {
+      isMongoConnected = true;
+      console.log("MongoDB veritabanına başarıyla bağlandı. Videolar artık kalıcı!");
+    })
+    .catch(err => {
+      console.error("MongoDB bağlantı hatası, yerel dosya sistemine devam ediliyor:", err.message);
+    });
+
+  const videoSchema = new mongoose.Schema({
+    id: { type: String, required: true, unique: true },
+    title: String,
+    category: String,
+    type: String,
+    embedSrc: String,
+    url: String,
+    embedCode: String,
+    thumbnail: String,
+    preview: String,
+    duration: String,
+    rating: String,
+    createdAt: { type: Date, default: Date.now }
+  });
+  VideoModel = mongoose.model("Video", videoSchema);
+}
+
+// Yerel JSON okuma/yazma yardımcıları
+function readLocalVideos() {
   try {
     const raw = fs.readFileSync(DATA, "utf8");
     const data = JSON.parse(raw);
@@ -30,37 +64,35 @@ function readVideos() {
   }
 }
 
-function writeVideos(videos) {
+function writeLocalVideos(videos) {
   fs.writeFileSync(DATA, JSON.stringify(videos, null, 2), "utf8");
 }
 
-function sanitizeEmbedSrc(raw) {
-  let src = String(raw || "").trim();
-  if (!src) return null;
-  if (src.startsWith("//")) src = "https:" + src;
-  if (!/^https?:\/\//i.test(src)) return null;
-  if (src.length > 2000) return null;
-  return src;
-}
-
-app.get("/api/videos", (req, res) => {
-  const videos = readVideos().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-  res.json(videos);
+// API Endpoints
+app.get("/api/videos", async (req, res) => {
+  try {
+    if (isMongoConnected && VideoModel) {
+      const videos = await VideoModel.find().sort({ createdAt: -1 });
+      return res.json(videos);
+    }
+    const videos = readLocalVideos().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    res.json(videos);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Videolar yüklenemedi." });
+  }
 });
 
-app.post("/api/upload", (req, res) => {
+app.post("/api/upload", async (req, res) => {
   try {
     const title = String(req.body.title || "Yeni Video").trim().slice(0, 160);
     const category = String(req.body.category || "Yeni").trim().slice(0, 60);
-    const embedSrc = sanitizeEmbedSrc(req.body.embedSrc || req.body.url);
+    let embedSrc = String(req.body.embedSrc || req.body.url || "").trim();
     
-    if (!embedSrc) {
+    if (embedSrc.startsWith("//")) embedSrc = "https:" + embedSrc;
+    if (!embedSrc || !/^https?:\/\//i.test(embedSrc)) {
       return res.status(400).json({ error: "Geçerli video kaynağı veya embed URL gerekli." });
     }
-
-    const thumbnail = String(req.body.thumbnail || "").trim().slice(0, 1500);
-    const preview = String(req.body.preview || "").trim().slice(0, 1500);
-    const embedCode = String(req.body.embedCode || "").trim().slice(0, 4000);
 
     const item = {
       id: crypto.randomUUID(),
@@ -69,17 +101,23 @@ app.post("/api/upload", (req, res) => {
       type: "embed",
       embedSrc,
       url: embedSrc,
-      embedCode: embedCode || null,
-      thumbnail: thumbnail || null,
-      preview: preview || null,
+      embedCode: String(req.body.embedCode || "").trim().slice(0, 4000) || null,
+      thumbnail: String(req.body.thumbnail || "").trim().slice(0, 1500) || null,
+      preview: String(req.body.preview || "").trim().slice(0, 1500) || null,
       duration: req.body.duration || "HD",
       rating: req.body.rating || "4.8",
-      createdAt: new Date().toISOString()
+      createdAt: new Date()
     };
 
-    const videos = readVideos();
+    if (isMongoConnected && VideoModel) {
+      const newVideo = new VideoModel(item);
+      await newVideo.save();
+      return res.status(201).json(newVideo);
+    }
+
+    const videos = readLocalVideos();
     videos.push(item);
-    writeVideos(videos);
+    writeLocalVideos(videos);
 
     res.status(201).json(item);
   } catch (err) {
@@ -88,15 +126,27 @@ app.post("/api/upload", (req, res) => {
   }
 });
 
-app.delete("/api/videos/:id", (req, res) => {
-  const videos = readVideos();
-  const exists = videos.find(v => v.id === req.params.id);
-  if (!exists) {
-    return res.status(404).json({ error: "Video bulunamadı." });
+app.delete("/api/videos/:id", async (req, res) => {
+  try {
+    const videoId = req.params.id;
+    if (isMongoConnected && VideoModel) {
+      const deleted = await VideoModel.findOneAndDelete({ id: videoId });
+      if (!deleted) return res.status(404).json({ error: "Video bulunamadı." });
+      return res.json({ ok: true });
+    }
+
+    const videos = readLocalVideos();
+    const exists = videos.find(v => v.id === videoId);
+    if (!exists) {
+      return res.status(404).json({ error: "Video bulunamadı." });
+    }
+    const filtered = videos.filter(v => v.id !== videoId);
+    writeLocalVideos(filtered);
+    res.json({ ok: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Silme işlemi başarısız." });
   }
-  const filtered = videos.filter(v => v.id !== req.params.id);
-  writeVideos(filtered);
-  res.json({ ok: true });
 });
 
 app.get("*", (req, res) => {
