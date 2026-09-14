@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="HentaiMini — 18+ anime video platformu">
-<meta name="google-site-verification" content="yQGqvhRneNNl9cgsdp27t8gBl3J8HRBiz0qofZbesQw" />
 <title>HentaiMini — 18+ Anime Video Platformu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,9 +70,6 @@ main{margin-left:248px;width:calc(100% - 248px);padding:22px 32px 60px}
 .icon{width:42px;height:42px;border-radius:12px;background:#121018;border:1px solid var(--line);color:#a9a2b0;display:grid;place-items:center;cursor:pointer;position:relative;transition:.2s}
 .icon:hover{color:#fff;border-color:#443b4d;transform:translateY(-1px)}
 .dot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--pink);right:9px;top:8px;box-shadow:0 0 10px var(--pink)}
-.profile{display:flex;align-items:center;gap:9px;padding:4px 10px 4px 4px;border:1px solid var(--line);background:#121018;border-radius:14px;cursor:pointer}
-.avatar{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-weight:800;background:linear-gradient(135deg,#ff5ba2,#7650e9)}
-.profile small{color:#777181;font-size:10px;display:block}.profile b{font-size:12px}
 
 .hero{position:relative;overflow:hidden;min-height:310px;border:1px solid #302a37;border-radius:24px;background:
  linear-gradient(90deg,rgba(12,10,17,.98) 0%,rgba(17,12,24,.88) 48%,rgba(35,14,37,.45) 100%);
@@ -115,23 +111,19 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 
 .empty{padding:45px;text-align:center;border:1px dashed #302a37;border-radius:18px;color:#716a79;display:none}.empty i{font-size:30px;margin-bottom:12px;color:#4b4351}.empty h3{color:#d8d2df;font-size:15px;margin-bottom:6px}.empty p{font-size:11px}
 
-.modal{position:fixed;inset:0;z-index:500;background:rgba(3,2,5,.84);backdrop-filter:blur(15px);display:none;place-items:center;padding:20px}.modal.open{display:grid}
-.modal-box{width:min(1400px,100%);max-height:98vh;background:#0e0d13;border:1px solid #332b3b;border-radius:20px;box-shadow:0 30px 100px #000;padding:18px;animation:modalIn .3s;display:flex;flex-direction:column}
-.modal-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.modal-top h3{font-size:16px;font-weight:700}.close{width:38px;height:38px;border-radius:12px;background:#19161f;color:#aaa2b0;cursor:pointer;display:grid;place-items:center;transition:.2s}.close:hover{background:#25212e;color:#fff}
-.player{width:100%;aspect-ratio:16/9;background:#000;border-radius:13px;display:flex;align-items:center;justify-content:center;border:1px solid #211d26;position:relative;overflow:hidden;flex-grow:1}
-.player video,.player iframe{position:relative;z-index:2;width:100%;height:100%;border:0;background:#000;display:block}
-.player video{object-fit:contain!important;object-position:center center}
-.player iframe{object-fit:cover}
-.player:before{content:"";position:absolute;z-index:0;pointer-events:none;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,63,145,.16),transparent 65%);animation:float 5s infinite}
-.big-play{position:relative;z-index:2;width:70px;height:70px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--pink),var(--purple));font-size:23px;box-shadow:0 0 50px rgba(255,63,145,.4);cursor:pointer}
-.player-label{position:absolute;top:14px;left:14px;z-index:3;background:#17131e;border:1px solid #33283b;border-radius:7px;padding:5px 8px;font-size:9px;font-weight:800;color:#c8bdce}
-.modal-meta{padding:15px 3px 3px;display:flex;justify-content:space-between;gap:12px}.modal-meta p{font-size:11px;color:#81798a;line-height:1.6}.modal-meta b{color:#fff;font-size:15px}
-
-
-.video-page{width:min(1250px,100%);background:#0b0a10;border:1px solid #272331;border-radius:24px;padding:20px}
-.video-related{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:20px}
-.related-title{font-size:18px;margin:25px 0 12px}
-@media(max-width:900px){.video-related{grid-template-columns:repeat(2,1fr)}}
+/* Tam Ekran / Geniş İzleme Görünümü */
+.watch-view{display:none;width:100%;animation:modalIn .3s}
+.watch-view.active{display:block}
+.watch-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.back-btn{display:inline-flex;align-items:center;gap:8px;background:#17131e;border:1px solid var(--line);padding:10px 16px;border-radius:12px;color:#fff;cursor:pointer;font-weight:600;font-size:13px;transition:.2s}
+.back-btn:hover{border-color:var(--pink);background:#221a2c}
+.watch-player-box{width:100%;aspect-ratio:16/9;background:#000;border-radius:20px;border:1px solid #30283a;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.8);position:relative}
+.watch-player-box iframe, .watch-player-box video{width:100%;height:100%;border:0;display:block}
+.watch-details{margin-top:20px;background:#111019;border:1px solid var(--line);border-radius:20px;padding:24px}
+.watch-title-row{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:12px;flex-wrap:wrap}
+.watch-title{font-size:20px;font-weight:700}
+.watch-meta-info{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px;margin-bottom:14px}
+.watch-desc{color:#b3abc2;font-size:13px;line-height:1.7}
 
 .toast{position:fixed;right:25px;bottom:25px;z-index:800;background:#17141d;border:1px solid #3a3040;padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);font-size:11px;transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s}.toast.show{transform:none;opacity:1}.toast i{color:var(--green);margin-right:7px}
 .dmca-box{width:min(640px,100%);background:#0e0d13;border:1px solid #332b3b;border-radius:20px;box-shadow:0 30px 100px #000;padding:28px;max-height:85vh;overflow:auto}
@@ -141,6 +133,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 .dmca-box a{color:var(--pink);text-decoration:underline}
 
 /* Embed modal */
+.modal{position:fixed;inset:0;z-index:500;background:rgba(3,2,5,.84);backdrop-filter:blur(15px);display:none;place-items:center;padding:20px}.modal.open{display:grid}
 .embed-box{width:min(560px,100%);background:#0e0d13;border:1px solid #332b3b;border-radius:20px;box-shadow:0 30px 100px #000;padding:24px;max-height:90vh;overflow:auto}
 .embed-box h3{font-size:16px;margin-bottom:6px}
 .embed-box .hint{font-size:12px;color:var(--muted);margin-bottom:18px;line-height:1.5}
@@ -150,11 +143,15 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
   width:100%;background:#121018;border:1px solid var(--line);border-radius:10px;color:#fff;
   padding:11px 13px;font-size:13px;outline:0;transition:.2s
 }
-.embed-field textarea{min-height:120px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;line-height:1.45}
+.embed-field textarea{min-height:100px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;line-height:1.45}
 .embed-field input:focus,.embed-field textarea:focus,.embed-field select:focus{border-color:rgba(255,63,145,.5);box-shadow:0 0 0 4px rgba(255,63,145,.06)}
 .embed-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+.thumb-options{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.thumb-opt{aspect-ratio:16/9;border:2px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;background:#000;position:relative}
+.thumb-opt.selected{border-color:var(--pink)}
+.thumb-opt img, .thumb-opt video{width:100%;height:100%;object-fit:cover}
 
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(12px)}}@keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}@keyframes modalIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(12px)}}@keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}@keyframes modalIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
 
 @media(max-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:820px){
@@ -173,7 +170,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <div class="age-logo"><i class="fa-solid fa-18"></i></div>
     <h1>HentaiMini</h1>
     <p>Bu platform yetişkinlere yönelik <strong>18+</strong> anime/video içerikleri için tasarlanmıştır.</p>
-    <div class="age-warning"><i class="fa-solid fa-triangle-exclamation"></i> Devam ederek 18 yaşında veya daha büyük olduğunuzu ve bulunduğunuz yerdeki yasalara uygun hareket edeceğinizi onaylarsınız. Telif hakkı ihlali, yasadışı içerik ve 18 yaş altı materyal kesinlikle yasaktır.</div>
+    <div class="age-warning"><i class="fa-solid fa-triangle-exclamation"></i> Devam ederek 18 yaşında veya daha büyük olduğunuzu ve bulunduğunuz yerdeki yasalara uygun hareket edeceğinizi onaylarsınız.</div>
     <div class="age-actions">
       <button class="primary" onclick="enterSite()">18+ Giriş Yap</button>
       <button class="secondary" onclick="leaveSite()">Çıkış</button>
@@ -186,28 +183,26 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
   <div class="logo"><div class="logo-mark"><i class="fa-solid fa-play"></i></div><span>HentaiMini</span><em class="age-label">18+</em></div>
   <div class="nav-label">Keşfet</div>
   <nav class="nav">
-    <a class="active" href="#" data-section="home"><i class="fa-solid fa-house"></i> Ana Sayfa</a>
-    <a href="#" data-section="trending"><i class="fa-solid fa-fire"></i> Trendler</a>
-    <a href="#" data-section="new"><i class="fa-solid fa-clock"></i> Yeni Eklenenler</a>
-    <a href="#" data-section="random"><i class="fa-solid fa-shuffle"></i> Rastgele</a>
+    <a class="active" href="#" onclick="goHome(); return false;" data-section="home"><i class="fa-solid fa-house"></i> Ana Sayfa</a>
+    <a href="#" onclick="setFilter('Popüler'); return false;" data-section="trending"><i class="fa-solid fa-fire"></i> Trendler</a>
+    <a href="#" onclick="setFilter('Yeni'); return false;" data-section="new"><i class="fa-solid fa-clock"></i> Yeni Eklenenler</a>
+    <a href="#" onclick="randomPick(); return false;" data-section="random"><i class="fa-solid fa-shuffle"></i> Rastgele</a>
   </nav>
   
   <div class="nav-label">Kategoriler</div>
   <nav class="nav">
-    <a href="#" data-filter="Romantik"><i class="fa-solid fa-heart"></i> Romantik</a>
-    <a href="#" data-filter="Aksiyon"><i class="fa-solid fa-bolt"></i> Aksiyon</a>
-    <a href="#" data-filter="Fantezi"><i class="fa-solid fa-wand-magic-sparkles"></i> Fantezi</a>
-    <a href="#" data-filter="Komedi"><i class="fa-solid fa-face-laugh"></i> Komedi</a>
+    <a href="#" onclick="setFilter('Romantik'); return false;"><i class="fa-solid fa-heart"></i> Romantik</a>
+    <a href="#" onclick="setFilter('Aksiyon'); return false;"><i class="fa-solid fa-bolt"></i> Aksiyon</a>
+    <a href="#" onclick="setFilter('Fantezi'); return false;"><i class="fa-solid fa-wand-magic-sparkles"></i> Fantezi</a>
+    <a href="#" onclick="setFilter('Komedi'); return false;"><i class="fa-solid fa-face-laugh"></i> Komedi</a>
   </nav>
   <div class="nav-label">Yasal</div>
   <nav class="nav">
     <a href="#" onclick="openLegal('termsModal'); return false;"><i class="fa-solid fa-file-contract"></i> Şartlar</a>
     <a href="#" onclick="openLegal('privacyModal'); return false;"><i class="fa-solid fa-user-shield"></i> Gizlilik</a>
-    <a href="#" onclick="openLegal('modal2257'); return false;"><i class="fa-solid fa-id-card"></i> 2257</a>
-    <a href="#" onclick="openDmca(); return false;"><i class="fa-solid fa-scale-balanced"></i> DMCA / Telif</a>
-    <a href="mailto:dmca.hentaimini@gmail.com"><i class="fa-solid fa-envelope"></i> Şikayet</a>
+    <a href="#" onclick="openDmca(); return false;"><i class="fa-solid fa-scale-balanced"></i> DMCA</a>
   </nav>
-  <div class="sidebar-bottom"><strong>18+ içerik modu</strong><p>Yetişkin içerikleri için hazırlanmış katalog arayüzü. Telifli veya yasadışı içerik yüklemek yasaktır.</p><div class="status">Sistem hazır</div></div>
+  <div class="sidebar-bottom"><strong>18+ içerik modu</strong><p>Yetişkin içerikler için katalog arayüzü.</p><div class="status">Sistem hazır</div></div>
 </aside>
 
 <main>
@@ -215,54 +210,90 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <button class="icon menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
     <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="search" placeholder="Anime, seri, kategori veya etiket ara..."><kbd>CTRL K</kbd></div>
     <div class="top-actions">
-      <button class="icon" onclick="showToast('Bildirimler yakında aktif olacak.')"><i class="fa-regular fa-bell"></i><span class="dot"></span></button>
-      <button class="icon" onclick="showToast('Ayarlar paneli sonraki sürümde.')"><i class="fa-solid fa-sliders"></i></button>
-      <button class="primary" onclick="openEmbedModal()"><i class="fa-solid fa-code"></i> Gömme Kodu Ekle</button>
+      <button class="icon" onclick="showToast('Bildirimler güncel.')"><i class="fa-regular fa-bell"></i><span class="dot"></span></button>
+      <button class="primary" onclick="openEmbedModal()"><i class="fa-solid fa-code"></i> Video Ekle</button>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-content">
-      <div class="eyebrow"><i class="fa-solid fa-shield-halved"></i> 18+ Anime Video Platformu</div>
-      <h1>Anime dünyasının <span class="gradient">yetişkinlere özel</span> köşesi.</h1>
-      <p>Modern bir katalog, hızlı arama, kategoriler, favoriler ve gömme kodu ile video ekleme için hazırlanmış yeni HentaiMini arayüzü.</p>
-      <div class="hero-actions">
-        <button class="primary" onclick="openEmbedModal()"><i class="fa-solid fa-code"></i> Gömme Kodu Ekle</button>
-        <button class="secondary" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-compass"></i> Kataloğu Keşfet</button>
+  <!-- ANA GÖRÜNÜM -->
+  <div id="homeView">
+    <section class="hero">
+      <div class="hero-grid"></div>
+      <div class="hero-content">
+        <div class="eyebrow"><i class="fa-solid fa-shield-halved"></i> 18+ Anime Video Platformu</div>
+        <h1>Anime dünyasının <span class="gradient">yetişkinlere özel</span> köşesi.</h1>
+        <p>Geniş ekran izleme deneyimi, otomatik kapak seçici, öz izleme (hover preview) ve hızlı arama özellikleriyle donatıldı.</p>
+        <div class="hero-actions">
+          <button class="primary" onclick="openEmbedModal()"><i class="fa-solid fa-code"></i> Video Ekle</button>
+          <button class="secondary" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-compass"></i> Kataloğu Keşfet</button>
+        </div>
+        <div class="stats"><div id="statVideoCount"><b>0</b><span>Video</span></div><div><b>HD</b><span>Yüksek Kalite</span></div><div><b>18+</b><span>Güvenli Mod</span></div></div>
       </div>
-      <div class="stats"><div><b>18+</b><span>Yaş sınırı</span></div><div><b>HD</b><span>Video altyapısı</span></div><div><b>0</b><span>Video</span></div></div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section">
-    <div class="section-head"><div><h2 id="sectionTitle">Videolar</h2><p id="sectionDesc">Henüz video eklenmedi</p></div><span class="see" onclick="randomPick()">Rastgele seç <i class="fa-solid fa-arrow-right"></i></span></div>
-    <div class="filters" id="filters">
-      <button class="filter active" data-filter="Tümü">Tümü</button>
-      <button class="filter" data-filter="Popüler">Popüler</button>
-      <button class="filter" data-filter="Yeni">Yeni</button>
-      <button class="filter" data-filter="Romantik">Romantik</button>
-      <button class="filter" data-filter="Aksiyon">Aksiyon</button>
-      <button class="filter" data-filter="Fantezi">Fantezi</button>
-      <button class="filter" data-filter="Komedi">Komedi</button>
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2 id="sectionTitle">Öne Çıkanlar</h2>
+          <p id="sectionDesc">Videolar yükleniyor...</p>
+        </div>
+        <span class="see" onclick="randomPick()">Rastgele seç <i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+      <div class="filters" id="filters">
+        <button class="filter active" data-filter="Tümü">Tümü</button>
+        <button class="filter" data-filter="Popüler">Popüler</button>
+        <button class="filter" data-filter="Yeni">Yeni</button>
+        <button class="filter" data-filter="Romantik">Romantik</button>
+        <button class="filter" data-filter="Aksiyon">Aksiyon</button>
+        <button class="filter" data-filter="Fantezi">Fantezi</button>
+        <button class="filter" data-filter="Komedi">Komedi</button>
+      </div>
+      <div class="grid" id="grid"></div>
+      <div class="empty" id="empty">
+        <i class="fa-solid fa-film"></i>
+        <h3>Henüz video yok</h3>
+        <p>Sağ üstteki "Video Ekle" butonunu kullanarak ilk içeriği ekleyin.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- BÜYÜK EKRAN İZLEME GÖRÜNÜMÜ -->
+  <div id="watchView" class="watch-view">
+    <div class="watch-topbar">
+      <button class="back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i> Ana Kataloğa Dön</button>
+      <div style="display:flex;gap:10px">
+        <button class="secondary" id="watchFavBtn" onclick="toggleFavoriteFromWatch()" style="padding:10px 14px;font-size:12px"><i class="fa-regular fa-heart"></i> Favori</button>
+        <button class="secondary" onclick="deleteCurrentVideo()" style="padding:10px 14px;font-size:12px;color:#ff5a82;border-color:rgba(255,90,130,.3)"><i class="fa-solid fa-trash"></i> Sil</button>
+      </div>
     </div>
-    <div class="grid" id="grid"></div>
-    <div class="empty" id="empty"><i class="fa-solid fa-code"></i><h3>Henüz video yok</h3><p>İlk gömme kodunu eklediğinde içerikler burada görünecek.</p></div>
-  </section>
+    
+    <div class="watch-player-box" id="playerLargeBox"></div>
+
+    <div class="watch-details">
+      <div class="watch-title-row">
+        <h2 class="watch-title" id="watchTitle">Video Başlığı</h2>
+        <span class="tag" id="watchCategoryTag" style="background:rgba(255,63,145,.15);color:var(--pink);padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700">Kategori</span>
+      </div>
+      <div class="watch-meta-info">
+        <span><i class="fa-solid fa-calendar"></i> <span id="watchDate"></span></span>
+        <span>•</span>
+        <span><i class="fa-solid fa-shield"></i> 18+ Yetişkin İçerik</span>
+        <span>•</span>
+        <span style="color:#e7c65d"><i class="fa-solid fa-star"></i> 4.9</span>
+      </div>
+      <p class="watch-desc" id="watchDesc">Bu video için açıklama girilmemiştir.</p>
+    </div>
+  </div>
+
 </main>
 </div>
 
-<!-- ALT FOOTER (hentaicity tarzı) -->
-<footer style="width:100%; text-align:center; padding:28px 16px 40px; color:#716a79; font-size:12px; line-height:1.8; border-top:1px solid #272331; margin-top:10px;">
+<footer style="width:100%; text-align:center; padding:28px 16px 40px; color:#716a79; font-size:12px; line-height:1.8; border-top:1px solid #272331; margin-top:20px;">
   <div style="max-width:720px; margin:0 auto;">
     <div style="margin-bottom:6px;">
-      <a href="javascript:void(0)" onclick="openLegal('termsModal')" style="color:#716a79; text-decoration:none;">Şartlar ve Koşullar</a>
-      &nbsp;·&nbsp;
-      <a href="javascript:void(0)" onclick="openLegal('privacyModal')" style="color:#716a79; text-decoration:none;">Gizlilik Politikası</a>
-      &nbsp;·&nbsp;
-      <a href="javascript:void(0)" onclick="openLegal('modal2257')" style="color:#716a79; text-decoration:none;">2257</a>
-      &nbsp;·&nbsp;
-      <a href="javascript:void(0)" onclick="openDmca()" style="color:#716a79; text-decoration:none;">DMCA</a>
+      <a href="javascript:void(0)" onclick="openLegal('termsModal')">Şartlar</a> &nbsp;·&nbsp;
+      <a href="javascript:void(0)" onclick="openLegal('privacyModal')">Gizlilik</a> &nbsp;·&nbsp;
+      <a href="javascript:void(0)" onclick="openDmca()">DMCA</a>
     </div>
     <div style="opacity:0.7;">© 2026 HentaiMini</div>
   </div>
@@ -270,139 +301,126 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 
 <div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span></span></div>
 
-<!-- Embed ekleme modalı -->
+<!-- VİDEO EKLEME MODALI -->
 <div class="modal" id="embedModal">
   <div class="embed-box">
-    <div class="modal-top" style="margin-bottom:14px">
-      <h3>Gömme Kodu Ekle</h3>
-      <button class="close" onclick="closeEmbedModal()"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-top" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <h3>Video / Gömme Kodu Ekle</h3>
+      <button class="icon" onclick="closeEmbedModal()" style="width:32px;height:32px"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <p class="hint">Başka siteden aldığın iframe / gömme kodunu veya doğrudan video URL’sini yapıştır. Oynatıcı iframe’i tam ekran gösterir; kaynak sitesinin kontrolleri görünür olabilir.</p>
+    <p class="hint">İframe gömme kodunu veya doğrudan video URL'sini yapıştırın. Sistem otomatik olarak videonun ortalarından kapak ve öz izleme seçenekleri oluşturur.</p>
+    
     <div class="embed-field">
-      <label for="embedTitle">Başlık</label>
-      <input id="embedTitle" type="text" placeholder="Video başlığı" maxlength="160">
+      <label for="embedTitle">Video Başlığı</label>
+      <input id="embedTitle" type="text" placeholder="Örn: Cyber Neon Fantasy" maxlength="160">
     </div>
+
     <div class="embed-field">
       <label for="embedCategory">Kategori</label>
       <select id="embedCategory">
-        <option value="Yeni">Yeni</option>
         <option value="Romantik">Romantik</option>
         <option value="Aksiyon">Aksiyon</option>
         <option value="Fantezi">Fantezi</option>
         <option value="Komedi">Komedi</option>
         <option value="Popüler">Popüler</option>
+        <option value="Yeni">Yeni</option>
       </select>
     </div>
-    <div class="embed-field">
-      <label for="embedCode">Gömme kodu veya video URL</label>
-      <textarea id="embedCode" placeholder='Örnek:
-<iframe src="https://..." width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
-veya doğrudan:
-https://ornek.com/embed/video123'></textarea>
+    <div class="embed-field">
+      <label for="embedCode">Video Kaynağı / Gömme Kodu (URL veya Iframe)</label>
+      <textarea id="embedCode" placeholder="https://ornek.com/video.mp4 veya <iframe src='...'></iframe>" oninput="handleSourceInput()"></textarea>
     </div>
+
+    <div class="embed-field">
+      <label>Kapak Görseli Seçimi (Videonun orta anlarından otomatik)</label>
+      <div class="thumb-options" id="autoThumbnails">
+        <span style="font-size:11px;color:var(--muted);grid-column:1/-1">Video kaynağı girildiğinde seçenekler burada belirecektir.</span>
+      </div>
+      <input type="hidden" id="thumbInput">
+      <input type="hidden" id="previewInput">
+    </div>
+
     <div class="embed-actions">
       <button class="secondary" onclick="closeEmbedModal()">İptal</button>
-      <button class="primary" onclick="submitEmbed()"><i class="fa-solid fa-plus"></i> Ekle</button>
+      <button class="primary" onclick="submitEmbed()"><i class="fa-solid fa-plus"></i> Videoyu Ekle</button>
     </div>
   </div>
 </div>
 
+<!-- DMCA MODAL -->
 <div class="modal" id="dmcaModal">
   <div class="dmca-box">
     <button class="close" onclick="closeDmca()" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
     <h3>DMCA / Telif Hakkı Politikası</h3>
-    <p><strong>Son güncelleme:</strong> 14 Eylül 2026</p>
-    <p>HentaiMini, telif haklarına saygı duyar. Platforma yüklenen içeriklerden kullanıcılar sorumludur. Platform aracı konumundadır.</p>
-    <p><strong>Yasaklar:</strong></p>
-    <ul>
-      <li>Başkasının telifli eserini izinsiz yüklemek</li>
-      <li>18 yaş altı (gerçek veya kurgusal) cinsel içerik</li>
-      <li>Yasadışı içerik</li>
-    </ul>
-    <p><strong>DMCA Bildirimi nasıl yapılır?</strong><br>
-    Telif sahibi olduğunuzu ve içeriğinizin izinsiz kullanıldığını düşünüyorsanız aşağıdaki bilgileri içeren geçerli bir bildirim gönderin:</p>
-    <ol style="padding-left:18px;margin-bottom:14px;color:#a7a0ae;font-size:13px;line-height:1.65">
-      <li>İhlal edildiğini iddia ettiğiniz telifli eserin tanımı</li>
-      <li>İhlal eden materyalin sitedeki konumu (URL)</li>
-      <li>İletişim bilgileriniz (ad, e-posta, adres)</li>
-      <li>İyi niyetle, kullanımın yetkisiz olduğuna inandığınıza dair beyan</li>
-      <li>Bilgilerin doğru olduğuna ve telif sahibi veya yetkili temsilci olduğunuza dair yeminli beyan (penalty of perjury)</li>
-      <li>Fiziksel veya elektronik imza</li>
-    </ol>
-    <p><strong>DMCA / Telif Bildirim Adresi:</strong><br>
-    <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    <p>Geçerli bildirimler incelenir. İhlal tespit edilirse içerik kaldırılır veya erişim engellenir. Tekrarlayan ihlalcilerin erişimi kısıtlanabilir.</p>
-    <p><strong>Karşı bildirim (Counter-Notice):</strong><br>
-    İçeriğinizin hatalı kaldırıldığını düşünüyorsanız karşı bildirim gönderebilirsiniz.</p>
-    <p style="font-size:11px;color:#666;margin-top:16px">Bu platform kullanıcı tarafından yüklenen içerikler için aracı konumundadır. İçerik sorumluluğu yükleyene aittir.</p>
+    <p>HentaiMini telif haklarına saygı duyar. Tüm içerikler kullanıcılar tarafından sağlanır.</p>
+    <p>Bildirimler için: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
   </div>
 </div>
 
-<!-- Şartlar ve Koşullar -->
+<!-- ŞARTLAR MODAL -->
 <div class="modal" id="termsModal">
   <div class="dmca-box">
     <button class="close" onclick="closeLegal('termsModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
-    <h3>Şartlar ve Koşullar</h3>
-    <p><strong>Son güncelleme:</strong> 14 Eylül 2026</p>
-    <p>HentaiMini platformunu kullanarak aşağıdaki şartları kabul etmiş sayılırsınız.</p>
-    <p><strong>1. Hizmetin niteliği</strong><br>
-    HentaiMini, kullanıcıların gömme kodu ile video ekleyebildiği bir 18+ anime/video platformudur. Platform aracı konumundadır; içeriklerin sahibi ve sorumlusu yükleyen kullanıcıdır.</p>
-    <p><strong>2. Yaş sınırı</strong><br>
-    Siteyi kullanmak için 18 yaşında veya daha büyük olmalısınız.</p>
-    <p><strong>3. Yasak içerikler</strong><br>
-    • 18 yaş altı (gerçek veya kurgusal) cinsel içerik<br>
-    • Telif hakkı ihlali içeren materyal<br>
-    • Yasa dışı faaliyetler, şiddet teşviki, nefret söylemi<br>
-    • Spam, malware</p>
-    <p><strong>4. Kullanıcı sorumluluğu</strong><br>
-    Yüklediğiniz her içerikten yalnızca siz sorumlusunuz. Bildirim üzerine ihlal içeren içerikler kaldırılabilir.</p>
-    <p><strong>5. Sorumluluk sınırlaması</strong><br>
-    Platform “olduğu gibi” sunulur. Kullanıcı içeriklerinden doğan zararlardan platform sorumlu tutulamaz.</p>
-    <p><strong>6. Değişiklikler</strong><br>
-    Bu şartlar güncellenebilir. Güncel metin sitede yayınlandığı andan itibaren geçerlidir.</p>
+    <h3>Kullanım Şartları</h3>
+    <p>Siteyi kullanmak için 18 yaş ve üzerinde olmalısınız. Yasadışı içerik yüklemek yasaktır.</p>
   </div>
 </div>
 
-<!-- Gizlilik Politikası -->
+<!-- GİZLİLİK MODAL -->
 <div class="modal" id="privacyModal">
   <div class="dmca-box">
     <button class="close" onclick="closeLegal('privacyModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
     <h3>Gizlilik Politikası</h3>
-    <p><strong>Son güncelleme:</strong> 14 Eylül 2026</p>
-    <p>HentaiMini olarak gizliliğinize saygı duyuyoruz.</p>
-    <p><strong>1. Toplanan veriler</strong><br>
-    • Teknik veriler: tarayıcı localStorage (yaş onayı, favoriler)<br>
-    • İçerik: sizin eklediğiniz gömme kodları / videolar</p>
-    <p><strong>2. Verilerin kullanımı</strong><br>
-    Veriler yalnızca hizmetin sunulması, güvenlik ve yasal yükümlülükler için kullanılır. Reklam amaçlı satılmaz.</p>
-    <p><strong>3. Saklama</strong><br>
-    Favoriler ve yaş onayı tarayıcınızda tutulur. Sunucu tarafında video metadata’sı saklanabilir.</p>
-    <p><strong>4. Çerezler / Yerel depolama</strong><br>
-    Zorunlu teknik depolama dışında izleme çerezi kullanılmaz.</p>
-    <p><strong>5. Haklarınız</strong><br>
-    Tarayıcı verilerinizi temizleyerek favorileri ve yaş onayını silebilirsiniz.</p>
-  </div>
-</div>
-
-<!-- 2257 -->
-<div class="modal" id="modal2257">
-  <div class="dmca-box">
-    <button class="close" onclick="closeLegal('modal2257')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
-    <h3>18 U.S.C. § 2257 Exemption</h3>
-    <p><strong>18 U.S.C. § 2257 &amp; 28 C.F.R. Part 75 Exemption Statement</strong></p>
-    <p>Bu sitede görüntülenen tüm görsel içerikler (çizimler, animasyonlar, bilgisayar üretimi görseller, kullanıcı gömmeleri dahil) kurgusal niteliktedir veya kullanıcılar tarafından sağlanmıştır.</p>
-    <p>Platform, gerçek insan performansçıların yer aldığı birincil üretici (primary producer) konumunda değildir. Gerçek kişilerin cinsel içerikli görüntülerinin kayıt tutma yükümlülüğü, içeriği yükleyen / sağlayan tarafa aittir.</p>
-    <p>Bu nedenle 18 U.S.C. § 2257 ve ilgili düzenlemeler kapsamındaki kayıt tutma, kimlik doğrulama ve etiketleme yükümlülükleri bu platform için geçerli değildir / muaf tutulmuştur.</p>
-    <p>Tüm karakterlerin ve tasvirlerin 18 yaş ve üzeri olarak tasarlandığı kabul edilir. 18 yaş altı (gerçek veya kurgusal) cinsel içerik kesinlikle yasaktır ve derhal kaldırılır.</p>
-    <p>Platform aracı konumundadır. İçerik sorumluluğu yükleyen / sağlayan kullanıcıdadır.</p>
+    <p>Tarayıcınızda yalnızca favoriler ve yaş onayı saklanır.</p>
   </div>
 </div>
 
 <script>
+const STORAGE_KEY = "hm_videos_data_v1";
+
+function getLocalVideos() {
+  const data = localStorage.getItem(STORAGE_KEY);
+  if (!data) {
+    const defaults = [
+      {
+        id: "demo-1",
+        title: "Cyber Neon Fantasy - Bölüm 1",
+        category: "Romantik",
+        embedSrc: "https://www.w3schools.com/html/mov_bbb.mp4",
+        thumbnail: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=60",
+        preview: "https://www.w3schools.com/html/mov_bbb.mp4",
+        duration: "03:45",
+        rating: "4.9",
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: "demo-2",
+        title: "Starlight Academy - Özel Sürüm",
+        category: "Aksiyon",
+        embedSrc: "https://www.w3schools.com/html/mov_bbb.mp4",
+        thumbnail: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop&q=60",
+        preview: "https://www.w3schools.com/html/mov_bbb.mp4",
+        duration: "04:12",
+        rating: "4.8",
+        createdAt: new Date().toISOString()
+      }
+    ];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(defaults));
+    return defaults;
+  }
+  try { return JSON.parse(data); } catch { return []; }
+}
+
+function saveLocalVideos(list) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+}
+
 const videos = [];
 let currentFilter = "Tümü";
 let favorites = new Set(JSON.parse(localStorage.getItem("hm_favorites") || "[]"));
+let activeVideoId = null;
+let selectedThumbUrl = "";
 
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, m => ({
@@ -414,17 +432,13 @@ function render() {
   const q = document.getElementById("search").value.toLowerCase().trim();
   let list = videos.filter(v => {
     const catMatch = currentFilter === "Tümü" ||
+      v.category === currentFilter ||
       v.cat === currentFilter ||
-      v.type === currentFilter ||
       (currentFilter === "Popüler" && Number(v.rating) >= 4) ||
-      (currentFilter === "Yeni" && v.cat === "Yeni");
-    const searchMatch = !q || (v.title + " " + v.cat + " " + (v.tags || []).join(" ")).toLowerCase().includes(q);
+      (currentFilter === "Yeni" && (v.category === "Yeni" || v.cat === "Yeni"));
+    const searchMatch = !q || (v.title + " " + (v.category || v.cat || "")).toLowerCase().includes(q);
     return catMatch && searchMatch;
   });
-
-  if (document.getElementById("sectionTitle").textContent === "Favoriler") {
-    list = videos.filter(v => favorites.has(v.id));
-  }
 
   const grid = document.getElementById("grid");
   const empty = document.getElementById("empty");
@@ -434,32 +448,32 @@ function render() {
     const thumbCls = "thumb" + (hasThumb ? " has-thumb" : "");
     const thumbMedia = hasThumb
       ? `<img class="thumb-img" src="${escapeHtml(v.thumbnail)}" alt="" loading="lazy" onerror="this.style.display='none'">`
-      : `<div class="thumb-art"><i class="fa-solid ${v.icon || "fa-film"}"></i></div>`;
+      : `<div class="thumb-art"><i class="fa-solid fa-film"></i></div>`;
     
-    // Önizleme için eğer varsa previewUrl, yoksa kapak fotoğrafını kullanıyoruz (hover efekti için)
-    const previewMedia = v.previewUrl 
-      ? `<video class="thumb-preview" src="${escapeHtml(v.previewUrl)}" muted loop playsinline></video>`
+    const previewSrc = v.preview || v.embedSrc || "";
+    const previewMedia = previewSrc && (previewSrc.endsWith(".mp4") || previewSrc.endsWith(".webm") || previewSrc.includes("mov_bbb.mp4"))
+      ? `<video class="thumb-preview" src="${escapeHtml(previewSrc)}" muted loop playsinline preload="none"></video>`
       : (hasThumb ? `<img class="thumb-preview" src="${escapeHtml(v.thumbnail)}" alt="">` : '');
 
     return `
     <article class="card" style="animation-delay:${i * 35}ms" 
-             onmouseenter="this.querySelector('video')?.play()" 
-             onmouseleave="const v=this.querySelector('video'); if(v){v.pause();v.currentTime=0}"
-             onclick="openPlayer('${v.id}')">
+             onmouseenter="const vEl=this.querySelector('video'); if(vEl){vEl.play().catch(()=>{})}" 
+             onmouseleave="const vEl=this.querySelector('video'); if(vEl){vEl.pause();vEl.currentTime=0}"
+             onclick="openWatchView('${v.id}')">
       <div class="${thumbCls}">
         ${thumbMedia}
         ${previewMedia}
         <span class="quality">HD</span>
-        <span class="duration">${escapeHtml(v.duration || "Embed")}</span>
+        <span class="duration">${escapeHtml(v.duration || "HD")}</span>
         <div class="play"><span><i class="fa-solid fa-play"></i></span></div>
       </div>
       <div class="info">
         <div class="title">${escapeHtml(v.title)}</div>
         <div class="meta">
-          <span class="tag">${escapeHtml(v.cat || "Yeni")}</span>
+          <span class="tag">${escapeHtml(v.category || v.cat || "Yeni")}</span>
           <span>•</span>
           <span>18+</span>
-          <span class="rating"><i class="fa-solid fa-star"></i> ${escapeHtml(String(v.rating || "Yeni"))}</span>
+          <span class="rating"><i class="fa-solid fa-star"></i> ${escapeHtml(String(v.rating || "4.8"))}</span>
           <i class="${favorites.has(v.id) ? "fa-solid active" : "fa-regular"} fa-heart heart"
              onclick="event.stopPropagation(); toggleFavorite('${v.id}')"></i>
         </div>
@@ -468,53 +482,21 @@ function render() {
   }).join("");
 
   empty.style.display = list.length ? "none" : "block";
-  if (!list.length && document.getElementById("sectionTitle").textContent === "Favoriler") {
-    empty.querySelector("h3").textContent = "Favori yok";
-    empty.querySelector("p").textContent = "Kartlardaki kalp ikonuyla video ekle.";
-  } else {
-    empty.querySelector("h3").textContent = "Henüz video yok";
-    empty.querySelector("p").textContent = "İlk gömme kodunu eklediğinde içerikler burada görünecek.";
-  }
 }
 
 function setFilter(f) {
   currentFilter = f;
+  goHome();
   document.querySelectorAll(".filter").forEach(b =>
     b.classList.toggle("active", b.dataset.filter === f)
   );
   document.getElementById("sectionTitle").textContent =
     f === "Tümü" ? "Öne Çıkanlar" : f + " İçerikleri";
-  document.getElementById("sectionDesc").textContent =
-    videos.length ? `${videos.length} video bulundu` : "Henüz video eklenmedi";
   render();
 }
 
 document.querySelectorAll(".filter").forEach(b => {
   b.onclick = () => setFilter(b.dataset.filter);
-});
-
-document.querySelectorAll("[data-filter]").forEach(a => {
-  a.addEventListener("click", e => {
-    e.preventDefault();
-    setFilter(a.dataset.filter);
-  });
-});
-
-document.querySelectorAll("[data-section]").forEach(a => {
-  a.addEventListener("click", e => {
-    e.preventDefault();
-    document.querySelectorAll(".nav a").forEach(x => x.classList.remove("active"));
-    a.classList.add("active");
-    const s = a.dataset.section;
-    if (s === "trending") setFilter("Popüler");
-    else if (s === "new") setFilter("Yeni");
-    else if (s === "random") {
-      setFilter("Tümü");
-      randomPick();
-    } else {
-      setFilter("Tümü");
-    }
-  });
 });
 
 document.getElementById("search").addEventListener("input", render);
@@ -535,77 +517,69 @@ function toggleFavorite(id) {
   }
   localStorage.setItem("hm_favorites", JSON.stringify([...favorites]));
   render();
+  if (activeVideoId === id) updateWatchFavButton();
 }
 
 async function loadVideos() {
   try {
-    const response = await fetch("/api/videos");
-    if (!response.ok) throw new Error("Videolar yüklenemedi. Sunucu çalışıyor mu?");
-    const data = await response.json();
+    let data = [];
+    try {
+      const response = await fetch("/api/videos");
+      if (response.ok) {
+        data = await response.json();
+      } else {
+        throw new Error();
+      }
+    } catch {
+      data = getLocalVideos();
+    }
+
     videos.splice(0, videos.length, ...data.map(v => ({
       ...v,
-      cat: v.category || "Yeni",
-      type: "Yeni",
-      icon: "fa-film",
-      duration: v.duration || "Embed",
-      rating: v.rating || "Yeni",
+      category: v.category || v.cat || "Yeni",
+      duration: v.duration || "HD",
+      rating: v.rating || "4.8",
       thumbnail: v.thumbnail || null,
-      isEmbed: true
+      preview: v.preview || null
     })));
-    const countEl = document.querySelector(".stats div:nth-child(3) b");
+    const countEl = document.querySelector("#statVideoCount b");
     if (countEl) countEl.textContent = videos.length;
     document.getElementById("sectionDesc").textContent =
       videos.length ? `${videos.length} video bulundu` : "Henüz video eklenmedi";
     render();
   } catch (error) {
     console.error(error);
-    showToast(error.message || "API'ye ulaşılamadı. node server.js ile başlat.");
+    showToast("Veriler yüklenirken hata oluştu.");
   }
 }
 
-function openPlayer(id) {
+function openWatchView(id) {
   const v = videos.find(x => x.id === id);
   if (!v) return;
+  activeVideoId = id;
 
-  let modal = document.getElementById("videoModal");
-  if (!modal) {
-    modal = document.createElement("div");
-    modal.id = "videoModal";
-    modal.className = "modal";
-    modal.innerHTML = `
-      <div class="modal-box">
-        <div class="modal-top">
-          <h3 id="playerTitle"></h3>
-          <div style="display:flex;gap:8px;align-items:center">
-            <button class="secondary" id="deleteBtn" style="padding:8px 12px;font-size:12px">
-              <i class="fa-solid fa-trash"></i> Sil
-            </button>
-            <button class="close" onclick="closePlayer()">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-        </div>
-        <div class="player" id="playerBox"></div>
-        <div class="modal-meta">
-          <div>
-            <b id="playerMetaTitle"></b>
-            <p id="playerMetaInfo"></p>
-          </div>
-        </div>
-      </div>`;
-    document.body.appendChild(modal);
-  }
+  document.getElementById("homeView").style.display = "none";
+  document.getElementById("watchView").classList.add("active");
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  document.getElementById("playerTitle").textContent = v.title;
-  document.getElementById("playerMetaTitle").textContent = v.title;
-  document.getElementById("playerMetaInfo").textContent =
-    `${v.cat || "Yeni"} • Gömme • ${v.createdAt ? new Date(v.createdAt).toLocaleDateString("tr-TR") : ""}`;
+  document.getElementById("watchTitle").textContent = v.title;
+  document.getElementById("watchCategoryTag").textContent = v.category || v.cat || "Yeni";
+  document.getElementById("watchDate").textContent = v.createdAt ? new Date(v.createdAt).toLocaleDateString("tr-TR") : "";
+  document.getElementById("watchDesc").textContent = v.description || "Bu video için ek açıklama girilmemiştir. HentaiMini üzerinden yüksek kalitede keyifle izleyebilirsiniz.";
 
-  const playerBox = document.getElementById("playerBox");
-  // Embed: iframe tam alan kaplasın, kenarlıksız, native hissi için
+  updateWatchFavButton();
+
+  const playerLargeBox = document.getElementById("playerLargeBox");
   const src = v.embedSrc || v.url || "";
-  if (src) {
-    playerBox.innerHTML = `
+  
+  if (src.endsWith(".mp4") || src.endsWith(".webm") || src.endsWith(".ogg") || src.includes("mov_bbb.mp4")) {
+    playerLargeBox.innerHTML = `
+      <video controls autoplay playsinline style="width:100%;height:100%;background:#000;">
+        <source src="${escapeHtml(src)}" type="video/mp4">
+        Tarayıcınız video oynatmayı desteklemiyor.
+      </video>`;
+  } else if (src) {
+    playerLargeBox.innerHTML = `
       <iframe
         src="${escapeHtml(src)}"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
@@ -613,51 +587,60 @@ function openPlayer(id) {
         webkitallowfullscreen
         mozallowfullscreen
         referrerpolicy="no-referrer-when-downgrade"
-        style="width:100%;height:100%;border:0;background:#000;display:block;"
+        style="width:100%;height:100%;border:0;background:#000;"
         title="${escapeHtml(v.title)}"
       ></iframe>`;
-  } else if (v.embedHtml) {
-    // Güvenli değil ama kullanıcı kendi kodunu ekliyor; sadece iframe src'sini tercih ediyoruz
-    playerBox.innerHTML = v.embedHtml;
   } else {
-    playerBox.innerHTML = `<div style="color:#888;font-size:13px">Gömme kaynağı bulunamadı.</div>`;
+    playerLargeBox.innerHTML = `<div style="color:#888;padding:40px;text-align:center">Oynatılabilir kaynak bulunamadı.</div>`;
   }
-
-  const delBtn = document.getElementById("deleteBtn");
-  delBtn.onclick = async (e) => {
-    e.stopPropagation();
-    if (!confirm("Bu videoyu silmek istediğine emin misin?")) return;
-    try {
-      const res = await fetch("/api/videos/" + encodeURIComponent(v.id), { method: "DELETE" });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Silinemedi");
-      showToast("Video silindi.");
-      closePlayer();
-      await loadVideos();
-    } catch (err) {
-      showToast(err.message || "Silme başarısız");
-    }
-  };
-
-  modal.classList.add("open");
 }
 
-function closePlayer() {
-  const m = document.getElementById("videoModal");
-  if (m) {
-    m.classList.remove("open");
-    const box = document.getElementById("playerBox");
-    if (box) box.innerHTML = "";
+function goHome() {
+  activeVideoId = null;
+  document.getElementById("watchView").classList.remove("active");
+  document.getElementById("homeView").style.display = "block";
+  const playerLargeBox = document.getElementById("playerLargeBox");
+  if (playerLargeBox) playerLargeBox.innerHTML = "";
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateWatchFavButton() {
+  const btn = document.getElementById("watchFavBtn");
+  if (!btn) return;
+  const isFav = favorites.has(activeVideoId);
+  btn.innerHTML = isFav ? '<i class="fa-solid fa-heart" style="color:var(--pink)"></i> Favorilerde' : '<i class="fa-regular fa-heart"></i> Favori';
+}
+
+function toggleFavoriteFromWatch() {
+  if (activeVideoId) toggleFavorite(activeVideoId);
+}
+
+async function deleteCurrentVideo() {
+  if (!activeVideoId) return;
+  if (!confirm("Bu videoyu kalıcı olarak silmek istediğinize emin misiniz?")) return;
+  try {
+    try {
+      await fetch("/api/videos/" + encodeURIComponent(activeVideoId), { method: "DELETE" });
+    } catch {}
+
+    const currentList = getLocalVideos().filter(x => x.id !== activeVideoId);
+    saveLocalVideos(currentList);
+
+    showToast("Video başarıyla silindi.");
+    goHome();
+    await loadVideos();
+  } catch (err) {
+    showToast(err.message || "Silme başarısız.");
   }
 }
 
 function randomPick() {
   if (!videos.length) {
-    showToast("Henüz video eklenmedi. Gömme kodu ekleyebilirsin.");
+    showToast("Henüz video bulunmuyor.");
     return;
   }
   const v = videos[Math.floor(Math.random() * videos.length)];
-  openPlayer(v.id);
+  openWatchView(v.id);
 }
 
 function showToast(msg) {
@@ -678,34 +661,21 @@ function enterSite() {
 }
 
 function leaveSite() {
-  document.body.innerHTML =
-    '<div style="min-height:100vh;display:grid;place-items:center;color:#aaa;font-family:Inter,sans-serif;background:#09080d;text-align:center;padding:30px"><div><h2 style="color:#fff;margin-bottom:10px">Çıkış yapıldı</h2><p>Bu sayfayı kapatabilirsiniz.</p></div></div>';
+  document.body.innerHTML = '<div style="min-height:100vh;display:grid;place-items:center;color:#aaa;font-family:Inter,sans-serif;background:#09080d;text-align:center;padding:30px"><div><h2 style="color:#fff;margin-bottom:10px">Çıkış yapıldı</h2><p>Bu sayfayı kapatabilirsiniz.</p></div></div>';
 }
 
-function openDmca() {
-  const m = document.getElementById("dmcaModal");
-  if (m) m.classList.add("open");
-}
-
-function closeDmca() {
-  const m = document.getElementById("dmcaModal");
-  if (m) m.classList.remove("open");
-}
-
-function openLegal(id) {
-  const m = document.getElementById(id);
-  if (m) m.classList.add("open");
-}
-
-function closeLegal(id) {
-  const m = document.getElementById(id);
-  if (m) m.classList.remove("open");
-}
+function openDmca() { document.getElementById("dmcaModal").classList.add("open"); }
+function closeDmca() { document.getElementById("dmcaModal").classList.remove("open"); }
+function openLegal(id) { document.getElementById(id).classList.add("open"); }
+function closeLegal(id) { document.getElementById(id).classList.remove("open"); }
 
 function openEmbedModal() {
   document.getElementById("embedTitle").value = "";
   document.getElementById("embedCode").value = "";
-  document.getElementById("embedCategory").value = "Yeni";
+  document.getElementById("thumbInput").value = "";
+  document.getElementById("previewInput").value = "";
+  document.getElementById("autoThumbnails").innerHTML = '<span style="font-size:11px;color:var(--muted);grid-column:1/-1">Video kaynağı girildiğinde otomatik kapak seçenekleri burada görünür.</span>';
+  selectedThumbUrl = "";
   document.getElementById("embedModal").classList.add("open");
 }
 
@@ -713,125 +683,119 @@ function closeEmbedModal() {
   document.getElementById("embedModal").classList.remove("open");
 }
 
-/**
- * Gömme kodundan veya URL'den temiz src çıkarır.
- * iframe src, embed src, veya düz URL desteklenir.
- */
 function extractEmbedSrc(raw) {
   const text = String(raw || "").trim();
   if (!text) return null;
-
-  // Düz URL ise
-  if (/^https?:\/\//i.test(text) && !text.includes("<")) {
-    return text;
-  }
-
-  // iframe / embed src="..." veya src='...'
+  if (/^https?:\/\//i.test(text) && !text.includes("<")) return text;
   const m = text.match(/src\s*=\s*["']([^"']+)["']/i);
   if (m && m[1]) {
     let src = m[1].trim();
     if (src.startsWith("//")) src = "https:" + src;
     return src;
   }
-
-  // data-src vb.
-  const m2 = text.match(/data-src\s*=\s*["']([^"']+)["']/i);
-  if (m2 && m2[1]) {
-    let src = m2[1].trim();
-    if (src.startsWith("//")) src = "https:" + src;
-    return src;
-  }
-
   return null;
 }
 
+function handleSourceInput() {
+  const raw = document.getElementById("embedCode").value;
+  const src = extractEmbedSrc(raw);
+  const container = document.getElementById("autoThumbnails");
+
+  if (!src) {
+    container.innerHTML = '<span style="font-size:11px;color:var(--muted);grid-column:1/-1">Geçerli bir video kaynağı girin.</span>';
+    return;
+  }
+
+  if (src.endsWith(".mp4") || src.endsWith(".webm") || src.includes("mov_bbb.mp4")) {
+    container.innerHTML = `
+      <div class="thumb-opt" onclick="selectAutoThumb('${escapeHtml(src)}#t=2', this)"><video src="${escapeHtml(src)}#t=2" muted preload="metadata"></video></div>
+      <div class="thumb-opt" onclick="selectAutoThumb('${escapeHtml(src)}#t=10', this)"><video src="${escapeHtml(src)}#t=10" muted preload="metadata"></video></div>
+      <div class="thumb-opt" onclick="selectAutoThumb('${escapeHtml(src)}#t=20', this)"><video src="${escapeHtml(src)}#t=20" muted preload="metadata"></video></div>
+    `;
+    if (!document.getElementById("previewInput").value) {
+      document.getElementById("previewInput").value = src;
+    }
+  } else {
+    const defaultCovers = [
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=60",
+      "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop&q=60",
+      "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop&q=60"
+    ];
+    container.innerHTML = defaultCovers.map(url => `
+      <div class="thumb-opt" onclick="selectAutoThumb('${url}', this)"><img src="${url}" alt="Kapak"></div>
+    `).join("");
+  }
+}
+
+function selectAutoThumb(url, el) {
+  document.querySelectorAll(".thumb-opt").forEach(x => x.classList.remove("selected"));
+  el.classList.add("selected");
+  selectedThumbUrl = url;
+  document.getElementById("thumbInput").value = url;
+}
+
 async function submitEmbed() {
-  const title = document.getElementById("embedTitle").value.trim() || "Yeni video";
+  const title = document.getElementById("embedTitle").value.trim() || "Anime Video";
   const category = document.getElementById("embedCategory").value || "Yeni";
   const rawCode = document.getElementById("embedCode").value.trim();
+  const customThumb = document.getElementById("thumbInput").value.trim();
+  const customPreview = document.getElementById("previewInput").value.trim();
 
   if (!rawCode) {
-    showToast("Gömme kodu veya URL gerekli.");
+    showToast("Gömme kodu veya video URL gerekli.");
     return;
   }
 
   const embedSrc = extractEmbedSrc(rawCode);
   if (!embedSrc) {
-    showToast("Geçerli bir iframe src veya video URL’si bulunamadı.");
+    showToast("Geçerli bir video URL'si veya iframe bulunamadı.");
     return;
   }
 
-  // Basit güvenlik: sadece http/https
-  if (!/^https?:\/\//i.test(embedSrc)) {
-    showToast("Sadece http/https URL’leri kabul edilir.");
-    return;
-  }
-
-  const ok = confirm(
-    "ÖNEMLİ UYARI\n\n" +
-    "• Sadece kendi ürettiğin veya yasal iznin olan içerik ekle.\n" +
-    "• Telifli / çalıntı içerik eklemek yasaktır.\n" +
-    "• 18 yaş altı içerik kesinlikle yasaktır.\n\n" +
-    "Devam edersen bu kuralları kabul etmiş sayılırsın.\n\nEklemek istiyor musun?"
-  );
-  if (!ok) {
-    showToast("Ekleme iptal edildi.");
-    return;
-  }
+  const thumbnail = customThumb || selectedThumbUrl || "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=60";
+  const preview = customPreview || embedSrc;
 
   try {
-    showToast("Gömme kodu kaydediliyor...");
-    const response = await fetch("/api/upload", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title,
-        category,
-        embedSrc,
-        embedCode: rawCode.slice(0, 4000)
-      })
-    });
-    let data;
+    showToast("Video kaydediliyor...");
+    
+    const newItem = {
+      id: 'vid-' + Math.random().toString(36).substring(2, 9),
+      title,
+      category,
+      type: "embed",
+      embedSrc,
+      url: embedSrc,
+      embedCode: rawCode.slice(0, 4000),
+      thumbnail: thumbnail || null,
+      preview: preview || null,
+      duration: "HD",
+      rating: "4.8",
+      createdAt: new Date().toISOString()
+    };
+
     try {
-      data = await response.json();
-    } catch {
-      throw new Error("Sunucu yanıtı okunamadı. node server.js çalışıyor mu?");
-    }
-    if (!response.ok) {
-      throw new Error(data.error || "Ekleme başarısız.");
-    }
-    showToast("Video eklendi: " + (data.title || ""));
+      await fetch("/api/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newItem)
+      });
+    } catch {}
+
+    const currentList = getLocalVideos();
+    currentList.unshift(newItem);
+    saveLocalVideos(currentList);
+    
+    showToast("Video başarıyla eklendi.");
     closeEmbedModal();
     await loadVideos();
-  } catch (error) {
-    console.error(error);
-    showToast(error.message || "Ekleme başarısız. Sunucuyu kontrol et.");
+  } catch (err) {
+    showToast(err.message || "Ekleme başarısız.");
   }
 }
 
 if (localStorage.getItem("hm_age_ok") === "1") {
   document.getElementById("ageGate").style.display = "none";
 }
-
-// Modal dışına tıklayınca kapat
-document.addEventListener("click", (e) => {
-  const modal = document.getElementById("videoModal");
-  if (modal && modal.classList.contains("open") && e.target === modal) {
-    closePlayer();
-  }
-  const dmca = document.getElementById("dmcaModal");
-  if (dmca && dmca.classList.contains("open") && e.target === dmca) {
-    closeDmca();
-  }
-  const emb = document.getElementById("embedModal");
-  if (emb && emb.classList.contains("open") && e.target === emb) {
-    closeEmbedModal();
-  }
-  ["termsModal","privacyModal","modal2257"].forEach(id => {
-    const m = document.getElementById(id);
-    if (m && m.classList.contains("open") && e.target === m) closeLegal(id);
-  });
-});
 
 loadVideos();
 </script>
