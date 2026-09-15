@@ -651,10 +651,18 @@ async function handleSourceInput(){
   const src = document.getElementById('embedCode').value.trim();
   const category = document.getElementById('embedCategory').value;
   const thumbContainer = document.getElementById('autoThumbnails');
+  document.getElementById('thumbInput').value = '';
+  document.getElementById('previewInput').value = '';
   thumbContainer.innerHTML = '<span style="font-size:11px;color:var(--muted);grid-column:1/-1">Videonun anlarından kapaklar çıkarılıyor...</span>';
 
   if(!src){
     thumbContainer.innerHTML = '<span style="font-size:11px;color:var(--muted);grid-column:1/-1">Kapak oluşturmak için önce video kaynağı girin.</span>';
+    return;
+  }
+
+  const localVideo = src.match(/<video\b[^>]*\bposter=["']([^"']+)["'][^>]*>/i);
+  if(localVideo && localVideo[1]){
+    renderThumbOptions([localVideo[1]], localVideo[1], localVideo[1]);
     return;
   }
 
@@ -691,6 +699,23 @@ async function handleSourceInput(){
         return;
       }
     }
+
+    try {
+      const response = await fetch('/api/extract-thumbnail', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({embedCode: src})
+      });
+      const data = await response.json();
+      if(data.thumbnails && data.thumbnails.length){
+        renderThumbOptions(data.thumbnails, data.thumbnails[0], data.thumbnails[0]);
+      } else {
+        thumbContainer.innerHTML = '<span style="font-size:11px;color:#f4cf72;grid-column:1/-1">Embed sayfasında poster veya kapak bulunamadı. Embed kodundaki video etiketine poster özelliği ekleyin.</span>';
+      }
+    } catch(e) {
+      thumbContainer.innerHTML = '<span style="font-size:11px;color:#f4cf72;grid-column:1/-1">Embed sunucusuna erişilemedi; kapak bilgisi alınamadı.</span>';
+    }
+    return;
   }
 
   // 2. Doğrudan video dosyası (.mp4, .webm) veya URL

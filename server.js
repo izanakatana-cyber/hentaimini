@@ -3,6 +3,11 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 const mongoose = require("mongoose");
+const os = require("os");
+const { execFile } = require("child_process");
+const { promisify } = require("util");
+
+const execFileAsync = promisify(execFile);
 
 const app = express();
 
@@ -82,6 +87,74 @@ app.get("/api/videos", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Videolar yüklenemedi." });
+  }
+});
+
+app.post("/api/extract-thumbnail", async (req, res) => {
+  try {
+    const embedCode = String(req.body.embedCode || "").trim();
+    const iframeMatch = embedCode.match(/<iframe\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/i);
+    const sourceUrl = iframeMatch ? iframeMatch[1] : embedCode;
+
+    if (!/^https?:\/\//i.test(sourceUrl)) {
+      return res.status(400).json({ error: "Geçerli bir embed sayfası gerekli." });
+    }
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+    const response = await fetch(sourceUrl, {
+      signal: controller.signal,
+      headers: { "User-Agent": "HentaiMini thumbnail resolver" }
+    });
+    clearTimeout(timeout);
+
+    if (!response.ok) {
+      return res.status(502).json({ error: "Embed sayfasına erişilemedi." });
+    }
+
+    const html = (await response.text()).slice(0, 2000000);
+    const pageUrl = new URL(sourceUrl);
+    const candidates = [];
+    const addCandidate = (value) => {
+      if (!value) return;
+      try {
+        const absoluteUrl = new URL(value.replace(/&amp;/g, "&"), pageUrl).href;
+        if (/^https?:\/\//i.test(absoluteUrl) && !candidates.includes(absoluteUrl)) {
+          candidates.push(absoluteUrl);
+        }
+      } catch {}
+    };
+
+    const posterRegex = /\bposter=["']([^"']+)["']/gi;
+    const imageMetaRegex = /<meta\b[^>]*(?:property|name)=["'](?:og:image|twitter:image)["'][^>]*\bcontent=["']([^"']+)["'][^>]*>/gi;
+    const reverseImageMetaRegex = /<meta\b[^>]*\bcontent=["']([^"']+)["'][^>]*(?:property|name)=["'](?:og:image|twitter:image)["'][^>]*>/gi;
+    let match;
+    while ((match = posterRegex.exec(html))) addCandidate(match[1]);
+    while ((match = imageMetaRegex.exec(html))) addCandidate(match[1]);
+    while ((match = reverseImageMetaRegex.exec(html))) addCandidate(match[1]);
+
+    if (candidates.length === 0) {
+      const videoMatch = html.match(/<(?:video|source)\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/i);
+      if (videoMatch) {
+        const videoUrl = new URL(videoMatch[1].replace(/&amp;/g, "&"), pageUrl).href;
+        const tempDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), "hentaimini-"));
+        const outputPath = path.join(tempDir, "thumbnail.jpg");
+        try {
+          await execFileAsync("ffmpeg", [
+            "-y", "-ss", "1", "-i", videoUrl,
+            "-frames:v", "1", "-vf", "scale=480:-2", "-q:v", "3", outputPath
+          ], { timeout: 20000, maxBuffer: 1024 * 1024 });
+          const image = await fs.promises.readFile(outputPath);
+          candidates.push(`data:image/jpeg;base64,${image.toString("base64")}`);
+        } finally {
+          await fs.promises.rm(tempDir, { recursive: true, force: true });
+        }
+      }
+    }
+
+    res.json({ thumbnails: candidates.slice(0, 3) });
+  } catch (err) {
+    res.status(502).json({ error: "Embed sayfasından kapak alınamadı." });
   }
 });
 
