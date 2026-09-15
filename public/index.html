@@ -816,7 +816,6 @@ function renderGrid(){
           ${hasThumb ? `<img class="thumb-img" src="${v.thumbnail}" alt="${v.title}" loading="lazy" onerror="this.style.display='none';">` : ''}
           ${hasPreview ? `<img class="thumb-preview" src="${v.preview}" alt="preview" onerror="this.style.display='none';">` : ''}
           <div class="play"><span><i class="fa-solid fa-play" style="color:#fff;margin-left:2px"></i></span></div>
-          <span class="quality">${v.duration || 'HD'}</span>
         </div>
         <div class="info">
           <div class="title" title="${v.title}">${v.title}</div>
