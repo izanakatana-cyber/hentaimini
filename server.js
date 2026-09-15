@@ -15,6 +15,8 @@ const DEFAULT_PORT = Number(process.env.PORT) || 3000;
 const ROOT = __dirname;
 const PUBLIC = path.join(ROOT, "public");
 const DATA = path.join(ROOT, "videos.json");
+const REMOTE_API_URL = process.env.REMOTE_API_URL || "https://hentaimini.onrender.com";
+const REMOTE_SYNC_ENABLED = process.env.REMOTE_SYNC === "true" || (!process.env.NODE_ENV && process.env.REMOTE_SYNC !== "false");
 
 function startServer(port) {
   const server = app.listen(port, "0.0.0.0", () => {
@@ -90,6 +92,40 @@ function readLocalVideos() {
 
 function writeLocalVideos(videos) {
   fs.writeFileSync(DATA, JSON.stringify(videos, null, 2), "utf8");
+}
+
+async function syncVideoToRemote(item) {
+  if (!REMOTE_SYNC_ENABLED || !REMOTE_API_URL) return;
+
+  try {
+    const response = await fetch(`${REMOTE_API_URL.replace(/\/$/, "")}/api/videos`);
+    if (!response.ok) throw new Error(`Remote list request failed: ${response.status}`);
+    const remoteVideos = await response.json();
+    const alreadyExists = remoteVideos.some(video => (video.embedSrc || video.url) === item.embedSrc);
+    if (alreadyExists) return;
+
+    const uploadResponse = await fetch(`${REMOTE_API_URL.replace(/\/$/, "")}/api/upload`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: item.title,
+        category: item.category,
+        embedSrc: item.embedSrc,
+        embedCode: item.embedCode,
+        thumbnail: item.thumbnail,
+        preview: item.preview,
+        duration: item.duration,
+        rating: item.rating
+      })
+    });
+
+    if (!uploadResponse.ok) {
+      throw new Error(`Remote upload failed: ${uploadResponse.status}`);
+    }
+    console.log(`Video Render'a senkronlandı: ${item.embedSrc}`);
+  } catch (err) {
+    console.error("Render senkronizasyonu başarısız, yerel kayıt korundu:", err.message);
+  }
 }
 
 // API Endpoints
@@ -227,12 +263,14 @@ app.post("/api/upload", async (req, res) => {
     if (isMongoConnected && VideoModel) {
       const newVideo = new VideoModel(item);
       await newVideo.save();
+      await syncVideoToRemote(item);
       return res.status(201).json(newVideo);
     }
 
     const videos = readLocalVideos();
     videos.push(item);
     writeLocalVideos(videos);
+    await syncVideoToRemote(item);
 
     res.status(201).json(item);
   } catch (err) {

@@ -21,5 +21,11 @@ API:
 
 Videolar `uploads/`, metadata `videos.json` içinde tutulur.
 
+## Render senkronizasyonu
+
+Yerel sunucuda eklenen yeni videolar, varsayılan olarak `https://hentaimini.onrender.com` adresine de aktarılır. Aynı embed adresi Render'da zaten varsa tekrar eklenmez. Render'a erişilemezse yerel kayıt yine korunur.
+
+Render sunucusunun kendisinde bu davranış otomatik olarak kapalıdır. Farklı bir uzak adres kullanmak için `REMOTE_API_URL` değişkeni verilebilir; senkronizasyonu açıkça açmak için `REMOTE_SYNC=true` kullanılabilir.
+
 ## Önemli
 Bu başlangıç sürümünde kimlik doğrulama, moderasyon, rate limit, CDN/object storage ve HTTPS yoktur. İnternete açık production sunucusuna koymadan önce bunları eklemek gerekir.

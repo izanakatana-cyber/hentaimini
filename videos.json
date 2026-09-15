@@ -54,5 +54,33 @@
     "duration": "HD",
     "rating": "4.8",
     "createdAt": "2026-09-15T13:41:38.384Z"
+  },
+  {
+    "id": "f607c31d-6e29-4fab-8e94-21c776d232c8",
+    "title": "Yeni Video",
+    "category": "Fantezi",
+    "type": "embed",
+    "embedSrc": "https://streamtape.com/e/GP0dL2KZBAC1kA7/",
+    "url": "https://streamtape.com/e/GP0dL2KZBAC1kA7/",
+    "embedCode": "<iframe src=\"https://streamtape.com/e/GP0dL2KZBAC1kA7/\" width=\"800\" height=\"600\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://thumb.tapecontent.net/thumb/GP0dL2KZBAC1kA7/G62lmYBWdoHmd4.jpg",
+    "preview": "https://thumb.tapecontent.net/thumb/GP0dL2KZBAC1kA7/G62lmYBWdoHmd4.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-15T14:00:41.349Z"
+  },
+  {
+    "id": "f587d221-3c9d-4eff-addf-15df75b037e9",
+    "title": "Yeni Video",
+    "category": "Fantezi",
+    "type": "embed",
+    "embedSrc": "https://streamtape.com/e/q8dl623vVKFzdev/",
+    "url": "https://streamtape.com/e/q8dl623vVKFzdev/",
+    "embedCode": "<iframe src=\"https://streamtape.com/e/q8dl623vVKFzdev/\" width=\"800\" height=\"600\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://thumb.tapecontent.net/thumb/q8dl623vVKFzdev/WbwAmVkzwlTrg2.jpg",
+    "preview": "https://thumb.tapecontent.net/thumb/q8dl623vVKFzdev/WbwAmVkzwlTrg2.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-15T14:03:50.389Z"
   }
 ]
