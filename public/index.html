@@ -454,7 +454,10 @@ async function loadVideos(){
   try {
     const res = await fetch('/api/videos');
     allVideos = await res.json();
-    document.getElementById('statVideoCount').innerHTML = `<b>${allVideos.length}</b><span>Video</span>`;
+    const statVideoCount = document.getElementById('statVideoCount');
+    if (statVideoCount) {
+      statVideoCount.innerHTML = `<b>${allVideos.length}</b><span>Video</span>`;
+    }
     renderGrid();
   } catch (err){
     console.error(err);
