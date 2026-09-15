@@ -476,6 +476,12 @@ async function loadVideos(){
   }
 }
 
+setInterval(() => {
+  if (document.visibilityState === 'visible' && !document.getElementById('embedModal').classList.contains('open')) {
+    loadVideos();
+  }
+}, 5000);
+
 function renderGrid(){
   const grid = document.getElementById('grid');
   const empty = document.getElementById('empty');
