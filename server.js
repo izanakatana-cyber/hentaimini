@@ -115,12 +115,22 @@ app.post("/api/extract-thumbnail", async (req, res) => {
     const html = (await response.text()).slice(0, 2000000);
     const pageUrl = new URL(sourceUrl);
     const candidates = [];
+    const mediaCandidates = [];
     const addCandidate = (value) => {
       if (!value) return;
       try {
         const absoluteUrl = new URL(value.replace(/&amp;/g, "&"), pageUrl).href;
         if (/^https?:\/\//i.test(absoluteUrl) && !candidates.includes(absoluteUrl)) {
           candidates.push(absoluteUrl);
+        }
+      } catch {}
+    };
+    const addMediaCandidate = (value) => {
+      if (!value || /^data:/i.test(value)) return;
+      try {
+        const absoluteUrl = new URL(value.replace(/\\u0026/g, "&").replace(/&amp;/g, "&"), pageUrl).href;
+        if (/^https?:\/\//i.test(absoluteUrl) && !mediaCandidates.includes(absoluteUrl)) {
+          mediaCandidates.push(absoluteUrl);
         }
       } catch {}
     };
@@ -133,10 +143,14 @@ app.post("/api/extract-thumbnail", async (req, res) => {
     while ((match = imageMetaRegex.exec(html))) addCandidate(match[1]);
     while ((match = reverseImageMetaRegex.exec(html))) addCandidate(match[1]);
 
+    const mediaRegex = /(?:file|source|videoUrl|video_url|contentUrl|content_url)\s*["']?\s*[:=]\s*["']([^"']+)["']/gi;
+    while ((match = mediaRegex.exec(html))) addMediaCandidate(match[1]);
+
     if (candidates.length === 0) {
       const videoMatch = html.match(/<(?:video|source)\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/i);
-      if (videoMatch) {
-        const videoUrl = new URL(videoMatch[1].replace(/&amp;/g, "&"), pageUrl).href;
+      if (videoMatch) addMediaCandidate(videoMatch[1]);
+
+      for (const videoUrl of mediaCandidates) {
         const tempDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), "hentaimini-"));
         const outputPath = path.join(tempDir, "thumbnail.jpg");
         try {
@@ -146,6 +160,9 @@ app.post("/api/extract-thumbnail", async (req, res) => {
           ], { timeout: 20000, maxBuffer: 1024 * 1024 });
           const image = await fs.promises.readFile(outputPath);
           candidates.push(`data:image/jpeg;base64,${image.toString("base64")}`);
+          break;
+        } catch {
+          // Try the next media URL when the player exposes multiple sources.
         } finally {
           await fs.promises.rm(tempDir, { recursive: true, force: true });
         }
