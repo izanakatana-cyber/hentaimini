@@ -414,7 +414,8 @@ let currentVideoId = null;
 let favorites = JSON.parse(localStorage.getItem('hentaimini_favs') || '[]');
 
 function enterSite(){
-  document.getElementById('ageGate').style.display = 'none';
+  const ageGate = document.getElementById('ageGate');
+  if (ageGate) ageGate.style.display = 'none';
   localStorage.setItem('age_verified', 'true');
   loadVideos();
 }
@@ -423,9 +424,19 @@ function leaveSite(){
   window.location.href = "https://www.google.com";
 }
 
-if(localStorage.getItem('age_verified') === 'true'){
-  document.getElementById('ageGate').style.display = 'none';
+function allowSiteOnLoad(){
+  const ageGate = document.getElementById('ageGate');
+  if (ageGate) ageGate.style.display = 'none';
+  localStorage.setItem('age_verified', 'true');
   loadVideos();
+}
+
+if(localStorage.getItem('age_verified') === 'true'){
+  const ageGate = document.getElementById('ageGate');
+  if (ageGate) ageGate.style.display = 'none';
+  loadVideos();
+} else {
+  allowSiteOnLoad();
 }
 
 function toggleSidebar(){
@@ -848,6 +859,9 @@ async function submitEmbed(){
 // Sayfa yüklendiğinde varsayılan kapak alternatiflerini hazırla
 document.addEventListener('DOMContentLoaded', () => {
   handleSourceInput();
+  if (localStorage.getItem('age_verified') !== 'true') {
+    allowSiteOnLoad();
+  }
 });
 </script>
 </body>
