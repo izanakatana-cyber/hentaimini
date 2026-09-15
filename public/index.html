@@ -67,8 +67,10 @@ main{margin-left:248px;width:calc(100% - 248px);padding:22px 32px 60px}
 .search input:focus{border-color:rgba(255,63,145,.5);box-shadow:0 0 0 4px rgba(255,63,145,.06)}
 .search kbd{position:absolute;right:10px;top:10px;color:#625c6a;border:1px solid #302b38;border-radius:6px;padding:3px 6px;font-size:10px}
 .top-actions{margin-left:auto;display:flex;align-items:center;gap:9px}
-.lang-toggle{padding:10px 12px;border-radius:12px;background:#121018;border:1px solid var(--line);color:#f2eaff;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.4px;transition:.2s}
-.lang-toggle:hover{border-color:#544869;transform:translateY(-1px)}
+.lang-wrap{position:relative;display:flex;align-items:center}
+.lang-select{padding:10px 34px 10px 12px;border-radius:12px;background:#121018;border:1px solid var(--line);color:#f2eaff;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.4px;transition:.2s;appearance:none;-webkit-appearance:none;-moz-appearance:none;min-width:110px;}
+.lang-wrap::after{content:'▾';position:absolute;right:12px;pointer-events:none;font-size:12px;color:#d9c9f6}
+.lang-select:hover{border-color:#544869;transform:translateY(-1px)}
 .icon{width:42px;height:42px;border-radius:12px;background:#121018;border:1px solid var(--line);color:#a9a2b0;display:grid;place-items:center;cursor:pointer;position:relative;transition:.2s}
 .icon:hover{color:#fff;border-color:#443b4d;transform:translateY(-1px)}
 .dot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--pink);right:9px;top:8px;box-shadow:0 0 10px var(--pink)}
@@ -170,11 +172,11 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
   <div class="age-card">
     <div class="age-logo"><i class="fa-solid fa-18"></i></div>
     <h1>HentaiMini</h1>
-    <p>Bu platform yetişkinlere yönelik <strong>18+</strong> hentai/video içerikleri için tasarlanmıştır.</p>
-    <div class="age-warning"><i class="fa-solid fa-triangle-exclamation"></i> Devam ederek 18 yaşında veya daha büyük olduğunuzu ve bulunduğunuz yerdeki yasalara uygun hareket edeceğinizi onaylarsınız.</div>
+    <p data-i18n="ageGateText">Bu platform yetişkinlere yönelik <strong>18+</strong> hentai/video içerikleri için tasarlanmıştır.</p>
+    <div class="age-warning" data-i18n="ageWarning"><i class="fa-solid fa-triangle-exclamation"></i> Devam ederek 18 yaşında veya daha büyük olduğunuzu ve bulunduğunuz yerdeki yasalara uygun hareket edeceğinizi onaylarsınız.</div>
     <div class="age-actions">
-      <button class="primary" onclick="enterSite()">18+ Giriş Yap</button>
-      <button class="secondary" onclick="leaveSite()">Çıkış</button>
+      <button class="primary" onclick="enterSite()" data-i18n="enter18">18+ Giriş Yap</button>
+      <button class="secondary" onclick="leaveSite()" data-i18n="exit">Çıkış</button>
     </div>
   </div>
 </div>
@@ -203,7 +205,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <a href="#" onclick="openLegal('privacyModal'); return false;"><i class="fa-solid fa-user-shield"></i> <span data-i18n="privacy">Gizlilik</span></a>
     <a href="#" onclick="openDmca(); return false;"><i class="fa-solid fa-scale-balanced"></i> DMCA</a>
   </nav>
-  <div class="sidebar-bottom"><strong>18+ içerik modu</strong><p>Yetişkin içerikler için katalog arayüzü.</p><div class="status">Sistem hazır</div></div>
+  <div class="sidebar-bottom"><strong data-i18n="adultMode">18+ içerik modu</strong><p data-i18n="adultCatalog">Yetişkin içerikler için katalog arayüzü.</p><div class="status" data-i18n="systemReady">Sistem hazır</div></div>
 </aside>
 
 <main>
@@ -211,8 +213,14 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <button class="icon menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
     <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="search" data-i18n-placeholder="searchPlaceholder" placeholder="Video, kategori veya etiket ara..."><kbd>CTRL K</kbd></div>
     <div class="top-actions">
-      <button class="icon" onclick="showToast('Bildirimler güncel.')"><i class="fa-regular fa-bell"></i><span class="dot"></span></button>
-      <button id="langToggle" class="lang-toggle" type="button" aria-label="Dil değiştir">TR / EN</button>
+      <button class="icon" onclick="showToast(getLocalizedText('notification'))"><i class="fa-regular fa-bell"></i><span class="dot"></span></button>
+      <div class="lang-wrap">
+        <select id="langSelect" class="lang-select" aria-label="Language selector">
+          <option value="tr">Türkçe</option>
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </div>
       <button class="primary" onclick="openEmbedModal()"><i class="fa-solid fa-code"></i> <span data-i18n="addVideo">Video Ekle</span></button>
     </div>
   </header>
@@ -222,14 +230,14 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <section class="hero">
       <div class="hero-grid"></div>
       <div class="hero-content">
-        <div class="eyebrow"><i class="fa-solid fa-shield-halved"></i> 18+ Yetişkin Video Platformu</div>
-        <h1>Hentai dünyasının <span class="gradient">en özgür</span> köşesi.</h1>
-        <p>Kaliteli 18+ içerikler, yüksek çözünürlük ve sorunsuz izleme deneyimi.</p>
+        <div class="eyebrow" data-i18n="adultPlatform">18+ Yetişkin Video Platformu</div>
+        <h1 data-i18n="heroTitle">Hentai dünyasının <span class="gradient">en özgür</span> köşesi.</h1>
+        <p data-i18n="heroSubtitle">Kaliteli 18+ içerikler, yüksek çözünürlük ve sorunsuz izleme deneyimi.</p>
         <div class="hero-actions">
-          <button class="primary" onclick="openEmbedModal()"><i class="fa-solid fa-code"></i> Video Ekle</button>
-          <button class="secondary" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-compass"></i> Kataloğu Keşfet</button>
+          <button class="primary" onclick="openEmbedModal()"><i class="fa-solid fa-code"></i> <span data-i18n="addVideo">Video Ekle</span></button>
+          <button class="secondary" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-compass"></i> <span data-i18n="exploreCatalog">Kataloğu Keşfet</span></button>
         </div>
-        <div class="stats"><div id="statVideoCount"><b>0</b><span>Video</span></div><div><b>HD</b><span>Yüksek Kalite</span></div><div><b>18+</b><span>Güvenli Mod</span></div></div>
+        <div class="stats"><div id="statVideoCount"><b>0</b><span data-i18n="videoStat">Video</span></div><div><b>HD</b><span data-i18n="highQuality">Yüksek Kalite</span></div><div><b>18+</b><span data-i18n="safeMode">Güvenli Mod</span></div></div>
       </div>
     </section>
 
@@ -248,13 +256,13 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
         <button class="filter" data-filter="Romantik" data-i18n="romantic">Romantik</button>
         <button class="filter" data-filter="Aksiyon" data-i18n="action">Aksiyon</button>
         <button class="filter" data-filter="Fantezi" data-i18n="fantasy">Fantezi</button>
-        <button class="filter" data-filter="comedy" data-i18n="comedy">Komedi</button>
+        <button class="filter" data-filter="Komedi" data-i18n="comedy">Komedi</button>
       </div>
       <div class="grid" id="grid"></div>
       <div class="empty" id="empty">
         <i class="fa-solid fa-film"></i>
-        <h3>Henüz video yok</h3>
-        <p>Sağ üstteki "Video Ekle" butonunu kullanarak ilk içeriği ekleyin.</p>
+        <h3 data-i18n="noVideos">Henüz video yok</h3>
+        <p data-i18n="noVideosHint">Sağ üstteki "Video Ekle" butonunu kullanarak ilk içeriği ekleyin.</p>
       </div>
     </section>
   </div>
@@ -262,10 +270,10 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
   <!-- BÜYÜK EKRAN İZLEME GÖRÜNÜMÜ -->
   <div id="watchView" class="watch-view">
     <div class="watch-topbar">
-      <button class="back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i> Ana Kataloğa Dön</button>
+      <button class="back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="backToCatalog">Ana Kataloğa Dön</span></button>
       <div style="display:flex;gap:10px">
-        <button class="secondary" id="watchFavBtn" onclick="toggleFavoriteFromWatch()" style="padding:10px 14px;font-size:12px"><i class="fa-regular fa-heart"></i> Favori</button>
-        <button class="secondary" onclick="deleteCurrentVideo()" style="padding:10px 14px;font-size:12px;color:#ff5a82;border-color:rgba(255,90,130,.3)"><i class="fa-solid fa-trash"></i> Sil</button>
+        <button class="secondary" id="watchFavBtn" onclick="toggleFavoriteFromWatch()" style="padding:10px 14px;font-size:12px"><i class="fa-regular fa-heart"></i> <span data-i18n="favorite">Favori</span></button>
+        <button class="secondary" onclick="deleteCurrentVideo()" style="padding:10px 14px;font-size:12px;color:#ff5a82;border-color:rgba(255,90,130,.3)"><i class="fa-solid fa-trash"></i> <span data-i18n="delete">Sil</span></button>
       </div>
     </div>
     
@@ -273,17 +281,17 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 
     <div class="watch-details">
       <div class="watch-title-row">
-        <h2 class="watch-title" id="watchTitle">Video Başlığı</h2>
-        <span class="tag" id="watchCategoryTag" style="background:rgba(255,63,145,.15);color:var(--pink);padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700">Kategori</span>
+        <h2 class="watch-title" id="watchTitle" data-i18n="videoTitleDefault">Video Başlığı</h2>
+        <span class="tag" id="watchCategoryTag" style="background:rgba(255,63,145,.15);color:var(--pink);padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700" data-i18n="categoryTag">Kategori</span>
       </div>
       <div class="watch-meta-info">
         <span><i class="fa-solid fa-calendar"></i> <span id="watchDate"></span></span>
         <span>•</span>
-        <span><i class="fa-solid fa-shield"></i> 18+ Yetişkin İçerik</span>
+        <span><i class="fa-solid fa-shield"></i> <span data-i18n="adultContent">18+ Yetişkin İçerik</span></span>
         <span>•</span>
         <span style="color:#e7c65d"><i class="fa-solid fa-star"></i> 4.9</span>
       </div>
-      <p class="watch-desc" id="watchDesc">Bu video için açıklama girilmemiştir.</p>
+      <p class="watch-desc" id="watchDesc" data-i18n="videoDescDefault">Bu video için açıklama girilmemiştir.</p>
     </div>
   </div>
 
@@ -293,8 +301,8 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 <footer style="width:100%; text-align:center; padding:28px 16px 40px; color:#716a79; font-size:12px; line-height:1.8; border-top:1px solid #272331; margin-top:20px;">
   <div style="max-width:720px; margin:0 auto;">
     <div style="margin-bottom:6px;">
-      <a href="javascript:void(0)" onclick="openLegal('termsModal')">Şartlar</a> &nbsp;·&nbsp;
-      <a href="javascript:void(0)" onclick="openLegal('privacyModal')">Gizlilik</a> &nbsp;·&nbsp;
+      <a href="javascript:void(0)" onclick="openLegal('termsModal')" data-i18n="terms">Şartlar</a> &nbsp;·&nbsp;
+      <a href="javascript:void(0)" onclick="openLegal('privacyModal')" data-i18n="privacy">Gizlilik</a> &nbsp;·&nbsp;
       <a href="javascript:void(0)" onclick="openDmca()">DMCA</a>
     </div>
     <div style="opacity:0.7;">© 2026 HentaiMini</div>
@@ -307,18 +315,18 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 <div class="modal" id="embedModal">
   <div class="embed-box">
     <div class="modal-top" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-      <h3>Video ve Otomatik Kapak Ekle</h3>
+      <h3 data-i18n="addVideoDialogTitle">Video ve Otomatik Kapak Ekle</h3>
       <button class="icon" onclick="closeEmbedModal()" style="width:32px;height:32px"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <p class="hint">Doğrudan video linki (.mp4 vb.) veya YouTube / iframe bağlantısı yapıştırın. Sistem videonun anlarından kapak görsellerini otomatik olarak oluşturacaktır.</p>
+    <p class="hint" data-i18n="embedHint">Doğrudan video linki (.mp4 vb.) veya YouTube / iframe bağlantısı yapıştırın. Sistem videonun anlarından kapak görsellerini otomatik olarak oluşturacaktır.</p>
     
     <div class="embed-field">
-      <label for="embedTitle">Video Başlığı</label>
-      <input id="embedTitle" type="text" placeholder="Örn: Cyber Neon Fantasy" maxlength="160">
+      <label for="embedTitle" data-i18n="videoTitleLabel">Video Başlığı</label>
+      <input id="embedTitle" type="text" placeholder="Örn: Cyber Neon Fantasy" maxlength="160" data-i18n-placeholder="videoTitlePlaceholder">
     </div>
 
     <div class="embed-field">
-      <label for="embedCategory">Kategori</label>
+      <label for="embedCategory" data-i18n="categoryTag">Kategori</label>
       <select id="embedCategory" onchange="handleSourceInput()">
         <option value="Romantik">Romantik</option>
         <option value="Aksiyon">Aksiyon</option>
@@ -330,22 +338,22 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     </div>
 
     <div class="embed-field">
-      <label for="embedCode">Video Kaynağı / URL</label>
-      <textarea id="embedCode" placeholder="https://ornek.com/video.mp4 veya YouTube linki" oninput="handleSourceInput()"></textarea>
+      <label for="embedCode" data-i18n="sourceUrlLabel">Video Kaynağı / URL</label>
+      <textarea id="embedCode" placeholder="https://ornek.com/video.mp4 veya YouTube linki" oninput="handleSourceInput()" data-i18n-placeholder="sourcePlaceholder"></textarea>
     </div>
 
     <div class="embed-field">
-      <label>Videonun Farklı Anlarından Otomatik Kapak Seçimi</label>
+      <label data-i18n="thumbPickerLabel">Videonun Farklı Anlarından Otomatik Kapak Seçimi</label>
       <div class="thumb-options" id="autoThumbnails">
-        <span style="font-size:11px;color:var(--muted);grid-column:1/-1">Video kaynağı girildiğinde kapak kesitleri burada belirecektir.</span>
+        <span style="font-size:11px;color:var(--muted);grid-column:1/-1" data-i18n="thumbPickerHint">Video kaynağı girildiğinde kapak kesitleri burada belirecektir.</span>
       </div>
       <input type="hidden" id="thumbInput">
       <input type="hidden" id="previewInput">
     </div>
 
     <div class="embed-actions">
-      <button class="secondary" onclick="closeEmbedModal()">İptal</button>
-      <button class="primary" onclick="submitEmbed()"><i class="fa-solid fa-plus"></i> Videoyu Ekle</button>
+      <button class="secondary" onclick="closeEmbedModal()" data-i18n="cancel">İptal</button>
+      <button class="primary" onclick="submitEmbed()"><i class="fa-solid fa-plus"></i> <span data-i18n="addVideoBtn">Videoyu Ekle</span></button>
     </div>
   </div>
 </div>
@@ -443,6 +451,54 @@ let favorites = JSON.parse(localStorage.getItem('hentaimini_favs') || '[]');
 
 const translations = {
   tr: {
+    ageGateText: 'Bu platform yetişkinlere yönelik 18+ hentai/video içerikleri için tasarlanmıştır.',
+    ageWarning: 'Devam ederek 18 yaşında veya daha büyük olduğunuzu ve bulunduğunuz yerdeki yasalara uygun hareket edeceğinizi onaylarsınız.',
+    enter18: '18+ Giriş Yap',
+    exit: 'Çıkış',
+    adultMode: '18+ içerik modu',
+    adultCatalog: 'Yetişkin içerikler için katalog arayüzü.',
+    systemReady: 'Sistem hazır',
+    adultPlatform: '18+ Yetişkin Video Platformu',
+    heroTitle: 'Hentai dünyasının en özgür köşesi.',
+    heroSubtitle: 'Kaliteli 18+ içerikler, yüksek çözünürlük ve sorunsuz izleme deneyimi.',
+    exploreCatalog: 'Kataloğu Keşfet',
+    videoStat: 'Video',
+    highQuality: 'Yüksek Kalite',
+    safeMode: 'Güvenli Mod',
+    noVideos: 'Henüz video yok',
+    noVideosHint: 'Sağ üstteki "Video Ekle" butonunu kullanarak ilk içeriği ekleyin.',
+    backToCatalog: 'Ana Kataloğa Dön',
+    favorite: 'Favori',
+    favoriteAdded: 'Favorilerde',
+    delete: 'Sil',
+    videoTitleDefault: 'Video Başlığı',
+    categoryTag: 'Kategori',
+    adultContent: '18+ Yetişkin İçerik',
+    videoDescDefault: 'Bu video için açıklama girilmemiştir.',
+    addVideoDialogTitle: 'Video ve Otomatik Kapak Ekle',
+    embedHint: 'Doğrudan video linki (.mp4 vb.) veya YouTube / iframe bağlantısı yapıştırın. Sistem videonun anlarından kapak görsellerini otomatik olarak oluşturacaktır.',
+    videoTitleLabel: 'Video Başlığı',
+    videoTitlePlaceholder: 'Örn: Cyber Neon Fantasy',
+    sourceUrlLabel: 'Video Kaynağı / URL',
+    sourcePlaceholder: 'https://ornek.com/video.mp4 veya YouTube linki',
+    thumbPickerLabel: 'Videonun Farklı Anlarından Otomatik Kapak Seçimi',
+    thumbPickerHint: 'Video kaynağı girildiğinde kapak kesitleri burada belirecektir.',
+    cancel: 'İptal',
+    addVideoBtn: 'Videoyu Ekle',
+    noResults: 'Gösterilecek içerik bulunamadı.',
+    resultsCount: 'video listeleniyor',
+    generalCategory: 'Genel',
+    favoriteRemoved: 'Favorilerden çıkarıldı.',
+    favoriteAddedToast: 'Favorilere eklendi.',
+    confirmDelete: 'Bu videoyu silmek istediğinize emin misiniz?',
+    deleteSuccess: 'Video silindi.',
+    deleteFail: 'Silme başarısız.',
+    connectionError: 'Bağlantı hatası.',
+    addVideoSuccess: 'Video başarıyla eklendi!',
+    addVideoFail: 'Video eklenemedi.',
+    addVideoMissing: 'Lütfen video kaynağı girin.',
+    addVideoThumbnailMissing: 'Videodan kapak alınamadı. CORS izinli bir doğrudan video bağlantısı kullanın.',
+    serverError: 'Sunucu bağlantı hatası.',
     discover: 'Keşfet',
     home: 'Ana Sayfa',
     trending: 'Trendler',
@@ -468,6 +524,54 @@ const translations = {
     videosError: 'Videolar yüklenirken hata oluştu.'
   },
   en: {
+    ageGateText: 'This platform is designed for adult 18+ hentai/video content.',
+    ageWarning: 'By continuing, you confirm that you are at least 18 years old and comply with local laws.',
+    enter18: '18+ Enter',
+    exit: 'Exit',
+    adultMode: '18+ content mode',
+    adultCatalog: 'Catalog interface for adult content.',
+    systemReady: 'System ready',
+    adultPlatform: '18+ Adult Video Platform',
+    heroTitle: 'The freest corner of the hentai world.',
+    heroSubtitle: 'High-quality 18+ content, high resolution and smooth viewing experience.',
+    exploreCatalog: 'Explore catalog',
+    videoStat: 'Videos',
+    highQuality: 'High Quality',
+    safeMode: 'Safe Mode',
+    noVideos: 'No videos yet',
+    noVideosHint: 'Use the "Add Video" button in the top-right to add the first content.',
+    backToCatalog: 'Back to catalog',
+    favorite: 'Favorite',
+    favoriteAdded: 'Saved',
+    delete: 'Delete',
+    videoTitleDefault: 'Video Title',
+    categoryTag: 'Category',
+    adultContent: '18+ Adult Content',
+    videoDescDefault: 'No description has been entered for this video yet.',
+    addVideoDialogTitle: 'Add Video and Auto Cover',
+    embedHint: 'Paste a direct video link (.mp4 etc.) or a YouTube / iframe link. The system will automatically generate cover images from the video frames.',
+    videoTitleLabel: 'Video Title',
+    videoTitlePlaceholder: 'Example: Cyber Neon Fantasy',
+    sourceUrlLabel: 'Video Source / URL',
+    sourcePlaceholder: 'https://example.com/video.mp4 or YouTube link',
+    thumbPickerLabel: 'Automatic Cover Selection from Different Moments of the Video',
+    thumbPickerHint: 'Thumbnail frames will appear here when the video source is entered.',
+    cancel: 'Cancel',
+    addVideoBtn: 'Add video',
+    noResults: 'No matching content found.',
+    resultsCount: 'videos listed',
+    generalCategory: 'General',
+    favoriteRemoved: 'Removed from favorites.',
+    favoriteAddedToast: 'Added to favorites.',
+    confirmDelete: 'Are you sure you want to delete this video?',
+    deleteSuccess: 'Video deleted.',
+    deleteFail: 'Delete failed.',
+    connectionError: 'Connection error.',
+    addVideoSuccess: 'Video added successfully!',
+    addVideoFail: 'Video could not be added.',
+    addVideoMissing: 'Please enter a video source.',
+    addVideoThumbnailMissing: 'The thumbnail could not be captured. Use a direct video URL with CORS access.',
+    serverError: 'Server connection error.',
     discover: 'Discover',
     home: 'Home',
     trending: 'Trending',
@@ -491,8 +595,85 @@ const translations = {
     searchPlaceholder: 'Search videos, categories or tags...',
     notification: 'Notifications are up to date.',
     videosError: 'An error occurred while loading videos.'
+  },
+  de: {
+    ageGateText: 'Diese Plattform ist für erwachsene 18+ Hentai-/Videoinhalte konzipiert.',
+    ageWarning: 'Wenn Sie fortfahren, bestätigen Sie, dass Sie mindestens 18 Jahre alt sind und die geltenden Gesetze beachten.',
+    enter18: '18+ Eintritt',
+    exit: 'Ausgang',
+    adultMode: '18+ Inhaltsmodus',
+    adultCatalog: 'Katalogoberfläche für Erwachsene.',
+    systemReady: 'System bereit',
+    adultPlatform: '18+ Erwachsenen-Video-Platform',
+    heroTitle: 'Die freieste Ecke der Hentai-Welt.',
+    heroSubtitle: 'Qualitätsvolle 18+-Inhalte, hohe Auflösung und reibungslose Wiedergabe.',
+    exploreCatalog: 'Katalog entdecken',
+    videoStat: 'Videos',
+    highQuality: 'Hohe Qualität',
+    safeMode: 'Sicherer Modus',
+    noVideos: 'Noch keine Videos',
+    noVideosHint: 'Verwenden Sie die Taste "Video hinzufügen" oben rechts, um den ersten Inhalt hinzuzufügen.',
+    backToCatalog: 'Zurück zum Katalog',
+    favorite: 'Favorit',
+    favoriteAdded: 'Gespeichert',
+    delete: 'Löschen',
+    videoTitleDefault: 'Video-Titel',
+    categoryTag: 'Kategorie',
+    adultContent: '18+ Erwachseneninhalt',
+    videoDescDefault: 'Für dieses Video wurde noch keine Beschreibung eingegeben.',
+    addVideoDialogTitle: 'Video und automatische Cover hinzufügen',
+    embedHint: 'Fügen Sie einen direkten Videolink (.mp4 usw.) oder einen YouTube-/Iframe-Link ein. Das System erstellt automatisch Vorschaubilder aus den Videoframes.',
+    videoTitleLabel: 'Video-Titel',
+    videoTitlePlaceholder: 'Beispiel: Cyber Neon Fantasy',
+    sourceUrlLabel: 'Videoquelle / URL',
+    sourcePlaceholder: 'https://beispiel.de/video.mp4 oder YouTube-Link',
+    thumbPickerLabel: 'Automatische Cover-Auswahl aus verschiedenen Video-Momenten',
+    thumbPickerHint: 'Vorschaubilder erscheinen hier, sobald die Videoquelle eingegeben wurde.',
+    cancel: 'Abbrechen',
+    addVideoBtn: 'Video hinzufügen',
+    noResults: 'Keine passenden Inhalte gefunden.',
+    resultsCount: 'Videos angezeigt',
+    generalCategory: 'Allgemein',
+    favoriteRemoved: 'Aus Favoriten entfernt.',
+    favoriteAddedToast: 'Zu Favoriten hinzugefügt.',
+    confirmDelete: 'Möchten Sie dieses Video wirklich löschen?',
+    deleteSuccess: 'Video gelöscht.',
+    deleteFail: 'Löschen fehlgeschlagen.',
+    connectionError: 'Verbindungsfehler.',
+    addVideoSuccess: 'Video erfolgreich hinzugefügt!',
+    addVideoFail: 'Video konnte nicht hinzugefügt werden.',
+    addVideoMissing: 'Bitte geben Sie eine Videoquelle ein.',
+    addVideoThumbnailMissing: 'Das Vorschaubild konnte nicht erzeugt werden. Verwenden Sie eine direkte Video-URL mit CORS-Zugriff.',
+    serverError: 'Server-Verbindungsfehler.',
+    discover: 'Entdecken',
+    home: 'Startseite',
+    trending: 'Trendings',
+    new: 'Neue Einträge',
+    random: 'Zufällig',
+    categories: 'Kategorien',
+    romantic: 'Romantisch',
+    action: 'Aktion',
+    fantasy: 'Fantasy',
+    comedy: 'Komödie',
+    legal: 'Rechtlich',
+    terms: 'Bedingungen',
+    privacy: 'Datenschutz',
+    addVideo: 'Video hinzufügen',
+    featured: 'Empfohlen',
+    loadingVideos: 'Videos werden geladen...',
+    randomPick: 'Zufällige Auswahl',
+    all: 'Alle',
+    popular: 'Beliebt',
+    newFilter: 'Neu',
+    searchPlaceholder: 'Videos, Kategorien oder Tags suchen...',
+    notification: 'Benachrichtigungen sind aktuell.',
+    videosError: 'Beim Laden der Videos ist ein Fehler aufgetreten.'
   }
 };
+
+function getLocalizedText(key) {
+  return translations[getCurrentLanguage()]?.[key] || key;
+}
 
 function getCurrentLanguage(){
   const saved = localStorage.getItem('hm_lang');
@@ -503,21 +684,29 @@ function applyLanguage(lang){
   const selected = translations[lang] ? lang : 'tr';
   localStorage.setItem('hm_lang', selected);
 
+  const langSelect = document.getElementById('langSelect');
+  if (langSelect) {
+    langSelect.value = selected;
+  }
+
   document.querySelectorAll('[data-i18n]').forEach((node) => {
     const key = node.dataset.i18n;
-    if (translations[selected][key]) {
+    if (translations[selected][key] !== undefined) {
       node.textContent = translations[selected][key];
+    }
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((node) => {
+    const key = node.dataset.i18nPlaceholder;
+    const value = translations[selected][key];
+    if (value) {
+      node.setAttribute('placeholder', value);
     }
   });
 
   const searchInput = document.getElementById('search');
   if (searchInput && translations[selected].searchPlaceholder) {
     searchInput.placeholder = translations[selected].searchPlaceholder;
-  }
-
-  const toggleBtn = document.getElementById('langToggle');
-  if (toggleBtn) {
-    toggleBtn.textContent = selected === 'tr' ? 'TR / EN' : 'EN / TR';
   }
 
   const sectionTitle = document.getElementById('sectionTitle');
@@ -532,8 +721,15 @@ function applyLanguage(lang){
 }
 
 function toggleLanguage(){
-  const nextLang = getCurrentLanguage() === 'tr' ? 'en' : 'tr';
+  const nextLang = document.getElementById('langSelect')?.value || getCurrentLanguage();
   applyLanguage(nextLang);
+}
+
+function handleLanguageSelection(event){
+  const selected = event.target.value;
+  if (selected && translations[selected]) {
+    applyLanguage(selected);
+  }
 }
 
 function allowSiteOnLoad(){
@@ -578,12 +774,12 @@ async function loadVideos(){
     allVideos = await res.json();
     const statVideoCount = document.getElementById('statVideoCount');
     if (statVideoCount) {
-      statVideoCount.innerHTML = `<b>${allVideos.length}</b><span>Video</span>`;
+      statVideoCount.innerHTML = `<b>${allVideos.length}</b><span>${getLocalizedText('videoStat')}</span>`;
     }
     renderGrid();
   } catch (err){
     console.error(err);
-    showToast(translations[getCurrentLanguage()].videosError);
+    showToast(getLocalizedText('videosError'));
   }
 }
 
@@ -601,12 +797,12 @@ function renderGrid(){
   if(filtered.length === 0){
     grid.innerHTML = '';
     empty.style.display = 'block';
-    document.getElementById('sectionDesc').innerText = 'Gösterilecek içerik bulunamadı.';
+    document.getElementById('sectionDesc').innerText = getLocalizedText('noResults');
     return;
   }
 
   empty.style.display = 'none';
-  document.getElementById('sectionDesc').innerText = `${filtered.length} video listeleniyor`;
+  document.getElementById('sectionDesc').innerText = `${filtered.length} ${getLocalizedText('resultsCount')}`;
 
   grid.innerHTML = filtered.map(v => {
     const isFav = favorites.includes(v.id);
@@ -625,7 +821,7 @@ function renderGrid(){
         <div class="info">
           <div class="title" title="${v.title}">${v.title}</div>
           <div class="meta">
-            <span class="tag">${v.category || 'Genel'}</span>
+              <span class="tag">${v.category || getLocalizedText('generalCategory')}</span>
             <span class="rating"><i class="fa-solid fa-star"></i> ${v.rating || '4.9'}</span>
             <i class="fa-solid fa-heart heart ${isFav ? 'active' : ''}" onclick="event.stopPropagation(); toggleFavorite('${v.id}')"></i>
           </div>
@@ -642,7 +838,11 @@ function setFilter(category){
   document.querySelectorAll('.filter').forEach(f => {
     f.classList.toggle('active', f.getAttribute('data-filter') === category);
   });
-  document.getElementById('sectionTitle').innerText = category === 'Tümü' ? 'Öne Çıkanlar' : category + ' Videoları';
+  const title = document.getElementById('sectionTitle');
+  const lang = getCurrentLanguage();
+  if (title) {
+    title.innerText = category === 'Tümü' ? translations[lang].featured : `${category} ${translations[lang].videoStat}`;
+  }
   goHome();
   renderGrid();
 }
@@ -663,15 +863,17 @@ function openWatch(id){
   const video = allVideos.find(v => v.id === id);
   if(!video) return;
   currentVideoId = id;
+  const lang = getCurrentLanguage();
 
   document.getElementById('homeView').style.display = 'none';
   const watchView = document.getElementById('watchView');
   watchView.classList.add('active');
 
   document.getElementById('watchTitle').innerText = video.title;
-  document.getElementById('watchCategoryTag').innerText = video.category || 'Genel';
-  document.getElementById('watchDate').innerText = new Date(video.createdAt || Date.now()).toLocaleDateString('tr-TR');
-  document.getElementById('watchDesc').innerText = `${video.title} başlıklı 18+ yetişkin videosu. HentaiMini platformunda yüksek kalitede keyifle izleyin.`;
+  document.getElementById('watchCategoryTag').innerText = video.category || getLocalizedText('generalCategory');
+  const localeMap = { tr: 'tr-TR', en: 'en-US', de: 'de-DE' };
+  document.getElementById('watchDate').innerText = new Date(video.createdAt || Date.now()).toLocaleDateString(localeMap[lang] || 'tr-TR');
+  document.getElementById('watchDesc').innerText = lang === 'en' ? `${video.title} is an 18+ adult video on HentaiMini — enjoy it in high quality.` : lang === 'de' ? `${video.title} ist ein 18+ Erwachsenenvideo auf HentaiMini — genießen Sie es in hoher Qualität.` : `${video.title} başlıklı 18+ yetişkin videosu. HentaiMini platformunda yüksek kalitede keyifle izleyin.`;
 
   const playerBox = document.getElementById('playerLargeBox');
   let src = video.embedSrc || video.url || '';
@@ -696,10 +898,10 @@ function openWatch(id){
 function toggleFavorite(id){
   if(favorites.includes(id)){
     favorites = favorites.filter(f => f !== id);
-    showToast('Favorilerden çıkarıldı.');
+    showToast(getLocalizedText('favoriteRemoved'));
   } else {
     favorites.push(id);
-    showToast('Favorilere eklendi.');
+    showToast(getLocalizedText('favoriteAddedToast'));
   }
   localStorage.setItem('hentaimini_favs', JSON.stringify(favorites));
   renderGrid();
@@ -714,25 +916,25 @@ function updateWatchFavButton(){
   const btn = document.getElementById('watchFavBtn');
   if(!btn || !currentVideoId) return;
   const isFav = favorites.includes(currentVideoId);
-  btn.innerHTML = isFav ? '<i class="fa-solid fa-heart" style="color:var(--pink)"></i> Favorilerde' : '<i class="fa-regular fa-heart"></i> Favori';
+  btn.innerHTML = isFav ? `<i class="fa-solid fa-heart" style="color:var(--pink)"></i> ${getLocalizedText('favoriteAdded')}` : `<i class="fa-regular fa-heart"></i> ${getLocalizedText('favorite')}`;
 }
 
 async function deleteCurrentVideo(){
   if(!currentVideoId) return;
-  if(!confirm('Bu videoyu silmek istediğinize emin misiniz?')) return;
+  if(!confirm(getLocalizedText('confirmDelete'))) return;
 
   try {
     const res = await fetch(`/api/videos/${currentVideoId}`, {method:'DELETE'});
     if(res.ok){
-      showToast('Video silindi.');
+      showToast(getLocalizedText('deleteSuccess'));
       goHome();
       loadVideos();
     } else {
-      showToast('Silme başarısız.');
+      showToast(getLocalizedText('deleteFail'));
     }
   } catch(err){
     console.error(err);
-    showToast('Bağlantı hatası.');
+    showToast(getLocalizedText('connectionError'));
   }
 }
 
@@ -925,12 +1127,12 @@ async function submitEmbed(){
   let preview = document.getElementById('previewInput').value;
 
   if(!embedCode){
-    showToast('Lütfen video kaynağı girin.');
+      showToast(getLocalizedText('addVideoMissing'));
     return;
   }
 
   if(!thumbnail){
-    showToast('Videodan kapak alınamadı. CORS izinli bir doğrudan video bağlantısı kullanın.');
+      showToast(getLocalizedText('addVideoThumbnailMissing'));
     return;
   }
 
@@ -957,7 +1159,7 @@ async function submitEmbed(){
     });
 
     if(res.ok){
-      showToast('Video başarıyla eklendi!');
+      showToast(getLocalizedText('addVideoSuccess'));
       closeEmbedModal();
       document.getElementById('embedTitle').value = '';
       document.getElementById('embedCode').value = '';
@@ -967,11 +1169,11 @@ async function submitEmbed(){
       loadVideos();
     } else {
       const errData = await res.json();
-      showToast(errData.error || 'Video eklenemedi.');
+      showToast(errData.error || getLocalizedText('addVideoFail'));
     }
   } catch(err){
     console.error(err);
-    showToast('Sunucu bağlantı hatası.');
+    showToast(getLocalizedText('serverError'));
   }
 }
 
@@ -979,7 +1181,11 @@ async function submitEmbed(){
 document.addEventListener('DOMContentLoaded', () => {
   const savedLang = getCurrentLanguage();
   applyLanguage(savedLang);
-  document.getElementById('langToggle')?.addEventListener('click', toggleLanguage);
+  const langSelect = document.getElementById('langSelect');
+  if (langSelect) {
+    langSelect.value = savedLang;
+    langSelect.addEventListener('change', handleLanguageSelection);
+  }
   handleSourceInput();
   if (localStorage.getItem('age_verified') !== 'true') {
     allowSiteOnLoad();

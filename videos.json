@@ -40,5 +40,19 @@
     "duration": "HD",
     "rating": "4.8",
     "createdAt": "2026-09-15T11:28:29.332Z"
+  },
+  {
+    "id": "2277910d-2bd1-4d40-bb3c-f2ac6f737b27",
+    "title": "Yeni Video",
+    "category": "Romantik",
+    "type": "embed",
+    "embedSrc": "https://streamtape.com/e/4mMl48qAGOcKvJm/",
+    "url": "https://streamtape.com/e/4mMl48qAGOcKvJm/",
+    "embedCode": "<iframe src=\"https://streamtape.com/e/4mMl48qAGOcKvJm/\" width=\"800\" height=\"600\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://thumb.tapecontent.net/thumb/4mMl48qAGOcKvJm/pDQBmO0dV8UrYZQ.jpg",
+    "preview": "https://thumb.tapecontent.net/thumb/4mMl48qAGOcKvJm/pDQBmO0dV8UrYZQ.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-15T13:41:38.384Z"
   }
 ]
