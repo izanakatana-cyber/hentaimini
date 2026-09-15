@@ -11,10 +11,28 @@ const execFileAsync = promisify(execFile);
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const DEFAULT_PORT = Number(process.env.PORT) || 3000;
 const ROOT = __dirname;
 const PUBLIC = path.join(ROOT, "public");
 const DATA = path.join(ROOT, "videos.json");
+
+function startServer(port) {
+  const server = app.listen(port, "0.0.0.0", () => {
+    console.log(`HentaiMini server running at http://localhost:${port}`);
+  });
+
+  server.on("error", (err) => {
+    if (err.code === "EADDRINUSE") {
+      const nextPort = port + 1;
+      console.warn(`Port ${port} kullanımda, ${nextPort} portuna geçiliyor...`);
+      startServer(nextPort);
+      return;
+    }
+
+    console.error("Sunucu başlatma hatası:", err);
+    process.exit(1);
+  });
+}
 
 fs.mkdirSync(PUBLIC, { recursive: true });
 
@@ -251,6 +269,4 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(PUBLIC, "index.html"));
 });
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`HentaiMini server running at http://localhost:${PORT}`);
-});
+startServer(DEFAULT_PORT);
