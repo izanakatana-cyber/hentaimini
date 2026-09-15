@@ -24,10 +24,11 @@ app.use(express.static(PUBLIC));
 // MongoDB Bağlantısı (Varsa bulut veritabanı kullanılır, yoksa yerel JSON dosyası)
 let isMongoConnected = false;
 const MONGO_URI = process.env.MONGO_URI;
+let mongoReady = Promise.resolve();
 
 let VideoModel = null;
 if (MONGO_URI) {
-  mongoose.connect(MONGO_URI)
+  mongoReady = mongoose.connect(MONGO_URI)
     .then(() => {
       isMongoConnected = true;
       console.log("MongoDB veritabanına başarıyla bağlandı. Videolar artık kalıcı!");
@@ -71,6 +72,7 @@ function writeLocalVideos(videos) {
 // API Endpoints
 app.get("/api/videos", async (req, res) => {
   try {
+    await mongoReady;
     if (isMongoConnected && VideoModel) {
       const videos = await VideoModel.find().sort({ createdAt: -1 });
       return res.json(videos);
@@ -85,6 +87,7 @@ app.get("/api/videos", async (req, res) => {
 
 app.post("/api/upload", async (req, res) => {
   try {
+    await mongoReady;
     const title = String(req.body.title || "Yeni Video").trim().slice(0, 160);
     const category = String(req.body.category || "Yeni").trim().slice(0, 60);
     let embedSrc = String(req.body.embedSrc || req.body.url || "").trim();
@@ -102,8 +105,8 @@ app.post("/api/upload", async (req, res) => {
       embedSrc,
       url: embedSrc,
       embedCode: String(req.body.embedCode || "").trim().slice(0, 4000) || null,
-      thumbnail: String(req.body.thumbnail || "").trim().slice(0, 1500) || null,
-      preview: String(req.body.preview || "").trim().slice(0, 1500) || null,
+      thumbnail: String(req.body.thumbnail || "").trim().slice(0, 5000000) || null,
+      preview: String(req.body.preview || "").trim().slice(0, 5000000) || null,
       duration: req.body.duration || "HD",
       rating: req.body.rating || "4.8",
       createdAt: new Date()
@@ -128,6 +131,7 @@ app.post("/api/upload", async (req, res) => {
 
 app.delete("/api/videos/:id", async (req, res) => {
   try {
+    await mongoReady;
     const videoId = req.params.id;
     if (isMongoConnected && VideoModel) {
       const deleted = await VideoModel.findOneAndDelete({ id: videoId });

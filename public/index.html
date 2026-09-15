@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="HentaiMini — 18+ anime video platformu">
-<title>HentaiMini — 18+ Anime Video Platformu</title>
+<meta name="description" content="HentaiMini — 18+ yetişkin video platformu">
+<title>HentaiMini — 18+ Yetişkin Video Platformu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -168,7 +168,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
   <div class="age-card">
     <div class="age-logo"><i class="fa-solid fa-18"></i></div>
     <h1>HentaiMini</h1>
-    <p>Bu platform yetişkinlere yönelik <strong>18+</strong> anime/video içerikleri için tasarlanmıştır.</p>
+    <p>Bu platform yetişkinlere yönelik <strong>18+</strong> hentai/video içerikleri için tasarlanmıştır.</p>
     <div class="age-warning"><i class="fa-solid fa-triangle-exclamation"></i> Devam ederek 18 yaşında veya daha büyük olduğunuzu ve bulunduğunuz yerdeki yasalara uygun hareket edeceğinizi onaylarsınız.</div>
     <div class="age-actions">
       <button class="primary" onclick="enterSite()">18+ Giriş Yap</button>
@@ -207,7 +207,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 <main>
   <header class="topbar">
     <button class="icon menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
-    <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="search" placeholder="Anime, seri, kategori veya etiket ara..."><kbd>CTRL K</kbd></div>
+    <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="search" placeholder="Video, kategori veya etiket ara..."><kbd>CTRL K</kbd></div>
     <div class="top-actions">
       <button class="icon" onclick="showToast('Bildirimler güncel.')"><i class="fa-regular fa-bell"></i><span class="dot"></span></button>
       <button class="primary" onclick="openEmbedModal()"><i class="fa-solid fa-code"></i> Video Ekle</button>
@@ -219,9 +219,9 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <section class="hero">
       <div class="hero-grid"></div>
       <div class="hero-content">
-        <div class="eyebrow"><i class="fa-solid fa-shield-halved"></i> 18+ Anime Video Platformu</div>
-        <h1>Anime dünyasının <span class="gradient">yetişkinlere özel</span> köşesi.</h1>
-        <p>Geniş ekran izleme deneyimi, otomatik videodan kapak çıkarıcı, öz izleme ve hızlı arama özellikleriyle donatıldı.</p>
+        <div class="eyebrow"><i class="fa-solid fa-shield-halved"></i> 18+ Yetişkin Video Platformu</div>
+        <h1>Hentai dünyasının <span class="gradient">en özgür</span> köşesi.</h1>
+        <p>Kaliteli 18+ içerikler, yüksek çözünürlük ve sorunsuz izleme deneyimi.</p>
         <div class="hero-actions">
           <button class="primary" onclick="openEmbedModal()"><i class="fa-solid fa-code"></i> Video Ekle</button>
           <button class="secondary" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-compass"></i> Kataloğu Keşfet</button>
@@ -351,27 +351,84 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 <div class="modal" id="dmcaModal">
   <div class="dmca-box">
     <button class="close" onclick="closeDmca()" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
+    
     <h3>DMCA / Telif Hakkı Politikası</h3>
-    <p>HentaiMini telif haklarına saygı duyar. Tüm içerikler kullanıcılar tarafından sağlanır.</p>
-    <p>Bildirimler için: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    
+    <p>HentaiMini, telif haklarına saygı duyar ve Digital Millennium Copyright Act (DMCA) kapsamında hareket eder.</p>
+    
+    <p>Bu platformdaki tüm içerikler kullanıcılar tarafından yüklenmektedir. HentaiMini, yüklenen içeriklerin telif durumunu önceden kontrol etmez ve sorumluluk kabul etmez.</p>
+    
+    <p><strong>Telif hakkı ihlali bildirimi için lütfen şu bilgileri içeren bir mail gönderin:</strong></p>
+    <ul>
+      <li>Telif hakkı sahibi veya yetkili temsilcisinin adı ve iletişim bilgileri</li>
+      <li>İhlal edildiği iddia edilen eserin tanımı</li>
+      <li>Sitede bulunan ihlal iddiası içeren içeriğin URL’si</li>
+      <li>İyi niyet beyanı (içeriğin izinsiz kullanıldığına inanıyorsunuz)</li>
+      <li>Yasal beyan (bildirimin doğru olduğu ve yalan beyanda bulunmanın cezai sorumluluğu olduğu)</li>
+      <li>Elektronik veya fiziksel imza</li>
+    </ul>
+    
+    <p>Bildirimleri şu adrese gönderin:<br>
+    <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    
+    <p>Geçerli bir DMCA bildirimi alındığında, söz konusu içerik derhal kaldırılır veya erişime kapatılır. Tekrarlayan ihlalcilerin hesapları kalıcı olarak kapatılabilir.</p>
+    
+    <p>Karşı bildirim (counter-notice) hakkı saklıdır. Karşı bildirim süreci hakkında bilgi almak için aynı adrese yazabilirsiniz.</p>
   </div>
 </div>
 
 <!-- ŞARTLAR MODAL -->
 <div class="modal" id="termsModal">
   <div class="dmca-box">
-    <button class="close" onclick="openLegal('termsModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
+    <button class="close" onclick="closeLegal('termsModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
+    
     <h3>Kullanım Şartları</h3>
-    <p>Siteyi kullanmak için 18 yaş ve üzerinde olmalısınız. Yasadışı içerik yüklemek yasaktır.</p>
+    
+    <p><strong>1. Yaş Sınırı</strong><br>
+    Bu site yalnızca 18 yaş ve üzeri kişiler içindir. Siteye girerek 18 yaşında veya daha büyük olduğunuzu beyan etmiş sayılırsınız.</p>
+    
+    <p><strong>2. İçerik Sorumluluğu</strong><br>
+    Kullanıcılar yükledikleri tüm içeriklerden bizzat sorumludur. Telif hakkı ihlali, yasadışı içerik, çocuk pornografisi veya herhangi bir yasalara aykırı materyal yüklemek kesinlikle yasaktır. Bu tür içerikler tespit edildiğinde derhal kaldırılır ve gerekli mercilere bildirim yapılabilir.</p>
+    
+    <p><strong>3. Yasaklı İçerikler</strong><br>
+    - 18 yaş altı kişileri içeren veya çağrıştıran her türlü içerik<br>
+    - Gerçek şiddet, zoofili, skatol veya aşırı yasa dışı fetişler<br>
+    - Telif hakkı sahibi izni olmadan yüklenen ticari içerikler (mümkün olduğunca kaçının)</p>
+    
+    <p><strong>4. Hesap ve Kullanım</strong><br>
+    Siteyi kötüye kullanmak, spam yapmak, sisteme zarar vermek yasaktır. Bu kurallara uymayan hesaplar uyarı yapılmaksızın kapatılabilir.</p>
+    
+    <p><strong>5. Sorumluluk Reddi</strong><br>
+    HentaiMini, kullanıcılar tarafından yüklenen içeriklerin doğruluğu, yasallığı veya kalitesi konusunda hiçbir garanti vermez. Platform “olduğu gibi” sunulmaktadır.</p>
   </div>
 </div>
 
 <!-- GİZLİLİK MODAL -->
 <div class="modal" id="privacyModal">
   <div class="dmca-box">
-    <button class="close" onclick="openLegal('privacyModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
+    <button class="close" onclick="closeLegal('privacyModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
+    
     <h3>Gizlilik Politikası</h3>
-    <p>Tarayıcınızda yalnızca favoriler ve yaş onayı saklanır.</p>
+    
+    <p>HentaiMini olarak gizliliğinize önem veriyoruz.</p>
+    
+    <p><strong>Topladığımız Veriler:</strong><br>
+    - Tarayıcınızda yerel olarak saklanan yaş onayı (localStorage)<br>
+    - Favori olarak işaretlediğiniz videolar (localStorage)<br>
+    - Temel teknik loglar (IP adresi, tarayıcı bilgisi – güvenlik ve kötüye kullanım önleme amaçlı)</p>
+    
+    <p><strong>Toplamadığımız Veriler:</strong><br>
+    - Kişisel kimlik bilgileriniz<br>
+    - E-posta adresiniz (DMCA bildirimi dışında)<br>
+    - Ödeme bilgileriniz (şu an ücretli hizmet yok)</p>
+    
+    <p><strong>Çerezler:</strong><br>
+    Sadece temel işlevsellik için gerekli teknik çerezler kullanılır. Reklam veya takip çerezi bulunmamaktadır.</p>
+    
+    <p><strong>Üçüncü Taraflar:</strong><br>
+    Verileriniz üçüncü taraflarla satılmaz veya paylaşılmaz. Yasal zorunluluk halinde (mahkeme kararı vb.) bilgi paylaşılabilir.</p>
+    
+    <p>Gizlilik ile ilgili sorularınız için: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
   </div>
 </div>
 
@@ -503,7 +560,7 @@ function openWatch(id){
   document.getElementById('watchTitle').innerText = video.title;
   document.getElementById('watchCategoryTag').innerText = video.category || 'Genel';
   document.getElementById('watchDate').innerText = new Date(video.createdAt || Date.now()).toLocaleDateString('tr-TR');
-  document.getElementById('watchDesc').innerText = `${video.title} başlıklı 18+ yetişkin anime videosu. HentaiMini platformunda yüksek kalitede keyifle izleyin.`;
+  document.getElementById('watchDesc').innerText = `${video.title} başlıklı 18+ yetişkin videosu. HentaiMini platformunda yüksek kalitede keyifle izleyin.`;
 
   const playerBox = document.getElementById('playerLargeBox');
   let src = video.embedSrc || video.url || '';
@@ -597,7 +654,7 @@ async function handleSourceInput(){
   thumbContainer.innerHTML = '<span style="font-size:11px;color:var(--muted);grid-column:1/-1">Videonun anlarından kapaklar çıkarılıyor...</span>';
 
   if(!src){
-    generateSmartAnimeFallback(thumbContainer, category);
+    thumbContainer.innerHTML = '<span style="font-size:11px;color:var(--muted);grid-column:1/-1">Kapak oluşturmak için önce video kaynağı girin.</span>';
     return;
   }
 
@@ -651,9 +708,9 @@ async function handleSourceInput(){
       const times = [duration * 0.2, duration * 0.5, duration * 0.8];
 
       for(let i=0; i<times.length; i++){
-        video.currentTime = times[i];
         await new Promise(resolve => {
           video.onseeked = resolve;
+          video.currentTime = times[i];
           setTimeout(resolve, 800);
         });
 
@@ -680,56 +737,28 @@ async function handleSourceInput(){
     };
 
     video.onerror = function(){
-      generateSmartAnimeFallback(thumbContainer, category);
+      thumbContainer.innerHTML = '<span style="font-size:11px;color:#f4cf72;grid-column:1/-1">Bu video kaynağından kare alınamadı. Kaynağın CORS izni olmalı veya aynı sunucudan yayınlanmalı.</span>';
+      document.getElementById('thumbInput').value = '';
+      document.getElementById('previewInput').value = '';
     };
 
     // Zaman aşımı koruması
     setTimeout(() => {
       if(capturedThumbs.length === 0){
-        generateSmartAnimeFallback(thumbContainer, category);
+        thumbContainer.innerHTML = '<span style="font-size:11px;color:#f4cf72;grid-column:1/-1">Videodan kapak alınamadı. Video bağlantısının kare yakalamaya izin verdiğini kontrol edin.</span>';
+        document.getElementById('thumbInput').value = '';
+        document.getElementById('previewInput').value = '';
       }
     }, 4000);
   } else {
-    generateSmartAnimeFallback(thumbContainer, category);
+    thumbContainer.innerHTML = '<span style="font-size:11px;color:#f4cf72;grid-column:1/-1">Bu kaynak türünden videonun karesi alınamıyor.</span>';
   }
 }
 
 function generateSmartAnimeFallback(container, category){
-  const animePools = {
-    "Romantik": [
-      "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=640&q=80",
-      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=640&q=80",
-      "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=640&q=80"
-    ],
-    "Aksiyon": [
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=640&q=80",
-      "https://images.unsplash.com/photo-1563089145-599997674d42?w=640&q=80",
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=640&q=80"
-    ],
-    "Fantezi": [
-      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=640&q=80",
-      "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=640&q=80",
-      "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=640&q=80"
-    ],
-    "Komedi": [
-      "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=640&q=80",
-      "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=640&q=80",
-      "https://images.unsplash.com/photo-1514539079130-25950c84af65?w=640&q=80"
-    ],
-    "Popüler": [
-      "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=640&q=80",
-      "https://images.unsplash.com/photo-1563089145-599997674d42?w=640&q=80",
-      "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=640&q=80"
-    ],
-    "Yeni": [
-      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=640&q=80",
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=640&q=80",
-      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=640&q=80"
-    ]
-  };
-
-  const thumbs = animePools[category] || animePools["Romantik"];
-  renderThumbOptions(thumbs, thumbs[0], thumbs[1]);
+  container.innerHTML = '<span style="font-size:11px;color:#f4cf72;grid-column:1/-1">Kapak yalnızca videonun kendisinden oluşturulur; bu kaynak için video karesi alınamadı.</span>';
+  document.getElementById('thumbInput').value = '';
+  document.getElementById('previewInput').value = '';
 }
 
 function renderThumbOptions(thumbs, defaultThumb, defaultPreview){
@@ -765,8 +794,8 @@ async function submitEmbed(){
   }
 
   if(!thumbnail){
-    thumbnail = "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=640&q=80";
-    preview = thumbnail;
+    showToast('Videodan kapak alınamadı. CORS izinli bir doğrudan video bağlantısı kullanın.');
+    return;
   }
 
   let embedSrc = embedCode;
@@ -782,7 +811,7 @@ async function submitEmbed(){
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        title: title || 'Yeni Anime Videosu',
+        title: title || 'Yeni Video',
         category,
         embedSrc,
         embedCode,
