@@ -136,12 +136,16 @@ app.post("/api/extract-thumbnail", async (req, res) => {
     };
 
     const posterRegex = /\bposter=["']([^"']+)["']/gi;
-    const imageMetaRegex = /<meta\b[^>]*(?:property|name)=["'](?:og:image|twitter:image)["'][^>]*\bcontent=["']([^"']+)["'][^>]*>/gi;
-    const reverseImageMetaRegex = /<meta\b[^>]*\bcontent=["']([^"']+)["'][^>]*(?:property|name)=["'](?:og:image|twitter:image)["'][^>]*>/gi;
     let match;
     while ((match = posterRegex.exec(html))) addCandidate(match[1]);
-    while ((match = imageMetaRegex.exec(html))) addCandidate(match[1]);
-    while ((match = reverseImageMetaRegex.exec(html))) addCandidate(match[1]);
+
+    const metaRegex = /<meta\b[^>]*>/gi;
+    while ((match = metaRegex.exec(html))) {
+      const tag = match[0];
+      const isImageMeta = /(?:property|name)\s*=\s*["'](?:og:image|twitter:image)["']/i.test(tag);
+      const contentMatch = tag.match(/\bcontent\s*=\s*["']([^"']+)["']/i);
+      if (isImageMeta && contentMatch) addCandidate(contentMatch[1]);
+    }
 
     const mediaRegex = /(?:file|source|videoUrl|video_url|contentUrl|content_url)\s*["']?\s*[:=]\s*["']([^"']+)["']/gi;
     while ((match = mediaRegex.exec(html))) addMediaCandidate(match[1]);
