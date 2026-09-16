@@ -138,5 +138,47 @@ window.STATIC_VIDEOS = [
     duration: 'HD',
     rating: '4.8',
     createdAt: '2026-09-16T09:00:00.000Z'
+  },
+  {
+    id: 'stream-11',
+    title: 'Stream 11',
+    category: 'Genel',
+    type: 'embed',
+    embedSrc: 'https://streamtape.com/e/RLMpr3j8pvId1pQ/',
+    url: 'https://streamtape.com/e/RLMpr3j8pvId1pQ/',
+    embedCode: '<iframe src="https://streamtape.com/e/RLMpr3j8pvId1pQ/" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>',
+    thumbnail: 'https://thumb.tapecontent.net/thumb/RLMpr3j8pvId1pQ/zxwQabAo9vIogP.jpg',
+    preview: 'https://thumb.tapecontent.net/thumb/RLMpr3j8pvId1pQ/zxwQabAo9vIogP.jpg',
+    duration: 'HD',
+    rating: '4.8',
+    createdAt: '2026-09-16T10:00:00.000Z'
+  },
+  {
+    id: 'stream-12',
+    title: 'Stream 12',
+    category: 'Genel',
+    type: 'embed',
+    embedSrc: 'https://streamtape.com/e/Pjqjq8gJ0Qu0VMq/',
+    url: 'https://streamtape.com/e/Pjqjq8gJ0Qu0VMq/',
+    embedCode: '<iframe src="https://streamtape.com/e/Pjqjq8gJ0Qu0VMq/" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>',
+    thumbnail: 'https://thumb.tapecontent.net/thumb/Pjqjq8gJ0Qu0VMq/l7k4YO3LWDF74BA.jpg',
+    preview: 'https://thumb.tapecontent.net/thumb/Pjqjq8gJ0Qu0VMq/l7k4YO3LWDF74BA.jpg',
+    duration: 'HD',
+    rating: '4.8',
+    createdAt: '2026-09-16T11:00:00.000Z'
+  },
+  {
+    id: 'stream-13',
+    title: 'Stream 13',
+    category: 'Genel',
+    type: 'embed',
+    embedSrc: 'https://streamtape.com/e/xb9GgKmGRgcwbB/',
+    url: 'https://streamtape.com/e/xb9GgKmGRgcwbB/',
+    embedCode: '<iframe src="https://streamtape.com/e/xb9GgKmGRgcwbB/" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>',
+    thumbnail: 'https://thumb.tapecontent.net/thumb/xb9GgKmGRgcwbB/kLZrRjox4eIYYQ.jpg',
+    preview: 'https://thumb.tapecontent.net/thumb/xb9GgKmGRgcwbB/kLZrRjox4eIYYQ.jpg',
+    duration: 'HD',
+    rating: '4.8',
+    createdAt: '2026-09-16T12:00:00.000Z'
   }
 ];
