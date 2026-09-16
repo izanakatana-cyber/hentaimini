@@ -1,6 +1,6 @@
 # HentaiMini
 
-Basit, kayıtsız video yükleme altyapısı.
+Yerel depolama kapalıdır; sadece Mongo varsa çalışır. Bu proje boştaki katalog arayüzü olarak tasarlanmıştır.
 
 ## Gerekenler
 - Node.js 18+
@@ -11,21 +11,13 @@ Basit, kayıtsız video yükleme altyapısı.
 3. `npm start`
 4. Tarayıcıdan `http://localhost:3000` adresini aç.
 
-## Video yükleme
-Frontend'in mevcut "Video Yükle" butonu `/api/upload` endpoint'ine gönderim yapacak şekilde kullanılabilir.
+## Durum
+- Yerel depolama kapalıdır.
+- Frontend video ekleme butonu kapatılmıştır.
+- Remote sync kapalıdır.
+- `MONGO_URI` kullanılmaz; gerekli ise harici Mongo bağlantısı kurulur.
 
-API:
-- `GET /api/videos` — videoları listeler
-- `POST /api/upload` — `video`, `title`, `description`, `category`, `tags` alanlarını alır
-- `DELETE /api/videos/:id` — videoyu ve kaydını siler
+## API
+- `GET /api/videos` — boş liste döner
 
-Videolar `uploads/`, metadata `videos.json` içinde tutulur.
-
-## Render senkronizasyonu
-
-Yerel sunucuda eklenen yeni videolar, varsayılan olarak `https://hentaimini.onrender.com` adresine de aktarılır. Aynı embed adresi Render'da zaten varsa tekrar eklenmez. Render'a erişilemezse yerel kayıt yine korunur.
-
-Render sunucusunun kendisinde bu davranış otomatik olarak kapalıdır. Farklı bir uzak adres kullanmak için `REMOTE_API_URL` değişkeni verilebilir; senkronizasyonu açıkça açmak için `REMOTE_SYNC=true` kullanılabilir.
-
-## Önemli
-Bu başlangıç sürümünde kimlik doğrulama, moderasyon, rate limit, CDN/object storage ve HTTPS yoktur. İnternete açık production sunucusuna koymadan önce bunları eklemek gerekir.
+Bu yapı, kullanıcıların siteye videoyu doğrudan eklemesini engeller ve yalnızca boş, hazır arayüz sunar.

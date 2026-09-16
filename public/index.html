@@ -221,7 +221,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
           <option value="de">Deutsch</option>
         </select>
       </div>
-      <button class="primary" onclick="openEmbedModal()"><i class="fa-solid fa-code"></i> <span data-i18n="addVideo">Video Ekle</span></button>
     </div>
   </header>
 
@@ -234,7 +233,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
         <h1 data-i18n="heroTitle">Hentai dünyasının <span class="gradient">en özgür</span> köşesi.</h1>
         <p data-i18n="heroSubtitle">Kaliteli 18+ içerikler, yüksek çözünürlük ve sorunsuz izleme deneyimi.</p>
         <div class="hero-actions">
-          <button class="primary" onclick="openEmbedModal()"><i class="fa-solid fa-code"></i> <span data-i18n="addVideo">Video Ekle</span></button>
           <button class="secondary" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-compass"></i> <span data-i18n="exploreCatalog">Kataloğu Keşfet</span></button>
         </div>
         <div class="stats"><div id="statVideoCount"><b>0</b><span data-i18n="videoStat">Video</span></div><div><b>HD</b><span data-i18n="highQuality">Yüksek Kalite</span></div><div><b>18+</b><span data-i18n="safeMode">Güvenli Mod</span></div></div>
@@ -253,7 +251,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
       <div class="empty" id="empty">
         <i class="fa-solid fa-film"></i>
         <h3 data-i18n="noVideos">Henüz video yok</h3>
-        <p data-i18n="noVideosHint">Sağ üstteki "Video Ekle" butonunu kullanarak ilk içeriği ekleyin.</p>
+        <p data-i18n="noVideosHint">Harici video kaynakları eklendiğinde burada görünür.</p>
       </div>
     </section>
   </div>
@@ -301,53 +299,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 </footer>
 
 <div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span></span></div>
-
-<!-- VİDEO EKLEME MODALI -->
-<div class="modal" id="embedModal">
-  <div class="embed-box">
-    <div class="modal-top" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-      <h3 data-i18n="addVideoDialogTitle">Video ve Otomatik Kapak Ekle</h3>
-      <button class="icon" onclick="closeEmbedModal()" style="width:32px;height:32px"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <p class="hint" data-i18n="embedHint">Doğrudan video linki (.mp4 vb.) veya YouTube / iframe bağlantısı yapıştırın. Sistem videonun anlarından kapak görsellerini otomatik olarak oluşturacaktır.</p>
-    
-    <div class="embed-field">
-      <label for="embedTitle" data-i18n="videoTitleLabel">Video Başlığı</label>
-      <input id="embedTitle" type="text" placeholder="Örn: Cyber Neon Fantasy" maxlength="160" data-i18n-placeholder="videoTitlePlaceholder">
-    </div>
-
-    <div class="embed-field">
-      <label for="embedCategory" data-i18n="categoryTag">Kategori</label>
-      <select id="embedCategory" onchange="handleSourceInput()">
-        <option value="Romantik">Romantik</option>
-        <option value="Aksiyon">Aksiyon</option>
-        <option value="Fantezi">Fantezi</option>
-        <option value="Komedi">Komedi</option>
-        <option value="Popüler">Popüler</option>
-        <option value="Yeni">Yeni</option>
-      </select>
-    </div>
-
-    <div class="embed-field">
-      <label for="embedCode" data-i18n="sourceUrlLabel">Video Kaynağı / URL</label>
-      <textarea id="embedCode" placeholder="https://ornek.com/video.mp4 veya YouTube linki" oninput="handleSourceInput()" data-i18n-placeholder="sourcePlaceholder"></textarea>
-    </div>
-
-    <div class="embed-field">
-      <label data-i18n="thumbPickerLabel">Videonun Farklı Anlarından Otomatik Kapak Seçimi</label>
-      <div class="thumb-options" id="autoThumbnails">
-        <span style="font-size:11px;color:var(--muted);grid-column:1/-1" data-i18n="thumbPickerHint">Video kaynağı girildiğinde kapak kesitleri burada belirecektir.</span>
-      </div>
-      <input type="hidden" id="thumbInput">
-      <input type="hidden" id="previewInput">
-    </div>
-
-    <div class="embed-actions">
-      <button class="secondary" onclick="closeEmbedModal()" data-i18n="cancel">İptal</button>
-      <button class="primary" onclick="submitEmbed()"><i class="fa-solid fa-plus"></i> <span data-i18n="addVideoBtn">Videoyu Ekle</span></button>
-    </div>
-  </div>
-</div>
 
 <!-- DMCA MODAL -->
 <div class="modal" id="dmcaModal">
@@ -434,8 +385,9 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
   </div>
 </div>
 
+<script src="/videos.js"></script>
 <script>
-let allVideos = [];
+let allVideos = Array.isArray(window.STATIC_VIDEOS) ? window.STATIC_VIDEOS : [];
 let activeFilter = "Tümü";
 let currentVideoId = null;
 let favorites = JSON.parse(localStorage.getItem('hentaimini_favs') || '[]');
@@ -457,7 +409,7 @@ const translations = {
     highQuality: 'Yüksek Kalite',
     safeMode: 'Güvenli Mod',
     noVideos: 'Henüz video yok',
-    noVideosHint: 'Sağ üstteki "Video Ekle" butonunu kullanarak ilk içeriği ekleyin.',
+    noVideosHint: 'Harici embed kaynakları eklenince burada görünür.',
     backToCatalog: 'Ana Kataloğa Dön',
     favorite: 'Favori',
     favoriteAdded: 'Favorilerde',
@@ -466,16 +418,6 @@ const translations = {
     categoryTag: 'Kategori',
     adultContent: '18+ Yetişkin İçerik',
     videoDescDefault: 'Bu video için açıklama girilmemiştir.',
-    addVideoDialogTitle: 'Video ve Otomatik Kapak Ekle',
-    embedHint: 'Doğrudan video linki (.mp4 vb.) veya YouTube / iframe bağlantısı yapıştırın. Sistem videonun anlarından kapak görsellerini otomatik olarak oluşturacaktır.',
-    videoTitleLabel: 'Video Başlığı',
-    videoTitlePlaceholder: 'Örn: Cyber Neon Fantasy',
-    sourceUrlLabel: 'Video Kaynağı / URL',
-    sourcePlaceholder: 'https://ornek.com/video.mp4 veya YouTube linki',
-    thumbPickerLabel: 'Videonun Farklı Anlarından Otomatik Kapak Seçimi',
-    thumbPickerHint: 'Video kaynağı girildiğinde kapak kesitleri burada belirecektir.',
-    cancel: 'İptal',
-    addVideoBtn: 'Videoyu Ekle',
     noResults: 'Gösterilecek içerik bulunamadı.',
     resultsCount: 'video listeleniyor',
     generalCategory: 'Genel',
@@ -485,10 +427,6 @@ const translations = {
     deleteSuccess: 'Video silindi.',
     deleteFail: 'Silme başarısız.',
     connectionError: 'Bağlantı hatası.',
-    addVideoSuccess: 'Video başarıyla eklendi!',
-    addVideoFail: 'Video eklenemedi.',
-    addVideoMissing: 'Lütfen video kaynağı girin.',
-    addVideoThumbnailMissing: 'Videodan kapak alınamadı. CORS izinli bir doğrudan video bağlantısı kullanın.',
     serverError: 'Sunucu bağlantı hatası.',
     discover: 'Keşfet',
     home: 'Ana Sayfa',
@@ -503,7 +441,6 @@ const translations = {
     legal: 'Yasal',
     terms: 'Şartlar',
     privacy: 'Gizlilik',
-    addVideo: 'Video Ekle',
     featured: 'Öne Çıkanlar',
     loadingVideos: 'Videolar yükleniyor...',
     randomPick: 'Rastgele seç',
@@ -530,7 +467,7 @@ const translations = {
     highQuality: 'High Quality',
     safeMode: 'Safe Mode',
     noVideos: 'No videos yet',
-    noVideosHint: 'Use the "Add Video" button in the top-right to add the first content.',
+    noVideosHint: 'External embed sources will appear here when added.',
     backToCatalog: 'Back to catalog',
     favorite: 'Favorite',
     favoriteAdded: 'Saved',
@@ -539,16 +476,6 @@ const translations = {
     categoryTag: 'Category',
     adultContent: '18+ Adult Content',
     videoDescDefault: 'No description has been entered for this video yet.',
-    addVideoDialogTitle: 'Add Video and Auto Cover',
-    embedHint: 'Paste a direct video link (.mp4 etc.) or a YouTube / iframe link. The system will automatically generate cover images from the video frames.',
-    videoTitleLabel: 'Video Title',
-    videoTitlePlaceholder: 'Example: Cyber Neon Fantasy',
-    sourceUrlLabel: 'Video Source / URL',
-    sourcePlaceholder: 'https://example.com/video.mp4 or YouTube link',
-    thumbPickerLabel: 'Automatic Cover Selection from Different Moments of the Video',
-    thumbPickerHint: 'Thumbnail frames will appear here when the video source is entered.',
-    cancel: 'Cancel',
-    addVideoBtn: 'Add video',
     noResults: 'No matching content found.',
     resultsCount: 'videos listed',
     generalCategory: 'General',
@@ -558,10 +485,6 @@ const translations = {
     deleteSuccess: 'Video deleted.',
     deleteFail: 'Delete failed.',
     connectionError: 'Connection error.',
-    addVideoSuccess: 'Video added successfully!',
-    addVideoFail: 'Video could not be added.',
-    addVideoMissing: 'Please enter a video source.',
-    addVideoThumbnailMissing: 'The thumbnail could not be captured. Use a direct video URL with CORS access.',
     serverError: 'Server connection error.',
     discover: 'Discover',
     home: 'Home',
@@ -576,7 +499,6 @@ const translations = {
     legal: 'Legal',
     terms: 'Terms',
     privacy: 'Privacy',
-    addVideo: 'Add Video',
     featured: 'Featured',
     loadingVideos: 'Loading videos...',
     randomPick: 'Random pick',
@@ -603,7 +525,7 @@ const translations = {
     highQuality: 'Hohe Qualität',
     safeMode: 'Sicherer Modus',
     noVideos: 'Noch keine Videos',
-    noVideosHint: 'Verwenden Sie die Taste "Video hinzufügen" oben rechts, um den ersten Inhalt hinzuzufügen.',
+    noVideosHint: 'Externe Embed-Quellen erscheinen hier, sobald sie hinzugefügt werden.',
     backToCatalog: 'Zurück zum Katalog',
     favorite: 'Favorit',
     favoriteAdded: 'Gespeichert',
@@ -612,16 +534,6 @@ const translations = {
     categoryTag: 'Kategorie',
     adultContent: '18+ Erwachseneninhalt',
     videoDescDefault: 'Für dieses Video wurde noch keine Beschreibung eingegeben.',
-    addVideoDialogTitle: 'Video und automatische Cover hinzufügen',
-    embedHint: 'Fügen Sie einen direkten Videolink (.mp4 usw.) oder einen YouTube-/Iframe-Link ein. Das System erstellt automatisch Vorschaubilder aus den Videoframes.',
-    videoTitleLabel: 'Video-Titel',
-    videoTitlePlaceholder: 'Beispiel: Cyber Neon Fantasy',
-    sourceUrlLabel: 'Videoquelle / URL',
-    sourcePlaceholder: 'https://beispiel.de/video.mp4 oder YouTube-Link',
-    thumbPickerLabel: 'Automatische Cover-Auswahl aus verschiedenen Video-Momenten',
-    thumbPickerHint: 'Vorschaubilder erscheinen hier, sobald die Videoquelle eingegeben wurde.',
-    cancel: 'Abbrechen',
-    addVideoBtn: 'Video hinzufügen',
     noResults: 'Keine passenden Inhalte gefunden.',
     resultsCount: 'Videos angezeigt',
     generalCategory: 'Allgemein',
@@ -631,10 +543,6 @@ const translations = {
     deleteSuccess: 'Video gelöscht.',
     deleteFail: 'Löschen fehlgeschlagen.',
     connectionError: 'Verbindungsfehler.',
-    addVideoSuccess: 'Video erfolgreich hinzugefügt!',
-    addVideoFail: 'Video konnte nicht hinzugefügt werden.',
-    addVideoMissing: 'Bitte geben Sie eine Videoquelle ein.',
-    addVideoThumbnailMissing: 'Das Vorschaubild konnte nicht erzeugt werden. Verwenden Sie eine direkte Video-URL mit CORS-Zugriff.',
     serverError: 'Server-Verbindungsfehler.',
     discover: 'Entdecken',
     home: 'Startseite',
@@ -649,7 +557,6 @@ const translations = {
     legal: 'Rechtlich',
     terms: 'Bedingungen',
     privacy: 'Datenschutz',
-    addVideo: 'Video hinzufügen',
     featured: 'Empfohlen',
     loadingVideos: 'Videos werden geladen...',
     randomPick: 'Zufällige Auswahl',
@@ -760,18 +667,12 @@ function showToast(msg){
 }
 
 async function loadVideos(){
-  try {
-    const res = await fetch('/api/videos');
-    allVideos = await res.json();
-    const statVideoCount = document.getElementById('statVideoCount');
-    if (statVideoCount) {
-      statVideoCount.innerHTML = `<b>${allVideos.length}</b><span>${getLocalizedText('videoStat')}</span>`;
-    }
-    renderGrid();
-  } catch (err){
-    console.error(err);
-    showToast(getLocalizedText('videosError'));
+  allVideos = Array.isArray(window.STATIC_VIDEOS) ? window.STATIC_VIDEOS : [];
+  const statVideoCount = document.getElementById('statVideoCount');
+  if (statVideoCount) {
+    statVideoCount.innerHTML = `<b>${allVideos.length}</b><span>${getLocalizedText('videoStat')}</span>`;
   }
+  renderGrid();
 }
 
 function renderGrid(){
@@ -788,7 +689,7 @@ function renderGrid(){
   if(filtered.length === 0){
     grid.innerHTML = '';
     empty.style.display = 'block';
-    document.getElementById('sectionDesc').innerText = getLocalizedText('noResults');
+    document.getElementById('sectionDesc').innerText = getLocalizedText('noVideos');
     return;
   }
 
@@ -901,32 +802,6 @@ function updateWatchFavButton(){
   btn.innerHTML = isFav ? `<i class="fa-solid fa-heart" style="color:var(--pink)"></i> ${getLocalizedText('favoriteAdded')}` : `<i class="fa-regular fa-heart"></i> ${getLocalizedText('favorite')}`;
 }
 
-async function deleteCurrentVideo(){
-  if(!currentVideoId) return;
-  if(!confirm(getLocalizedText('confirmDelete'))) return;
-
-  try {
-    const res = await fetch(`/api/videos/${currentVideoId}`, {method:'DELETE'});
-    if(res.ok){
-      showToast(getLocalizedText('deleteSuccess'));
-      goHome();
-      loadVideos();
-    } else {
-      showToast(getLocalizedText('deleteFail'));
-    }
-  } catch(err){
-    console.error(err);
-    showToast(getLocalizedText('connectionError'));
-  }
-}
-
-function openEmbedModal(){
-  document.getElementById('embedModal').classList.add('open');
-}
-function closeEmbedModal(){
-  document.getElementById('embedModal').classList.remove('open');
-}
-
 function openDmca(){
   document.getElementById('dmcaModal').classList.add('open');
 }
@@ -941,225 +816,6 @@ function closeLegal(modalId){
   document.getElementById(modalId).classList.remove('open');
 }
 
-// Geliştirilmiş Otomatik Kapak Çıkarıcı (Videodan Kare Alıcı ve Akıllı Anime Sahne Yedekleri)
-async function handleSourceInput(){
-  const src = document.getElementById('embedCode').value.trim();
-  const category = document.getElementById('embedCategory').value;
-  const thumbContainer = document.getElementById('autoThumbnails');
-  document.getElementById('thumbInput').value = '';
-  document.getElementById('previewInput').value = '';
-  thumbContainer.innerHTML = '<span style="font-size:11px;color:var(--muted);grid-column:1/-1">Videonun anlarından kapaklar çıkarılıyor...</span>';
-
-  if(!src){
-    thumbContainer.innerHTML = '<span style="font-size:11px;color:var(--muted);grid-column:1/-1">Kapak oluşturmak için önce video kaynağı girin.</span>';
-    return;
-  }
-
-  const localVideo = src.match(/<video\b[^>]*\bposter=["']([^"']+)["'][^>]*>/i);
-  if(localVideo && localVideo[1]){
-    renderThumbOptions([localVideo[1]], localVideo[1], localVideo[1]);
-    return;
-  }
-
-  // 1. YouTube kontrolü
-  const ytMatch = src.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
-  if(ytMatch && ytMatch[1]){
-    const videoId = ytMatch[1];
-    const thumbs = [
-      `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
-      `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
-      `https://img.youtube.com/vi/${videoId}/sddefault.jpg`
-    ];
-    renderThumbOptions(thumbs, thumbs[0], thumbs[0]);
-    return;
-  }
-
-  // Eğer iframe kodu yapıştırıldıysa src'yi çek
-  let cleanSrc = src;
-  if(src.includes('<iframe')) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(src, 'text/html');
-    const iframe = doc.querySelector('iframe');
-    if(iframe && iframe.src) {
-      cleanSrc = iframe.src;
-      const ytMatchFrame = cleanSrc.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
-      if(ytMatchFrame && ytMatchFrame[1]){
-        const videoId = ytMatchFrame[1];
-        const thumbs = [
-          `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
-          `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
-          `https://img.youtube.com/vi/${videoId}/sddefault.jpg`
-        ];
-        renderThumbOptions(thumbs, thumbs[0], thumbs[0]);
-        return;
-      }
-    }
-
-    try {
-      const response = await fetch('/api/extract-thumbnail', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({embedCode: src})
-      });
-      const data = await response.json();
-      if(data.thumbnails && data.thumbnails.length){
-        renderThumbOptions(data.thumbnails, data.thumbnails[0], data.thumbnails[0]);
-      } else {
-        thumbContainer.innerHTML = '<span style="font-size:11px;color:#f4cf72;grid-column:1/-1">Embed sayfasında poster veya kapak bulunamadı. Embed kodundaki video etiketine poster özelliği ekleyin.</span>';
-      }
-    } catch(e) {
-      thumbContainer.innerHTML = '<span style="font-size:11px;color:#f4cf72;grid-column:1/-1">Embed sunucusuna erişilemedi; kapak bilgisi alınamadı.</span>';
-    }
-    return;
-  }
-
-  // 2. Doğrudan video dosyası (.mp4, .webm) veya URL
-  if(cleanSrc.startsWith('http://') || cleanSrc.startsWith('https://') || cleanSrc.startsWith('blob:')){
-    const video = document.createElement('video');
-    video.src = cleanSrc;
-    video.crossOrigin = 'anonymous';
-    video.muted = true;
-    video.preload = 'metadata';
-
-    let capturedThumbs = [];
-
-    video.onloadedmetadata = async function() {
-      const duration = video.duration && !isNaN(video.duration) ? video.duration : 10;
-      const times = [duration * 0.2, duration * 0.5, duration * 0.8];
-
-      for(let i=0; i<times.length; i++){
-        await new Promise(resolve => {
-          video.onseeked = resolve;
-          video.currentTime = times[i];
-          setTimeout(resolve, 800);
-        });
-
-        try {
-          const canvas = document.createElement('canvas');
-          canvas.width = 480;
-          canvas.height = 270;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-          const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
-          if(dataUrl && dataUrl.length > 200) {
-            capturedThumbs.push(dataUrl);
-          }
-        } catch(e) {
-          console.warn("Video frame capture CORS notice:", e);
-        }
-      }
-
-      if(capturedThumbs.length > 0){
-        renderThumbOptions(capturedThumbs, capturedThumbs[0], capturedThumbs[1] || capturedThumbs[0]);
-      } else {
-        generateSmartAnimeFallback(thumbContainer, category);
-      }
-    };
-
-    video.onerror = function(){
-      thumbContainer.innerHTML = '<span style="font-size:11px;color:#f4cf72;grid-column:1/-1">Bu video kaynağından kare alınamadı. Kaynağın CORS izni olmalı veya aynı sunucudan yayınlanmalı.</span>';
-      document.getElementById('thumbInput').value = '';
-      document.getElementById('previewInput').value = '';
-    };
-
-    // Zaman aşımı koruması
-    setTimeout(() => {
-      if(capturedThumbs.length === 0){
-        thumbContainer.innerHTML = '<span style="font-size:11px;color:#f4cf72;grid-column:1/-1">Videodan kapak alınamadı. Video bağlantısının kare yakalamaya izin verdiğini kontrol edin.</span>';
-        document.getElementById('thumbInput').value = '';
-        document.getElementById('previewInput').value = '';
-      }
-    }, 4000);
-  } else {
-    thumbContainer.innerHTML = '<span style="font-size:11px;color:#f4cf72;grid-column:1/-1">Bu kaynak türünden videonun karesi alınamıyor.</span>';
-  }
-}
-
-function generateSmartAnimeFallback(container, category){
-  container.innerHTML = '<span style="font-size:11px;color:#f4cf72;grid-column:1/-1">Kapak yalnızca videonun kendisinden oluşturulur; bu kaynak için video karesi alınamadı.</span>';
-  document.getElementById('thumbInput').value = '';
-  document.getElementById('previewInput').value = '';
-}
-
-function renderThumbOptions(thumbs, defaultThumb, defaultPreview){
-  const thumbContainer = document.getElementById('autoThumbnails');
-  thumbContainer.innerHTML = '';
-  document.getElementById('thumbInput').value = defaultThumb;
-  document.getElementById('previewInput').value = defaultPreview;
-
-  thumbs.forEach((t, idx) => {
-    const opt = document.createElement('div');
-    opt.className = `thumb-opt ${idx === 0 ? 'selected' : ''}`;
-    opt.innerHTML = `<img src="${t}" alt="Kapak ${idx+1}">`;
-    opt.onclick = () => {
-      document.querySelectorAll('.thumb-opt').forEach(el => el.classList.remove('selected'));
-      opt.classList.add('selected');
-      document.getElementById('thumbInput').value = t;
-      document.getElementById('previewInput').value = t;
-    };
-    thumbContainer.appendChild(opt);
-  });
-}
-
-async function submitEmbed(){
-  const title = document.getElementById('embedTitle').value.trim();
-  const category = document.getElementById('embedCategory').value;
-  let embedCode = document.getElementById('embedCode').value.trim();
-  let thumbnail = document.getElementById('thumbInput').value;
-  let preview = document.getElementById('previewInput').value;
-
-  if(!embedCode){
-      showToast(getLocalizedText('addVideoMissing'));
-    return;
-  }
-
-  if(!thumbnail){
-      showToast(getLocalizedText('addVideoThumbnailMissing'));
-    return;
-  }
-
-  let embedSrc = embedCode;
-  if(embedCode.includes('<iframe')) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(embedCode, 'text/html');
-    const iframe = doc.querySelector('iframe');
-    if(iframe && iframe.src) embedSrc = iframe.src;
-  }
-
-  try {
-    const res = await fetch('/api/upload', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        title: title || 'Yeni Video',
-        category,
-        embedSrc,
-        embedCode,
-        thumbnail,
-        preview
-      })
-    });
-
-    if(res.ok){
-      showToast(getLocalizedText('addVideoSuccess'));
-      closeEmbedModal();
-      document.getElementById('embedTitle').value = '';
-      document.getElementById('embedCode').value = '';
-      document.getElementById('thumbInput').value = '';
-      document.getElementById('previewInput').value = '';
-      document.getElementById('autoThumbnails').innerHTML = '<span style="font-size:11px;color:var(--muted);grid-column:1/-1">Video kaynağı girildiğinde kapak kesitleri burada belirecektir.</span>';
-      loadVideos();
-    } else {
-      const errData = await res.json();
-      showToast(errData.error || getLocalizedText('addVideoFail'));
-    }
-  } catch(err){
-    console.error(err);
-    showToast(getLocalizedText('serverError'));
-  }
-}
-
-// Sayfa yüklendiğinde varsayılan kapak alternatiflerini hazırla
 document.addEventListener('DOMContentLoaded', () => {
   const savedLang = getCurrentLanguage();
   applyLanguage(savedLang);
@@ -1168,7 +824,6 @@ document.addEventListener('DOMContentLoaded', () => {
     langSelect.value = savedLang;
     langSelect.addEventListener('change', handleLanguageSelection);
   }
-  handleSourceInput();
   if (localStorage.getItem('age_verified') !== 'true') {
     allowSiteOnLoad();
   }
