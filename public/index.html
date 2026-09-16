@@ -247,21 +247,13 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     </div>
     
     <div class="watch-player-box" id="playerLargeBox"></div>
-
     <div class="watch-details">
-      <div class="watch-title-row">
-        <h2 class="watch-title" id="watchTitle" data-i18n="videoTitleDefault">Video Başlığı</h2>
-        <span class="tag" id="watchCategoryTag" style="background:rgba(255,63,145,.15);color:var(--pink);padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700" data-i18n="categoryTag">Kategori</span>
-      </div>
+      <h2 class="watch-title" id="watchTitle">Video Başlığı</h2>
       <div class="watch-meta-info">
         <span><i class="fa-solid fa-calendar"></i> <span id="watchDate"></span></span>
-        <span>•</span>
-        <span><i class="fa-solid fa-shield"></i> <span data-i18n="adultContent">18+ Yetişkin İçerik</span></span>
-        <span>•</span>
-        <span style="color:#e7c65d"><i class="fa-solid fa-star"></i> 4.9</span>
       </div>
-      <p class="watch-desc" id="watchDesc" data-i18n="videoDescDefault">Bu video için açıklama girilmemiştir.</p>
     </div>
+
   </div>
 
 </main>
@@ -390,7 +382,6 @@ const translations = {
     delete: 'Sil',
     videoTitleDefault: 'Video Başlığı',
     categoryTag: 'Kategori',
-    adultContent: '18+ Yetişkin İçerik',
     videoDescDefault: 'Bu video için açıklama girilmemiştir.',
     noResults: 'Gösterilecek içerik bulunamadı.',
     resultsCount: 'video listeleniyor',
@@ -442,7 +433,6 @@ const translations = {
     delete: 'Delete',
     videoTitleDefault: 'Video Title',
     categoryTag: 'Category',
-    adultContent: '18+ Adult Content',
     videoDescDefault: 'No description has been entered for this video yet.',
     noResults: 'No matching content found.',
     resultsCount: 'videos listed',
@@ -494,7 +484,6 @@ const translations = {
     delete: 'Löschen',
     videoTitleDefault: 'Video-Titel',
     categoryTag: 'Kategorie',
-    adultContent: '18+ Erwachseneninhalt',
     videoDescDefault: 'Für dieses Video wurde noch keine Beschreibung eingegeben.',
     noResults: 'Keine passenden Inhalte gefunden.',
     resultsCount: 'Videos angezeigt',
@@ -711,10 +700,8 @@ function openWatch(id){
   watchView.classList.add('active');
 
   document.getElementById('watchTitle').innerText = video.title;
-  document.getElementById('watchCategoryTag').innerText = video.category || getLocalizedText('generalCategory');
   const localeMap = { tr: 'tr-TR', en: 'en-US', de: 'de-DE' };
   document.getElementById('watchDate').innerText = new Date(video.createdAt || Date.now()).toLocaleDateString(localeMap[lang] || 'tr-TR');
-  document.getElementById('watchDesc').innerText = lang === 'en' ? `${video.title} is an 18+ adult video on HentaiMini — enjoy it in high quality.` : lang === 'de' ? `${video.title} ist ein 18+ Erwachsenenvideo auf HentaiMini — genießen Sie es in hoher Qualität.` : `${video.title} başlıklı 18+ yetişkin videosu. HentaiMini platformunda yüksek kalitede keyifle izleyin.`;
 
   const playerBox = document.getElementById('playerLargeBox');
   let src = video.embedSrc || video.url || '';
