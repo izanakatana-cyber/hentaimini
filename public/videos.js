@@ -82,5 +82,61 @@ window.STATIC_VIDEOS = [
     duration: 'HD',
     rating: '4.8',
     createdAt: '2026-09-16T05:00:00.000Z'
+  },
+  {
+    id: 'stream-07',
+    title: 'Stream 07',
+    category: 'Genel',
+    type: 'embed',
+    embedSrc: 'https://streamtape.com/e/GXBZDrOlzDHVJg/',
+    url: 'https://streamtape.com/e/GXBZDrOlzDHVJg/',
+    embedCode: '<iframe src="https://streamtape.com/e/GXBZDrOlzDHVJg/" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>',
+    thumbnail: 'https://thumb.tapecontent.net/thumb/GXBZDrOlzDHVJg/mLV73vyer8ubWaB.jpg',
+    preview: 'https://thumb.tapecontent.net/thumb/GXBZDrOlzDHVJg/mLV73vyer8ubWaB.jpg',
+    duration: 'HD',
+    rating: '4.8',
+    createdAt: '2026-09-16T06:00:00.000Z'
+  },
+  {
+    id: 'stream-08',
+    title: 'Stream 08',
+    category: 'Genel',
+    type: 'embed',
+    embedSrc: 'https://streamtape.com/e/4AoY78AlBMHKRJ9/',
+    url: 'https://streamtape.com/e/4AoY78AlBMHKRJ9/',
+    embedCode: '<iframe src="https://streamtape.com/e/4AoY78AlBMHKRJ9/" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>',
+    thumbnail: 'https://thumb.tapecontent.net/thumb/4AoY78AlBMHKRJ9/zVVoZ1vLD1TYPYK.jpg',
+    preview: 'https://thumb.tapecontent.net/thumb/4AoY78AlBMHKRJ9/zVVoZ1vLD1TYPYK.jpg',
+    duration: 'HD',
+    rating: '4.8',
+    createdAt: '2026-09-16T07:00:00.000Z'
+  },
+  {
+    id: 'stream-09',
+    title: 'Stream 09',
+    category: 'Genel',
+    type: 'embed',
+    embedSrc: 'https://streamtape.com/e/r27Y1VAVV3fbpVZ/',
+    url: 'https://streamtape.com/e/r27Y1VAVV3fbpVZ/',
+    embedCode: '<iframe src="https://streamtape.com/e/r27Y1VAVV3fbpVZ/" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>',
+    thumbnail: 'https://thumb.tapecontent.net/thumb/r27Y1VAVV3fbpVZ/8wOy93bekPIoP90.jpg',
+    preview: 'https://thumb.tapecontent.net/thumb/r27Y1VAVV3fbpVZ/8wOy93bekPIoP90.jpg',
+    duration: 'HD',
+    rating: '4.8',
+    createdAt: '2026-09-16T08:00:00.000Z'
+  },
+  {
+    id: 'stream-10',
+    title: 'Stream 10',
+    category: 'Genel',
+    type: 'embed',
+    embedSrc: 'https://streamtape.com/e/DGPMdyPexjHdbw/',
+    url: 'https://streamtape.com/e/DGPMdyPexjHdbw/',
+    embedCode: '<iframe src="https://streamtape.com/e/DGPMdyPexjHdbw/" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>',
+    thumbnail: 'https://thumb.tapecontent.net/thumb/DGPMdyPexjHdbw/RB6bjj360lFdba3.jpg',
+    preview: 'https://thumb.tapecontent.net/thumb/DGPMdyPexjHdbw/RB6bjj360lFdba3.jpg',
+    duration: 'HD',
+    rating: '4.8',
+    createdAt: '2026-09-16T09:00:00.000Z'
   }
 ];
