@@ -1,19 +1,5 @@
 window.STATIC_VIDEOS = [
   {
-    id: 'stream-01',
-    title: 'Demo Stream 01',
-    category: 'Romantik',
-    type: 'embed',
-    embedSrc: 'https://streamtape.com/e/dVr7kaVxYDTkplM/',
-    url: 'https://streamtape.com/e/dVr7kaVxYDTkplM/',
-    embedCode: '<iframe src="https://streamtape.com/e/dVr7kaVxYDTkplM/" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>',
-    thumbnail: 'https://thumb.tapecontent.net/thumb/dVr7kaVxYDTkplM/YWO6aWoRZxsdoV.jpg',
-    preview: 'https://thumb.tapecontent.net/thumb/dVr7kaVxYDTkplM/YWO6aWoRZxsdoV.jpg',
-    duration: 'HD',
-    rating: '4.9',
-    createdAt: '2026-09-16T00:00:00.000Z'
-  },
-  {
     id: 'stream-02',
     title: 'Demo Stream 02',
     category: 'Aksiyon',
