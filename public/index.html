@@ -247,10 +247,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
   <div id="watchView" class="watch-view">
     <div class="watch-topbar">
       <button class="back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="backToCatalog">Ana Kataloğa Dön</span></button>
-      <div style="display:flex;gap:10px">
-        <button class="secondary" id="watchFavBtn" onclick="toggleFavoriteFromWatch()" style="padding:10px 14px;font-size:12px"><i class="fa-regular fa-heart"></i> <span data-i18n="favorite">Favori</span></button>
-        <button class="secondary" onclick="deleteCurrentVideo()" style="padding:10px 14px;font-size:12px;color:#ff5a82;border-color:rgba(255,90,130,.3)"><i class="fa-solid fa-trash"></i> <span data-i18n="delete">Sil</span></button>
-      </div>
     </div>
     
     <div class="watch-player-box" id="playerLargeBox"></div>
@@ -369,7 +365,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 let allVideos = Array.isArray(window.STATIC_VIDEOS) ? window.STATIC_VIDEOS : [];
 let activeFilter = "Tümü";
 let currentVideoId = null;
-let favorites = JSON.parse(localStorage.getItem('hentaimini_favs') || '[]');
 
 const translations = {
   tr: {
@@ -1009,7 +1004,6 @@ function renderGrid(){
   document.getElementById('sectionDesc').innerText = `${filtered.length} ${getLocalizedText('resultsCount')}`;
 
   grid.innerHTML = filtered.map(v => {
-    const isFav = favorites.includes(v.id);
     const hasThumb = v.thumbnail && v.thumbnail.length > 5;
     const hasPreview = v.preview && v.preview.length > 5;
 
@@ -1084,32 +1078,7 @@ function openWatch(id){
     playerBox.innerHTML = `<iframe src="${src}" allowfullscreen></iframe>`;
   }
 
-  updateWatchFavButton();
   window.scrollTo({top:0, behavior:'smooth'});
-}
-
-function toggleFavorite(id){
-  if(favorites.includes(id)){
-    favorites = favorites.filter(f => f !== id);
-    showToast(getLocalizedText('favoriteRemoved'));
-  } else {
-    favorites.push(id);
-    showToast(getLocalizedText('favoriteAddedToast'));
-  }
-  localStorage.setItem('hentaimini_favs', JSON.stringify(favorites));
-  renderGrid();
-  updateWatchFavButton();
-}
-
-function toggleFavoriteFromWatch(){
-  if(currentVideoId) toggleFavorite(currentVideoId);
-}
-
-function updateWatchFavButton(){
-  const btn = document.getElementById('watchFavBtn');
-  if(!btn || !currentVideoId) return;
-  const isFav = favorites.includes(currentVideoId);
-  btn.innerHTML = isFav ? `<i class="fa-solid fa-heart" style="color:var(--pink)"></i> ${getLocalizedText('favoriteAdded')}` : `<i class="fa-regular fa-heart"></i> ${getLocalizedText('favorite')}`;
 }
 
 function openDmca(){
