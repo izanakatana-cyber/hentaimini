@@ -226,19 +226,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 
   <!-- ANA GÖRÜNÜM -->
   <div id="homeView">
-    <section class="hero">
-      <div class="hero-grid"></div>
-      <div class="hero-content">
-        <div class="eyebrow" data-i18n="adultPlatform">18+ Yetişkin Video Platformu</div>
-        <h1 data-i18n="heroTitle">Hentai dünyasının <span class="gradient">en özgür</span> köşesi.</h1>
-        <p data-i18n="heroSubtitle">Kaliteli 18+ içerikler, yüksek çözünürlük ve sorunsuz izleme deneyimi.</p>
-        <div class="hero-actions">
-          <button class="secondary" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-compass"></i> <span data-i18n="exploreCatalog">Kataloğu Keşfet</span></button>
-        </div>
-        <div class="stats"><div id="statVideoCount"><b>0</b><span data-i18n="videoStat">Video</span></div><div><b>HD</b><span data-i18n="highQuality">Yüksek Kalite</span></div><div><b>18+</b><span data-i18n="safeMode">Güvenli Mod</span></div></div>
-      </div>
-    </section>
-
     <section class="section">
       <div class="section-head">
         <div>
@@ -401,13 +388,7 @@ const translations = {
     adultMode: '18+ içerik modu',
     adultCatalog: 'Yetişkin içerikler için katalog arayüzü.',
     systemReady: 'Sistem hazır',
-    adultPlatform: '18+ Yetişkin Video Platformu',
-    heroTitle: 'Hentai dünyasının en özgür köşesi.',
-    heroSubtitle: 'Kaliteli 18+ içerikler, yüksek çözünürlük ve sorunsuz izleme deneyimi.',
-    exploreCatalog: 'Kataloğu Keşfet',
     videoStat: 'Video',
-    highQuality: 'Yüksek Kalite',
-    safeMode: 'Güvenli Mod',
     noVideos: 'Henüz video yok',
     noVideosHint: 'Harici embed kaynakları eklenince burada görünür.',
     backToCatalog: 'Ana Kataloğa Dön',
@@ -459,13 +440,7 @@ const translations = {
     adultMode: '18+ content mode',
     adultCatalog: 'Catalog interface for adult content.',
     systemReady: 'System ready',
-    adultPlatform: '18+ Adult Video Platform',
-    heroTitle: 'The freest corner of the hentai world.',
-    heroSubtitle: 'High-quality 18+ content, high resolution and smooth viewing experience.',
-    exploreCatalog: 'Explore catalog',
     videoStat: 'Videos',
-    highQuality: 'High Quality',
-    safeMode: 'Safe Mode',
     noVideos: 'No videos yet',
     noVideosHint: 'External embed sources will appear here when added.',
     backToCatalog: 'Back to catalog',
@@ -517,13 +492,7 @@ const translations = {
     adultMode: '18+ Inhaltsmodus',
     adultCatalog: 'Katalogoberfläche für Erwachsene.',
     systemReady: 'System bereit',
-    adultPlatform: '18+ Erwachsenen-Video-Platform',
-    heroTitle: 'Die freieste Ecke der Hentai-Welt.',
-    heroSubtitle: 'Qualitätsvolle 18+-Inhalte, hohe Auflösung und reibungslose Wiedergabe.',
-    exploreCatalog: 'Katalog entdecken',
     videoStat: 'Videos',
-    highQuality: 'Hohe Qualität',
-    safeMode: 'Sicherer Modus',
     noVideos: 'Noch keine Videos',
     noVideosHint: 'Externe Embed-Quellen erscheinen hier, sobald sie hinzugefügt werden.',
     backToCatalog: 'Zurück zum Katalog',
@@ -668,10 +637,6 @@ function showToast(msg){
 
 async function loadVideos(){
   allVideos = Array.isArray(window.STATIC_VIDEOS) ? window.STATIC_VIDEOS : [];
-  const statVideoCount = document.getElementById('statVideoCount');
-  if (statVideoCount) {
-    statVideoCount.innerHTML = `<b>${allVideos.length}</b><span>${getLocalizedText('videoStat')}</span>`;
-  }
   renderGrid();
 }
 
