@@ -54,5 +54,19 @@ window.STATIC_VIDEOS = [
     duration: 'HD',
     rating: '4.8',
     createdAt: '2026-09-16T03:00:00.000Z'
+  },
+  {
+    id: 'stream-05',
+    title: 'Stream 05',
+    category: 'Genel',
+    type: 'embed',
+    embedSrc: 'https://streamtape.com/e/GP0dL2KZBAC1kA7/',
+    url: 'https://streamtape.com/e/GP0dL2KZBAC1kA7/',
+    embedCode: '<iframe src="https://streamtape.com/e/GP0dL2KZBAC1kA7/" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>',
+    thumbnail: 'https://thumb.tapecontent.net/thumb/GP0dL2KZBAC1kA7/G62lmYBWdoHmd4.jpg',
+    preview: 'https://thumb.tapecontent.net/thumb/GP0dL2KZBAC1kA7/G62lmYBWdoHmd4.jpg',
+    duration: 'HD',
+    rating: '4.8',
+    createdAt: '2026-09-16T04:00:00.000Z'
   }
 ];
