@@ -204,7 +204,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 <main>
   <header class="topbar">
     <button class="icon menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
-    <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="search" data-i18n-placeholder="searchPlaceholder" placeholder="Video, kategori veya etiket ara..."><kbd>CTRL K</kbd></div>
     <div class="top-actions">
       <button class="icon" onclick="showToast(getLocalizedText('notification'))"><i class="fa-regular fa-bell"></i><span class="dot"></span></button>
       <div class="lang-wrap">
@@ -985,12 +984,10 @@ async function loadVideos(){
 function renderGrid(){
   const grid = document.getElementById('grid');
   const empty = document.getElementById('empty');
-  const searchVal = document.getElementById('search').value.toLowerCase();
 
   let filtered = allVideos.filter(v => {
     const matchesFilter = activeFilter === 'Tümü' || v.category === activeFilter || (activeFilter === 'Popüler' && Number(v.rating)>=4.8) || (activeFilter === 'Yeni');
-    const matchesSearch = !searchVal || v.title.toLowerCase().includes(searchVal) || (v.category && v.category.toLowerCase().includes(searchVal));
-    return matchesFilter && matchesSearch;
+    return matchesFilter;
   });
 
   if(filtered.length === 0){
@@ -1019,8 +1016,6 @@ function renderGrid(){
     `;
   }).join('');
 }
-
-document.getElementById('search').addEventListener('input', renderGrid);
 
 function setFilter(category){
   activeFilter = category;
