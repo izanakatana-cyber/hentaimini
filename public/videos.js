@@ -44,49 +44,15 @@ window.STATIC_VIDEOS = [
   {
     id: 'stream-04',
     title: 'Stream 04',
-    category: 'Romantik',
+    category: 'Genel',
     type: 'embed',
     embedSrc: 'https://streamtape.com/e/4mMl48qAGOcKvJm/',
     url: 'https://streamtape.com/e/4mMl48qAGOcKvJm/',
     embedCode: '<iframe src="https://streamtape.com/e/4mMl48qAGOcKvJm/" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>',
+    thumbnail: 'https://thumb.tapecontent.net/thumb/4mMl48qAGOcKvJm/pDQBmO0dV8UrYZQ.jpg',
+    preview: 'https://thumb.tapecontent.net/thumb/4mMl48qAGOcKvJm/pDQBmO0dV8UrYZQ.jpg',
     duration: 'HD',
     rating: '4.8',
     createdAt: '2026-09-16T03:00:00.000Z'
-  },
-  {
-    id: 'stream-05',
-    title: 'Stream 05',
-    category: 'Fantezi',
-    type: 'embed',
-    embedSrc: 'https://streamtape.com/e/GP0dL2KZBAC1kA7/',
-    url: 'https://streamtape.com/e/GP0dL2KZBAC1kA7/',
-    embedCode: '<iframe src="https://streamtape.com/e/GP0dL2KZBAC1kA7/" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>',
-    duration: 'HD',
-    rating: '4.8',
-    createdAt: '2026-09-16T04:00:00.000Z'
-  },
-  {
-    id: 'stream-06',
-    title: 'Stream 06',
-    category: 'Aksiyon',
-    type: 'embed',
-    embedSrc: 'https://streamtape.com/e/q8dl623vVKFzdev/',
-    url: 'https://streamtape.com/e/q8dl623vVKFzdev/',
-    embedCode: '<iframe src="https://streamtape.com/e/q8dl623vVKFzdev/" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>',
-    duration: 'HD',
-    rating: '4.8',
-    createdAt: '2026-09-16T05:00:00.000Z'
-  },
-  {
-    id: 'stream-07',
-    title: 'Stream 07',
-    category: 'Komedi',
-    type: 'embed',
-    embedSrc: 'https://streamtape.com/e/GXBZDrOlzDHVJg/',
-    url: 'https://streamtape.com/e/GXBZDrOlzDHVJg/',
-    embedCode: '<iframe src="https://streamtape.com/e/GXBZDrOlzDHVJg/" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>',
-    duration: 'HD',
-    rating: '4.8',
-    createdAt: '2026-09-16T06:00:00.000Z'
   }
 ];
