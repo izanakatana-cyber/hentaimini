@@ -990,6 +990,18 @@ function renderGrid(){
     return matchesFilter;
   });
 
+  if (activeFilter === 'Yeni') {
+    filtered.sort((a, b) => {
+      if (a.createdAt && b.createdAt) {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      }
+      if (!a.createdAt && !b.createdAt) {
+        return allVideos.indexOf(b) - allVideos.indexOf(a);
+      }
+      return a.createdAt ? 1 : -1;
+    });
+  }
+
   if(filtered.length === 0){
     grid.innerHTML = '';
     empty.style.display = 'block';
