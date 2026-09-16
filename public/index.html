@@ -254,6 +254,15 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
         <span><i class="fa-solid fa-calendar"></i> <span id="watchDate"></span></span>
       </div>
     </div>
+    <section class="section recommendations-section">
+      <div class="section-head">
+        <div>
+          <h2>Önerilen Videolar</h2>
+          <p>Rastgele seçilen içerikler</p>
+        </div>
+      </div>
+      <div class="grid" id="recommendationsGrid"></div>
+    </section>
 
   </div>
 
@@ -1067,6 +1076,7 @@ function openWatch(id){
   document.getElementById('watchTitle').innerText = video.title;
   const localeMap = { tr: 'tr-TR', en: 'en-US', de: 'de-DE' };
   document.getElementById('watchDate').innerText = new Date(video.createdAt || Date.now()).toLocaleDateString(localeMap[lang] || 'tr-TR');
+  renderRecommendations(id);
 
   const playerBox = document.getElementById('playerLargeBox');
   let src = video.embedSrc || video.url || '';
@@ -1085,6 +1095,32 @@ function openWatch(id){
   }
 
   window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function renderRecommendations(currentId){
+  const grid = document.getElementById('recommendationsGrid');
+  if(!grid) return;
+
+  const candidates = allVideos
+    .filter(video => video.id !== currentId)
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 8);
+
+  grid.innerHTML = candidates.map(video => {
+    const hasThumb = video.thumbnail && video.thumbnail.length > 5;
+    const hasPreview = video.preview && video.preview.length > 5;
+
+    return `
+      <div class="card" onclick="openWatch('${video.id}')">
+        <div class="thumb">
+          <div class="thumb-art"><i class="fa-solid fa-play"></i></div>
+          ${hasThumb ? `<img class="thumb-img" src="${video.thumbnail}" alt="${video.title}" loading="lazy" onerror="this.style.display='none';">` : ''}
+          ${hasPreview ? `<img class="thumb-preview" src="${video.preview}" alt="preview" onerror="this.style.display='none';">` : ''}
+          <div class="play"><span><i class="fa-solid fa-play" style="color:#fff;margin-left:2px"></i></span></div>
+        </div>
+      </div>
+    `;
+  }).join('');
 }
 
 function openDmca(){
