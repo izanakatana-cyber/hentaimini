@@ -124,5 +124,47 @@ window.STATIC_VIDEOS = [
     "duration": "HD",
     "rating": "4.8",
     "createdAt": "2026-09-17T11:15:52.799Z"
+  },
+  {
+    "id": "runtime-1789644471595",
+    "title": "10",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/qm1e1m2c9lzb",
+    "url": "https://voe.sx/e/qm1e1m2c9lzb",
+    "embedCode": "<iframe src=\"https://voe.sx/e/qm1e1m2c9lzb\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/qm1e1m2c9lzb_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/qm1e1m2c9lzb_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-17T11:27:51.595Z"
+  },
+  {
+    "id": "runtime-1789644530154",
+    "title": "11",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/ny6sltcjopla",
+    "url": "https://voe.sx/e/ny6sltcjopla",
+    "embedCode": "<iframe src=\"https://voe.sx/e/ny6sltcjopla\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/ny6sltcjopla_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/ny6sltcjopla_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-17T11:28:50.154Z"
+  },
+  {
+    "id": "runtime-1789644567921",
+    "title": "12",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/moenlwgeb5aw",
+    "url": "https://voe.sx/e/moenlwgeb5aw",
+    "embedCode": "<iframe src=\"https://voe.sx/e/moenlwgeb5aw\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/moenlwgeb5aw_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/moenlwgeb5aw_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-17T11:29:27.921Z"
   }
 ];
