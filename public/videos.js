@@ -1,5 +1,19 @@
 window.STATIC_VIDEOS = [
   {
+    "id": "runtime-1789655930859",
+    "title": "46",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/zbxcxubjpcjy",
+    "url": "https://voe.sx/zbxcxubjpcjy",
+    "embedCode": "<iframe src=\"https://voe.sx/e/zbxcxubjpcjy\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/zbxcxubjpcjy_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/zbxcxubjpcjy_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-17T14:38:50.859248Z"
+  },
+  {
     "id": "runtime-1789655734886",
     "title": "45",
     "category": "Genel",
