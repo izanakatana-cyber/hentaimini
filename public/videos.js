@@ -21,8 +21,8 @@ window.STATIC_VIDEOS = [
     "embedSrc": "https://voe.sx/e/fq1dgoh8q4sj",
     "url": "https://voe.sx/fq1dgoh8q4sj",
     "embedCode": "<iframe src=\"https://voe.sx/e/fq1dgoh8q4sj\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/fq1dgoh8q4sj_splash.jpg",
-    "preview": "https://i.voe.sx/cache/fq1dgoh8q4sj_splash.jpg",
+    "thumbnail": "https://i.voe.sx/cache/fq1dgoh8q4sj_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/fq1dgoh8q4sj_storyboard_L5.jpg",
     "duration": "HD",
     "rating": "4.8",
     "createdAt": "2026-09-17T18:50:54.707475Z"
