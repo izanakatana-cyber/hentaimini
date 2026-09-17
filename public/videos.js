@@ -1,35 +1,7 @@
 window.STATIC_VIDEOS = [
   {
-    "id": "runtime-1789662725957",
-    "title": "57",
-    "category": "Genel",
-    "type": "embed",
-    "embedSrc": "https://voe.sx/e/t3quejrccfve",
-    "url": "https://voe.sx/t3quejrccfve",
-    "embedCode": "<iframe src=\"https://voe.sx/e/t3quejrccfve\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/t3quejrccfve_storyboard_L5.jpg",
-    "preview": "https://i.voe.sx/cache/t3quejrccfve_storyboard_L5.jpg",
-    "duration": "HD",
-    "rating": "4.8",
-    "createdAt": "2026-09-17T16:32:05.957655Z"
-  },
-  {
-    "id": "runtime-1789662496427",
-    "title": "56",
-    "category": "Genel",
-    "type": "embed",
-    "embedSrc": "https://voe.sx/e/d8kmsz5rsc12",
-    "url": "https://voe.sx/d8kmsz5rsc12",
-    "embedCode": "<iframe src=\"https://voe.sx/e/d8kmsz5rsc12\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/d8kmsz5rsc12_storyboard_L5.jpg",
-    "preview": "https://i.voe.sx/cache/d8kmsz5rsc12_storyboard_L5.jpg",
-    "duration": "HD",
-    "rating": "4.8",
-    "createdAt": "2026-09-17T16:28:16.427410Z"
-  },
-  {
     "id": "runtime-1789662249713",
-    "title": "55",
+    "title": "51",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/nklio7flyzup",
@@ -42,36 +14,8 @@ window.STATIC_VIDEOS = [
     "createdAt": "2026-09-17T16:24:09.713064Z"
   },
   {
-    "id": "runtime-1789662177640",
-    "title": "54",
-    "category": "Genel",
-    "type": "embed",
-    "embedSrc": "https://voe.sx/e/csflthtrkj2u",
-    "url": "https://voe.sx/csflthtrkj2u",
-    "embedCode": "<iframe src=\"https://voe.sx/e/csflthtrkj2u\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/csflthtrkj2u_storyboard_L5.jpg",
-    "preview": "https://i.voe.sx/cache/csflthtrkj2u_storyboard_L5.jpg",
-    "duration": "HD",
-    "rating": "4.8",
-    "createdAt": "2026-09-17T16:22:57.640901Z"
-  },
-  {
-    "id": "runtime-1789662038310",
-    "title": "53",
-    "category": "Genel",
-    "type": "embed",
-    "embedSrc": "https://voe.sx/e/vxvko8saolyo",
-    "url": "https://voe.sx/vxvko8saolyo",
-    "embedCode": "<iframe src=\"https://voe.sx/e/vxvko8saolyo\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/vxvko8saolyo_storyboard_L5.jpg",
-    "preview": "https://i.voe.sx/cache/vxvko8saolyo_storyboard_L5.jpg",
-    "duration": "HD",
-    "rating": "4.8",
-    "createdAt": "2026-09-17T16:20:38.310656Z"
-  },
-  {
     "id": "runtime-1789659777388",
-    "title": "52",
+    "title": "50",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/lf9tyskn2fh1",
@@ -85,7 +29,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789659207403",
-    "title": "51",
+    "title": "49",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/enktmzus3wvh",
@@ -96,34 +40,6 @@ window.STATIC_VIDEOS = [
     "duration": "HD",
     "rating": "4.8",
     "createdAt": "2026-09-17T15:33:27.403187Z"
-  },
-  {
-    "id": "runtime-1789659127733",
-    "title": "50",
-    "category": "Genel",
-    "type": "embed",
-    "embedSrc": "https://voe.sx/e/2ktqre7mv8hv",
-    "url": "https://voe.sx/2ktqre7mv8hv",
-    "embedCode": "<iframe src=\"https://voe.sx/e/2ktqre7mv8hv\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/2ktqre7mv8hv_storyboard_L5.jpg",
-    "preview": "https://i.voe.sx/cache/2ktqre7mv8hv_storyboard_L5.jpg",
-    "duration": "HD",
-    "rating": "4.8",
-    "createdAt": "2026-09-17T15:32:07.733574Z"
-  },
-  {
-    "id": "runtime-1789658924243",
-    "title": "49",
-    "category": "Genel",
-    "type": "embed",
-    "embedSrc": "https://voe.sx/e/en2om8wmfno1",
-    "url": "https://voe.sx/en2om8wmfno1",
-    "embedCode": "<iframe src=\"https://voe.sx/e/en2om8wmfno1\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/en2om8wmfno1_storyboard_L5.jpg",
-    "preview": "https://i.voe.sx/cache/en2om8wmfno1_storyboard_L5.jpg",
-    "duration": "HD",
-    "rating": "4.8",
-    "createdAt": "2026-09-17T15:28:44.243294Z"
   },
   {
     "id": "runtime-1789658862444",
@@ -140,22 +56,8 @@ window.STATIC_VIDEOS = [
     "createdAt": "2026-09-17T15:27:42.444134Z"
   },
   {
-    "id": "runtime-1789658806900",
-    "title": "47",
-    "category": "Genel",
-    "type": "embed",
-    "embedSrc": "https://voe.sx/e/f5r6lwbmv1sj",
-    "url": "https://voe.sx/f5r6lwbmv1sj",
-    "embedCode": "<iframe src=\"https://voe.sx/e/f5r6lwbmv1sj\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/f5r6lwbmv1sj_storyboard_L5.jpg",
-    "preview": "https://i.voe.sx/cache/f5r6lwbmv1sj_storyboard_L5.jpg",
-    "duration": "HD",
-    "rating": "4.8",
-    "createdAt": "2026-09-17T15:26:46.900585Z"
-  },
-  {
     "id": "runtime-1789658306859",
-    "title": "45",
+    "title": "47",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/s8lmbggdm7br",
