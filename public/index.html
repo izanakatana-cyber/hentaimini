@@ -191,12 +191,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <a href="#" onclick="randomPick(); return false;" data-section="random"><i class="fa-solid fa-shuffle"></i> <span data-i18n="random">Rastgele</span></a>
   </nav>
   
-  <div class="nav-label" data-i18n="legal">Yasal</div>
-  <nav class="nav">
-    <a href="#" onclick="openLegal('termsModal'); return false;"><i class="fa-solid fa-file-contract"></i> <span data-i18n="terms">Şartlar</span></a>
-    <a href="#" onclick="openLegal('privacyModal'); return false;"><i class="fa-solid fa-user-shield"></i> <span data-i18n="privacy">Gizlilik</span></a>
-    <a href="#" onclick="openDmca(); return false;"><i class="fa-solid fa-scale-balanced"></i> DMCA</a>
-  </nav>
   <div class="sidebar-bottom"><strong data-i18n="adultMode">18+ içerik modu</strong><p data-i18n="adultCatalog">Yetişkin içerikler için katalog arayüzü.</p><div class="status" data-i18n="systemReady">Sistem hazır</div></div>
 </aside>
 
@@ -205,7 +199,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <button class="icon menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
     <div class="top-actions">
       <button class="icon" onclick="showToast(getLocalizedText('notification'))"><i class="fa-regular fa-bell"></i><span class="dot"></span></button>
-      <button class="primary" onclick="openEmbedModal()"><i class="fa-solid fa-code"></i> Embed Video Ekle</button>
       <div class="lang-wrap">
         <select id="langSelect" class="lang-select" aria-label="Language selector">
           <option value="de">Deutsch</option>
