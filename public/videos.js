@@ -1,5 +1,19 @@
 window.STATIC_VIDEOS = [
   {
+    "id": "runtime-1789655734886",
+    "title": "45",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/jnlt9ww55hhy",
+    "url": "https://voe.sx/jnlt9ww55hhy",
+    "embedCode": "<iframe src=\"https://voe.sx/e/jnlt9ww55hhy\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/jnlt9ww55hhy_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/jnlt9ww55hhy_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-17T14:35:34.886327Z"
+  },
+  {
     "id": "runtime-1789641075249",
     "title": "Yeni Video",
     "category": "Genel",
