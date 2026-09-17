@@ -1105,8 +1105,8 @@ function renderGrid(){
       <div class="card" onclick="openWatch('${v.id}')">
         <div class="thumb">
           <div class="thumb-art"><i class="fa-solid fa-play"></i></div>
-          ${hasThumb ? `<img class="thumb-img" src="${v.thumbnail}" alt="${v.title}" loading="lazy" onerror="this.style.display='none';">` : ''}
-          ${hasPreview ? `<img class="thumb-preview" src="${v.preview}" alt="preview" onerror="this.style.display='none';">` : ''}
+          ${hasThumb ? `<img class="thumb-img" src="${encodeURI(v.thumbnail)}" alt="${v.title}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';">` : ''}
+          ${hasPreview ? `<img class="thumb-preview" src="${encodeURI(v.preview)}" alt="preview" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';">` : ''}
           <div class="play"><span><i class="fa-solid fa-play" style="color:#fff;margin-left:2px"></i></span></div>
         </div>
       </div>
@@ -1191,8 +1191,8 @@ function renderRecommendations(currentId){
       <div class="card" onclick="openWatch('${video.id}')">
         <div class="thumb">
           <div class="thumb-art"><i class="fa-solid fa-play"></i></div>
-          ${hasThumb ? `<img class="thumb-img" src="${video.thumbnail}" alt="${video.title}" loading="lazy" onerror="this.style.display='none';">` : ''}
-          ${hasPreview ? `<img class="thumb-preview" src="${video.preview}" alt="preview" onerror="this.style.display='none';">` : ''}
+          ${hasThumb ? `<img class="thumb-img" src="${encodeURI(video.thumbnail)}" alt="${video.title}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';">` : ''}
+          ${hasPreview ? `<img class="thumb-preview" src="${encodeURI(video.preview)}" alt="preview" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';">` : ''}
           <div class="play"><span><i class="fa-solid fa-play" style="color:#fff;margin-left:2px"></i></span></div>
         </div>
       </div>
