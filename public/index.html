@@ -289,7 +289,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
       <h3>Embed Video Ekle</h3>
       <button class="icon" onclick="closeEmbedModal()" style="width:32px;height:32px"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <p class="hint">Embed ve kapak bilgileri yalnızca bu tarayıcıda saklanır. Sunucuya gönderilmez.</p>
+    <p class="hint">Bilgiler sunucuya gönderilmez. Ekleme sonrası güncel videos.js dosyası indirilir.</p>
     <div class="embed-field">
       <label for="runtimeVideoTitle">Video Başlığı</label>
       <input id="runtimeVideoTitle" type="text" placeholder="Örn: Yeni Video" maxlength="160">
@@ -304,7 +304,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     </div>
     <div class="embed-actions">
       <button class="secondary" onclick="closeEmbedModal()">İptal</button>
-      <button class="primary" onclick="addRuntimeEmbed()"><i class="fa-solid fa-plus"></i> Ekle</button>
+      <button class="primary" onclick="addRuntimeEmbed()"><i class="fa-solid fa-download"></i> videos.js Oluştur</button>
     </div>
   </div>
 </div>
@@ -1046,23 +1046,30 @@ function addRuntimeEmbed(){
     createdAt: new Date().toISOString()
   };
 
-  const savedVideos = JSON.parse(localStorage.getItem('hentaimini_runtime_videos') || '[]');
-  savedVideos.push(video);
-  localStorage.setItem('hentaimini_runtime_videos', JSON.stringify(savedVideos));
   allVideos.push(video);
+  downloadVideosFile();
 
   closeEmbedModal();
   document.getElementById('runtimeVideoTitle').value = '';
   document.getElementById('runtimeEmbedCode').value = '';
   document.getElementById('runtimeThumbnail').value = '';
   renderGrid();
-  showToast('Video bu tarayıcıya kaydedildi.');
+  showToast('videos.js indirildi; projedeki public/videos.js ile değiştir.');
+}
+
+function downloadVideosFile(){
+  const source = `window.STATIC_VIDEOS = ${JSON.stringify(allVideos, null, 2)};\n`;
+  const blob = new Blob([source], {type: 'application/javascript'});
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'videos.js';
+  link.click();
+  URL.revokeObjectURL(link.href);
 }
 
 async function loadVideos(){
-  const staticVideos = Array.isArray(window.STATIC_VIDEOS) ? window.STATIC_VIDEOS : [];
-  const savedVideos = JSON.parse(localStorage.getItem('hentaimini_runtime_videos') || '[]');
-  allVideos = [...staticVideos, ...savedVideos];
+  localStorage.removeItem('hentaimini_runtime_videos');
+  allVideos = Array.isArray(window.STATIC_VIDEOS) ? window.STATIC_VIDEOS : [];
   renderGrid();
 }
 
