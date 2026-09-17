@@ -27,6 +27,13 @@ function startServer(port) {
 
 fs.mkdirSync(PUBLIC, { recursive: true });
 
+app.use((req, res, next) => {
+  if (req.path === "/videos.js") {
+    res.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+  }
+  next();
+});
+
 app.use(express.static(PUBLIC));
 
 app.get("/api/videos", (req, res) => {
