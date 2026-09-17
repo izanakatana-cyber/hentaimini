@@ -1,5 +1,47 @@
 window.STATIC_VIDEOS = [
   {
+    "id": "runtime-1789662249713",
+    "title": "55",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/nklio7flyzup",
+    "url": "https://voe.sx/nklio7flyzup",
+    "embedCode": "<iframe src=\"https://voe.sx/e/nklio7flyzup\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/nklio7flyzup_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/nklio7flyzup_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-17T16:24:09.713064Z"
+  },
+  {
+    "id": "runtime-1789662177640",
+    "title": "54",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/csflthtrkj2u",
+    "url": "https://voe.sx/csflthtrkj2u",
+    "embedCode": "<iframe src=\"https://voe.sx/e/csflthtrkj2u\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/csflthtrkj2u_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/csflthtrkj2u_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-17T16:22:57.640901Z"
+  },
+  {
+    "id": "runtime-1789662038310",
+    "title": "53",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/vxvko8saolyo",
+    "url": "https://voe.sx/vxvko8saolyo",
+    "embedCode": "<iframe src=\"https://voe.sx/e/vxvko8saolyo\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/vxvko8saolyo_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/vxvko8saolyo_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-17T16:20:38.310656Z"
+  },
+  {
     "id": "runtime-1789659777388",
     "title": "52",
     "category": "Genel",
