@@ -96,5 +96,33 @@ window.STATIC_VIDEOS = [
     "duration": "HD",
     "rating": "4.8",
     "createdAt": "2026-09-17T10:56:37.405Z"
+  },
+  {
+    "id": "runtime-1789643606330",
+    "title": "8",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/3twqkqmzntcv",
+    "url": "https://voe.sx/e/3twqkqmzntcv",
+    "embedCode": "<iframe src=\"https://voe.sx/e/3twqkqmzntcv\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/3twqkqmzntcv_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/3twqkqmzntcv_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-17T11:13:26.330Z"
+  },
+  {
+    "id": "runtime-1789643752799",
+    "title": "Yeni Video",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/on88bpma67lb",
+    "url": "https://voe.sx/e/on88bpma67lb",
+    "embedCode": "<iframe src=\"https://voe.sx/e/on88bpma67lb\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/on88bpma67lb_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/on88bpma67lb_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-17T11:15:52.799Z"
   }
 ];
