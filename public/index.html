@@ -289,7 +289,11 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
       <h3>Embed Video Ekle</h3>
       <button class="icon" onclick="closeEmbedModal()" style="width:32px;height:32px"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <p class="hint">Bilgiler sunucuya gönderilmez. Ekleme sonrası güncel videos.js dosyası indirilir.</p>
+    <p class="hint">Bir kez public/videos.js dosyasını seç. Yeni embed kayıtları aynı dosyanın içine yazılır; sunucuya gönderilmez.</p>
+    <div class="embed-actions" style="justify-content:flex-start;margin-top:0;margin-bottom:14px">
+      <button class="secondary" onclick="selectVideosFile()"><i class="fa-solid fa-folder-open"></i> videos.js Dosyasını Seç</button>
+      <span id="videosFileStatus" style="font-size:11px;color:var(--muted)">Dosya seçilmedi</span>
+    </div>
     <div class="embed-field">
       <label for="runtimeVideoTitle">Video Başlığı</label>
       <input id="runtimeVideoTitle" type="text" placeholder="Örn: Yeni Video" maxlength="160">
@@ -304,7 +308,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     </div>
     <div class="embed-actions">
       <button class="secondary" onclick="closeEmbedModal()">İptal</button>
-      <button class="primary" onclick="addRuntimeEmbed()"><i class="fa-solid fa-download"></i> videos.js Oluştur</button>
+      <button class="primary" onclick="addRuntimeEmbed()"><i class="fa-solid fa-save"></i> videos.js'e Yaz</button>
     </div>
   </div>
 </div>
@@ -399,6 +403,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 let allVideos = Array.isArray(window.STATIC_VIDEOS) ? window.STATIC_VIDEOS : [];
 let activeFilter = "Tümü";
 let currentVideoId = null;
+let videosFileHandle = null;
 
 const translations = {
   tr: {
@@ -1019,7 +1024,28 @@ function closeEmbedModal(){
   document.getElementById('embedModal').classList.remove('open');
 }
 
-function addRuntimeEmbed(){
+async function selectVideosFile(){
+  if(!window.showOpenFilePicker){
+    showToast('Bu tarayıcı doğrudan dosyaya yazmayı desteklemiyor.');
+    return false;
+  }
+
+  try {
+    const [handle] = await window.showOpenFilePicker({
+      multiple: false,
+      types: [{description: 'JavaScript dosyası', accept: {'text/javascript': ['.js']}}]
+    });
+    videosFileHandle = handle;
+    const status = document.getElementById('videosFileStatus');
+    if(status) status.innerText = 'videos.js bağlı';
+    return true;
+  } catch (error) {
+    if(error.name !== 'AbortError') showToast('videos.js dosyası seçilemedi.');
+    return false;
+  }
+}
+
+async function addRuntimeEmbed(){
   const title = document.getElementById('runtimeVideoTitle').value.trim() || 'Yeni Video';
   const embedCode = document.getElementById('runtimeEmbedCode').value.trim();
   const thumbnail = document.getElementById('runtimeThumbnail').value.trim();
@@ -1047,24 +1073,36 @@ function addRuntimeEmbed(){
   };
 
   allVideos.push(video);
-  downloadVideosFile();
+  const saved = await saveVideosFile();
+  if(!saved){
+    allVideos.pop();
+    return;
+  }
 
   closeEmbedModal();
   document.getElementById('runtimeVideoTitle').value = '';
   document.getElementById('runtimeEmbedCode').value = '';
   document.getElementById('runtimeThumbnail').value = '';
   renderGrid();
-  showToast('videos.js indirildi; projedeki public/videos.js ile değiştir.');
+  showToast('Video aynı videos.js dosyasına yazıldı.');
 }
 
-function downloadVideosFile(){
+async function saveVideosFile(){
+  if(!videosFileHandle){
+    const selected = await selectVideosFile();
+    if(!selected) return false;
+  }
+
   const source = `window.STATIC_VIDEOS = ${JSON.stringify(allVideos, null, 2)};\n`;
-  const blob = new Blob([source], {type: 'application/javascript'});
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'videos.js';
-  link.click();
-  URL.revokeObjectURL(link.href);
+  try {
+    const writable = await videosFileHandle.createWritable();
+    await writable.write(source);
+    await writable.close();
+    return true;
+  } catch (error) {
+    showToast('videos.js dosyasına yazılamadı.');
+    return false;
+  }
 }
 
 async function loadVideos(){
