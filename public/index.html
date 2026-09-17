@@ -205,6 +205,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <button class="icon menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
     <div class="top-actions">
       <button class="icon" onclick="showToast(getLocalizedText('notification'))"><i class="fa-regular fa-bell"></i><span class="dot"></span></button>
+      <button class="primary" onclick="openEmbedModal()"><i class="fa-solid fa-code"></i> Embed Video Ekle</button>
       <div class="lang-wrap">
         <select id="langSelect" class="lang-select" aria-label="Language selector">
           <option value="de">Deutsch</option>
@@ -281,6 +282,32 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 </footer>
 
 <div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span></span></div>
+
+<div class="modal" id="embedModal">
+  <div class="embed-box">
+    <div class="modal-top" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <h3>Embed Video Ekle</h3>
+      <button class="icon" onclick="closeEmbedModal()" style="width:32px;height:32px"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <p class="hint">Embed ve kapak bilgileri yalnızca bu tarayıcıda saklanır. Sunucuya gönderilmez.</p>
+    <div class="embed-field">
+      <label for="runtimeVideoTitle">Video Başlığı</label>
+      <input id="runtimeVideoTitle" type="text" placeholder="Örn: Yeni Video" maxlength="160">
+    </div>
+    <div class="embed-field">
+      <label for="runtimeEmbedCode">Embed Kodu veya URL</label>
+      <textarea id="runtimeEmbedCode" placeholder="<iframe src=\"...\"></iframe>"></textarea>
+    </div>
+    <div class="embed-field">
+      <label for="runtimeThumbnail">Kapak Fotoğrafı URL'si</label>
+      <input id="runtimeThumbnail" type="url" placeholder="https://.../kapak.jpg">
+    </div>
+    <div class="embed-actions">
+      <button class="secondary" onclick="closeEmbedModal()">İptal</button>
+      <button class="primary" onclick="addRuntimeEmbed()"><i class="fa-solid fa-plus"></i> Ekle</button>
+    </div>
+  </div>
+</div>
 
 <!-- DMCA MODAL -->
 <div class="modal" id="dmcaModal">
@@ -984,8 +1011,58 @@ function showToast(msg){
   setTimeout(()=>t.classList.remove('show'), 3000);
 }
 
+function openEmbedModal(){
+  document.getElementById('embedModal').classList.add('open');
+}
+
+function closeEmbedModal(){
+  document.getElementById('embedModal').classList.remove('open');
+}
+
+function addRuntimeEmbed(){
+  const title = document.getElementById('runtimeVideoTitle').value.trim() || 'Yeni Video';
+  const embedCode = document.getElementById('runtimeEmbedCode').value.trim();
+  const thumbnail = document.getElementById('runtimeThumbnail').value.trim();
+  if(!embedCode) return;
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(embedCode, 'text/html');
+  const iframe = doc.querySelector('iframe');
+  const embedSrc = iframe?.getAttribute('src') || embedCode;
+  if(!/^https?:\/\//i.test(embedSrc)) return;
+
+  const video = {
+    id: `runtime-${Date.now()}`,
+    title,
+    category: 'Genel',
+    type: 'embed',
+    embedSrc,
+    url: embedSrc,
+    embedCode,
+    thumbnail,
+    preview: thumbnail,
+    duration: 'HD',
+    rating: '4.8',
+    createdAt: new Date().toISOString()
+  };
+
+  const savedVideos = JSON.parse(localStorage.getItem('hentaimini_runtime_videos') || '[]');
+  savedVideos.push(video);
+  localStorage.setItem('hentaimini_runtime_videos', JSON.stringify(savedVideos));
+  allVideos.push(video);
+
+  closeEmbedModal();
+  document.getElementById('runtimeVideoTitle').value = '';
+  document.getElementById('runtimeEmbedCode').value = '';
+  document.getElementById('runtimeThumbnail').value = '';
+  renderGrid();
+  showToast('Video bu tarayıcıya kaydedildi.');
+}
+
 async function loadVideos(){
-  allVideos = Array.isArray(window.STATIC_VIDEOS) ? window.STATIC_VIDEOS : [];
+  const staticVideos = Array.isArray(window.STATIC_VIDEOS) ? window.STATIC_VIDEOS : [];
+  const savedVideos = JSON.parse(localStorage.getItem('hentaimini_runtime_videos') || '[]');
+  allVideos = [...staticVideos, ...savedVideos];
   renderGrid();
 }
 
