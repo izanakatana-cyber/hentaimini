@@ -890,7 +890,20 @@ function getLocalizedText(key) {
 
 function getCurrentLanguage(){
   const saved = localStorage.getItem('hm_lang');
-  return saved && translations[saved] ? saved : 'tr';
+  if (saved && translations[saved]) return saved;
+
+  const browserLanguages = Array.isArray(navigator.languages) && navigator.languages.length
+    ? navigator.languages
+    : [navigator.language];
+  const detected = browserLanguages.find((language) => {
+    const normalized = String(language || '').toLowerCase();
+    const languageCode = normalized.split('-')[0].split('_')[0];
+    return translations[normalized] || translations[languageCode];
+  });
+  if (!detected) return 'en';
+
+  const normalized = detected.toLowerCase();
+  return translations[normalized] ? normalized : normalized.split('-')[0].split('_')[0];
 }
 
 function applyLanguage(lang){
@@ -1234,6 +1247,18 @@ function openLegal(modalId){
 function closeLegal(modalId){
   document.getElementById(modalId).classList.remove('open');
 }
+
+document.addEventListener('contextmenu', (event) => {
+  event.preventDefault();
+});
+
+document.addEventListener('keydown', (event) => {
+  const key = event.key.toLowerCase();
+  const blockedShortcut = event.key === 'F12'
+    || (event.ctrlKey && event.shiftKey && ['i', 'j', 'c'].includes(key))
+    || (event.ctrlKey && key === 'u');
+  if (blockedShortcut) event.preventDefault();
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   const savedLang = getCurrentLanguage();
