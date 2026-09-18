@@ -1,5 +1,19 @@
 window.STATIC_VIDEOS = [
   {
+    "id": "runtime-1789731201931",
+    "title": "67",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/yzpzeyvoww3g",
+    "url": "https://voe.sx/yzpzeyvoww3g",
+    "embedCode": "<iframe src=\"https://voe.sx/e/yzpzeyvoww3g\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://media.hentaifreak.org/residence-episode-1.jpg",
+    "preview": "https://media.hentaifreak.org/residence-episode-1.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-18T11:33:21.931599Z"
+  },
+  {
     "id": "runtime-1789689768745",
     "title": "66",
     "category": "Genel",
