@@ -128,8 +128,10 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 .watch-meta-info{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px;margin-bottom:14px}
 .watch-desc{color:#b3abc2;font-size:13px;line-height:1.7}
 .watch-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}
-.watch-download-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:12px;background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;font-weight:700;font-size:12px;cursor:pointer;transition:.2s;text-decoration:none;box-shadow:0 10px 24px rgba(255,63,145,.2)}
-.watch-download-btn:hover{transform:translateY(-1px)}
+.watch-download-btn,.watch-share-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:12px;color:#fff;font-weight:700;font-size:12px;cursor:pointer;transition:.2s;text-decoration:none;box-shadow:0 10px 24px rgba(255,63,145,.2)}
+.watch-download-btn{background:linear-gradient(135deg,var(--pink),var(--purple));}
+.watch-share-btn{background:linear-gradient(135deg,#111019,#1c1827);border:1px solid var(--line)}
+.watch-download-btn:hover,.watch-share-btn:hover{transform:translateY(-1px)}
 .watch-download-btn.disabled{pointer-events:none;opacity:.45;filter:grayscale(.2)}
 
 .toast{position:fixed;right:25px;bottom:25px;z-index:800;background:#17141d;border:1px solid #3a3040;padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);font-size:11px;transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s}.toast.show{transform:none;opacity:1}.toast i{color:var(--green);margin-right:7px}
@@ -253,6 +255,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
       </div>
       <div class="watch-actions">
         <a id="videoDownloadBtn" class="watch-download-btn disabled" href="#" target="_blank" rel="noopener noreferrer">İndir</a>
+        <button id="videoShareBtn" class="watch-share-btn" type="button" onclick="copyVideoShareLink()">Video linkini kopyala</button>
       </div>
     </div>
     <section class="section recommendations-section">
@@ -1005,11 +1008,20 @@ function handleLanguageSelection(event){
   }
 }
 
+function getVideoIdFromUrl(){
+  return new URLSearchParams(window.location.search).get('v');
+}
+
 function allowSiteOnLoad(){
   const ageGate = document.getElementById('ageGate');
   if (ageGate) ageGate.style.display = 'none';
   localStorage.setItem('age_verified', 'true');
   loadVideos();
+
+  const initialVideoId = getVideoIdFromUrl();
+  if (initialVideoId && allVideos.some(video => video.id === initialVideoId)) {
+    openWatch(initialVideoId);
+  }
 }
 
 function enterSite(){
@@ -1136,6 +1148,29 @@ async function loadVideos(){
   renderGrid();
 }
 
+function buildVideoShareUrl(videoId){
+  const url = new URL(window.location.href);
+  url.searchParams.set('v', videoId);
+  return url.toString();
+}
+
+function copyVideoShareLink(){
+  const id = currentVideoId || new URLSearchParams(window.location.search).get('v');
+  if (!id) return;
+  const shareUrl = buildVideoShareUrl(id);
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      showToast('Video linki kopyalandı.');
+    }).catch(() => {
+      window.prompt('Video bağlantısını kopyalayın:', shareUrl);
+    });
+    return;
+  }
+
+  window.prompt('Video bağlantısını kopyalayın:', shareUrl);
+}
+
 function renderGrid(){
   const grid = document.getElementById('grid');
   const empty = document.getElementById('empty');
@@ -1201,6 +1236,12 @@ function setFilter(category){
 function goHome(){
   document.getElementById('watchView').classList.remove('active');
   document.getElementById('homeView').style.display = 'block';
+  currentVideoId = null;
+  const url = new URL(window.location.href);
+  url.searchParams.delete('v');
+  if (window.history && window.history.pushState) {
+    window.history.pushState({}, '', url.toString());
+  }
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
@@ -1215,6 +1256,10 @@ function openWatch(id){
   if(!video) return;
   currentVideoId = id;
   const lang = getCurrentLanguage();
+  const shareUrl = buildVideoShareUrl(id);
+  if (window.history && window.history.pushState) {
+    window.history.pushState({}, '', shareUrl);
+  }
 
   document.getElementById('homeView').style.display = 'none';
   const watchView = document.getElementById('watchView');
@@ -1227,6 +1272,7 @@ function openWatch(id){
 
   const playerBox = document.getElementById('playerLargeBox');
   const downloadBtn = document.getElementById('videoDownloadBtn');
+  const shareBtn = document.getElementById('videoShareBtn');
   let src = video.embedSrc || video.url || '';
 
   if(src.includes('iframe') || src.includes('<')) {
@@ -1260,6 +1306,10 @@ function openWatch(id){
       downloadBtn.textContent = translations[getCurrentLanguage()].downloadUnavailable || 'Download unavailable';
       downloadBtn.target = '_self';
     }
+  }
+
+  if (shareBtn) {
+    shareBtn.title = buildVideoShareUrl(id);
   }
 
   window.scrollTo({top:0, behavior:'smooth'});
@@ -1325,9 +1375,24 @@ document.addEventListener('DOMContentLoaded', () => {
     langSelect.value = savedLang;
     langSelect.addEventListener('change', handleLanguageSelection);
   }
+
+  const initialVideoId = getVideoIdFromUrl();
+  if (initialVideoId && allVideos.some(video => video.id === initialVideoId)) {
+    openWatch(initialVideoId);
+  }
+
   if (localStorage.getItem('age_verified') !== 'true') {
     allowSiteOnLoad();
   }
+});
+
+window.addEventListener('popstate', () => {
+  const videoId = getVideoIdFromUrl();
+  if (videoId && allVideos.some(video => video.id === videoId)) {
+    openWatch(videoId);
+    return;
+  }
+  goHome();
 });
 </script>
 </body>
