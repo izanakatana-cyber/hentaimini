@@ -1,7 +1,7 @@
 window.STATIC_VIDEOS = [
   {
     "id": "runtime-1789757348413",
-    "title": "a",
+    "title": "126d",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/bzgt4m69sbsy",
@@ -15,7 +15,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789757072441",
-    "title": "a",
+    "title": "125",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/1xvejjzbiuiq",
@@ -29,7 +29,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789756870915",
-    "title": "a",
+    "title": "124",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/eaqwqufmvrjh",
@@ -43,7 +43,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789756848375",
-    "title": "a",
+    "title": "123",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/wqeffykwepsi",
@@ -57,7 +57,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789756814183",
-    "title": "a",
+    "title": "122",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/prxwjdwh9etl",
@@ -71,7 +71,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789756779983",
-    "title": "a",
+    "title": "121",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/rzuaz2lnezry",
@@ -85,7 +85,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789756735443",
-    "title": "a",
+    "title": "120",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/86vbp0n58fbh",
@@ -99,7 +99,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789756676249",
-    "title": "a",
+    "title": "119",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/0vedshg7ojws",

@@ -400,7 +400,9 @@ const translations = {
     newFilter: 'Yeni',
     searchPlaceholder: 'Video, kategori veya etiket ara...',
     notification: 'Bildirimler güncel.',
-    videosError: 'Videolar yüklenirken hata oluştu.'
+    videosError: 'Videolar yüklenirken hata oluştu.',
+    downloadVideo: 'Videoyu indir',
+    downloadUnavailable: 'İndirme mevcut değil'
   },
   en: {
     ageGateText: 'This platform is designed for adult 18+ hentai/video content.',
@@ -451,7 +453,9 @@ const translations = {
     newFilter: 'New',
     searchPlaceholder: 'Search videos, categories or tags...',
     notification: 'Notifications are up to date.',
-    videosError: 'An error occurred while loading videos.'
+    videosError: 'An error occurred while loading videos.',
+    downloadVideo: 'Download video',
+    downloadUnavailable: 'Download unavailable'
   },
   ja: {
     ageGateText: 'このプラットフォームは18歳以上の成人向けコンテンツ用です。',
@@ -502,7 +506,9 @@ const translations = {
     newFilter: '新着',
     searchPlaceholder: '動画、カテゴリー、タグを検索...',
     notification: '通知は最新です。',
-    videosError: '動画の読み込み中にエラーが発生しました。'
+    videosError: '動画の読み込み中にエラーが発生しました。',
+    downloadVideo: '動画をダウンロード',
+    downloadUnavailable: 'ダウンロード不可'
   },
   ru: {
     ageGateText: 'Эта платформа предназначена для взрослых материалов 18+.',
@@ -553,7 +559,9 @@ const translations = {
     newFilter: 'Новые',
     searchPlaceholder: 'Поиск видео, категорий или тегов...',
     notification: 'Уведомления обновлены.',
-    videosError: 'Произошла ошибка при загрузке видео.'
+    videosError: 'Произошла ошибка при загрузке видео.',
+    downloadVideo: 'Скачать видео',
+    downloadUnavailable: 'Скачать невозможно'
   },
   it: {
     ageGateText: 'Questa piattaforma è destinata a contenuti per adulti 18+.',
@@ -604,7 +612,9 @@ const translations = {
     newFilter: 'Nuovi',
     searchPlaceholder: 'Cerca video, categorie o tag...',
     notification: 'Le notifiche sono aggiornate.',
-    videosError: 'Si è verificato un errore durante il caricamento dei video.'
+    videosError: 'Si è verificato un errore durante il caricamento dei video.',
+    downloadVideo: 'Scarica video',
+    downloadUnavailable: 'Download non disponibile'
   },
   hi: {
     ageGateText: 'यह प्लेटफ़ॉर्म 18+ वयस्क सामग्री के लिए है।',
@@ -655,7 +665,9 @@ const translations = {
     newFilter: 'नए',
     searchPlaceholder: 'वीडियो, श्रेणियां या टैग खोजें...',
     notification: 'सूचनाएं अपडेट हैं।',
-    videosError: 'वीडियो लोड करते समय त्रुटि हुई।'
+    videosError: 'वीडियो लोड करते समय त्रुटि हुई।',
+    downloadVideo: 'वीडियो डाउनलोड करें',
+    downloadUnavailable: 'डाउनलोड उपलब्ध नहीं'
   },
   ko: {
     ageGateText: '이 플랫폼은 18세 이상 성인 콘텐츠를 위한 공간입니다.',
@@ -706,7 +718,9 @@ const translations = {
     newFilter: '최신',
     searchPlaceholder: '동영상, 카테고리 또는 태그 검색...',
     notification: '알림이 최신 상태입니다.',
-    videosError: '동영상을 불러오는 중 오류가 발생했습니다.'
+    videosError: '동영상을 불러오는 중 오류가 발생했습니다.',
+    downloadVideo: '동영상 다운로드',
+    downloadUnavailable: '다운로드 불가'
   },
   fr: {
     ageGateText: 'Cette plateforme est destinée aux contenus pour adultes de 18 ans et plus.',
@@ -808,7 +822,9 @@ const translations = {
     newFilter: 'جديد',
     searchPlaceholder: 'ابحث عن فيديوهات أو فئات أو وسوم...',
     notification: 'الإشعارات محدثة.',
-    videosError: 'حدث خطأ أثناء تحميل الفيديوهات.'
+    videosError: 'حدث خطأ أثناء تحميل الفيديوهات.',
+    downloadVideo: 'تحميل الفيديو',
+    downloadUnavailable: 'التنزيل غير متاح'
   },
   de: {
     ageGateText: 'Diese Plattform ist für erwachsene 18+ Hentai-/Videoinhalte konzipiert.',
@@ -859,7 +875,9 @@ const translations = {
     newFilter: 'Neu',
     searchPlaceholder: 'Videos, Kategorien oder Tags suchen...',
     notification: 'Benachrichtigungen sind aktuell.',
-    videosError: 'Beim Laden der Videos ist ein Fehler aufgetreten.'
+    videosError: 'Beim Laden der Videos ist ein Fehler aufgetreten.',
+    downloadVideo: 'Video herunterladen',
+    downloadUnavailable: 'Download nicht verfügbar'
   }
 };
 
@@ -947,6 +965,17 @@ function applyLanguage(lang){
     const key = node.dataset.i18nHtml;
     if (legal[key]) node.innerHTML = legal[key];
   });
+
+  const downloadBtn = document.getElementById('videoDownloadBtn');
+  if (downloadBtn) {
+    const buttonLabel = translations[selected].downloadVideo || 'Download video';
+    const unavailableLabel = translations[selected].downloadUnavailable || 'Download unavailable';
+    if (downloadBtn.classList.contains('disabled')) {
+      downloadBtn.textContent = unavailableLabel;
+    } else {
+      downloadBtn.textContent = buttonLabel;
+    }
+  }
 
   const searchInput = document.getElementById('search');
   if (searchInput && translations[selected].searchPlaceholder) {
@@ -1222,13 +1251,13 @@ function openWatch(id){
       downloadBtn.href = directUrl;
       downloadBtn.classList.remove('disabled');
       downloadBtn.setAttribute('download', fileName);
-      downloadBtn.textContent = 'Videoyu indir';
+      downloadBtn.textContent = translations[getCurrentLanguage()].downloadVideo || 'Download video';
       downloadBtn.target = '_blank';
     } else {
       downloadBtn.href = '#';
       downloadBtn.classList.add('disabled');
       downloadBtn.removeAttribute('download');
-      downloadBtn.textContent = 'İndirme mevcut değil';
+      downloadBtn.textContent = translations[getCurrentLanguage()].downloadUnavailable || 'Download unavailable';
       downloadBtn.target = '_self';
     }
   }
