@@ -127,6 +127,10 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 .watch-title{font-size:20px;font-weight:700}
 .watch-meta-info{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px;margin-bottom:14px}
 .watch-desc{color:#b3abc2;font-size:13px;line-height:1.7}
+.watch-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.watch-download-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:12px;background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;font-weight:700;font-size:12px;cursor:pointer;transition:.2s;text-decoration:none;box-shadow:0 10px 24px rgba(255,63,145,.2)}
+.watch-download-btn:hover{transform:translateY(-1px)}
+.watch-download-btn.disabled{pointer-events:none;opacity:.45;filter:grayscale(.2)}
 
 .toast{position:fixed;right:25px;bottom:25px;z-index:800;background:#17141d;border:1px solid #3a3040;padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);font-size:11px;transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s}.toast.show{transform:none;opacity:1}.toast i{color:var(--green);margin-right:7px}
 .dmca-box{width:min(640px,100%);background:#0e0d13;border:1px solid #332b3b;border-radius:20px;box-shadow:0 30px 100px #000;padding:28px;max-height:85vh;overflow:auto}
@@ -246,6 +250,9 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
       <h2 class="watch-title" id="watchTitle">Video Başlığı</h2>
       <div class="watch-meta-info">
         <span><i class="fa-solid fa-calendar"></i> <span id="watchDate"></span></span>
+      </div>
+      <div class="watch-actions">
+        <a id="videoDownloadBtn" class="watch-download-btn disabled" href="#" target="_blank" rel="noopener noreferrer">İndir</a>
       </div>
     </div>
     <section class="section recommendations-section">
@@ -1190,6 +1197,7 @@ function openWatch(id){
   renderRecommendations(id);
 
   const playerBox = document.getElementById('playerLargeBox');
+  const downloadBtn = document.getElementById('videoDownloadBtn');
   let src = video.embedSrc || video.url || '';
 
   if(src.includes('iframe') || src.includes('<')) {
@@ -1203,6 +1211,26 @@ function openWatch(id){
     playerBox.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
   } else {
     playerBox.innerHTML = `<iframe src="${src}" allowfullscreen></iframe>`;
+  }
+
+  if (downloadBtn) {
+    const rawDownloadUrl = (video.url || '').trim();
+    const directUrl = rawDownloadUrl && !rawDownloadUrl.includes('<') && !rawDownloadUrl.includes('youtube.com') && !rawDownloadUrl.includes('youtu.be') ? rawDownloadUrl : '';
+
+    if (directUrl) {
+      const fileName = `${(video.title || 'video').replace(/[^a-z0-9ğüşöçıİĞÜŞÖÇ]+/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') || 'video'}${directUrl.includes('.') ? directUrl.substring(directUrl.lastIndexOf('.')) : '.mp4'}`;
+      downloadBtn.href = directUrl;
+      downloadBtn.classList.remove('disabled');
+      downloadBtn.setAttribute('download', fileName);
+      downloadBtn.textContent = 'Videoyu indir';
+      downloadBtn.target = '_blank';
+    } else {
+      downloadBtn.href = '#';
+      downloadBtn.classList.add('disabled');
+      downloadBtn.removeAttribute('download');
+      downloadBtn.textContent = 'İndirme mevcut değil';
+      downloadBtn.target = '_self';
+    }
   }
 
   window.scrollTo({top:0, behavior:'smooth'});
