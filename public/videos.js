@@ -1,7 +1,7 @@
 window.STATIC_VIDEOS = [
   {
     "id": "runtime-1789836001852",
-    "title": "a",
+    "title": "Modaete Yo Adam Kun – Bölüm 1",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/r4rkshkpb1gk",
