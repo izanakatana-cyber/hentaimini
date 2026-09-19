@@ -46,6 +46,16 @@ app.get("/api/videos", (req, res) => {
   res.json([]);
 });
 
+app.get("/api/feedback", (req, res) => {
+  try {
+    const feedback = JSON.parse(fs.readFileSync(FEEDBACK_FILE, "utf8"));
+    res.json(feedback.slice(-100).reverse());
+  } catch (error) {
+    console.error("Bildirimleri okuma hatası:", error);
+    res.status(500).json({ error: "Yorumlar yüklenemedi." });
+  }
+});
+
 app.post("/api/feedback", (req, res) => {
   const { type, message, contact } = req.body || {};
   const allowedTypes = new Set(["suggestion", "bug", "other"]);

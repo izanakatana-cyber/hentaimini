@@ -53,12 +53,12 @@ a{color:inherit;text-decoration:none}
 .nav a:hover{background:#1a1721;color:#fff;transform:translateX(3px)}
 .nav a.active{background:linear-gradient(90deg,rgba(255,63,145,.18),rgba(139,92,246,.08));color:#fff;border:1px solid rgba(255,63,145,.17)}
 .nav a.active i{color:var(--pink)}
+.feedback-nav-btn{width:100%;display:flex;align-items:center;gap:12px;padding:11px 12px;border:1px solid rgba(255,63,145,.25);border-radius:12px;background:rgba(255,63,145,.08);color:#ff8abd;font-size:13px;font-weight:600;cursor:pointer;text-align:left;transition:.2s}
+.feedback-nav-btn i{width:19px;text-align:center}.feedback-nav-btn:hover{background:rgba(255,63,145,.15);border-color:rgba(255,63,145,.5);color:#fff;transform:translateX(3px)}
 .sidebar-bottom{margin-top:auto;background:linear-gradient(145deg,#17131f,#121019);border:1px solid var(--line);border-radius:16px;padding:15px}
 .sidebar-bottom strong{display:block;font-size:12px;margin-bottom:6px}
 .sidebar-bottom p{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:11px}
 .status{font-size:10px;color:var(--green);display:flex;align-items:center;gap:6px}.status:before{content:"";width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 9px var(--green)}
-.feedback-trigger{width:100%;display:flex;align-items:center;gap:9px;margin-top:12px;padding:11px 12px;border:1px solid rgba(255,63,145,.25);border-radius:12px;background:rgba(255,63,145,.08);color:#ff8abd;font-size:11px;font-weight:700;cursor:pointer;text-align:left;transition:.2s}
-.feedback-trigger:hover{background:rgba(255,63,145,.15);border-color:rgba(255,63,145,.5);color:#fff;transform:translateY(-1px)}
 
 main{margin-left:248px;width:calc(100% - 248px);padding:22px 32px 60px}
 .topbar{height:58px;display:flex;align-items:center;gap:16px;margin-bottom:22px}
@@ -157,6 +157,11 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 .embed-field textarea{min-height:100px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;line-height:1.45}
 .embed-field input:focus,.embed-field textarea:focus,.embed-field select:focus{border-color:rgba(255,63,145,.5);box-shadow:0 0 0 4px rgba(255,63,145,.06)}
 .feedback-note{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:18px}
+.feedback-list{display:grid;gap:9px;max-height:230px;overflow:auto;margin:0 0 20px;padding-right:3px}
+.feedback-empty{padding:18px;border:1px dashed #302a37;border-radius:12px;color:#716a79;text-align:center;font-size:12px}
+.feedback-item{padding:11px 12px;background:#121018;border:1px solid var(--line);border-radius:11px}
+.feedback-item-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px;color:#ff8abd;font-size:10px;font-weight:700}
+.feedback-item-date{color:#716a79;font-weight:500}.feedback-item-message{color:#d5cedd;font-size:12px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
 .feedback-status{min-height:18px;margin-top:12px;font-size:12px;color:var(--muted)}
 .feedback-status.success{color:var(--green)}.feedback-status.error{color:#ff7d9f}
 .embed-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
@@ -200,9 +205,10 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <a class="active" href="#" onclick="goHome(); return false;" data-section="home"><i class="fa-solid fa-house"></i> <span data-i18n="home">Ana Sayfa</span></a>
     <a href="#" onclick="setFilter('Yeni'); return false;" data-section="new"><i class="fa-solid fa-clock"></i> <span data-i18n="new">Yeni Eklenenler</span></a>
     <a href="#" onclick="randomPick(); return false;" data-section="random"><i class="fa-solid fa-shuffle"></i> <span data-i18n="random">Rastgele</span></a>
+    <button class="feedback-nav-btn" type="button" onclick="openFeedback()"><i class="fa-solid fa-comment-dots"></i><span>Hata veya Öneri Bildir</span></button>
   </nav>
   
-  <div class="sidebar-bottom"><strong data-i18n="adultMode">18+ içerik modu</strong><p data-i18n="adultCatalog">Yetişkin içerikler için katalog arayüzü.</p><div class="status" data-i18n="systemReady">Sistem hazır</div><button class="feedback-trigger" type="button" onclick="openFeedback()"><i class="fa-solid fa-comment-dots"></i><span>Hata veya Öneri Bildir</span></button></div>
+  <div class="sidebar-bottom"><strong data-i18n="adultMode">18+ içerik modu</strong><p data-i18n="adultCatalog">Yetişkin içerikler için katalog arayüzü.</p><div class="status" data-i18n="systemReady">Sistem hazır</div></div>
 </aside>
 
 <main>
@@ -298,6 +304,8 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
       <button class="icon" type="button" onclick="closeFeedback()" style="width:32px;height:32px"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <p class="feedback-note">Siteyle ilgili hata, öneri veya görüşünü herkes açıkça yazabilir. Mesajın doğrudan site ekibine iletilir.</p>
+    <div id="feedbackList" class="feedback-list" aria-live="polite"><div class="feedback-empty">Yorumlar yükleniyor...</div></div>
+    <h4 style="font-size:13px;margin-bottom:12px">Yeni yorum yaz</h4>
     <form id="feedbackForm" onsubmit="submitFeedback(event)">
       <div class="embed-field">
         <label for="feedbackType">Bildirim türü</label>
@@ -1095,10 +1103,39 @@ function openFeedback(){
   document.getElementById('feedbackModal').classList.add('open');
   document.getElementById('feedbackMessage').focus();
   document.getElementById('sidebar').classList.remove('open');
+  loadFeedback();
 }
 
 function closeFeedback(){
   document.getElementById('feedbackModal').classList.remove('open');
+}
+
+function escapeFeedbackText(value){
+  return String(value).replace(/[&<>'"]/g, (character) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+  }[character]));
+}
+
+async function loadFeedback(){
+  const list = document.getElementById('feedbackList');
+  if (!list) return;
+  list.innerHTML = '<div class="feedback-empty">Yorumlar yükleniyor...</div>';
+  try {
+    const response = await fetch('/api/feedback');
+    if (!response.ok) throw new Error('Yorumlar yüklenemedi.');
+    const feedback = await response.json();
+    if (!feedback.length) {
+      list.innerHTML = '<div class="feedback-empty">Henüz yorum yok. İlk yorumu sen yaz.</div>';
+      return;
+    }
+    const typeLabels = {suggestion: 'Öneri', bug: 'Hata bildirimi', other: 'Diğer'};
+    list.innerHTML = feedback.map((item) => {
+      const date = new Date(item.createdAt).toLocaleString('tr-TR', {dateStyle: 'short', timeStyle: 'short'});
+      return `<article class="feedback-item"><div class="feedback-item-head"><span>${escapeFeedbackText(typeLabels[item.type] || 'Yorum')}</span><span class="feedback-item-date">${escapeFeedbackText(date)}</span></div><div class="feedback-item-message">${escapeFeedbackText(item.message)}</div></article>`;
+    }).join('');
+  } catch (error) {
+    list.innerHTML = '<div class="feedback-empty">Yorumlar şu anda yüklenemedi.</div>';
+  }
 }
 
 async function submitFeedback(event){
@@ -1121,6 +1158,7 @@ async function submitFeedback(event){
     form.reset();
     status.className = 'feedback-status success';
     status.textContent = 'Bildirimin alındı, teşekkürler.';
+    loadFeedback();
   } catch (error) {
     status.className = 'feedback-status error';
     status.textContent = error.message || 'Bildirim gönderilemedi.';
