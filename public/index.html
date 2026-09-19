@@ -195,7 +195,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <p data-i18n="ageGateText">Bu platform yetişkinlere yönelik <strong>18+</strong> hentai/video içerikleri için tasarlanmıştır.</p>
     <div class="age-warning" data-i18n="ageWarning"><i class="fa-solid fa-triangle-exclamation"></i> Devam ederek 18 yaşında veya daha büyük olduğunuzu ve bulunduğunuz yerdeki yasalara uygun hareket edeceğinizi onaylarsınız.</div>
     <div class="age-actions">
-      <button class="primary" onclick="enterSite()" data-i18n="enter18">18+ Giriş Yap</button>
+      <button class="primary" type="button" onclick="document.getElementById('ageGate').style.display='none'; localStorage.setItem('age_verified','true'); if (typeof enterSite === 'function') enterSite();" data-i18n="enter18">18+ Giriş Yap</button>
       <button class="secondary" onclick="leaveSite()" data-i18n="exit">Çıkış</button>
     </div>
   </div>
