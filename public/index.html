@@ -127,12 +127,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 .watch-title{font-size:20px;font-weight:700}
 .watch-meta-info{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px;margin-bottom:14px}
 .watch-desc{color:#b3abc2;font-size:13px;line-height:1.7}
-.watch-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}
-.watch-download-btn,.watch-share-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:12px;color:#fff;font-weight:700;font-size:12px;cursor:pointer;transition:.2s;text-decoration:none;box-shadow:0 10px 24px rgba(255,63,145,.2)}
-.watch-download-btn{background:linear-gradient(135deg,var(--pink),var(--purple));}
-.watch-share-btn{background:linear-gradient(135deg,#111019,#1c1827);border:1px solid var(--line)}
-.watch-download-btn:hover,.watch-share-btn:hover{transform:translateY(-1px)}
-.watch-download-btn.disabled{pointer-events:none;opacity:.45;filter:grayscale(.2)}
 
 .toast{position:fixed;right:25px;bottom:25px;z-index:800;background:#17141d;border:1px solid #3a3040;padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);font-size:11px;transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s}.toast.show{transform:none;opacity:1}.toast i{color:var(--green);margin-right:7px}
 .dmca-box{width:min(640px,100%);background:#0e0d13;border:1px solid #332b3b;border-radius:20px;box-shadow:0 30px 100px #000;padding:28px;max-height:85vh;overflow:auto}
@@ -169,7 +163,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
  .topbar{gap:8px}.profile span{display:none}.profile{padding-right:4px}
  .hero{padding:28px 23px;min-height:330px}.hero h1{font-size:34px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-@media(max-width:520px){.search{order:3;flex-basis:100%}.topbar{height:auto;flex-wrap:wrap}.top-actions{margin-left:auto}.icon:nth-child(1){display:none}.hero{margin-top:12px}.grid{grid-template-columns:1fr 1fr;gap:10px}.info{padding:9px}.title{font-size:11px}.stats{gap:13px}.age-card{padding:30px 20px}.age-actions{flex-direction:column}.watch-player-box{aspect-ratio:auto;height:min(78svh,720px);min-height:440px;border-radius:14px}.watch-player-box iframe,.watch-player-box video{height:100%!important}}
+@media(max-width:520px){.search{order:3;flex-basis:100%}.topbar{height:auto;flex-wrap:wrap}.top-actions{margin-left:auto}.icon:nth-child(1){display:none}.hero{margin-top:12px}.grid{grid-template-columns:1fr 1fr;gap:10px}.info{padding:9px}.title{font-size:11px}.stats{gap:13px}.age-card{padding:30px 20px}.age-actions{flex-direction:column}}
 </style>
 </head>
 <body>
@@ -253,10 +247,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
       <div class="watch-meta-info">
         <span><i class="fa-solid fa-calendar"></i> <span id="watchDate"></span></span>
       </div>
-      <div class="watch-actions">
-        <a id="videoDownloadBtn" class="watch-download-btn disabled" href="#" target="_blank" rel="noopener noreferrer">İndir</a>
-        <button id="videoShareBtn" class="watch-share-btn" type="button" onclick="copyVideoShareLink()">Video linkini kopyala</button>
-      </div>
     </div>
     <section class="section recommendations-section">
       <div class="section-head">
@@ -278,7 +268,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <div style="margin-bottom:6px;">
       <a href="javascript:void(0)" onclick="openLegal('termsModal')" data-i18n="terms">Şartlar</a> &nbsp;·&nbsp;
       <a href="javascript:void(0)" onclick="openLegal('privacyModal')" data-i18n="privacy">Gizlilik</a> &nbsp;·&nbsp;
-      <a href="javascript:void(0)" onclick="openDmca()" data-i18n="dmca">DMCA</a>
+      <a href="javascript:void(0)" onclick="openDmca()">DMCA</a>
     </div>
     <div style="opacity:0.7;">© 2026 HentaiMini</div>
   </div>
@@ -321,8 +311,28 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
   <div class="dmca-box">
     <button class="close" onclick="closeDmca()" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
     
-    <h3 data-legal-title="dmcaTitle">DMCA / Telif Hakkı Politikası</h3>
-    <div data-i18n-html="dmcaBody"></div>
+    <h3>DMCA / Telif Hakkı Politikası</h3>
+    
+    <p>HentaiMini, telif haklarına saygı duyar ve Digital Millennium Copyright Act (DMCA) kapsamında hareket eder.</p>
+    
+    <p>Bu platformdaki tüm içerikler kullanıcılar tarafından yüklenmektedir. HentaiMini, yüklenen içeriklerin telif durumunu önceden kontrol etmez ve sorumluluk kabul etmez.</p>
+    
+    <p><strong>Telif hakkı ihlali bildirimi için lütfen şu bilgileri içeren bir mail gönderin:</strong></p>
+    <ul>
+      <li>Telif hakkı sahibi veya yetkili temsilcisinin adı ve iletişim bilgileri</li>
+      <li>İhlal edildiği iddia edilen eserin tanımı</li>
+      <li>Sitede bulunan ihlal iddiası içeren içeriğin URL’si</li>
+      <li>İyi niyet beyanı (içeriğin izinsiz kullanıldığına inanıyorsunuz)</li>
+      <li>Yasal beyan (bildirimin doğru olduğu ve yalan beyanda bulunmanın cezai sorumluluğu olduğu)</li>
+      <li>Elektronik veya fiziksel imza</li>
+    </ul>
+    
+    <p>Bildirimleri şu adrese gönderin:<br>
+    <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    
+    <p>Geçerli bir DMCA bildirimi alındığında, söz konusu içerik derhal kaldırılır veya erişime kapatılır. Tekrarlayan ihlalcilerin hesapları kalıcı olarak kapatılabilir.</p>
+    
+    <p>Karşı bildirim (counter-notice) hakkı saklıdır. Karşı bildirim süreci hakkında bilgi almak için aynı adrese yazabilirsiniz.</p>
   </div>
 </div>
 
@@ -331,8 +341,24 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
   <div class="dmca-box">
     <button class="close" onclick="closeLegal('termsModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
     
-    <h3 data-legal-title="termsTitle">Kullanım Şartları</h3>
-    <div data-i18n-html="termsBody"></div>
+    <h3>Kullanım Şartları</h3>
+    
+    <p><strong>1. Yaş Sınırı</strong><br>
+    Bu site yalnızca 18 yaş ve üzeri kişiler içindir. Siteye girerek 18 yaşında veya daha büyük olduğunuzu beyan etmiş sayılırsınız.</p>
+    
+    <p><strong>2. İçerik Sorumluluğu</strong><br>
+    Kullanıcılar yükledikleri tüm içeriklerden bizzat sorumludur. Telif hakkı ihlali, yasadışı içerik, çocuk pornografisi veya herhangi bir yasalara aykırı materyal yüklemek kesinlikle yasaktır. Bu tür içerikler tespit edildiğinde derhal kaldırılır ve gerekli mercilere bildirim yapılabilir.</p>
+    
+    <p><strong>3. Yasaklı İçerikler</strong><br>
+    - 18 yaş altı kişileri içeren veya çağrıştıran her türlü içerik<br>
+    - Gerçek şiddet, zoofili, skatol veya aşırı yasa dışı fetişler<br>
+    - Telif hakkı sahibi izni olmadan yüklenen ticari içerikler (mümkün olduğunca kaçının)</p>
+    
+    <p><strong>4. Hesap ve Kullanım</strong><br>
+    Siteyi kötüye kullanmak, spam yapmak, sisteme zarar vermek yasaktır. Bu kurallara uymayan hesaplar uyarı yapılmaksızın kapatılabilir.</p>
+    
+    <p><strong>5. Sorumluluk Reddi</strong><br>
+    HentaiMini, kullanıcılar tarafından yüklenen içeriklerin doğruluğu, yasallığı veya kalitesi konusunda hiçbir garanti vermez. Platform “olduğu gibi” sunulmaktadır.</p>
   </div>
 </div>
 
@@ -341,8 +367,27 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
   <div class="dmca-box">
     <button class="close" onclick="closeLegal('privacyModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
     
-    <h3 data-legal-title="privacyTitle">Gizlilik Politikası</h3>
-    <div data-i18n-html="privacyBody"></div>
+    <h3>Gizlilik Politikası</h3>
+    
+    <p>HentaiMini olarak gizliliğinize önem veriyoruz.</p>
+    
+    <p><strong>Topladığımız Veriler:</strong><br>
+    - Tarayıcınızda yerel olarak saklanan yaş onayı (localStorage)<br>
+    - Favori olarak işaretlediğiniz videolar (localStorage)<br>
+    - Temel teknik loglar (IP adresi, tarayıcı bilgisi – güvenlik ve kötüye kullanım önleme amaçlı)</p>
+    
+    <p><strong>Toplamadığımız Veriler:</strong><br>
+    - Kişisel kimlik bilgileriniz<br>
+    - E-posta adresiniz (DMCA bildirimi dışında)<br>
+    - Ödeme bilgileriniz (şu an ücretli hizmet yok)</p>
+    
+    <p><strong>Çerezler:</strong><br>
+    Sadece temel işlevsellik için gerekli teknik çerezler kullanılır. Reklam veya takip çerezi bulunmamaktadır.</p>
+    
+    <p><strong>Üçüncü Taraflar:</strong><br>
+    Verileriniz üçüncü taraflarla satılmaz veya paylaşılmaz. Yasal zorunluluk halinde (mahkeme kararı vb.) bilgi paylaşılabilir.</p>
+    
+    <p>Gizlilik ile ilgili sorularınız için: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
   </div>
 </div>
 
@@ -403,9 +448,7 @@ const translations = {
     newFilter: 'Yeni',
     searchPlaceholder: 'Video, kategori veya etiket ara...',
     notification: 'Bildirimler güncel.',
-    videosError: 'Videolar yüklenirken hata oluştu.',
-    downloadVideo: 'Videoyu indir',
-    downloadUnavailable: 'İndirme mevcut değil'
+    videosError: 'Videolar yüklenirken hata oluştu.'
   },
   en: {
     ageGateText: 'This platform is designed for adult 18+ hentai/video content.',
@@ -456,9 +499,7 @@ const translations = {
     newFilter: 'New',
     searchPlaceholder: 'Search videos, categories or tags...',
     notification: 'Notifications are up to date.',
-    videosError: 'An error occurred while loading videos.',
-    downloadVideo: 'Download video',
-    downloadUnavailable: 'Download unavailable'
+    videosError: 'An error occurred while loading videos.'
   },
   ja: {
     ageGateText: 'このプラットフォームは18歳以上の成人向けコンテンツ用です。',
@@ -509,9 +550,7 @@ const translations = {
     newFilter: '新着',
     searchPlaceholder: '動画、カテゴリー、タグを検索...',
     notification: '通知は最新です。',
-    videosError: '動画の読み込み中にエラーが発生しました。',
-    downloadVideo: '動画をダウンロード',
-    downloadUnavailable: 'ダウンロード不可'
+    videosError: '動画の読み込み中にエラーが発生しました。'
   },
   ru: {
     ageGateText: 'Эта платформа предназначена для взрослых материалов 18+.',
@@ -562,9 +601,7 @@ const translations = {
     newFilter: 'Новые',
     searchPlaceholder: 'Поиск видео, категорий или тегов...',
     notification: 'Уведомления обновлены.',
-    videosError: 'Произошла ошибка при загрузке видео.',
-    downloadVideo: 'Скачать видео',
-    downloadUnavailable: 'Скачать невозможно'
+    videosError: 'Произошла ошибка при загрузке видео.'
   },
   it: {
     ageGateText: 'Questa piattaforma è destinata a contenuti per adulti 18+.',
@@ -615,9 +652,7 @@ const translations = {
     newFilter: 'Nuovi',
     searchPlaceholder: 'Cerca video, categorie o tag...',
     notification: 'Le notifiche sono aggiornate.',
-    videosError: 'Si è verificato un errore durante il caricamento dei video.',
-    downloadVideo: 'Scarica video',
-    downloadUnavailable: 'Download non disponibile'
+    videosError: 'Si è verificato un errore durante il caricamento dei video.'
   },
   hi: {
     ageGateText: 'यह प्लेटफ़ॉर्म 18+ वयस्क सामग्री के लिए है।',
@@ -668,9 +703,7 @@ const translations = {
     newFilter: 'नए',
     searchPlaceholder: 'वीडियो, श्रेणियां या टैग खोजें...',
     notification: 'सूचनाएं अपडेट हैं।',
-    videosError: 'वीडियो लोड करते समय त्रुटि हुई।',
-    downloadVideo: 'वीडियो डाउनलोड करें',
-    downloadUnavailable: 'डाउनलोड उपलब्ध नहीं'
+    videosError: 'वीडियो लोड करते समय त्रुटि हुई।'
   },
   ko: {
     ageGateText: '이 플랫폼은 18세 이상 성인 콘텐츠를 위한 공간입니다.',
@@ -721,9 +754,7 @@ const translations = {
     newFilter: '최신',
     searchPlaceholder: '동영상, 카테고리 또는 태그 검색...',
     notification: '알림이 최신 상태입니다.',
-    videosError: '동영상을 불러오는 중 오류가 발생했습니다.',
-    downloadVideo: '동영상 다운로드',
-    downloadUnavailable: '다운로드 불가'
+    videosError: '동영상을 불러오는 중 오류가 발생했습니다.'
   },
   fr: {
     ageGateText: 'Cette plateforme est destinée aux contenus pour adultes de 18 ans et plus.',
@@ -825,9 +856,7 @@ const translations = {
     newFilter: 'جديد',
     searchPlaceholder: 'ابحث عن فيديوهات أو فئات أو وسوم...',
     notification: 'الإشعارات محدثة.',
-    videosError: 'حدث خطأ أثناء تحميل الفيديوهات.',
-    downloadVideo: 'تحميل الفيديو',
-    downloadUnavailable: 'التنزيل غير متاح'
+    videosError: 'حدث خطأ أثناء تحميل الفيديوهات.'
   },
   de: {
     ageGateText: 'Diese Plattform ist für erwachsene 18+ Hentai-/Videoinhalte konzipiert.',
@@ -878,38 +907,8 @@ const translations = {
     newFilter: 'Neu',
     searchPlaceholder: 'Videos, Kategorien oder Tags suchen...',
     notification: 'Benachrichtigungen sind aktuell.',
-    videosError: 'Beim Laden der Videos ist ein Fehler aufgetreten.',
-    downloadVideo: 'Video herunterladen',
-    downloadUnavailable: 'Download nicht verfügbar'
+    videosError: 'Beim Laden der Videos ist ein Fehler aufgetreten.'
   }
-};
-
-const legalTranslations = {
-  tr: {
-    dmcaTitle: 'DMCA / Telif Hakkı Politikası',
-    dmcaBody: '<p>HentaiMini, telif haklarına saygı duyar ve Digital Millennium Copyright Act (DMCA) kapsamında hareket eder.</p><p>Bu platformdaki tüm içerikler kullanıcılar tarafından yüklenmektedir. HentaiMini, yüklenen içeriklerin telif durumunu önceden kontrol etmez ve sorumluluk kabul etmez.</p><p><strong>Telif hakkı ihlali bildirimi için lütfen şu bilgileri içeren bir mail gönderin:</strong></p><ul><li>Telif hakkı sahibi veya yetkili temsilcisinin adı ve iletişim bilgileri</li><li>İhlal edildiği iddia edilen eserin tanımı</li><li>Sitede bulunan ihlal iddiası içeren içeriğin URL’si</li><li>İyi niyet ve yasal beyan</li><li>Elektronik veya fiziksel imza</li></ul><p>Bildirimleri şu adrese gönderin:<br><a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p><p>Geçerli bir DMCA bildirimi alındığında içerik kaldırılır veya erişime kapatılır. Tekrarlayan ihlalcilerin hesapları kapatılabilir.</p>',
-    termsTitle: 'Kullanım Şartları',
-    termsBody: '<p><strong>1. Yaş Sınırı</strong><br>Bu site yalnızca 18 yaş ve üzeri kişiler içindir.</p><p><strong>2. İçerik Sorumluluğu</strong><br>Kullanıcılar yükledikleri içeriklerden sorumludur. Telif hakkı ihlali veya yasadışı içerik yüklemek yasaktır.</p><p><strong>3. Yasaklı İçerikler</strong><br>18 yaş altı kişileri içeren içerikler, gerçek şiddet ve yasa dışı materyaller yasaktır.</p><p><strong>4. Hesap ve Kullanım</strong><br>Siteyi kötüye kullanmak, spam yapmak veya sisteme zarar vermek yasaktır.</p><p><strong>5. Sorumluluk Reddi</strong><br>Platform kullanıcı içeriklerini “olduğu gibi” sunar ve bunların doğruluğunu garanti etmez.</p>',
-    privacyTitle: 'Gizlilik Politikası',
-    privacyBody: '<p>HentaiMini olarak gizliliğinize önem veriyoruz.</p><p><strong>Topladığımız Veriler:</strong><br>Yaş onayı, favoriler ve güvenlik amacıyla temel teknik loglar.</p><p><strong>Toplamadığımız Veriler:</strong><br>Kişisel kimlik, DMCA bildirimi dışındaki e-posta ve ödeme bilgileri.</p><p><strong>Çerezler:</strong><br>Yalnızca temel işlevsellik için gerekli teknik çerezler kullanılır; reklam veya takip çerezi yoktur.</p><p><strong>Üçüncü Taraflar:</strong><br>Verileriniz satılmaz veya paylaşılmaz; yasal zorunluluklar saklıdır.</p><p>Gizlilik soruları: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>'
-  },
-  en: {
-    dmcaTitle: 'DMCA / Copyright Policy', dmcaBody: '<p>HentaiMini respects copyright and operates under the Digital Millennium Copyright Act (DMCA).</p><p>All content is uploaded by users. HentaiMini does not pre-screen copyright status and assumes no liability for uploaded content.</p><p><strong>To report infringement, please include:</strong></p><ul><li>Copyright owner or authorized representative contact details</li><li>Description of the work and the alleged infringing URL</li><li>Good-faith and legal statements</li><li>Electronic or physical signature</li></ul><p>Send notices to:<br><a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p><p>Valid notices result in prompt removal or disabling of access. Repeat infringers may be permanently banned.</p>',
-    termsTitle: 'Terms of Use', termsBody: '<p><strong>1. Age Limit</strong><br>This site is for people aged 18 and over only.</p><p><strong>2. Content Responsibility</strong><br>Users are responsible for everything they upload. Copyright infringement and illegal content are prohibited.</p><p><strong>3. Prohibited Content</strong><br>Content involving minors, real violence, or illegal material is prohibited.</p><p><strong>4. Accounts and Use</strong><br>Abuse, spam, and damaging the system are prohibited.</p><p><strong>5. Disclaimer</strong><br>The platform provides user content “as is” and does not guarantee its accuracy or legality.</p>',
-    privacyTitle: 'Privacy Policy', privacyBody: '<p>HentaiMini values your privacy.</p><p><strong>Data We Collect:</strong><br>Age verification, favorites, and basic technical logs for security.</p><p><strong>Data We Do Not Collect:</strong><br>Personal identity details, email except for DMCA notices, or payment information.</p><p><strong>Cookies:</strong><br>Only technical cookies required for core functionality are used. No advertising or tracking cookies.</p><p><strong>Third Parties:</strong><br>Your data is not sold or shared, except where legally required.</p><p>Privacy questions: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>'
-  },
-  ja: {
-    dmcaTitle: 'DMCA / 著作権ポリシー', dmcaBody: '<p>HentaiMiniは著作権を尊重し、DMCAに基づいて対応します。</p><p>すべてのコンテンツはユーザーが投稿します。著作権の確認と投稿内容の責任は負いません。</p><p><strong>侵害通知には次の情報を含めてください。</strong></p><ul><li>権利者または代理人の連絡先</li><li>作品の説明と対象URL</li><li>善意の申告、法的申告、署名</li></ul><p>通知先:<br><a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>',
-    termsTitle: '利用規約', termsBody: '<p><strong>1. 年齢制限</strong><br>18歳以上の方のみ利用できます。</p><p><strong>2. コンテンツ責任</strong><br>投稿内容はユーザーの責任です。違法または著作権を侵害する内容は禁止です。</p><p><strong>3. 禁止事項</strong><br>未成年者、現実の暴力、違法な素材を含む内容は禁止です。</p><p><strong>4. 利用</strong><br>悪用、スパム、システムへの攻撃は禁止です。</p>',
-    privacyTitle: 'プライバシーポリシー', privacyBody: '<p>HentaiMiniはプライバシーを大切にします。</p><p><strong>収集する情報:</strong><br>年齢確認、お気に入り、セキュリティ用の基本ログ。</p><p><strong>収集しない情報:</strong><br>個人情報、DMCA以外のメール、支払い情報。</p><p><strong>Cookie:</strong><br>基本機能に必要な技術Cookieのみ使用します。</p><p>お問い合わせ: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>'
-  },
-  ru: { dmcaTitle: 'Политика DMCA / авторских прав', dmcaBody: '<p>HentaiMini уважает авторские права и действует в соответствии с DMCA.</p><p>Контент загружают пользователи. Для уведомлений укажите данные правообладателя, описание работы, URL и подпись.</p><p>Отправляйте уведомления: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>', termsTitle: 'Условия использования', termsBody: '<p><strong>Возраст:</strong> сайт предназначен только для лиц от 18 лет.</p><p>Пользователи отвечают за свои публикации. Незаконный контент, спам и злоупотребления запрещены.</p><p>Платформа предоставляется «как есть».</p>', privacyTitle: 'Политика конфиденциальности', privacyBody: '<p>Мы ценим вашу конфиденциальность.</p><p>Хранятся подтверждение возраста, избранное и базовые технические журналы безопасности. Личные и платёжные данные не собираются.</p><p>Вопросы: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>' },
-  it: { dmcaTitle: 'Politica DMCA / Copyright', dmcaBody: '<p>HentaiMini rispetta il copyright e segue il DMCA.</p><p>I contenuti sono caricati dagli utenti. Per le segnalazioni includi titolare, descrizione, URL, dichiarazioni e firma.</p><p>Invia le segnalazioni a <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a>.</p>', termsTitle: 'Termini di utilizzo', termsBody: '<p><strong>Età:</strong> il sito è riservato ai maggiori di 18 anni.</p><p>Gli utenti sono responsabili dei contenuti pubblicati. Sono vietati contenuti illegali, spam e abusi.</p><p>La piattaforma è fornita “così com’è”.</p>', privacyTitle: 'Informativa sulla privacy', privacyBody: '<p>HentaiMini tiene alla tua privacy.</p><p>Raccogliamo conferma dell’età, preferiti e log tecnici essenziali. Non raccogliamo dati personali o di pagamento.</p><p>Contatti: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>' },
-  hi: { dmcaTitle: 'DMCA / कॉपीराइट नीति', dmcaBody: '<p>HentaiMini कॉपीराइट का सम्मान करता है और DMCA के अनुसार काम करता है।</p><p>सामग्री उपयोगकर्ता अपलोड करते हैं। शिकायत में अधिकारधारक, विवरण, URL और हस्ताक्षर भेजें।</p><p>ईमेल: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>', termsTitle: 'उपयोग की शर्तें', termsBody: '<p><strong>आयु:</strong> यह साइट केवल 18 वर्ष या अधिक आयु वालों के लिए है।</p><p>उपयोगकर्ता अपनी सामग्री के लिए जिम्मेदार हैं। अवैध सामग्री, स्पैम और दुरुपयोग निषिद्ध हैं।</p>', privacyTitle: 'गोपनीयता नीति', privacyBody: '<p>HentaiMini आपकी गोपनीयता का सम्मान करता है।</p><p>आयु सत्यापन, पसंदीदा और आवश्यक तकनीकी लॉग रखे जाते हैं। व्यक्तिगत या भुगतान विवरण एकत्र नहीं किए जाते।</p>' },
-  ko: { dmcaTitle: 'DMCA / 저작권 정책', dmcaBody: '<p>HentaiMini는 저작권을 존중하며 DMCA에 따라 대응합니다.</p><p>콘텐츠는 사용자가 업로드합니다. 신고에는 권리자, 작품 설명, URL 및 서명을 포함해 주세요.</p><p>신고: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>', termsTitle: '이용약관', termsBody: '<p><strong>연령:</strong> 만 18세 이상만 이용할 수 있습니다.</p><p>사용자는 게시물에 책임이 있으며 불법 콘텐츠, 스팸과 악용은 금지됩니다.</p>', privacyTitle: '개인정보 보호정책', privacyBody: '<p>HentaiMini는 개인정보를 중요하게 생각합니다.</p><p>연령 확인, 즐겨찾기와 보안을 위한 기본 로그만 보관하며 개인 및 결제 정보는 수집하지 않습니다.</p>' },
-  fr: { dmcaTitle: 'Politique DMCA / droits d’auteur', dmcaBody: '<p>HentaiMini respecte les droits d’auteur et applique le DMCA.</p><p>Les utilisateurs publient les contenus. Une notification doit inclure le titulaire, la description, l’URL et la signature.</p><p>Contact : <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>', termsTitle: 'Conditions d’utilisation', termsBody: '<p><strong>Âge :</strong> ce site est réservé aux personnes de 18 ans et plus.</p><p>Les utilisateurs sont responsables de leurs publications. Les contenus illégaux, le spam et les abus sont interdits.</p>', privacyTitle: 'Politique de confidentialité', privacyBody: '<p>HentaiMini respecte votre vie privée.</p><p>Nous conservons la vérification d’âge, les favoris et des journaux techniques essentiels. Aucune donnée personnelle ou bancaire n’est collectée.</p>' },
-  ar: { dmcaTitle: 'سياسة DMCA وحقوق الطبع', dmcaBody: '<p>تحترم HentaiMini حقوق الطبع وتلتزم بقانون DMCA.</p><p>يرفع المستخدمون المحتوى. يجب أن يتضمن البلاغ بيانات صاحب الحق ووصف العمل والرابط والتوقيع.</p><p>البريد: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>', termsTitle: 'شروط الاستخدام', termsBody: '<p><strong>العمر:</strong> الموقع مخصص لمن هم في سن 18 عاماً أو أكثر.</p><p>المستخدمون مسؤولون عن منشوراتهم. يُحظر المحتوى غير القانوني والإساءة والرسائل المزعجة.</p>', privacyTitle: 'سياسة الخصوصية', privacyBody: '<p>نحترم خصوصيتك.</p><p>نحتفظ بتأكيد العمر والمفضلة والسجلات التقنية الأساسية فقط، ولا نجمع البيانات الشخصية أو بيانات الدفع.</p>' },
-  de: { dmcaTitle: 'DMCA / Urheberrecht', dmcaBody: '<p>HentaiMini respektiert Urheberrechte und handelt nach dem DMCA.</p><p>Inhalte werden von Nutzern hochgeladen. Meldungen müssen Rechteinhaber, Beschreibung, URL und Unterschrift enthalten.</p><p>Kontakt: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>', termsTitle: 'Nutzungsbedingungen', termsBody: '<p><strong>Alter:</strong> Diese Seite ist nur für Personen ab 18 Jahren bestimmt.</p><p>Nutzer sind für ihre Beiträge verantwortlich. Illegale Inhalte, Spam und Missbrauch sind verboten.</p>', privacyTitle: 'Datenschutzerklärung', privacyBody: '<p>HentaiMini schützt Ihre Privatsphäre.</p><p>Wir speichern Altersbestätigung, Favoriten und grundlegende Sicherheitsprotokolle. Personen- und Zahlungsdaten werden nicht gesammelt.</p>' }
 };
 
 function getLocalizedText(key) {
@@ -918,20 +917,7 @@ function getLocalizedText(key) {
 
 function getCurrentLanguage(){
   const saved = localStorage.getItem('hm_lang');
-  if (saved && translations[saved]) return saved;
-
-  const browserLanguages = Array.isArray(navigator.languages) && navigator.languages.length
-    ? navigator.languages
-    : [navigator.language];
-  const detected = browserLanguages.find((language) => {
-    const normalized = String(language || '').toLowerCase();
-    const languageCode = normalized.split('-')[0].split('_')[0];
-    return translations[normalized] || translations[languageCode];
-  });
-  if (!detected) return 'en';
-
-  const normalized = detected.toLowerCase();
-  return translations[normalized] ? normalized : normalized.split('-')[0].split('_')[0];
+  return saved && translations[saved] ? saved : 'tr';
 }
 
 function applyLanguage(lang){
@@ -958,27 +944,6 @@ function applyLanguage(lang){
       node.setAttribute('placeholder', value);
     }
   });
-
-  const legal = legalTranslations[selected] || legalTranslations.en;
-  document.querySelectorAll('[data-legal-title]').forEach((node) => {
-    const key = node.dataset.legalTitle;
-    if (legal[key]) node.textContent = legal[key];
-  });
-  document.querySelectorAll('[data-i18n-html]').forEach((node) => {
-    const key = node.dataset.i18nHtml;
-    if (legal[key]) node.innerHTML = legal[key];
-  });
-
-  const downloadBtn = document.getElementById('videoDownloadBtn');
-  if (downloadBtn) {
-    const buttonLabel = translations[selected].downloadVideo || 'Download video';
-    const unavailableLabel = translations[selected].downloadUnavailable || 'Download unavailable';
-    if (downloadBtn.classList.contains('disabled')) {
-      downloadBtn.textContent = unavailableLabel;
-    } else {
-      downloadBtn.textContent = buttonLabel;
-    }
-  }
 
   const searchInput = document.getElementById('search');
   if (searchInput && translations[selected].searchPlaceholder) {
@@ -1008,20 +973,11 @@ function handleLanguageSelection(event){
   }
 }
 
-function getVideoIdFromUrl(){
-  return new URLSearchParams(window.location.search).get('v');
-}
-
 function allowSiteOnLoad(){
   const ageGate = document.getElementById('ageGate');
   if (ageGate) ageGate.style.display = 'none';
   localStorage.setItem('age_verified', 'true');
   loadVideos();
-
-  const initialVideoId = getVideoIdFromUrl();
-  if (initialVideoId && allVideos.some(video => video.id === initialVideoId)) {
-    openWatch(initialVideoId);
-  }
 }
 
 function enterSite(){
@@ -1148,29 +1104,6 @@ async function loadVideos(){
   renderGrid();
 }
 
-function buildVideoShareUrl(videoId){
-  const url = new URL(window.location.href);
-  url.searchParams.set('v', videoId);
-  return url.toString();
-}
-
-function copyVideoShareLink(){
-  const id = currentVideoId || new URLSearchParams(window.location.search).get('v');
-  if (!id) return;
-  const shareUrl = buildVideoShareUrl(id);
-
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(shareUrl).then(() => {
-      showToast('Video linki kopyalandı.');
-    }).catch(() => {
-      window.prompt('Video bağlantısını kopyalayın:', shareUrl);
-    });
-    return;
-  }
-
-  window.prompt('Video bağlantısını kopyalayın:', shareUrl);
-}
-
 function renderGrid(){
   const grid = document.getElementById('grid');
   const empty = document.getElementById('empty');
@@ -1236,12 +1169,6 @@ function setFilter(category){
 function goHome(){
   document.getElementById('watchView').classList.remove('active');
   document.getElementById('homeView').style.display = 'block';
-  currentVideoId = null;
-  const url = new URL(window.location.href);
-  url.searchParams.delete('v');
-  if (window.history && window.history.pushState) {
-    window.history.pushState({}, '', url.toString());
-  }
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
@@ -1256,10 +1183,6 @@ function openWatch(id){
   if(!video) return;
   currentVideoId = id;
   const lang = getCurrentLanguage();
-  const shareUrl = buildVideoShareUrl(id);
-  if (window.history && window.history.pushState) {
-    window.history.pushState({}, '', shareUrl);
-  }
 
   document.getElementById('homeView').style.display = 'none';
   const watchView = document.getElementById('watchView');
@@ -1271,8 +1194,6 @@ function openWatch(id){
   renderRecommendations(id);
 
   const playerBox = document.getElementById('playerLargeBox');
-  const downloadBtn = document.getElementById('videoDownloadBtn');
-  const shareBtn = document.getElementById('videoShareBtn');
   let src = video.embedSrc || video.url || '';
 
   if(src.includes('iframe') || src.includes('<')) {
@@ -1286,30 +1207,6 @@ function openWatch(id){
     playerBox.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
   } else {
     playerBox.innerHTML = `<iframe src="${src}" allowfullscreen></iframe>`;
-  }
-
-  if (downloadBtn) {
-    const rawDownloadUrl = (video.url || '').trim();
-    const directUrl = rawDownloadUrl && !rawDownloadUrl.includes('<') && !rawDownloadUrl.includes('youtube.com') && !rawDownloadUrl.includes('youtu.be') ? rawDownloadUrl : '';
-
-    if (directUrl) {
-      const fileName = `${(video.title || 'video').replace(/[^a-z0-9ğüşöçıİĞÜŞÖÇ]+/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') || 'video'}${directUrl.includes('.') ? directUrl.substring(directUrl.lastIndexOf('.')) : '.mp4'}`;
-      downloadBtn.href = directUrl;
-      downloadBtn.classList.remove('disabled');
-      downloadBtn.setAttribute('download', fileName);
-      downloadBtn.textContent = translations[getCurrentLanguage()].downloadVideo || 'Download video';
-      downloadBtn.target = '_blank';
-    } else {
-      downloadBtn.href = '#';
-      downloadBtn.classList.add('disabled');
-      downloadBtn.removeAttribute('download');
-      downloadBtn.textContent = translations[getCurrentLanguage()].downloadUnavailable || 'Download unavailable';
-      downloadBtn.target = '_self';
-    }
-  }
-
-  if (shareBtn) {
-    shareBtn.title = buildVideoShareUrl(id);
   }
 
   window.scrollTo({top:0, behavior:'smooth'});
@@ -1355,18 +1252,6 @@ function closeLegal(modalId){
   document.getElementById(modalId).classList.remove('open');
 }
 
-document.addEventListener('contextmenu', (event) => {
-  event.preventDefault();
-});
-
-document.addEventListener('keydown', (event) => {
-  const key = event.key.toLowerCase();
-  const blockedShortcut = event.key === 'F12'
-    || (event.ctrlKey && event.shiftKey && ['i', 'j', 'c'].includes(key))
-    || (event.ctrlKey && key === 'u');
-  if (blockedShortcut) event.preventDefault();
-});
-
 document.addEventListener('DOMContentLoaded', () => {
   const savedLang = getCurrentLanguage();
   applyLanguage(savedLang);
@@ -1375,24 +1260,9 @@ document.addEventListener('DOMContentLoaded', () => {
     langSelect.value = savedLang;
     langSelect.addEventListener('change', handleLanguageSelection);
   }
-
-  const initialVideoId = getVideoIdFromUrl();
-  if (initialVideoId && allVideos.some(video => video.id === initialVideoId)) {
-    openWatch(initialVideoId);
-  }
-
   if (localStorage.getItem('age_verified') !== 'true') {
     allowSiteOnLoad();
   }
-});
-
-window.addEventListener('popstate', () => {
-  const videoId = getVideoIdFromUrl();
-  if (videoId && allVideos.some(video => video.id === videoId)) {
-    openWatch(videoId);
-    return;
-  }
-  goHome();
 });
 </script>
 </body>
