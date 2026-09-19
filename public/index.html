@@ -1106,7 +1106,7 @@ if(localStorage.getItem('age_verified') === 'true'){
   document.getElementById('ageGate').style.display = 'none';
   loadVideos();
 } else {
-  allowSiteOnLoad();
+  document.getElementById('ageGate').style.display = 'grid';
 }
 
 function toggleSidebar(){
@@ -1530,7 +1530,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (localStorage.getItem('age_verified') !== 'true') {
-    allowSiteOnLoad();
+    document.getElementById('ageGate').style.display = 'grid';
   }
 });
 
