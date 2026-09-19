@@ -275,8 +275,8 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <section class="section recommendations-section">
       <div class="section-head">
         <div>
-          <h2>Önerilen Videolar</h2>
-          <p>Rastgele seçilen içerikler</p>
+          <h2 data-i18n="recommendedVideos">Önerilen Videolar</h2>
+          <p data-i18n="recommendedDesc">Rastgele seçilen içerikler</p>
         </div>
       </div>
       <div class="grid" id="recommendationsGrid"></div>
@@ -292,7 +292,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <div style="margin-bottom:6px;">
       <a href="javascript:void(0)" onclick="openLegal('termsModal')" data-i18n="terms">Şartlar</a> &nbsp;·&nbsp;
       <a href="javascript:void(0)" onclick="openLegal('privacyModal')" data-i18n="privacy">Gizlilik</a> &nbsp;·&nbsp;
-      <a href="javascript:void(0)" onclick="openDmca()">DMCA</a>
+      <a href="javascript:void(0)" onclick="openDmca()" data-i18n="dmca">DMCA</a>
     </div>
     <div style="opacity:0.7;">© 2026 HentaiMini</div>
   </div>
@@ -334,29 +334,8 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 <div class="modal" id="dmcaModal">
   <div class="dmca-box">
     <button class="close" onclick="closeDmca()" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
-    
-    <h3>DMCA / Telif Hakkı Politikası</h3>
-    
-    <p>HentaiMini, telif haklarına saygı duyar ve Digital Millennium Copyright Act (DMCA) kapsamında hareket eder.</p>
-    
-    <p>Bu platformdaki tüm içerikler kullanıcılar tarafından yüklenmektedir. HentaiMini, yüklenen içeriklerin telif durumunu önceden kontrol etmez ve sorumluluk kabul etmez.</p>
-    
-    <p><strong>Telif hakkı ihlali bildirimi için lütfen şu bilgileri içeren bir mail gönderin:</strong></p>
-    <ul>
-      <li>Telif hakkı sahibi veya yetkili temsilcisinin adı ve iletişim bilgileri</li>
-      <li>İhlal edildiği iddia edilen eserin tanımı</li>
-      <li>Sitede bulunan ihlal iddiası içeren içeriğin URL’si</li>
-      <li>İyi niyet beyanı (içeriğin izinsiz kullanıldığına inanıyorsunuz)</li>
-      <li>Yasal beyan (bildirimin doğru olduğu ve yalan beyanda bulunmanın cezai sorumluluğu olduğu)</li>
-      <li>Elektronik veya fiziksel imza</li>
-    </ul>
-    
-    <p>Bildirimleri şu adrese gönderin:<br>
-    <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    
-    <p>Geçerli bir DMCA bildirimi alındığında, söz konusu içerik derhal kaldırılır veya erişime kapatılır. Tekrarlayan ihlalcilerin hesapları kalıcı olarak kapatılabilir.</p>
-    
-    <p>Karşı bildirim (counter-notice) hakkı saklıdır. Karşı bildirim süreci hakkında bilgi almak için aynı adrese yazabilirsiniz.</p>
+    <h3 id="dmcaModalTitle"></h3>
+    <div id="dmcaModalBody"></div>
   </div>
 </div>
 
@@ -364,25 +343,8 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 <div class="modal" id="termsModal">
   <div class="dmca-box">
     <button class="close" onclick="closeLegal('termsModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
-    
-    <h3>Kullanım Şartları</h3>
-    
-    <p><strong>1. Yaş Sınırı</strong><br>
-    Bu site yalnızca 18 yaş ve üzeri kişiler içindir. Siteye girerek 18 yaşında veya daha büyük olduğunuzu beyan etmiş sayılırsınız.</p>
-    
-    <p><strong>2. İçerik Sorumluluğu</strong><br>
-    Kullanıcılar yükledikleri tüm içeriklerden bizzat sorumludur. Telif hakkı ihlali, yasadışı içerik, çocuk pornografisi veya herhangi bir yasalara aykırı materyal yüklemek kesinlikle yasaktır. Bu tür içerikler tespit edildiğinde derhal kaldırılır ve gerekli mercilere bildirim yapılabilir.</p>
-    
-    <p><strong>3. Yasaklı İçerikler</strong><br>
-    - 18 yaş altı kişileri içeren veya çağrıştıran her türlü içerik<br>
-    - Gerçek şiddet, zoofili, skatol veya aşırı yasa dışı fetişler<br>
-    - Telif hakkı sahibi izni olmadan yüklenen ticari içerikler (mümkün olduğunca kaçının)</p>
-    
-    <p><strong>4. Hesap ve Kullanım</strong><br>
-    Siteyi kötüye kullanmak, spam yapmak, sisteme zarar vermek yasaktır. Bu kurallara uymayan hesaplar uyarı yapılmaksızın kapatılabilir.</p>
-    
-    <p><strong>5. Sorumluluk Reddi</strong><br>
-    HentaiMini, kullanıcılar tarafından yüklenen içeriklerin doğruluğu, yasallığı veya kalitesi konusunda hiçbir garanti vermez. Platform “olduğu gibi” sunulmaktadır.</p>
+    <h3 id="termsModalTitle"></h3>
+    <div id="termsModalBody"></div>
   </div>
 </div>
 
@@ -390,33 +352,227 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 <div class="modal" id="privacyModal">
   <div class="dmca-box">
     <button class="close" onclick="closeLegal('privacyModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
-    
-    <h3>Gizlilik Politikası</h3>
-    
-    <p>HentaiMini olarak gizliliğinize önem veriyoruz.</p>
-    
-    <p><strong>Topladığımız Veriler:</strong><br>
-    - Tarayıcınızda yerel olarak saklanan yaş onayı (localStorage)<br>
-    - Favori olarak işaretlediğiniz videolar (localStorage)<br>
-    - Temel teknik loglar (IP adresi, tarayıcı bilgisi – güvenlik ve kötüye kullanım önleme amaçlı)</p>
-    
-    <p><strong>Toplamadığımız Veriler:</strong><br>
-    - Kişisel kimlik bilgileriniz<br>
-    - E-posta adresiniz (DMCA bildirimi dışında)<br>
-    - Ödeme bilgileriniz (şu an ücretli hizmet yok)</p>
-    
-    <p><strong>Çerezler:</strong><br>
-    Sadece temel işlevsellik için gerekli teknik çerezler kullanılır. Reklam veya takip çerezi bulunmamaktadır.</p>
-    
-    <p><strong>Üçüncü Taraflar:</strong><br>
-    Verileriniz üçüncü taraflarla satılmaz veya paylaşılmaz. Yasal zorunluluk halinde (mahkeme kararı vb.) bilgi paylaşılabilir.</p>
-    
-    <p>Gizlilik ile ilgili sorularınız için: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    <h3 id="privacyModalTitle"></h3>
+    <div id="privacyModalBody"></div>
   </div>
 </div>
 
 <script>document.write('<script src="videos.js?v=' + Date.now() + '"><\/script>');</script>
 <script>
+const legalTranslations = {
+  tr: {
+    dmcaTitle: "DMCA / Telif Hakkı Politikası",
+    dmcaContent: `
+      <p>HentaiMini, telif haklarına saygı duyar ve Digital Millennium Copyright Act (DMCA) kapsamında hareket eder.</p>
+      <p>Bu platformdaki tüm içerikler kullanıcılar tarafından yüklenmektedir. HentaiMini, yüklenen içeriklerin telif durumunu önceden kontrol etmez ve sorumluluk kabul etmez.</p>
+      <p><strong>Telif hakkı ihlali bildirimi için lütfen şu bilgileri içeren bir mail gönderin:</strong></p>
+      <ul>
+        <li>Telif hakkı sahibi veya yetkili temsilcisinin adı ve iletişim bilgileri</li>
+        <li>İhlal edildiği iddia edilen eserin tanımı</li>
+        <li>Sitede bulunan ihlal iddiası içeren içeriğin URL’si</li>
+        <li>İyi niyet beyanı (içeriğin izinsiz kullanıldığına inanıyorsunuz)</li>
+        <li>Yasal beyan (bildirimin doğru olduğu ve yalan beyanda bulunmanın cezai sorumluluğu olduğu)</li>
+        <li>Elektronik veya fiziksel imza</li>
+      </ul>
+      <p>Bildirimleri şu adrese gönderin:<br>
+      <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+      <p>Geçerli bir DMCA bildirimi alındığında, söz konusu içerik derhal kaldırılır veya erişime kapatılır.</p>
+    `,
+    termsTitle: "Kullanım Şartları",
+    termsContent: `
+      <p><strong>1. Yaş Sınırı</strong><br>Bu site yalnızca 18 yaş ve üzeri kişiler içindir. Siteye girerek 18 yaşında veya daha büyük olduğunuzu beyan etmiş sayılırsınız.</p>
+      <p><strong>2. İçerik Sorumluluğu</strong><br>Kullanıcılar yükledikleri tüm içeriklerden bizzat sorumludur. Telif hakkı ihlali, yasadışı içerik veya yasalara aykırı materyal yüklemek yasaktır.</p>
+      <p><strong>3. Yasaklı İçerikler</strong><br>- 18 yaş altı kişileri içeren veya çağrıştıran her türlü içerik<br>- Gerçek şiddet, zoofili veya yasa dışı fetişler<br>- İzinsiz telif hakkı içeren materyaller</p>
+      <p><strong>4. Sorumluluk Reddi</strong><br>HentaiMini, kullanıcılar tarafından yüklenen içeriklerin doğruluğu veya yasallığı konusunda garanti vermez.</p>
+    `,
+    privacyTitle: "Gizlilik Politikası",
+    privacyContent: `
+      <p>HentaiMini olarak gizliliğinize önem veriyoruz.</p>
+      <p><strong>Topladığımız Veriler:</strong><br>- Tarayıcınızda yerel olarak saklanan yaş onayı (localStorage)<br>- Favori olarak işaretlediğiniz videolar (localStorage)<br>- Temel teknik loglar (IP adresi, tarayıcı bilgisi)</p>
+      <p><strong>Toplamadığımız Veriler:</strong><br>- Kişisel kimlik bilgileriniz<br>- E-posta adresiniz (DMCA dışında)<br>- Ödeme bilgileriniz</p>
+      <p>Gizlilik sorularınız için: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `
+  },
+  en: {
+    dmcaTitle: "DMCA / Copyright Policy",
+    dmcaContent: `
+      <p>HentaiMini respects copyright law and complies with the Digital Millennium Copyright Act (DMCA).</p>
+      <p>All content on this platform is submitted by users. HentaiMini does not pre-screen uploaded content and assumes no direct liability.</p>
+      <p><strong>To submit a copyright infringement notice, please email us with:</strong></p>
+      <ul>
+        <li>Name and contact info of the copyright owner or authorized representative</li>
+        <li>Description of the copyrighted work claimed to be infringed</li>
+        <li>URL of the allegedly infringing material on our site</li>
+        <li>A statement of good-faith belief that the use is unauthorized</li>
+        <li>A statement made under penalty of perjury that information is accurate</li>
+        <li>Electronic or physical signature</li>
+      </ul>
+      <p>Send notices to:<br>
+      <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `,
+    termsTitle: "Terms of Service",
+    termsContent: `
+      <p><strong>1. Age Requirement</strong><br>This website is strictly for adults aged 18 and older. By entering, you confirm that you are at least 18 years old.</p>
+      <p><strong>2. Content Responsibility</strong><br>Users are solely responsible for content they upload or link. Copyright infringement and illegal material are strictly prohibited.</p>
+      <p><strong>3. Prohibited Content</strong><br>- Content depicting or involving minors under 18<br>- Extreme violence, bestiality, or non-consensual content<br>- Unauthorized copyrighted media</p>
+      <p><strong>4. Disclaimer</strong><br>HentaiMini is provided "as is" without guarantees regarding third-party links or user submissions.</p>
+    `,
+    privacyTitle: "Privacy Policy",
+    privacyContent: `
+      <p>HentaiMini values your privacy.</p>
+      <p><strong>Data We Store Locally:</strong><br>- Age verification preference (localStorage)<br>- Saved favorites (localStorage)<br>- Technical connection logs (IP, browser headers)</p>
+      <p><strong>Data We Do NOT Collect:</strong><br>- Personal identity profiles<br>- Email addresses (except DMCA inquiries)<br>- Financial details</p>
+      <p>Inquiries: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `
+  },
+  it: {
+    dmcaTitle: "DMCA / Politica sul Copyright",
+    dmcaContent: `
+      <p>HentaiMini rispetta il diritto d'autore e agisce in conformità con il Digital Millennium Copyright Act (DMCA).</p>
+      <p>Tutti i contenuti su questa piattaforma sono caricati dagli utenti. HentaiMini non controlla preventivamente i contenuti caricati e declina ogni responsabilità.</p>
+      <p><strong>Per inviare una segnalazione di violazione del copyright, inviare un'e-mail contenente:</strong></p>
+      <ul>
+        <li>Nome e contatti del titolare del copyright o del rappresentante autorizzato</li>
+        <li>Descrizione dell'opera protetta da copyright che si ritiene sia stata violata</li>
+        <li>URL del materiale presunto violato presente sul sito</li>
+        <li>Una dichiarazione di buona fede sull'uso non autorizzato</li>
+        <li>Firma elettronica o fisica</li>
+      </ul>
+      <p>Invia le segnalazioni a:<br>
+      <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `,
+    termsTitle: "Termini di Servizio",
+    termsContent: `
+      <p><strong>1. Limite di Età</strong><br>Questo sito è riservato esclusivamente agli adulti di età pari o superiore a 18 anni.</p>
+      <p><strong>2. Responsabilità dei Contenuti</strong><br>Gli utenti sono gli unici responsabili dei contenuti caricati. È vietato caricare materiale illegale o in violazione del copyright.</p>
+      <p><strong>3. Contenuti Vietati</strong><br>- Contenuti che coinvolgono o raffigurano minori di 18 anni<br>- Violenza estrema, zoofilia o fetish illegali<br>- Materiale protetto da copyright non autorizzato</p>
+    `,
+    privacyTitle: "Informativa sulla Privacy",
+    privacyContent: `
+      <p>HentaiMini rispetta la tua privacy.</p>
+      <p><strong>Dati Conservati Localmente:</strong><br>- Conferma dell'età (localStorage)<br>- Video preferiti (localStorage)<br>- Log tecnici di sicurezza</p>
+      <p>Contatti privacy: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `
+  },
+  de: {
+    dmcaTitle: "DMCA / Urheberrechtsrichtlinie",
+    dmcaContent: `
+      <p>HentaiMini respektiert Urheberrechte und handelt gemäß dem Digital Millennium Copyright Act (DMCA).</p>
+      <p>Alle Inhalte auf dieser Plattform werden von Nutzern bereitgestellt.</p>
+      <p>Senden Sie Urheberrechtsbeschwerden per E-Mail an:<br>
+      <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `,
+    termsTitle: "Nutzungsbedingungen",
+    termsContent: `
+      <p><strong>1. Altersbeschränkung</strong><br>Diese Website ist ausschließlich für Erwachsene ab 18 Jahren bestimmt.</p>
+      <p><strong>2. Inhaltsverantwortung</strong><br>Nutzer haften für die von ihnen hochgeladenen Inhalte.</p>
+      <p><strong>3. Verbotene Inhalte</strong><br>- Inhalte mit Minderjährigen unter 18 Jahren<br>- Urheberrechtlich geschützte Werke ohne Erlaubnis</p>
+    `,
+    privacyTitle: "Datenschutzerklärung",
+    privacyContent: `
+      <p>HentaiMini nimmt Ihren Datenschutz ernst. Es werden lediglich funktionale lokale Daten (localStorage) gespeichert.</p>
+      <p>Kontakt: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `
+  },
+  fr: {
+    dmcaTitle: "DMCA / Politique de Droits d'Auteur",
+    dmcaContent: `
+      <p>HentaiMini respecte les droits d'auteur et se conforme au DMCA.</p>
+      <p>Tout le contenu de cette plateforme est publié par les utilisateurs.</p>
+      <p>Contact DMCA : <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `,
+    termsTitle: "Conditions d'Utilisation",
+    termsContent: `
+      <p><strong>1. Limite d'âge</strong><br>Ce site est strictement réservé aux personnes âgées de 18 ans et plus.</p>
+      <p><strong>2. Responsabilité</strong><br>Les utilisateurs sont seuls responsables des contenus mis en ligne.</p>
+    `,
+    privacyTitle: "Politique de Confidentialité",
+    privacyContent: `
+      <p>HentaiMini protège votre vie privée. Seules des données fonctionnelles sont stockées localement.</p>
+      <p>Contact : <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `
+  },
+  ja: {
+    dmcaTitle: "DMCA / 著作権ポリシー",
+    dmcaContent: `
+      <p>HentaiMiniは著作権を尊重し、DMCAを遵守します。</p>
+      <p>当プラットフォームのコンテンツはユーザーにより投稿されたものです。</p>
+      <p>権利侵害の申し立て：<a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `,
+    termsTitle: "利用規約",
+    termsContent: `
+      <p><strong>1. 年齢制限</strong><br>当サイトは18歳以上の成人専用です。</p>
+      <p><strong>2. 禁止事項</strong><br>18歳未満に関するコンテンツおよび無断転載を禁止します。</p>
+    `,
+    privacyTitle: "プライバシーポリシー",
+    privacyContent: `
+      <p>利用者のプライバシーを尊重し、最低限の機能用ローカルデータのみ保持します。</p>
+      <p>お問い合わせ：<a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `
+  },
+  ru: {
+    dmcaTitle: "DMCA / Авторские права",
+    dmcaContent: `
+      <p>HentaiMini уважает авторские права и действует в соответствии с DMCA.</p>
+      <p>Весь контент загружается пользователями.</p>
+      <p>E-mail: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `,
+    termsTitle: "Условия использования",
+    termsContent: `
+      <p><strong>1. Возрастное ограничение</strong><br>Сайт предназначен исключительно для лиц старше 18 лет.</p>
+      <p><strong>2. Ответственность</strong><br>Пользователи несут личную ответственность за загружаемый контент.</p>
+    `,
+    privacyTitle: "Политика конфиденциальности",
+    privacyContent: `
+      <p>HentaiMini защищает ваши персональные данные и хранит только технические файлы в localStorage.</p>
+      <p>Контакты: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `
+  },
+  hi: {
+    dmcaTitle: "DMCA / कॉपीराइट नीति",
+    dmcaContent: `
+      <p>HentaiMini कॉपीराइट का सम्मान करता है। ईमेल: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `,
+    termsTitle: "उपयोग की शर्तें",
+    termsContent: `
+      <p><strong>1. आयु सीमा:</strong> केवल 18 वर्ष या उससे अधिक आयु के व्यक्तियों के लिए।</p>
+    `,
+    privacyTitle: "गोपनीयता नीति",
+    privacyContent: `
+      <p>हम आपकी गोपनीयता का ध्यान रखते हैं। स्थानीय भंडारण (localStorage) का उपयोग केवल बुनियादी प्राथमिकताओं के लिए होता है।</p>
+    `
+  },
+  ko: {
+    dmcaTitle: "DMCA / 저작권 방침",
+    dmcaContent: `
+      <p>HentaiMini는 저작권을 준수합니다. 신고: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `,
+    termsTitle: "이용약관",
+    termsContent: `
+      <p><strong>1. 연령 제한:</strong> 만 18세 이상 성인 전용입니다.</p>
+    `,
+    privacyTitle: "개인정보 처리방침",
+    privacyContent: `
+      <p>최소한의 브라우저 localstorage 데이터만 저장됩니다.</p>
+    `
+  },
+  ar: {
+    dmcaTitle: "DMCA / سياسة حقوق النشر",
+    dmcaContent: `
+      <p>يحترم HentaiMini حقوق الطبع والنشر ويعمل بموجب قانون DMCA.</p>
+      <p>للتواصل: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
+    `,
+    termsTitle: "شروط الاستخدام",
+    termsContent: `
+      <p><strong>1. الفئة العمرية:</strong> مخصص حصرياً للبالغين بعمر 18 عاماً أو أكثر.</p>
+    `,
+    privacyTitle: "سياسة الخصوصية",
+    privacyContent: `
+      <p>نحن نحترم خصوصيتك. يتم تخزين البيانات الأساسية محلياً فقط (localStorage).</p>
+    `
+  }
+};
+
 let allVideos = Array.isArray(window.STATIC_VIDEOS) ? window.STATIC_VIDEOS : [];
 let activeFilter = "Tümü";
 let currentVideoId = null;
@@ -464,6 +620,9 @@ const translations = {
     legal: 'Yasal',
     terms: 'Şartlar',
     privacy: 'Gizlilik',
+    dmca: 'DMCA',
+    recommendedVideos: 'Önerilen Videolar',
+    recommendedDesc: 'Rastgele seçilen içerikler',
     featured: 'Öne Çıkanlar',
     loadingVideos: 'Videolar yükleniyor...',
     randomPick: 'Rastgele seç',
@@ -519,6 +678,9 @@ const translations = {
     legal: 'Legal',
     terms: 'Terms',
     privacy: 'Privacy',
+    dmca: 'DMCA',
+    recommendedVideos: 'Recommended Videos',
+    recommendedDesc: 'Randomly selected content',
     featured: 'Featured',
     loadingVideos: 'Loading videos...',
     randomPick: 'Random pick',
@@ -574,6 +736,9 @@ const translations = {
     legal: '法的情報',
     terms: '利用規約',
     privacy: 'プライバシー',
+    dmca: 'DMCA',
+    recommendedVideos: 'おすすめ動画',
+    recommendedDesc: 'ランダムに選ばれたコンテンツ',
     featured: 'おすすめ',
     loadingVideos: '動画を読み込んでいます...',
     randomPick: 'ランダムに選ぶ',
@@ -629,6 +794,9 @@ const translations = {
     legal: 'Правовая информация',
     terms: 'Условия',
     privacy: 'Конфиденциальность',
+    dmca: 'DMCA',
+    recommendedVideos: 'Рекомендуемые видео',
+    recommendedDesc: 'Случайно выбранный контент',
     featured: 'Рекомендуемое',
     loadingVideos: 'Загрузка видео...',
     randomPick: 'Выбрать случайное',
@@ -684,6 +852,9 @@ const translations = {
     legal: 'Informazioni legali',
     terms: 'Termini',
     privacy: 'Privacy',
+    dmca: 'DMCA',
+    recommendedVideos: 'Video consigliati',
+    recommendedDesc: 'Contenuti selezionati casualmente',
     featured: 'In evidenza',
     loadingVideos: 'Caricamento video...',
     randomPick: 'Scelta casuale',
@@ -739,6 +910,9 @@ const translations = {
     legal: 'कानूनी',
     terms: 'शर्तें',
     privacy: 'गोपनीयता',
+    dmca: 'DMCA',
+    recommendedVideos: 'अनुशंसित वीडियो',
+    recommendedDesc: 'यादृच्छिक रूप से चुनी गई सामग्री',
     featured: 'विशेष वीडियो',
     loadingVideos: 'वीडियो लोड हो रहे हैं...',
     randomPick: 'रैंडम चुनें',
@@ -793,7 +967,10 @@ const translations = {
     comedy: '코미디',
     legal: '법률 정보',
     terms: '이용약관',
-    privacy: '개인정보 보호',
+    privacy: '개인정보 처리방침',
+    dmca: 'DMCA',
+    recommendedVideos: '추천 동영상',
+    recommendedDesc: '무작위로 선택된 콘텐츠',
     featured: '추천 동영상',
     loadingVideos: '동영상을 불러오는 중...',
     randomPick: '랜덤 선택',
@@ -849,6 +1026,9 @@ const translations = {
     legal: 'Mentions légales',
     terms: 'Conditions',
     privacy: 'Confidentialité',
+    dmca: 'DMCA',
+    recommendedVideos: 'Vidéos recommandées',
+    recommendedDesc: 'Contenu sélectionné au hasard',
     featured: 'À la une',
     loadingVideos: 'Chargement des vidéos...',
     randomPick: 'Choix aléatoire',
@@ -904,6 +1084,9 @@ const translations = {
     legal: 'قانوني',
     terms: 'الشروط',
     privacy: 'الخصوصية',
+    dmca: 'DMCA',
+    recommendedVideos: 'فيديوهات مقترحة',
+    recommendedDesc: 'محتوى المختار عشوائياً',
     featured: 'مميز',
     loadingVideos: 'جارٍ تحميل الفيديوهات...',
     randomPick: 'اختيار عشوائي',
@@ -959,6 +1142,9 @@ const translations = {
     legal: 'Rechtlich',
     terms: 'Bedingungen',
     privacy: 'Datenschutz',
+    dmca: 'DMCA',
+    recommendedVideos: 'Empfohlene Videos',
+    recommendedDesc: 'Zufällig ausgewählte Inhalte',
     featured: 'Empfohlen',
     loadingVideos: 'Videos werden geladen...',
     randomPick: 'Zufällige Auswahl',
@@ -1018,6 +1204,28 @@ function applyLanguage(lang){
   if (sectionTitle && activeFilter === 'Tümü') {
     sectionTitle.textContent = translations[selected].featured;
   }
+
+  updateLegalModalsContent(selected);
+}
+
+function updateLegalModalsContent(lang) {
+  const currentLang = legalTranslations[lang] ? lang : (legalTranslations['en'] ? 'en' : 'tr');
+  const texts = legalTranslations[currentLang] || legalTranslations['tr'];
+
+  const dmcaTitle = document.getElementById('dmcaModalTitle');
+  const dmcaBody = document.getElementById('dmcaModalBody');
+  if (dmcaTitle) dmcaTitle.textContent = texts.dmcaTitle;
+  if (dmcaBody) dmcaBody.innerHTML = texts.dmcaContent;
+
+  const termsTitle = document.getElementById('termsModalTitle');
+  const termsBody = document.getElementById('termsModalBody');
+  if (termsTitle) termsTitle.textContent = texts.termsTitle;
+  if (termsBody) termsBody.innerHTML = texts.termsContent;
+
+  const privacyTitle = document.getElementById('privacyModalTitle');
+  const privacyBody = document.getElementById('privacyModalBody');
+  if (privacyTitle) privacyTitle.textContent = texts.privacyTitle;
+  if (privacyBody) privacyBody.innerHTML = texts.privacyContent;
 }
 
 function toggleLanguage(){
@@ -1387,6 +1595,7 @@ function renderRecommendations(currentId){
 }
 
 function openDmca(){
+  updateLegalModalsContent(getCurrentLanguage());
   document.getElementById('dmcaModal').classList.add('open');
 }
 function closeDmca(){
@@ -1394,6 +1603,7 @@ function closeDmca(){
 }
 
 function openLegal(modalId){
+  updateLegalModalsContent(getCurrentLanguage());
   document.getElementById(modalId).classList.add('open');
 }
 function closeLegal(modalId){
