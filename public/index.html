@@ -53,12 +53,6 @@ a{color:inherit;text-decoration:none}
 .nav a:hover{background:#1a1721;color:#fff;transform:translateX(3px)}
 .nav a.active{background:linear-gradient(90deg,rgba(255,63,145,.18),rgba(139,92,246,.08));color:#fff;border:1px solid rgba(255,63,145,.17)}
 .nav a.active i{color:var(--pink)}
-.feedback-nav-btn{width:100%;display:flex;align-items:center;gap:12px;padding:11px 12px;border:1px solid rgba(255,63,145,.25);border-radius:12px;background:rgba(255,63,145,.08);color:#ff8abd;font-size:13px;font-weight:600;cursor:pointer;text-align:left;transition:.2s}
-.feedback-nav-btn i{width:19px;text-align:center}.feedback-nav-btn:hover{background:rgba(255,63,145,.15);border-color:rgba(255,63,145,.5);color:#fff;transform:translateX(3px)}
-.mobile-menu-tools{display:none}
-.mobile-menu-tool{width:100%;display:flex;align-items:center;gap:12px;min-height:42px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#121018;color:#c8c2d1;font-size:12px;font-weight:600;cursor:pointer;text-align:left}
-.mobile-menu-tool i{width:19px;text-align:center;color:#ff8abd}.mobile-menu-tool:hover{border-color:#544869;color:#fff}
-.mobile-lang-wrap{position:relative;display:flex;align-items:center}.mobile-lang-wrap>i{position:absolute;left:14px;z-index:1;color:#ff8abd}.mobile-lang-wrap select{width:100%;padding:10px 34px 10px 42px;border:1px solid var(--line);border-radius:12px;background:#121018;color:#f2eaff;font-size:12px;font-weight:700;appearance:none}.mobile-lang-wrap:after{content:'▾';position:absolute;right:13px;pointer-events:none;color:#d9c9f6}
 .sidebar-bottom{margin-top:auto;background:linear-gradient(145deg,#17131f,#121019);border:1px solid var(--line);border-radius:16px;padding:15px}
 .sidebar-bottom strong{display:block;font-size:12px;margin-bottom:6px}
 .sidebar-bottom p{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:11px}
@@ -160,14 +154,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 }
 .embed-field textarea{min-height:100px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;line-height:1.45}
 .embed-field input:focus,.embed-field textarea:focus,.embed-field select:focus{border-color:rgba(255,63,145,.5);box-shadow:0 0 0 4px rgba(255,63,145,.06)}
-.feedback-note{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:18px}
-.feedback-list{display:grid;gap:9px;max-height:230px;overflow:auto;margin:0 0 20px;padding-right:3px}
-.feedback-empty{padding:18px;border:1px dashed #302a37;border-radius:12px;color:#716a79;text-align:center;font-size:12px}
-.feedback-item{padding:11px 12px;background:#121018;border:1px solid var(--line);border-radius:11px}
-.feedback-item-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px;color:#ff8abd;font-size:10px;font-weight:700}
-.feedback-item-date{color:#716a79;font-weight:500}.feedback-item-message{color:#d5cedd;font-size:12px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
-.feedback-status{min-height:18px;margin-top:12px;font-size:12px;color:var(--muted)}
-.feedback-status.success{color:var(--green)}.feedback-status.error{color:#ff7d9f}
 .embed-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
 .thumb-options{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
 .thumb-opt{aspect-ratio:16/9;border:2px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;background:#000;position:relative}
@@ -180,7 +166,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 @media(max-width:820px){
  .sidebar{transform:translateX(-100%);transition:.25s}.sidebar.open{transform:none}
  main{margin-left:0;width:100%;padding:15px 16px 45px}.menu-btn{display:grid}
- .topbar{gap:8px}.top-actions{display:none}.mobile-menu-tools{display:grid;gap:8px;margin-top:2px}
+ .topbar{gap:8px}.profile span{display:none}.profile{padding-right:4px}
  .hero{padding:28px 23px;min-height:330px}.hero h1{font-size:34px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:520px){.search{order:3;flex-basis:100%}.topbar{height:auto;flex-wrap:wrap}.top-actions{margin-left:auto}.icon:nth-child(1){display:none}.hero{margin-top:12px}.grid{grid-template-columns:1fr 1fr;gap:10px}.info{padding:9px}.title{font-size:11px}.stats{gap:13px}.age-card{padding:30px 20px}.age-actions{flex-direction:column}.watch-player-box{aspect-ratio:auto;height:min(78svh,720px);min-height:440px;border-radius:14px}.watch-player-box iframe,.watch-player-box video{height:100%!important}}
@@ -195,7 +181,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <p data-i18n="ageGateText">Bu platform yetişkinlere yönelik <strong>18+</strong> hentai/video içerikleri için tasarlanmıştır.</p>
     <div class="age-warning" data-i18n="ageWarning"><i class="fa-solid fa-triangle-exclamation"></i> Devam ederek 18 yaşında veya daha büyük olduğunuzu ve bulunduğunuz yerdeki yasalara uygun hareket edeceğinizi onaylarsınız.</div>
     <div class="age-actions">
-      <button class="primary" type="button" onclick="document.getElementById('ageGate').style.display='none'; localStorage.setItem('age_verified','true'); if (typeof enterSite === 'function') enterSite();" data-i18n="enter18">18+ Giriş Yap</button>
+      <button class="primary" onclick="enterSite()" data-i18n="enter18">18+ Giriş Yap</button>
       <button class="secondary" onclick="leaveSite()" data-i18n="exit">Çıkış</button>
     </div>
   </div>
@@ -209,25 +195,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <a class="active" href="#" onclick="goHome(); return false;" data-section="home"><i class="fa-solid fa-house"></i> <span data-i18n="home">Ana Sayfa</span></a>
     <a href="#" onclick="setFilter('Yeni'); return false;" data-section="new"><i class="fa-solid fa-clock"></i> <span data-i18n="new">Yeni Eklenenler</span></a>
     <a href="#" onclick="randomPick(); return false;" data-section="random"><i class="fa-solid fa-shuffle"></i> <span data-i18n="random">Rastgele</span></a>
-    <button class="feedback-nav-btn" type="button" onclick="openFeedback()"><i class="fa-solid fa-comment-dots"></i><span>Hata veya Öneri Bildir</span></button>
-    <div class="mobile-menu-tools">
-      <button class="mobile-menu-tool" type="button" onclick="showToast(getLocalizedText('notification'))"><i class="fa-regular fa-bell"></i><span data-i18n="notifications">Bildirimler</span></button>
-      <div class="mobile-lang-wrap">
-        <i class="fa-solid fa-language"></i>
-        <select id="mobileLangSelect" aria-label="Language selector">
-          <option value="de">Deutsch</option>
-          <option value="ar">العربية</option>
-          <option value="fr">Français</option>
-          <option value="hi">हिन्दी</option>
-          <option value="en">English</option>
-          <option value="it">Italiano</option>
-          <option value="ja">日本語</option>
-          <option value="ko">한국어</option>
-          <option value="ru">Русский</option>
-          <option value="tr">Türkçe</option>
-        </select>
-      </div>
-    </div>
   </nav>
   
   <div class="sidebar-bottom"><strong data-i18n="adultMode">18+ içerik modu</strong><p data-i18n="adultCatalog">Yetişkin içerikler için katalog arayüzü.</p><div class="status" data-i18n="systemReady">Sistem hazır</div></div>
@@ -261,6 +228,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
       <div class="section-head">
         <div>
           <h2 id="sectionTitle" data-i18n="featured">Öne Çıkanlar</h2>
+          <p id="sectionDesc" data-i18n="loadingVideos">Videolar yükleniyor...</p>
         </div>
         <span class="see" onclick="randomPick()"><span data-i18n="randomPick">Rastgele seç</span> <i class="fa-solid fa-arrow-right"></i></span>
       </div>
@@ -317,41 +285,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 </footer>
 
 <div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span></span></div>
-
-<div class="modal" id="feedbackModal">
-  <div class="embed-box">
-    <div class="modal-top" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-      <h3>Hata veya Öneri Bildir</h3>
-      <button class="icon" type="button" onclick="closeFeedback()" style="width:32px;height:32px"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <p class="feedback-note">Siteyle ilgili hata, öneri veya görüşünü herkes açıkça yazabilir. Mesajın doğrudan site ekibine iletilir.</p>
-    <div id="feedbackList" class="feedback-list" aria-live="polite"><div class="feedback-empty">Yorumlar yükleniyor...</div></div>
-    <h4 style="font-size:13px;margin-bottom:12px">Yeni yorum yaz</h4>
-    <form id="feedbackForm" onsubmit="submitFeedback(event)">
-      <div class="embed-field">
-        <label for="feedbackType">Bildirim türü</label>
-        <select id="feedbackType" name="type" required>
-          <option value="suggestion">Öneri</option>
-          <option value="bug">Hata bildirimi</option>
-          <option value="other">Diğer</option>
-        </select>
-      </div>
-      <div class="embed-field">
-        <label for="feedbackMessage">Mesajın</label>
-        <textarea id="feedbackMessage" name="message" required maxlength="3000" placeholder="Ne öneriyorsun veya hangi hatayla karşılaştın?"></textarea>
-      </div>
-      <div class="embed-field">
-        <label for="feedbackContact">İletişim (isteğe bağlı)</label>
-        <input id="feedbackContact" name="contact" type="text" maxlength="160" placeholder="E-posta veya kullanıcı adı">
-      </div>
-      <div id="feedbackStatus" class="feedback-status" aria-live="polite"></div>
-      <div class="embed-actions">
-        <button class="secondary" type="button" onclick="closeFeedback()">İptal</button>
-        <button class="primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Gönder</button>
-      </div>
-    </form>
-  </div>
-</div>
 
 <div class="modal" id="embedModal">
   <div class="embed-box">
@@ -413,7 +346,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
   </div>
 </div>
 
-<script src="/videos.js?v=20260919"></script>
+<script>document.write('<script src="/videos.js?v=' + Date.now() + '"><\/script>');</script>
 <script>
 let allVideos = Array.isArray(window.STATIC_VIDEOS) ? window.STATIC_VIDEOS : [];
 let activeFilter = "Tümü";
@@ -527,7 +460,6 @@ const translations = {
     downloadVideo: 'Download video',
     downloadUnavailable: 'Download unavailable'
   },
-    downloadUnavailable: 'İndirme mevcut değil'
   ja: {
     ageGateText: 'このプラットフォームは18歳以上の成人向けコンテンツ用です。',
     ageWarning: '続行することで、18歳以上であり、お住まいの地域の法律を遵守することを確認します。',
@@ -1007,9 +939,10 @@ function applyLanguage(lang){
   localStorage.setItem('hm_lang', selected);
   document.documentElement.dir = selected === 'ar' ? 'rtl' : 'ltr';
 
-  document.querySelectorAll('#langSelect, #mobileLangSelect').forEach((langSelect) => {
+  const langSelect = document.getElementById('langSelect');
+  if (langSelect) {
     langSelect.value = selected;
-  });
+  }
 
   document.querySelectorAll('[data-i18n]').forEach((node) => {
     const key = node.dataset.i18n;
@@ -1106,7 +1039,7 @@ if(localStorage.getItem('age_verified') === 'true'){
   document.getElementById('ageGate').style.display = 'none';
   loadVideos();
 } else {
-  document.getElementById('ageGate').style.display = 'grid';
+  allowSiteOnLoad();
 }
 
 function toggleSidebar(){
@@ -1118,74 +1051,6 @@ function showToast(msg){
   t.querySelector('span').innerText = msg;
   t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'), 3000);
-}
-
-function openFeedback(){
-  document.getElementById('feedbackModal').classList.add('open');
-  document.getElementById('feedbackMessage').focus();
-  document.getElementById('sidebar').classList.remove('open');
-  loadFeedback();
-}
-
-function closeFeedback(){
-  document.getElementById('feedbackModal').classList.remove('open');
-}
-
-function escapeFeedbackText(value){
-  return String(value).replace(/[&<>'"]/g, (character) => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
-  }[character]));
-}
-
-async function loadFeedback(){
-  const list = document.getElementById('feedbackList');
-  if (!list) return;
-  list.innerHTML = '<div class="feedback-empty">Yorumlar yükleniyor...</div>';
-  try {
-    const response = await fetch('/api/feedback');
-    if (!response.ok) throw new Error('Yorumlar yüklenemedi.');
-    const feedback = await response.json();
-    if (!feedback.length) {
-      list.innerHTML = '<div class="feedback-empty">Henüz yorum yok. İlk yorumu sen yaz.</div>';
-      return;
-    }
-    const typeLabels = {suggestion: 'Öneri', bug: 'Hata bildirimi', other: 'Diğer'};
-    list.innerHTML = feedback.map((item) => {
-      const date = new Date(item.createdAt).toLocaleString('tr-TR', {dateStyle: 'short', timeStyle: 'short'});
-      return `<article class="feedback-item"><div class="feedback-item-head"><span>${escapeFeedbackText(typeLabels[item.type] || 'Yorum')}</span><span class="feedback-item-date">${escapeFeedbackText(date)}</span></div><div class="feedback-item-message">${escapeFeedbackText(item.message)}</div></article>`;
-    }).join('');
-  } catch (error) {
-    list.innerHTML = '<div class="feedback-empty">Yorumlar şu anda yüklenemedi.</div>';
-  }
-}
-
-async function submitFeedback(event){
-  event.preventDefault();
-  const form = event.currentTarget;
-  const status = document.getElementById('feedbackStatus');
-  const submitButton = form.querySelector('button[type="submit"]');
-  submitButton.disabled = true;
-  status.className = 'feedback-status';
-  status.textContent = 'Gönderiliyor...';
-
-  try {
-    const response = await fetch('/api/feedback', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(Object.fromEntries(new FormData(form)))
-    });
-    const result = await response.json();
-    if (!response.ok) throw new Error(result.error || 'Bildirim gönderilemedi.');
-    form.reset();
-    status.className = 'feedback-status success';
-    status.textContent = 'Bildirimin alındı, teşekkürler.';
-    loadFeedback();
-  } catch (error) {
-    status.className = 'feedback-status error';
-    status.textContent = error.message || 'Bildirim gönderilemedi.';
-  } finally {
-    submitButton.disabled = false;
-  }
 }
 
 function openEmbedModal(){
@@ -1330,10 +1195,13 @@ function renderGrid(){
   if(filtered.length === 0){
     grid.innerHTML = '';
     empty.style.display = 'block';
+    document.getElementById('sectionDesc').innerText = getLocalizedText('noVideos');
     return;
   }
 
   empty.style.display = 'none';
+  document.getElementById('sectionDesc').innerText = `${filtered.length} ${getLocalizedText('resultsCount')}`;
+
   grid.innerHTML = filtered.map(v => {
     const hasThumb = v.thumbnail && v.thumbnail.length > 5;
     const hasPreview = v.preview && v.preview.length > 5;
@@ -1365,26 +1233,10 @@ function setFilter(category){
   renderGrid();
 }
 
-function stopVideoPlayer(){
-  const playerBox = document.getElementById('playerLargeBox');
-  if (!playerBox) return;
-
-  playerBox.querySelectorAll('video').forEach((video) => {
-    video.pause();
-    video.removeAttribute('src');
-    video.load();
-  });
-  playerBox.querySelectorAll('iframe').forEach((iframe) => {
-    iframe.src = 'about:blank';
-  });
-  playerBox.replaceChildren();
-}
-
 function goHome(){
   document.getElementById('watchView').classList.remove('active');
   document.getElementById('homeView').style.display = 'block';
   currentVideoId = null;
-  stopVideoPlayer();
   const url = new URL(window.location.href);
   url.searchParams.delete('v');
   if (window.history && window.history.pushState) {
@@ -1419,7 +1271,6 @@ function openWatch(id){
   renderRecommendations(id);
 
   const playerBox = document.getElementById('playerLargeBox');
-  stopVideoPlayer();
   const downloadBtn = document.getElementById('videoDownloadBtn');
   const shareBtn = document.getElementById('videoShareBtn');
   let src = video.embedSrc || video.url || '';
@@ -1519,10 +1370,11 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('DOMContentLoaded', () => {
   const savedLang = getCurrentLanguage();
   applyLanguage(savedLang);
-  document.querySelectorAll('#langSelect, #mobileLangSelect').forEach((langSelect) => {
+  const langSelect = document.getElementById('langSelect');
+  if (langSelect) {
     langSelect.value = savedLang;
     langSelect.addEventListener('change', handleLanguageSelection);
-  });
+  }
 
   const initialVideoId = getVideoIdFromUrl();
   if (initialVideoId && allVideos.some(video => video.id === initialVideoId)) {
@@ -1530,7 +1382,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (localStorage.getItem('age_verified') !== 'true') {
-    document.getElementById('ageGate').style.display = 'grid';
+    allowSiteOnLoad();
   }
 });
 
