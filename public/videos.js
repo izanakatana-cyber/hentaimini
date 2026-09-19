@@ -1,5 +1,47 @@
 window.STATIC_VIDEOS = [
   {
+    "id": "runtime-1789842358430",
+    "title": "a",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/cwhgjatneg15",
+    "url": "https://voe.sx/cwhgjatneg15",
+    "embedCode": "<iframe src=\"https://voe.sx/e/cwhgjatneg15\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/cwhgjatneg15_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/cwhgjatneg15_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-19T18:25:58.430331Z"
+  },
+  {
+    "id": "runtime-1789842248703",
+    "title": "a",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/kuubcykjgt0f",
+    "url": "https://voe.sx/kuubcykjgt0f",
+    "embedCode": "<iframe src=\"https://voe.sx/e/kuubcykjgt0f\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/kuubcykjgt0f_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/kuubcykjgt0f_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-19T18:24:08.703253Z"
+  },
+  {
+    "id": "runtime-1789842145856",
+    "title": "a",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/mcjt4x6aluzc",
+    "url": "https://voe.sx/mcjt4x6aluzc",
+    "embedCode": "<iframe src=\"https://voe.sx/e/mcjt4x6aluzc\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/mcjt4x6aluzc_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/mcjt4x6aluzc_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-19T18:22:25.856705Z"
+  },
+  {
     "id": "runtime-1789836001852",
     "title": "Modaete Yo Adam Kun – Bölüm 1",
     "category": "Genel",
