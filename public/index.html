@@ -122,13 +122,23 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 .back-btn:hover{border-color:var(--pink);background:#221a2c}
 .watch-player-box{width:100%;aspect-ratio:16/9;background:#000;border-radius:20px;border:1px solid #30283a;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.8);position:relative}
 .watch-player-box iframe, .watch-player-box video{width:100%;height:100%;border:0;display:block}
+
+/* Kapağın / Videonun altındaki aksiyon butonları */
+.watch-action-bar{display:flex;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap}
+.action-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:14px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s ease;border:1px solid var(--line);background:#171422;color:#f0eaeb}
+.action-btn:hover{transform:translateY(-2px);border-color:var(--pink);color:#fff;box-shadow:0 8px 24px rgba(255,63,145,.2)}
+.action-btn-download{background:linear-gradient(135deg,var(--pink),#a23ff5);border-color:transparent;color:#fff;box-shadow:0 6px 20px rgba(255,63,145,.25)}
+.action-btn-download:hover{box-shadow:0 10px 30px rgba(255,63,145,.4)}
+.action-btn-copy{background:#1c182a;border-color:#382d47;color:#e8e1f5}
+.action-btn-copy:hover{background:#262038;border-color:var(--purple)}
+
 .watch-details{margin-top:20px;background:#111019;border:1px solid var(--line);border-radius:20px;padding:24px}
 .watch-title-row{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:12px;flex-wrap:wrap}
 .watch-title{font-size:20px;font-weight:700}
 .watch-meta-info{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px;margin-bottom:14px}
 .watch-desc{color:#b3abc2;font-size:13px;line-height:1.7}
 
-.toast{position:fixed;right:25px;bottom:25px;z-index:800;background:#17141d;border:1px solid #3a3040;padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);font-size:11px;transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s}.toast.show{transform:none;opacity:1}.toast i{color:var(--green);margin-right:7px}
+.toast{position:fixed;right:25px;bottom:25px;z-index:800;background:#17141d;border:1px solid #3a3040;padding:12px 18px;border-radius:12px;box-shadow:var(--shadow);font-size:12px;font-weight:600;transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s;display:flex;align-items:center;gap:8px}.toast.show{transform:none;opacity:1}.toast i{color:var(--green);font-size:15px}
 .dmca-box{width:min(640px,100%);background:#0e0d13;border:1px solid #332b3b;border-radius:20px;box-shadow:0 30px 100px #000;padding:28px;max-height:85vh;overflow:auto}
 .dmca-box h3{font-size:18px;margin-bottom:12px}
 .dmca-box p,.dmca-box li{font-size:13px;color:#a7a0ae;line-height:1.65;margin-bottom:10px}
@@ -163,7 +173,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
  .topbar{gap:8px}.profile span{display:none}.profile{padding-right:4px}
  .hero{padding:28px 23px;min-height:330px}.hero h1{font-size:34px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-@media(max-width:520px){.search{order:3;flex-basis:100%}.topbar{height:auto;flex-wrap:wrap}.top-actions{margin-left:auto}.icon:nth-child(1){display:none}.hero{margin-top:12px}.grid{grid-template-columns:1fr 1fr;gap:10px}.info{padding:9px}.title{font-size:11px}.stats{gap:13px}.age-card{padding:30px 20px}.age-actions{flex-direction:column}}
+@media(max-width:520px){.search{order:3;flex-basis:100%}.topbar{height:auto;flex-wrap:wrap}.top-actions{margin-left:auto}.icon:nth-child(1){display:none}.hero{margin-top:12px}.grid{grid-template-columns:1fr 1fr;gap:10px}.info{padding:9px}.title{font-size:11px}.stats{gap:13px}.age-card{padding:30px 20px}.age-actions{flex-direction:column}.watch-action-bar{flex-direction:column;align-items:stretch}.action-btn{justify-content:center}}
 </style>
 </head>
 <body>
@@ -241,7 +251,21 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
       <button class="back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="backToCatalog">Ana Kataloğa Dön</span></button>
     </div>
     
+    <!-- VIDEO OYNATICI -->
     <div class="watch-player-box" id="playerLargeBox"></div>
+    
+    <!-- KAPAĞIN / VİDEO OYNATICI LİNTİSİNİN ALTINDAKİ AKSİYON BUTONLARI -->
+    <div class="watch-action-bar">
+      <button class="action-btn action-btn-download" onclick="downloadCurrentVideo()">
+        <i class="fa-solid fa-download"></i>
+        <span data-i18n="downloadVideo">Videoyu İndir</span>
+      </button>
+      <button class="action-btn action-btn-copy" onclick="copyCurrentVideoLink()">
+        <i class="fa-solid fa-link"></i>
+        <span data-i18n="copyLink">Bağlantıyı Kopyala</span>
+      </button>
+    </div>
+
     <div class="watch-details">
       <h2 class="watch-title" id="watchTitle">Video Başlığı</h2>
       <div class="watch-meta-info">
@@ -293,7 +317,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     </div>
     <div class="embed-field">
       <label for="runtimeEmbedCode">Embed Kodu veya URL</label>
-      <textarea id="runtimeEmbedCode" placeholder="<iframe src=\"...\"></iframe>"></textarea>
+      <textarea id="runtimeEmbedCode" placeholder="<iframe src=&quot;...&quot;></iframe>"></textarea>
     </div>
     <div class="embed-field">
       <label for="runtimeThumbnail">Kapak Fotoğrafı URL'si</label>
@@ -391,7 +415,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
   </div>
 </div>
 
-<script>document.write('<script src="/videos.js?v=' + Date.now() + '"><\/script>');</script>
+<script>document.write('<script src="videos.js?v=' + Date.now() + '"><\/script>');</script>
 <script>
 let allVideos = Array.isArray(window.STATIC_VIDEOS) ? window.STATIC_VIDEOS : [];
 let activeFilter = "Tümü";
@@ -448,7 +472,11 @@ const translations = {
     newFilter: 'Yeni',
     searchPlaceholder: 'Video, kategori veya etiket ara...',
     notification: 'Bildirimler güncel.',
-    videosError: 'Videolar yüklenirken hata oluştu.'
+    videosError: 'Videolar yüklenirken hata oluştu.',
+    downloadVideo: 'Videoyu İndir',
+    copyLink: 'Bağlantıyı Kopyala',
+    linkCopied: 'Bağlantı panoya kopyalandı!',
+    downloadStarted: 'İndirme sayfası açılıyor...'
   },
   en: {
     ageGateText: 'This platform is designed for adult 18+ hentai/video content.',
@@ -499,7 +527,11 @@ const translations = {
     newFilter: 'New',
     searchPlaceholder: 'Search videos, categories or tags...',
     notification: 'Notifications are up to date.',
-    videosError: 'An error occurred while loading videos.'
+    videosError: 'An error occurred while loading videos.',
+    downloadVideo: 'Download Video',
+    copyLink: 'Copy Link',
+    linkCopied: 'Link copied to clipboard!',
+    downloadStarted: 'Opening download page...'
   },
   ja: {
     ageGateText: 'このプラットフォームは18歳以上の成人向けコンテンツ用です。',
@@ -550,7 +582,11 @@ const translations = {
     newFilter: '新着',
     searchPlaceholder: '動画、カテゴリー、タグを検索...',
     notification: '通知は最新です。',
-    videosError: '動画の読み込み中にエラーが発生しました。'
+    videosError: '動画の読み込み中にエラーが発生しました。',
+    downloadVideo: '動画をダウンロード',
+    copyLink: 'リンクをコピー',
+    linkCopied: 'リンクをクリップボードにコピーしました！',
+    downloadStarted: 'ダウンロードページを開いています...'
   },
   ru: {
     ageGateText: 'Эта платформа предназначена для взрослых материалов 18+.',
@@ -601,7 +637,11 @@ const translations = {
     newFilter: 'Новые',
     searchPlaceholder: 'Поиск видео, категорий или тегов...',
     notification: 'Уведомления обновлены.',
-    videosError: 'Произошла ошибка при загрузке видео.'
+    videosError: 'Произошла ошибка при загрузке видео.',
+    downloadVideo: 'Скачать видео',
+    copyLink: 'Копировать ссылку',
+    linkCopied: 'Ссылка скопирована в буфер обмена!',
+    downloadStarted: 'Открывается страница скачивания...'
   },
   it: {
     ageGateText: 'Questa piattaforma è destinata a contenuti per adulti 18+.',
@@ -652,7 +692,11 @@ const translations = {
     newFilter: 'Nuovi',
     searchPlaceholder: 'Cerca video, categorie o tag...',
     notification: 'Le notifiche sono aggiornate.',
-    videosError: 'Si è verificato un errore durante il caricamento dei video.'
+    videosError: 'Si è verificato un errore durante il caricamento dei video.',
+    downloadVideo: 'Scarica video',
+    copyLink: 'Copia link',
+    linkCopied: 'Link copiato negli appunti!',
+    downloadStarted: 'Apertura pagina di download...'
   },
   hi: {
     ageGateText: 'यह प्लेटफ़ॉर्म 18+ वयस्क सामग्री के लिए है।',
@@ -703,7 +747,11 @@ const translations = {
     newFilter: 'नए',
     searchPlaceholder: 'वीडियो, श्रेणियां या टैग खोजें...',
     notification: 'सूचनाएं अपडेट हैं।',
-    videosError: 'वीडियो लोड करते समय त्रुटि हुई।'
+    videosError: 'वीडियो लोड करते समय त्रुटि हुई।',
+    downloadVideo: 'वीडियो डाउनलोड करें',
+    copyLink: 'लिंक कॉपी करें',
+    linkCopied: 'लिंक क्लिपबोर्ड पर कॉपी हो गया!',
+    downloadStarted: 'डाउनलोड पेज खुल रहा है...'
   },
   ko: {
     ageGateText: '이 플랫폼은 18세 이상 성인 콘텐츠를 위한 공간입니다.',
@@ -754,7 +802,11 @@ const translations = {
     newFilter: '최신',
     searchPlaceholder: '동영상, 카테고리 또는 태그 검색...',
     notification: '알림이 최신 상태입니다.',
-    videosError: '동영상을 불러오는 중 오류가 발생했습니다.'
+    videosError: '동영상을 불러오는 중 오류가 발생했습니다.',
+    downloadVideo: '동영상 다운로드',
+    copyLink: '링크 복사',
+    linkCopied: '링크가 클립보드에 복사되었습니다!',
+    downloadStarted: '다운로드 페이지를 열고 있습니다...'
   },
   fr: {
     ageGateText: 'Cette plateforme est destinée aux contenus pour adultes de 18 ans et plus.',
@@ -805,7 +857,11 @@ const translations = {
     newFilter: 'Nouvelles',
     searchPlaceholder: 'Rechercher des vidéos, catégories ou tags...',
     notification: 'Les notifications sont à jour.',
-    videosError: 'Une erreur est survenue lors du chargement des vidéos.'
+    videosError: 'Une erreur est survenue lors du chargement des vidéos.',
+    downloadVideo: 'Télécharger la vidéo',
+    copyLink: 'Copier le lien',
+    linkCopied: 'Lien copié dans le presse-papiers !',
+    downloadStarted: 'Ouverture de la page de téléchargement...'
   },
   ar: {
     ageGateText: 'هذه المنصة مخصصة لمحتوى البالغين 18+.',
@@ -856,7 +912,11 @@ const translations = {
     newFilter: 'جديد',
     searchPlaceholder: 'ابحث عن فيديوهات أو فئات أو وسوم...',
     notification: 'الإشعارات محدثة.',
-    videosError: 'حدث خطأ أثناء تحميل الفيديوهات.'
+    videosError: 'حدث خطأ أثناء تحميل الفيديوهات.',
+    downloadVideo: 'تحميل الفيديو',
+    copyLink: 'نسخ الرابط',
+    linkCopied: 'تم نسخ الرابط إلى الحافظة!',
+    downloadStarted: 'جارٍ فتح صفحة التحميل...'
   },
   de: {
     ageGateText: 'Diese Plattform ist für erwachsene 18+ Hentai-/Videoinhalte konzipiert.',
@@ -907,7 +967,11 @@ const translations = {
     newFilter: 'Neu',
     searchPlaceholder: 'Videos, Kategorien oder Tags suchen...',
     notification: 'Benachrichtigungen sind aktuell.',
-    videosError: 'Beim Laden der Videos ist ein Fehler aufgetreten.'
+    videosError: 'Beim Laden der Videos ist ein Fehler aufgetreten.',
+    downloadVideo: 'Video herunterladen',
+    copyLink: 'Link kopieren',
+    linkCopied: 'Link in die Zwischenablage kopiert!',
+    downloadStarted: 'Download-Seite wird geöffnet...'
   }
 };
 
@@ -953,11 +1017,6 @@ function applyLanguage(lang){
   const sectionTitle = document.getElementById('sectionTitle');
   if (sectionTitle && activeFilter === 'Tümü') {
     sectionTitle.textContent = translations[selected].featured;
-  }
-
-  const searchPlaceholder = document.querySelector('[data-i18n-placeholder="searchPlaceholder"]');
-  if (searchPlaceholder) {
-    searchPlaceholder.setAttribute('placeholder', translations[selected].searchPlaceholder);
   }
 }
 
@@ -1102,6 +1161,16 @@ async function loadVideos(){
   localStorage.removeItem('hentaimini_runtime_videos');
   allVideos = Array.isArray(window.STATIC_VIDEOS) ? window.STATIC_VIDEOS : [];
   renderGrid();
+  
+  // URL parametresinde v (video id) varsa doğrudan aç
+  const urlParams = new URLSearchParams(window.location.search);
+  const videoId = urlParams.get('v');
+  if(videoId) {
+    const found = allVideos.find(v => v.id === videoId);
+    if(found) {
+      openWatch(videoId);
+    }
+  }
 }
 
 function renderGrid(){
@@ -1169,6 +1238,14 @@ function setFilter(category){
 function goHome(){
   document.getElementById('watchView').classList.remove('active');
   document.getElementById('homeView').style.display = 'block';
+  currentVideoId = null;
+  
+  // URL'den v parametresini kaldır (sayfa yenilenmeden)
+  if(window.history && window.history.replaceState) {
+    const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    window.history.replaceState({path: cleanUrl}, '', cleanUrl);
+  }
+  
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
@@ -1209,7 +1286,78 @@ function openWatch(id){
     playerBox.innerHTML = `<iframe src="${src}" allowfullscreen></iframe>`;
   }
 
+  // URL query güncelle (örneğin: ?v=runtime-12345)
+  if(window.history && window.history.replaceState) {
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?v=' + id;
+    window.history.replaceState({path: newUrl}, '', newUrl);
+  }
+
   window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Videoyu İndir Fonksiyonu
+function downloadCurrentVideo(){
+  if(!currentVideoId) return;
+  const video = allVideos.find(v => v.id === currentVideoId);
+  if(!video) return;
+
+  const targetUrl = video.url || video.embedSrc || '';
+  if(!targetUrl) {
+    showToast('İndirme bağlantısı bulunamadı.');
+    return;
+  }
+
+  showToast(getLocalizedText('downloadStarted'));
+
+  // Doğrudan video dosyası (.mp4 / .webm) ise indirmeyi başlat
+  if(targetUrl.endsWith('.mp4') || targetUrl.endsWith('.webm')) {
+    const a = document.createElement('a');
+    a.href = targetUrl;
+    a.download = (video.title || 'video').replace(/[^a-zA-Z0-9_-]/g, '_') + (targetUrl.endsWith('.webm') ? '.webm' : '.mp4');
+    a.target = '_blank';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } else {
+    // Harici sunucu / Embed sayfası ise yeni sekmede açarak indirmeye yönlendir
+    window.open(targetUrl, '_blank', 'noopener,noreferrer');
+  }
+}
+
+// Bağlantıyı Kopyala Fonksiyonu
+function copyCurrentVideoLink(){
+  if(!currentVideoId) return;
+  
+  // Paylaşım URL'si (Doğrudan sitenin video izleme bağlantısı)
+  const shareUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?v=' + currentVideoId;
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      showToast(getLocalizedText('linkCopied'));
+    }).catch(() => {
+      fallbackCopyText(shareUrl);
+    });
+  } else {
+    fallbackCopyText(shareUrl);
+  }
+}
+
+function fallbackCopyText(text){
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.style.position = "fixed";
+  textArea.style.left = "-999999px";
+  textArea.style.top = "-999999px";
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand('copy');
+    showToast(getLocalizedText('linkCopied'));
+  } catch (err) {
+    showToast('Kopyalama başarısız oldu.');
+  }
+  document.body.removeChild(textArea);
 }
 
 function renderRecommendations(currentId){
