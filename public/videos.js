@@ -1,7 +1,7 @@
 window.STATIC_VIDEOS = [
   {
     "id": "runtime-1789909859983",
-    "title": "Animation Big Tits Doggystyle Missionary NSFW Pussy Reverse Cowgirl Rule34 Sex Threesome",
+    "title": "Animation Big Tits Doggystyle Missionary NSFW Pussy Reverse Cowgirl",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/cotdszzn9aqv",
@@ -15,7 +15,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789909840387",
-    "title": "Animation Ass Big Tits Masturbating NSFW Pussy Rule34 Sex Thick Threesome",
+    "title": "Animation Ass Big Tits Masturbating NSFW Pussy",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/ihrbhdshsnsj",
@@ -29,7 +29,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789909826918",
-    "title": "Animation Big Ass Big Tits Cumshot NSFW Pussy Riding Rule34 Sex Thick",
+    "title": "Animation Big Ass Big Tits Cumshot NSFW Pussy Riding",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/jfjryvd5znyz",
@@ -43,7 +43,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789909811882",
-    "title": "Anal Animation Big Tits Missionary NSFW Overwatch Pussy Rule34 Sex Thick",
+    "title": "Anal Animation Big Tits Missionary NSFW Overwatch Pussy",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/v2qvukbll26u",
@@ -57,7 +57,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789909785651",
-    "title": "Animation Beach Big Tits NSFW Pussy Reverse Cowgirl Rule34 Sex Thick Tits",
+    "title": "Animation Beach Big Tits NSFW Pussy Reverse Cowgirl",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/kacy9vsamgdt",
@@ -71,7 +71,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789909760798",
-    "title": "Animation Big Tits Dildo NSFW Nude Overwatch Pussy Rule34 Squirting Wet Pussy",
+    "title": "Animation Big Tits Dildo NSFW Nude Overwatch Pussy ",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/btwtwyhwmvju",
@@ -85,7 +85,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789909750034",
-    "title": "Animation Big Tits NSFW Overwatch Pussy Riding Robot Rule34 Sex Thick",
+    "title": "Animation Big Tits NSFW Overwatch Pussy Riding Robot",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/qlarpumuri3w",
@@ -99,7 +99,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789909647303",
-    "title": "Animation Big Tits Boobs NSFW Overwatch Pussy Rule34 Sex Thick Tits",
+    "title": "Animation Big Tits Boobs NSFW Overwatch Pussy ",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/mrctvrah6q7r",
@@ -113,7 +113,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789909625557",
-    "title": "Animation Ass Big Tits NSFW Orgasm Pussy Riding Rule34 Sex Squirting",
+    "title": "Animation Ass Big Tits NSFW Orgasm Pussy Riding Sex Squirting",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/osvihrjmn4as",
@@ -127,7 +127,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789909494031",
-    "title": "Animation Ass Big Ass Creampie Homemade NSFW POV Rule34 Side Fuck Thick",
+    "title": "Animation Ass Big Ass Creampie Homemade NSFW POV Side Fuck Thick",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/meg9ebqadnvp",
@@ -141,7 +141,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1789909473957",
-    "title": "Animation Armpits Big Tits Cumshot Missionary NSFW Pussy Rule34 Sex Titty Fuck",
+    "title": "Animation Armpits Big Tits Cumshot Missionary NSFW Pussy  Sex Titty Fuck",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/6o0qp6oaenec",
