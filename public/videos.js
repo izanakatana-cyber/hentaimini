@@ -1,33 +1,5 @@
 window.STATIC_VIDEOS = [
   {
-    "id": "runtime-1789908891373",
-    "title": "Animation Armpits Big Tits Cumshot Missionary NSFW Pussy Rule34 Sex Titty Fuck Porn GIF by patricio980",
-    "category": "Genel",
-    "type": "embed",
-    "embedSrc": "https://voe.sx/e/a5wfgsqb5acx",
-    "url": "https://voe.sx/a5wfgsqb5acx",
-    "embedCode": "<iframe src=\"https://voe.sx/e/a5wfgsqb5acx\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/a5wfgsqb5acx_storyboard_L5.jpg",
-    "preview": "https://i.voe.sx/cache/a5wfgsqb5acx_storyboard_L5.jpg",
-    "duration": "HD",
-    "rating": "4.8",
-    "createdAt": "2026-09-20T12:54:51.373007Z"
-  },
-  {
-    "id": "runtime-1789908831771",
-    "title": "Animation Big Tits Boobs NSFW Overwatch Pussy Rule34 Sex Thick Tits Porn GIF by patricio980",
-    "category": "Genel",
-    "type": "embed",
-    "embedSrc": "https://voe.sx/e/zh2k4fn2fuk1",
-    "url": "https://voe.sx/zh2k4fn2fuk1",
-    "embedCode": "<iframe src=\"https://voe.sx/e/zh2k4fn2fuk1\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/zh2k4fn2fuk1_storyboard_L5.jpg",
-    "preview": "https://i.voe.sx/cache/zh2k4fn2fuk1_storyboard_L5.jpg",
-    "duration": "HD",
-    "rating": "4.8",
-    "createdAt": "2026-09-20T12:53:51.771801Z"
-  },
-  {
     "id": "runtime-1789906624638",
     "title": "Watch Otonari no Nie Episode 2 Preview",
     "category": "Genel",
