@@ -1,5 +1,19 @@
 window.STATIC_VIDEOS = [
   {
+    "id": "runtime-1789906624638",
+    "title": "Watch Otonari no Nie Episode 2 Preview",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/iv7lq75hqmzl",
+    "url": "https://voe.sx/iv7lq75hqmzl",
+    "embedCode": "<iframe src=\"https://voe.sx/e/iv7lq75hqmzl\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/iv7lq75hqmzl_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/iv7lq75hqmzl_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-20T12:17:04.638365Z"
+  },
+  {
     "id": "runtime-1789843950357",
     "title": "a",
     "category": "Genel",
