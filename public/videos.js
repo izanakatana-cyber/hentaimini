@@ -154,20 +154,6 @@ window.STATIC_VIDEOS = [
     "createdAt": "2026-09-20T14:11:31.373099Z"
   },
   {
-    "id": "runtime-1789913467747",
-    "title": "Animation Anime Creampie Moaning",
-    "category": "Genel",
-    "type": "embed",
-    "embedSrc": "https://voe.sx/e/0ltn5a3ptybc",
-    "url": "https://voe.sx/0ltn5a3ptybc",
-    "embedCode": "<iframe src=\"https://voe.sx/e/0ltn5a3ptybc\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/0ltn5a3ptybc_storyboard_L5.jpg",
-    "preview": "https://i.voe.sx/cache/0ltn5a3ptybc_storyboard_L5.jpg",
-    "duration": "HD",
-    "rating": "4.8",
-    "createdAt": "2026-09-20T14:11:07.747871Z"
-  },
-  {
     "id": "runtime-1789913441298",
     "title": "Animation Anime Ass Cum Sex",
     "category": "Genel",
