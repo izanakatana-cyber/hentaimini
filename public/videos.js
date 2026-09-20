@@ -56,20 +56,6 @@ window.STATIC_VIDEOS = [
     "createdAt": "2026-09-20T13:46:50.620223Z"
   },
   {
-    "id": "runtime-1789911934852",
-    "title": "Ass Cute Tits",
-    "category": "Genel",
-    "type": "embed",
-    "embedSrc": "https://voe.sx/e/yymo3hfympng",
-    "url": "https://voe.sx/yymo3hfympng",
-    "embedCode": "<iframe src=\"https://voe.sx/e/yymo3hfympng\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/yymo3hfympng_storyboard_L5.jpg",
-    "preview": "https://i.voe.sx/cache/yymo3hfympng_storyboard_L5.jpg",
-    "duration": "HD",
-    "rating": "4.8",
-    "createdAt": "2026-09-20T13:45:34.852912Z"
-  },
-  {
     "id": "runtime-1789911797715",
     "title": "Ass Cock NSFW Pussy",
     "category": "Genel",
