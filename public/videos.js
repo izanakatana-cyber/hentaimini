@@ -1,5 +1,33 @@
 window.STATIC_VIDEOS = [
   {
+    "id": "runtime-1789910559404",
+    "title": "Ass Cute Masturbating Sexy",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/dusgzrqjxpsg",
+    "url": "https://voe.sx/dusgzrqjxpsg",
+    "embedCode": "<iframe src=\"https://voe.sx/e/dusgzrqjxpsg\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/dusgzrqjxpsg_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/dusgzrqjxpsg_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-20T13:22:39.404888Z"
+  },
+  {
+    "id": "runtime-1789910549596",
+    "title": "Ass Big Ass Pussy Tits",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/cl8ne6uwwku1",
+    "url": "https://voe.sx/cl8ne6uwwku1",
+    "embedCode": "<iframe src=\"https://voe.sx/e/cl8ne6uwwku1\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/cl8ne6uwwku1_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/cl8ne6uwwku1_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-20T13:22:29.596137Z"
+  },
+  {
     "id": "runtime-1789909859983",
     "title": "Animation Big Tits Doggystyle Missionary NSFW Pussy Reverse Cowgirl",
     "category": "Genel",
