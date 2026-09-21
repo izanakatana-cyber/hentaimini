@@ -1,7 +1,7 @@
 window.STATIC_VIDEOS = [
   {
     "id": "runtime-1790003296730",
-    "title": "Animation Asian Cheating Cuckold Interracial Kissing Moaning Rule34 Tattoo Tits",
+    "title": "Animation Asian Cheating Cuckold Interracial Kissing Moaning Tattoo Tits",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/75h8v0hdynv4",
@@ -12,62 +12,6 @@ window.STATIC_VIDEOS = [
     "duration": "HD",
     "rating": "4.8",
     "createdAt": "2026-09-21T15:08:16.730831Z"
-  },
-  {
-    "id": "runtime-1790002530676",
-    "title": "Ada Wong - Cucking Leon on the Honeymoon Night (1)",
-    "category": "Genel",
-    "type": "embed",
-    "embedSrc": "https://voe.sx/e/1yramnuycp5w",
-    "url": "https://voe.sx/1yramnuycp5w",
-    "embedCode": "<iframe src=\"https://voe.sx/e/1yramnuycp5w\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/1yramnuycp5w_storyboard_L5.jpg",
-    "preview": "https://i.voe.sx/cache/1yramnuycp5w_storyboard_L5.jpg",
-    "duration": "HD",
-    "rating": "4.8",
-    "createdAt": "2026-09-21T14:55:30.676618Z"
-  },
-  {
-    "id": "runtime-1790002493182",
-    "title": "Sadako - Horny Ghost Interrupts Your Porn Session (1)",
-    "category": "Genel",
-    "type": "embed",
-    "embedSrc": "https://voe.sx/e/euenvst2i2qm",
-    "url": "https://voe.sx/euenvst2i2qm",
-    "embedCode": "<iframe src=\"https://voe.sx/e/euenvst2i2qm\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/euenvst2i2qm_storyboard_L5.jpg",
-    "preview": "https://i.voe.sx/cache/euenvst2i2qm_storyboard_L5.jpg",
-    "duration": "HD",
-    "rating": "4.8",
-    "createdAt": "2026-09-21T14:54:53.182871Z"
-  },
-  {
-    "id": "runtime-1790002454253",
-    "title": "Ben Tennyson - Let's Make Him a Man on his Brithday (1)",
-    "category": "Genel",
-    "type": "embed",
-    "embedSrc": "https://voe.sx/e/jqbepfcl1yms",
-    "url": "https://voe.sx/jqbepfcl1yms",
-    "embedCode": "<iframe src=\"https://voe.sx/e/jqbepfcl1yms\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/jqbepfcl1yms_storyboard_L5.jpg",
-    "preview": "https://i.voe.sx/cache/jqbepfcl1yms_storyboard_L5.jpg",
-    "duration": "HD",
-    "rating": "4.8",
-    "createdAt": "2026-09-21T14:54:14.253531Z"
-  },
-  {
-    "id": "runtime-1790002414556",
-    "title": "Nymphomaniac Teen Can't Control Her Lust Anymore (1)",
-    "category": "Genel",
-    "type": "embed",
-    "embedSrc": "https://voe.sx/e/jk6h9lewgzjk",
-    "url": "https://voe.sx/jk6h9lewgzjk",
-    "embedCode": "<iframe src=\"https://voe.sx/e/jk6h9lewgzjk\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
-    "thumbnail": "https://i.voe.sx/cache/jk6h9lewgzjk_storyboard_L5.jpg",
-    "preview": "https://i.voe.sx/cache/jk6h9lewgzjk_storyboard_L5.jpg",
-    "duration": "HD",
-    "rating": "4.8",
-    "createdAt": "2026-09-21T14:53:34.556129Z"
   },
   {
     "id": "runtime-1789941594579",
