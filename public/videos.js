@@ -1,5 +1,19 @@
 window.STATIC_VIDEOS = [
   {
+    "id": "runtime-1790003296730",
+    "title": "Animation Asian Cheating Cuckold Interracial Kissing Moaning Rule34 Tattoo Tits",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/75h8v0hdynv4",
+    "url": "https://voe.sx/75h8v0hdynv4",
+    "embedCode": "<iframe src=\"https://voe.sx/e/75h8v0hdynv4\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/75h8v0hdynv4_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/75h8v0hdynv4_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-21T15:08:16.730831Z"
+  },
+  {
     "id": "runtime-1790002530676",
     "title": "Ada Wong - Cucking Leon on the Honeymoon Night (1)",
     "category": "Genel",
