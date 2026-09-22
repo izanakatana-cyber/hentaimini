@@ -1,5 +1,19 @@
 window.STATIC_VIDEOS = [
   {
+    "id": "runtime-1790081335666",
+    "title": "Digging up a Horny Ancient Egyptian Mummy (1)",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/7f3xxj4hxtvi",
+    "url": "https://voe.sx/7f3xxj4hxtvi",
+    "embedCode": "<iframe src=\"https://voe.sx/e/7f3xxj4hxtvi\" width=\"560\" height=\"315\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/7f3xxj4hxtvi_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/7f3xxj4hxtvi_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.8",
+    "createdAt": "2026-09-22T12:48:55.666365Z"
+  },
+  {
     "id": "runtime-1790016518548",
     "title": "Hentai NSFW Pussy Teen",
     "category": "Genel",
