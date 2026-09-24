@@ -1,7 +1,7 @@
 window.STATIC_VIDEOS = [
   {
     "id": "runtime-1790266208861",
-    "title": "Video - 24.09.2026 19:10",
+    "title": "Shidoukan Day After – Episode 2",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/s7wfzkp7ymi5",
@@ -15,7 +15,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1790266172770",
-    "title": "Video - 24.09.2026 19:09",
+    "title": "Shidoukan Day After – Episode 1",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/h2hsjjdvje4z",
@@ -29,7 +29,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1790262105290",
-    "title": "4741082.mov720",
+    "title": "kkrt03",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/7an3ttmqg3gm",
@@ -43,7 +43,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1790262082495",
-    "title": "4741095.mov720",
+    "title": "kkrt02",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/ceop7ozu9ate",
@@ -57,7 +57,7 @@ window.STATIC_VIDEOS = [
   },
   {
     "id": "runtime-1790261904958",
-    "title": "e7a39c07489b46c9d33609a738dae4da",
+    "title": "kkrt01",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/mg59wgntz99i",
