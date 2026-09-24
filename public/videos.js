@@ -1,7 +1,7 @@
 window.STATIC_VIDEOS = [
   {
     "id": "runtime-1790266715169",
-    "title": "Video - 24.09.2026 19:17",
+    "title": "Succuba Mist Story – Episode 1",
     "category": "Genel",
     "type": "embed",
     "embedSrc": "https://voe.sx/e/avovnqwnaufg",
