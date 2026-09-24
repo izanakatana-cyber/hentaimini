@@ -1,5 +1,19 @@
 window.STATIC_VIDEOS = [
   {
+    "id": "runtime-1790266715169",
+    "title": "Video - 24.09.2026 19:17",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/avovnqwnaufg",
+    "url": "https://voe.sx/avovnqwnaufg",
+    "embedCode": "<iframe src=\"https://voe.sx/e/avovnqwnaufg\" width=\"100%\" height=\"100%\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://i.voe.sx/cache/avovnqwnaufg_storyboard_L5.jpg",
+    "preview": "https://i.voe.sx/cache/avovnqwnaufg_storyboard_L5.jpg",
+    "duration": "HD",
+    "rating": "4.9",
+    "createdAt": "2026-09-24T16:18:35.169454Z"
+  },
+  {
     "id": "runtime-1790266208861",
     "title": "Shidoukan Day After – Episode 2",
     "category": "Genel",
