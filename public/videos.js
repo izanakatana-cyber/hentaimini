@@ -1,5 +1,33 @@
 window.STATIC_VIDEOS = [
   {
+    "id": "runtime-1790296783539",
+    "title": "Evilaudio, Jubilee , Marvel, Marvel Rivals, X-Men, Animated, Video, 1Boy, 1Girl, 3D, Anus, Arm Support, Artist Name, ...",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/sgqlhagkop2u",
+    "url": "https://voe.sx/sgqlhagkop2u",
+    "embedCode": "<iframe src=\"https://voe.sx/e/sgqlhagkop2u\" width=\"100%\" height=\"100%\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://img4.gelbooru.com/images/18/2c/182c65b2d9dd80636e4897a28962b907.jpg",
+    "preview": "https://img4.gelbooru.com/images/18/2c/182c65b2d9dd80636e4897a28962b907.jpg",
+    "duration": "HD",
+    "rating": "4.9",
+    "createdAt": "2026-09-25T00:39:43.539440Z"
+  },
+  {
+    "id": "runtime-1790296327456",
+    "title": "Kizu, Velina Airgid, Zenless Zone Zero, Animated, Sound, Tagme, Video, 1Boy, 1Girl, Ass, Blush, Bouncing Breasts, Bow...",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/5kned4fbo2i9",
+    "url": "https://voe.sx/5kned4fbo2i9",
+    "embedCode": "<iframe src=\"https://voe.sx/e/5kned4fbo2i9\" width=\"100%\" height=\"100%\" allowfullscreen allowtransparency allow=\"autoplay\" scrolling=\"no\" frameborder=\"0\"></iframe>",
+    "thumbnail": "https://img4.gelbooru.com/images/02/ee/02eead33b68b615d6acf60f1c400d505.jpg",
+    "preview": "https://img4.gelbooru.com/images/02/ee/02eead33b68b615d6acf60f1c400d505.jpg",
+    "duration": "HD",
+    "rating": "4.9",
+    "createdAt": "2026-09-25T00:32:07.456750Z"
+  },
+  {
     "id": "runtime-1790274651000",
     "title": "3D Animation",
     "category": "Genel",
