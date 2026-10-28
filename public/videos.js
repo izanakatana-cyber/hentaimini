@@ -1,5 +1,17 @@
 window.STATIC_VIDEOS = [
   {
+    "id": "video-1793189098",
+    "title": "Redirecting...",
+    "category": "Genel",
+    "type": "embed",
+    "embedSrc": "https://voe.sx/e/acih7zh84wxy",
+    "url": "https://voe.sx/e/acih7zh84wxy",
+    "thumbnail": "",
+    "preview": "",
+    "episode": "HD",
+    "createdAt": "2026-10-28T12:04:58Z"
+  },
+  {
     "id": "runtime-1790274651000",
     "title": "3D Animation",
     "category": "Genel",
