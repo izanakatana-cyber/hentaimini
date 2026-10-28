@@ -67,7 +67,6 @@ main{margin-left:248px;width:calc(100% - 248px);padding:22px 32px 60px}
 .search i{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#777181}
 .search input{width:100%;height:44px;background:#121018;border:1px solid var(--line);border-radius:13px;color:#fff;padding:0 44px;font-size:13px;outline:0;transition:.2s}
 .search input:focus{border-color:rgba(255,63,145,.5);box-shadow:0 0 0 4px rgba(255,63,145,.06)}
-.search kbd{position:absolute;right:10px;top:10px;color:#625c6a;border:1px solid #302b38;border-radius:6px;padding:3px 6px;font-size:10px}
 .top-actions{margin-left:auto;display:flex;align-items:center;gap:9px}
 .lang-wrap{position:relative;display:flex;align-items:center}
 .lang-select{padding:10px 34px 10px 12px;border-radius:12px;background:#121018;border:1px solid var(--line);color:#f2eaff;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.4px;transition:.2s;appearance:none;-webkit-appearance:none;-moz-appearance:none;min-width:110px;}
@@ -77,27 +76,10 @@ main{margin-left:248px;width:calc(100% - 248px);padding:22px 32px 60px}
 .icon:hover{color:#fff;border-color:#443b4d;transform:translateY(-1px)}
 .dot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--pink);right:9px;top:8px;box-shadow:0 0 10px var(--pink)}
 
-.hero{position:relative;overflow:hidden;min-height:310px;border:1px solid #302a37;border-radius:24px;background:
- linear-gradient(90deg,rgba(12,10,17,.98) 0%,rgba(17,12,24,.88) 48%,rgba(35,14,37,.45) 100%);
-padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
-.hero:after{content:"";position:absolute;width:500px;height:500px;right:-130px;top:-190px;border-radius:50%;background:radial-gradient(circle,rgba(255,63,145,.26),rgba(139,92,246,.12) 35%,transparent 68%);animation:float 7s ease-in-out infinite}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:35px 35px;mask-image:linear-gradient(90deg,#000,transparent 80%)}
-.hero-content{position:relative;z-index:2;max-width:690px}
-.eyebrow{display:inline-flex;align-items:center;gap:7px;color:#ff73ad;background:rgba(255,63,145,.1);border:1px solid rgba(255,63,145,.2);padding:7px 11px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;margin-bottom:16px}
-.hero h1{font-size:clamp(30px,4vw,50px);line-height:1.03;letter-spacing:-2px;margin-bottom:13px}
-.gradient{background:linear-gradient(90deg,#fff 5%,#ff5aa4 50%,#a478ff 90%);-webkit-background-clip:text;color:transparent}
-.hero p{color:#a7a0ae;line-height:1.65;font-size:14px;max-width:600px;margin-bottom:23px}
-.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
-.stats{display:flex;gap:24px;margin-top:25px}.stat b{font-size:16px}.stat span{font-size:10px;color:#756e7e;margin-left:5px}
-
-.section{margin-top:30px}
+.section{margin-top:10px}
 .section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:15px}
 .section-head h2{font-size:18px;letter-spacing:-.5px}.section-head p{color:#6f6878;font-size:11px;margin-top:4px}
 .see{color:#ff6cab;font-size:11px;font-weight:700;cursor:pointer}
-
-.filters{display:flex;gap:8px;overflow:auto;padding-bottom:4px;margin-bottom:18px}
-.filter{white-space:nowrap;padding:9px 13px;border-radius:10px;background:#121018;border:1px solid var(--line);color:#918a99;font-size:11px;font-weight:700;cursor:pointer;transition:.2s}
-.filter:hover{border-color:#4a3d4f;color:#fff}.filter.active{background:linear-gradient(135deg,var(--pink),#b33df0);border-color:transparent;color:#fff;box-shadow:0 8px 20px rgba(255,63,145,.15)}
 
 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .card{min-width:0;background:#111019;border:1px solid #24202c;border-radius:15px;overflow:hidden;cursor:pointer;transition:.28s;animation:cardIn .5s both}
@@ -110,9 +92,9 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 .card:hover .play{opacity:0}
 .thumb-art{position:absolute;inset:0;display:grid;place-items:center;font-size:44px;color:rgba(255,255,255,.18);z-index:1;background:linear-gradient(135deg,#1f1328,#120f18)}
 .duration,.quality{position:absolute;bottom:8px;padding:4px 6px;border-radius:5px;background:rgba(0,0,0,.78);font-size:9px;font-weight:800;z-index:3}
-.duration{right:8px}.quality{left:8px;color:#fff}
+.duration{right:8px}.quality{left:8px;color:#fff;background:rgba(255,63,145,.85)}
 .play{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:.2s;z-index:3;pointer-events:none}.play span{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:rgba(255,63,145,.92);box-shadow:0 0 30px rgba(255,63,145,.5)}.card:hover .play{opacity:1}
-.info{padding:11px 12px 13px}.title{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:7px}.meta{display:flex;align-items:center;gap:8px;color:#716a79;font-size:9px}.tag{color:#b9b1c2}.rating{margin-left:auto;color:#e7c65d}.heart{color:#686171;cursor:pointer;margin-left:8px;font-size:11px}.heart.active{color:var(--pink)}
+.info{padding:11px 12px 13px}.title{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:5px}.meta{display:flex;align-items:center;gap:8px;color:#716a79;font-size:10px}.tag{color:#ff7ab1;font-weight:600}
 
 .empty{padding:45px;text-align:center;border:1px dashed #302a37;border-radius:18px;color:#716a79;display:none}.empty i{font-size:30px;margin-bottom:12px;color:#4b4351}.empty h3{color:#d8d2df;font-size:15px;margin-bottom:6px}.empty p{font-size:11px}
 
@@ -128,14 +110,11 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 .action-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:14px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s ease;border:1px solid var(--line);background:#171422;color:#f0eaeb}
 .action-btn:hover{transform:translateY(-2px);border-color:var(--pink);color:#fff;box-shadow:0 8px 24px rgba(255,63,145,.2)}
 .action-btn-download{background:linear-gradient(135deg,var(--pink),#a23ff5);border-color:transparent;color:#fff;box-shadow:0 6px 20px rgba(255,63,145,.25)}
-.action-btn-download:hover{box-shadow:0 10px 30px rgba(255,63,145,.4)}
 .action-btn-copy{background:#1c182a;border-color:#382d47;color:#e8e1f5}
-.action-btn-copy:hover{background:#262038;border-color:var(--purple)}
 
 .watch-details{margin-top:20px;background:#111019;border:1px solid var(--line);border-radius:20px;padding:24px}
-.watch-title-row{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:12px;flex-wrap:wrap}
-.watch-title{font-size:20px;font-weight:700}
-.watch-meta-info{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px;margin-bottom:14px}
+.watch-title{font-size:20px;font-weight:700;margin-bottom:10px}
+.watch-meta-info{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px;margin-bottom:12px;flex-wrap:wrap}
 .watch-desc{color:#b3abc2;font-size:13px;line-height:1.7}
 
 .toast{position:fixed;right:25px;bottom:25px;z-index:9999;background:#17141d;border:1px solid #3a3040;padding:12px 18px;border-radius:12px;box-shadow:var(--shadow);font-size:12px;font-weight:600;transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s;display:flex;align-items:center;gap:8px}.toast.show{transform:none;opacity:1}.toast i{color:var(--green);font-size:15px}
@@ -145,49 +124,20 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 .dmca-box p,.dmca-box li{font-size:13px;color:#a7a0ae;line-height:1.65;margin-bottom:10px}
 .dmca-box ul{padding-left:18px;margin-bottom:14px}
 .dmca-box a{color:var(--pink);text-decoration:underline}
-
 .modal{position:fixed;inset:0;z-index:950;background:rgba(3,2,5,.84);backdrop-filter:blur(15px);display:none;place-items:center;padding:20px}.modal.open{display:grid}
-.embed-box{width:min(560px,100%);background:#0e0d13;border:1px solid #332b3b;border-radius:20px;box-shadow:0 30px 100px #000;padding:24px;max-height:90vh;overflow:auto}
-.embed-box h3{font-size:16px;margin-bottom:6px}
-.embed-box .hint{font-size:12px;color:var(--muted);margin-bottom:18px;line-height:1.5}
-.embed-field{margin-bottom:14px}
-.embed-field label{display:block;font-size:11px;font-weight:700;color:#b9b1c2;margin-bottom:6px}
-.embed-field input,.embed-field textarea,.embed-field select{
-  width:100%;background:#121018;border:1px solid var(--line);border-radius:10px;color:#fff;
-  padding:11px 13px;font-size:13px;outline:0;transition:.2s
-}
-.embed-field textarea{min-height:100px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;line-height:1.45}
-.embed-field input:focus,.embed-field textarea:focus,.embed-field select:focus{border-color:rgba(255,63,145,.5);box-shadow:0 0 0 4px rgba(255,63,145,.06)}
-.embed-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
-.thumb-options{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
-.thumb-opt{aspect-ratio:16/9;border:2px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;background:#000;position:relative}
-.thumb-opt.selected{border-color:var(--pink)}
-.thumb-opt img, .thumb-opt video{width:100%;height:100%;object-fit:cover}
 
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(12px)}}@keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}@keyframes modalIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+@keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}@keyframes modalIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
 
 @media(max-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:820px){
  .sidebar{transform:translateX(-100%);transition:.25s ease}.sidebar.open{transform:none}
  main{margin-left:0;width:100%;padding:15px 16px 45px}.menu-btn{display:grid !important}
- .topbar{gap:12px}.profile span{display:none}.profile{padding-right:4px}
- .hero{padding:28px 23px;min-height:330px}.hero h1{font-size:34px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
- .watch-player-box{aspect-ratio:16/9;min-height:auto;max-height:none}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:520px){
  .topbar{height:auto;flex-wrap:wrap;gap:10px;align-items:center}
  .search{order:3;flex-basis:100%;width:100%;max-width:100%}
- .top-actions{margin-left:auto;display:flex;align-items:center;gap:8px}
- .icon{display:grid !important;width:38px;height:38px;font-size:14px}
- .lang-select{min-width:90px;padding:8px 26px 8px 10px;font-size:11px}
- .hero{margin-top:12px;padding:20px 16px;min-height:auto}
- .hero h1{font-size:26px}
- .hero p{font-size:12px}
  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
- .info{padding:9px}.title{font-size:11px}.stats{gap:13px}.age-card{padding:30px 20px}.age-actions{flex-direction:column}
- .watch-action-bar{flex-direction:row;align-items:stretch;gap:8px}
- .action-btn{flex:1;justify-content:center;padding:10px 12px;font-size:12px}
- .watch-player-box{aspect-ratio:16/9;min-height:auto;max-height:none}
 }
 </style>
 </head>
@@ -217,27 +167,30 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <a href="#" onclick="setFilter('Yeni'); return false;" data-section="new"><i class="fa-solid fa-clock"></i> <span data-i18n="new">Yeni Eklenenler</span></a>
     <a href="#" onclick="randomPick(); return false;" data-section="random"><i class="fa-solid fa-shuffle"></i> <span data-i18n="random">Rastgele</span></a>
   </nav>
-  
   <div class="sidebar-bottom"><strong data-i18n="adultMode">18+ içerik modu</strong><p data-i18n="adultCatalog">Yetişkin içerikler için katalog arayüzü.</p><div class="status" data-i18n="systemReady">Sistem hazır</div></div>
 </aside>
 
 <main>
   <header class="topbar">
     <button class="icon menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+    <div class="search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="search" placeholder="Video, kategori veya etiket ara..." oninput="renderGrid()">
+    </div>
     <div class="top-actions">
       <button class="icon" onclick="showToast(getLocalizedText('notification'))"><i class="fa-regular fa-bell"></i><span class="dot"></span></button>
       <div class="lang-wrap">
         <select id="langSelect" class="lang-select" aria-label="Language selector">
-          <option value="de">Deutsch</option>
-          <option value="ar">العربية</option>
-          <option value="fr">Français</option>
-          <option value="hi">हिन्दी</option>
+          <option value="tr">Türkçe</option>
           <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
           <option value="it">Italiano</option>
+          <option value="ru">Русский</option>
           <option value="ja">日本語</option>
           <option value="ko">한국어</option>
-          <option value="ru">Русский</option>
-          <option value="tr">Türkçe</option>
+          <option value="hi">हिन्दी</option>
+          <option value="ar">العربية</option>
         </select>
       </div>
     </div>
@@ -257,7 +210,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
       <div class="empty" id="empty">
         <i class="fa-solid fa-film"></i>
         <h3 data-i18n="noVideos">Henüz video yok</h3>
-        <p data-i18n="noVideosHint">Harici video kaynakları eklendiğinde burada görünür.</p>
+        <p data-i18n="noVideosHint">Admin panelinden (`admin_upload.html`) eklenen VOE.sx videoları burada otomatik görünür.</p>
       </div>
     </section>
   </div>
@@ -268,10 +221,8 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
       <button class="back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="backToCatalog">Ana Kataloğa Dön</span></button>
     </div>
     
-    <!-- VIDEO OYNATICI -->
     <div class="watch-player-box" id="playerLargeBox"></div>
     
-    <!-- KAPAĞIN / VİDEO OYNATICI LİNTİSİNİN ALTINDAKİ AKSİYON BUTONLARI -->
     <div class="watch-action-bar">
       <button class="action-btn action-btn-download" onclick="downloadCurrentVideo()">
         <i class="fa-solid fa-download"></i>
@@ -287,8 +238,11 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
       <h2 class="watch-title" id="watchTitle">Video Başlığı</h2>
       <div class="watch-meta-info">
         <span><i class="fa-solid fa-calendar"></i> <span id="watchDate"></span></span>
+        <span id="watchExtraMeta"></span>
       </div>
+      <p class="watch-desc" id="watchDesc"></p>
     </div>
+
     <section class="section recommendations-section">
       <div class="section-head">
         <div>
@@ -298,9 +252,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
       </div>
       <div class="grid" id="recommendationsGrid"></div>
     </section>
-
   </div>
-
 </main>
 </div>
 
@@ -317,37 +269,7 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
 
 <div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span></span></div>
 
-<div class="modal" id="embedModal">
-  <div class="embed-box">
-    <div class="modal-top" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-      <h3>Embed Video Ekle</h3>
-      <button class="icon" onclick="closeEmbedModal()" style="width:32px;height:32px"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <p class="hint">Bir kez public/videos.js dosyasını seç. Yeni embed kayıtları aynı dosyanın içine yazılır; sunucuya gönderilmez.</p>
-    <div class="embed-actions" style="justify-content:flex-start;margin-top:0;margin-bottom:14px">
-      <button class="secondary" onclick="selectVideosFile()"><i class="fa-solid fa-folder-open"></i> videos.js Dosyasını Seç</button>
-      <span id="videosFileStatus" style="font-size:11px;color:var(--muted)">Dosya seçilmedi</span>
-    </div>
-    <div class="embed-field">
-      <label for="runtimeVideoTitle">Video Başlığı</label>
-      <input id="runtimeVideoTitle" type="text" placeholder="Örn: Yeni Video" maxlength="160">
-    </div>
-    <div class="embed-field">
-      <label for="runtimeEmbedCode">Embed Kodu veya URL</label>
-      <textarea id="runtimeEmbedCode" placeholder="<iframe src=&quot;...&quot;></iframe>"></textarea>
-    </div>
-    <div class="embed-field">
-      <label for="runtimeThumbnail">Kapak Fotoğrafı URL'si</label>
-      <input id="runtimeThumbnail" type="url" placeholder="https://.../kapak.jpg">
-    </div>
-    <div class="embed-actions">
-      <button class="secondary" onclick="closeEmbedModal()">İptal</button>
-      <button class="primary" onclick="addRuntimeEmbed()"><i class="fa-solid fa-save"></i> videos.js'e Yaz</button>
-    </div>
-  </div>
-</div>
-
-<!-- DMCA MODAL -->
+<!-- DMCA & YASAL MODALLAR -->
 <div class="modal" id="dmcaModal">
   <div class="dmca-box">
     <button class="close" onclick="closeDmca()" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
@@ -355,8 +277,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <div id="dmcaModalBody"></div>
   </div>
 </div>
-
-<!-- ŞARTLAR MODAL -->
 <div class="modal" id="termsModal">
   <div class="dmca-box">
     <button class="close" onclick="closeLegal('termsModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
@@ -364,8 +284,6 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
     <div id="termsModalBody"></div>
   </div>
 </div>
-
-<!-- GİZLİLİK MODAL -->
 <div class="modal" id="privacyModal">
   <div class="dmca-box">
     <button class="close" onclick="closeLegal('privacyModal')" style="float:right;width:36px;height:36px;border-radius:10px;background:#19161f;color:#aaa2b0;cursor:pointer;border:0"><i class="fa-solid fa-xmark"></i></button>
@@ -374,896 +292,93 @@ padding:42px;margin-bottom:27px;box-shadow:var(--shadow)}
   </div>
 </div>
 
-<script>document.write('<script src="videos.js?v=' + Date.now() + '"><\/script>');</script>
-<script>
-const legalTranslations = {
-  tr: {
-    dmcaTitle: "DMCA / Telif Hakkı Politikası",
-    dmcaContent: `
-      <p>HentaiMini, telif haklarına saygı duyar ve Digital Millennium Copyright Act (DMCA) kapsamında hareket eder.</p>
-      <p>Bu platformdaki tüm içerikler kullanıcılar tarafından yüklenmektedir. HentaiMini, yüklenen içeriklerin telif durumunu önceden kontrol etmez ve sorumluluk kabul etmez.</p>
-      <p><strong>Telif hakkı ihlali bildirimi için lütfen şu bilgileri içeren bir mail gönderin:</strong></p>
-      <ul>
-        <li>Telif hakkı sahibi veya yetkili temsilcisinin adı ve iletişim bilgileri</li>
-        <li>İhlal edildiği iddia edilen eserin tanımı</li>
-        <li>Sitede bulunan ihlal iddiası içeren içeriğin URL’si</li>
-        <li>İyi niyet beyanı (içeriğin izinsiz kullanıldığına inanıyorsunuz)</li>
-        <li>Yasal beyan (bildirimin doğru olduğu ve yalan beyanda bulunmanın cezai sorumluluğu olduğu)</li>
-        <li>Elektronik veya fiziksel imza</li>
-      </ul>
-      <p>Bildirimleri şu adrese gönderin:<br>
-      <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-      <p>Geçerli bir DMCA bildirimi alındığında, söz konusu içerik derhal kaldırılır veya erişime kapatılır.</p>
-    `,
-    termsTitle: "Kullanım Şartları",
-    termsContent: `
-      <p><strong>1. Yaş Sınırı</strong><br>Bu site yalnızca 18 yaş ve üzeri kişiler içindir. Siteye girerek 18 yaşında veya daha büyük olduğunuzu beyan etmiş sayılırsınız.</p>
-      <p><strong>2. İçerik Sorumluluğu</strong><br>Kullanıcılar yükledikleri tüm içeriklerden bizzat sorumludur. Telif hakkı ihlali, yasadışı içerik veya yasalara aykırı materyal yüklemek yasaktır.</p>
-      <p><strong>3. Yasaklı İçerikler</strong><br>- 18 yaş altı kişileri içeren veya çağrıştıran her türlü içerik<br>- Gerçek şiddet, zoofili veya yasa dışı fetişler<br>- İzinsiz telif hakkı içeren materyaller</p>
-      <p><strong>4. Sorumluluk Reddi</strong><br>HentaiMini, kullanıcılar tarafından yüklenen içeriklerin doğruluğu veya yasallığı konusunda garanti vermez.</p>
-    `,
-    privacyTitle: "Gizlilik Politikası",
-    privacyContent: `
-      <p>HentaiMini olarak gizliliğinize önem veriyoruz.</p>
-      <p><strong>Topladığımız Veriler:</strong><br>- Tarayıcınızda yerel olarak saklanan yaş onayı (localStorage)<br>- Favori olarak işaretlediğiniz videolar (localStorage)<br>- Temel teknik loglar (IP adresi, tarayıcı bilgisi)</p>
-      <p><strong>Toplamadığımız Veriler:</strong><br>- Kişisel kimlik bilgileriniz<br>- E-posta adresiniz (DMCA dışında)<br>- Ödeme bilgileriniz</p>
-      <p>Gizlilik sorularınız için: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `
-  },
-  en: {
-    dmcaTitle: "DMCA / Copyright Policy",
-    dmcaContent: `
-      <p>HentaiMini respects copyright law and complies with the Digital Millennium Copyright Act (DMCA).</p>
-      <p>All content on this platform is submitted by users. HentaiMini does not pre-screen uploaded content and assumes no direct liability.</p>
-      <p><strong>To submit a copyright infringement notice, please email us with:</strong></p>
-      <ul>
-        <li>Name and contact info of the copyright owner or authorized representative</li>
-        <li>Description of the copyrighted work claimed to be infringed</li>
-        <li>URL of the allegedly infringing material on our site</li>
-        <li>A statement of good-faith belief that the use is unauthorized</li>
-        <li>A statement made under penalty of perjury that information is accurate</li>
-        <li>Electronic or physical signature</li>
-      </ul>
-      <p>Send notices to:<br>
-      <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `,
-    termsTitle: "Terms of Service",
-    termsContent: `
-      <p><strong>1. Age Requirement</strong><br>This website is strictly for adults aged 18 and older. By entering, you confirm that you are at least 18 years old.</p>
-      <p><strong>2. Content Responsibility</strong><br>Users are solely responsible for content they upload or link. Copyright infringement and illegal material are strictly prohibited.</p>
-      <p><strong>3. Prohibited Content</strong><br>- Content depicting or involving minors under 18<br>- Extreme violence, bestiality, or non-consensual content<br>- Unauthorized copyrighted media</p>
-      <p><strong>4. Disclaimer</strong><br>HentaiMini is provided "as is" without guarantees regarding third-party links or user submissions.</p>
-    `,
-    privacyTitle: "Privacy Policy",
-    privacyContent: `
-      <p>HentaiMini values your privacy.</p>
-      <p><strong>Data We Store Locally:</strong><br>- Age verification preference (localStorage)<br>- Saved favorites (localStorage)<br>- Technical connection logs (IP, browser headers)</p>
-      <p><strong>Data We Do NOT Collect:</strong><br>- Personal identity profiles<br>- Email addresses (except DMCA inquiries)<br>- Financial details</p>
-      <p>Inquiries: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `
-  },
-  it: {
-    dmcaTitle: "DMCA / Politica sul Copyright",
-    dmcaContent: `
-      <p>HentaiMini rispetta il diritto d'autore e agisce in conformità con il Digital Millennium Copyright Act (DMCA).</p>
-      <p>Tutti i contenuti su questa piattaforma sono caricati dagli utenti. HentaiMini non controlla preventivamente i contenuti caricati e declina ogni responsabilità.</p>
-      <p><strong>Per inviare una segnalazione di violazione del copyright, inviare un'e-mail contenente:</strong></p>
-      <ul>
-        <li>Nome e contatti del titolare del copyright o del rappresentante autorizzato</li>
-        <li>Descrizione dell'opera protetta da copyright che si ritiene sia stata violata</li>
-        <li>URL del materiale presunto violato presente sul sito</li>
-        <li>Una dichiarazione di buona fede sull'uso non autorizzato</li>
-        <li>Firma elettronica o fisica</li>
-      </ul>
-      <p>Invia le segnalazioni a:<br>
-      <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `,
-    termsTitle: "Termini di Servizio",
-    termsContent: `
-      <p><strong>1. Limite di Età</strong><br>Questo sito è riservato esclusivamente agli adulti di età pari o superiore a 18 anni.</p>
-      <p><strong>2. Responsabilità dei Contenuti</strong><br>Gli utenti sono gli unici responsabili dei contenuti caricati. È vietato caricare materiale illegale o in violazione del copyright.</p>
-      <p><strong>3. Contenuti Vietati</strong><br>- Contenuti che coinvolgono o raffigurano minori di 18 anni<br>- Violenza estrema, zoofilia o fetish illegali<br>- Materiale protetto da copyright non autorizzato</p>
-    `,
-    privacyTitle: "Informativa sulla Privacy",
-    privacyContent: `
-      <p>HentaiMini rispetta la tua privacy.</p>
-      <p><strong>Dati Conservati Localmente:</strong><br>- Conferma dell'età (localStorage)<br>- Video preferiti (localStorage)<br>- Log tecnici di sicurezza</p>
-      <p>Contatti privacy: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `
-  },
-  de: {
-    dmcaTitle: "DMCA / Urheberrechtsrichtlinie",
-    dmcaContent: `
-      <p>HentaiMini respektiert Urheberrechte und handelt gemäß dem Digital Millennium Copyright Act (DMCA).</p>
-      <p>Alle Inhalte auf dieser Plattform werden von Nutzern bereitgestellt.</p>
-      <p>Senden Sie Urheberrechtsbeschwerden per E-Mail an:<br>
-      <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `,
-    termsTitle: "Nutzungsbedingungen",
-    termsContent: `
-      <p><strong>1. Altersbeschränkung</strong><br>Diese Website ist ausschließlich für Erwachsene ab 18 Jahren bestimmt.</p>
-      <p><strong>2. Inhaltsverantwortung</strong><br>Nutzer haften für die von ihnen hochgeladenen Inhalte.</p>
-      <p><strong>3. Verbotene Inhalte</strong><br>- Inhalte mit Minderjährigen unter 18 Jahren<br>- Urheberrechtlich geschützte Werke ohne Erlaubnis</p>
-    `,
-    privacyTitle: "Datenschutzerklärung",
-    privacyContent: `
-      <p>HentaiMini nimmt Ihren Datenschutz ernst. Es werden lediglich funktionale lokale Daten (localStorage) gespeichert.</p>
-      <p>Kontakt: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `
-  },
-  fr: {
-    dmcaTitle: "DMCA / Politique de Droits d'Auteur",
-    dmcaContent: `
-      <p>HentaiMini respecte les droits d'auteur et se conforme au DMCA.</p>
-      <p>Tout le contenu de cette plateforme est publié par les utilisateurs.</p>
-      <p>Contact DMCA : <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `,
-    termsTitle: "Conditions d'Utilisation",
-    termsContent: `
-      <p><strong>1. Limite d'âge</strong><br>Ce site est strictement réservé aux personnes âgées de 18 ans et plus.</p>
-      <p><strong>2. Responsabilité</strong><br>Les utilisateurs sont seuls responsables des contenus mis en ligne.</p>
-    `,
-    privacyTitle: "Politique de Confidentialité",
-    privacyContent: `
-      <p>HentaiMini protège votre vie privée. Seules des données fonctionnelles sont stockées localement.</p>
-      <p>Contact : <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `
-  },
-  ja: {
-    dmcaTitle: "DMCA / 著作権ポリシー",
-    dmcaContent: `
-      <p>HentaiMiniは著作権を尊重し、DMCAを遵守します。</p>
-      <p>当プラットフォームのコンテンツはユーザーにより投稿されたものです。</p>
-      <p>権利侵害の申し立て：<a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `,
-    termsTitle: "利用規約",
-    termsContent: `
-      <p><strong>1. 年齢制限</strong><br>当サイトは18歳以上の成人専用です。</p>
-      <p><strong>2. 禁止事項</strong><br>18歳未満に関するコンテンツおよび無断転載を禁止します。</p>
-    `,
-    privacyTitle: "プライバシーポリシー",
-    privacyContent: `
-      <p>利用者のプライバシーを尊重し、最低限の機能用ローカルデータのみ保持します。</p>
-      <p>お問い合わせ：<a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `
-  },
-  ru: {
-    dmcaTitle: "DMCA / Авторские права",
-    dmcaContent: `
-      <p>HentaiMini уважает авторские права и действует в соответствии с DMCA.</p>
-      <p>Весь контент загружается пользователями.</p>
-      <p>E-mail: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `,
-    termsTitle: "Условия использования",
-    termsContent: `
-      <p><strong>1. Возрастное ограничение</strong><br>Сайт предназначен исключительно для лиц старше 18 лет.</p>
-      <p><strong>2. Ответственность</strong><br>Пользователи несут личную ответственность за загружаемый контент.</p>
-    `,
-    privacyTitle: "Политика конфиденциальности",
-    privacyContent: `
-      <p>HentaiMini защищает ваши персональные данные и хранит только технические файлы в localStorage.</p>
-      <p>Контакты: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `
-  },
-  hi: {
-    dmcaTitle: "DMCA / कॉपीराइट नीति",
-    dmcaContent: `
-      <p>HentaiMini कॉपीराइट का सम्मान करता है। ईमेल: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `,
-    termsTitle: "उपयोग की शर्तें",
-    termsContent: `
-      <p><strong>1. आयु सीमा:</strong> केवल 18 वर्ष या उससे अधिक आयु के व्यक्तियों के लिए।</p>
-    `,
-    privacyTitle: "गोपनीयता नीति",
-    privacyContent: `
-      <p>हम आपकी गोपनीयता का ध्यान रखते हैं। स्थानीय भंडारण (localStorage) का उपयोग केवल बुनियादी प्राथमिकताओं के लिए होता है।</p>
-    `
-  },
-  ko: {
-    dmcaTitle: "DMCA / 저작권 방침",
-    dmcaContent: `
-      <p>HentaiMini는 저작권을 준수합니다. 신고: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `,
-    termsTitle: "이용약관",
-    termsContent: `
-      <p><strong>1. 연령 제한:</strong> 만 18세 이상 성인 전용입니다.</p>
-    `,
-    privacyTitle: "개인정보 처리방침",
-    privacyContent: `
-      <p>최소한의 브라우저 localstorage 데이터만 저장됩니다.</p>
-    `
-  },
-  ar: {
-    dmcaTitle: "DMCA / سياسة حقوق النشر",
-    dmcaContent: `
-      <p>يحترم HentaiMini حقوق الطبع والنشر ويعمل بموجب قانون DMCA.</p>
-      <p>للتواصل: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>
-    `,
-    termsTitle: "شروط الاستخدام",
-    termsContent: `
-      <p><strong>1. الفئة العمرية:</strong> مخصص حصرياً للبالغين بعمر 18 عاماً أو أكثر.</p>
-    `,
-    privacyTitle: "سياسة الخصوصية",
-    privacyContent: `
-      <p>نحن نحترم خصوصيتك. يتم تخزين البيانات الأساسية محلياً فقط (localStorage).</p>
-    `
-  }
-};
+<!-- 1. Önce videos.js dosyasını yükle -->
+<script src="videos.js"></script>
 
+<script>
 let allVideos = Array.isArray(window.STATIC_VIDEOS) ? window.STATIC_VIDEOS : [];
 let activeFilter = "Tümü";
 let currentVideoId = null;
-let videosFileHandle = null;
+
+const legalTranslations = {
+  tr: {
+    dmcaTitle: "DMCA / Telif Hakkı Politikası",
+    dmcaContent: `<p>HentaiMini, telif haklarına saygı duyar ve Digital Millennium Copyright Act (DMCA) kapsamında hareket eder. Bildirimler için: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>`,
+    termsTitle: "Kullanım Şartları",
+    termsContent: `<p>Bu site yalnızca 18 yaş ve üzeri kişiler içindir.</p>`,
+    privacyTitle: "Gizlilik Politikası",
+    privacyContent: `<p>HentaiMini olarak gizliliğinize önem veriyoruz.</p>`
+  },
+  en: {
+    dmcaTitle: "DMCA / Copyright Policy",
+    dmcaContent: `<p>Send notices to: <a href="mailto:dmca.hentaimini@gmail.com">dmca.hentaimini@gmail.com</a></p>`,
+    termsTitle: "Terms of Service",
+    termsContent: `<p>Strictly for adults aged 18+.</p>`,
+    privacyTitle: "Privacy Policy",
+    privacyContent: `<p>We value your privacy.</p>`
+  }
+};
 
 const translations = {
   tr: {
     ageGateText: 'Bu platform yetişkinlere yönelik 18+ hentai/video içerikleri için tasarlanmıştır.',
-    ageWarning: 'Devam ederek 18 yaşında veya daha büyük olduğunuzu ve bulunduğunuz yerdeki yasalara uygun hareket edeceğinizi onaylarsınız.',
-    enter18: '18+ Giriş Yap',
-    exit: 'Çıkış',
-    adultMode: '18+ içerik modu',
-    adultCatalog: 'Yetişkin içerikler için katalog arayüzü.',
-    systemReady: 'Sistem hazır',
-    videoStat: 'Video',
-    noVideos: 'Henüz video yok',
-    noVideosHint: 'Harici embed kaynakları eklenince burada görünür.',
-    backToCatalog: 'Ana Kataloğa Dön',
-    favorite: 'Favori',
-    favoriteAdded: 'Favorilerde',
-    delete: 'Sil',
-    videoTitleDefault: 'Video Başlığı',
-    categoryTag: 'Kategori',
-    videoDescDefault: 'Bu video için açıklama girilmemiştir.',
-    noResults: 'Gösterilecek içerik bulunamadı.',
-    resultsCount: 'video listeleniyor',
-    generalCategory: 'Genel',
-    favoriteRemoved: 'Favorilerden çıkarıldı.',
-    favoriteAddedToast: 'Favorilere eklendi.',
-    confirmDelete: 'Bu videoyu silmek istediğinize emin misiniz?',
-    deleteSuccess: 'Video silindi.',
-    deleteFail: 'Silme başarısız.',
-    connectionError: 'Bağlantı hatası.',
-    serverError: 'Sunucu bağlantı hatası.',
-    discover: 'Keşfet',
-    home: 'Ana Sayfa',
-    trending: 'Trendler',
-    new: 'Yeni Eklenenler',
-    random: 'Rastgele',
-    categories: 'Kategoriler',
-    romantic: 'Romantik',
-    action: 'Aksiyon',
-    fantasy: 'Fantezi',
-    comedy: 'Komedi',
-    legal: 'Yasal',
-    terms: 'Şartlar',
-    privacy: 'Gizlilik',
-    dmca: 'DMCA',
-    recommendedVideos: 'Önerilen Videolar',
-    recommendedDesc: 'Rastgele seçilen içerikler',
-    featured: 'Öne Çıkanlar',
-    loadingVideos: 'Videolar yükleniyor...',
-    randomPick: 'Rastgele seç',
-    all: 'Tümü',
-    popular: 'Popüler',
-    newFilter: 'Yeni',
-    searchPlaceholder: 'Video, kategori veya etiket ara...',
-    notification: 'Bildirimler güncel.',
-    videosError: 'Videolar yüklenirken hata oluştu.',
-    downloadVideo: 'Videoyu İndir',
-    copyLink: 'Bağlantıyı Kopyala',
-    linkCopied: 'Bağlantı panoya kopyalandı!',
-    downloadStarted: 'İndirme sayfası açılıyor...'
+    ageWarning: 'Devam ederek 18 yaşında veya daha büyük olduğunuzu onaylarsınız.',
+    enter18: '18+ Giriş Yap', exit: 'Çıkış', adultMode: '18+ içerik modu',
+    adultCatalog: 'Yetişkin içerikler için katalog arayüzü.', systemReady: 'Sistem hazır',
+    videoStat: 'Video', noVideos: 'Henüz video yok',
+    noVideosHint: 'Admin panelinden eklenen VOE.sx videoları burada görünür.',
+    backToCatalog: 'Ana Kataloğa Dön', resultsCount: 'video listeleniyor',
+    discover: 'Keşfet', home: 'Ana Sayfa', new: 'Yeni Eklenenler', random: 'Rastgele',
+    terms: 'Şartlar', privacy: 'Gizlilik', dmca: 'DMCA',
+    recommendedVideos: 'Önerilen Videolar', recommendedDesc: 'Rastgele seçilen içerikler',
+    featured: 'Öne Çıkanlar', loadingVideos: 'Videolar yükleniyor...', randomPick: 'Rastgele seç',
+    searchPlaceholder: 'Video, kategori veya etiket ara...', notification: 'Bildirimler güncel.',
+    downloadVideo: 'Videoyu İndir', copyLink: 'Bağlantıyı Kopyala',
+    linkCopied: 'Bağlantı panoya kopyalandı!', downloadStarted: 'İndirme sayfası açılıyor...'
   },
   en: {
     ageGateText: 'This platform is designed for adult 18+ hentai/video content.',
-    ageWarning: 'By continuing, you confirm that you are at least 18 years old and comply with local laws.',
-    enter18: '18+ Enter',
-    exit: 'Exit',
-    adultMode: '18+ content mode',
-    adultCatalog: 'Catalog interface for adult content.',
-    systemReady: 'System ready',
-    videoStat: 'Videos',
-    noVideos: 'No videos yet',
+    ageWarning: 'By continuing, you confirm that you are at least 18 years old.',
+    enter18: '18+ Enter', exit: 'Exit', adultMode: '18+ content mode',
+    adultCatalog: 'Catalog interface for adult content.', systemReady: 'System ready',
+    videoStat: 'Videos', noVideos: 'No videos yet',
     noVideosHint: 'External embed sources will appear here when added.',
-    backToCatalog: 'Back to catalog',
-    favorite: 'Favorite',
-    favoriteAdded: 'Saved',
-    delete: 'Delete',
-    videoTitleDefault: 'Video Title',
-    categoryTag: 'Category',
-    videoDescDefault: 'No description has been entered for this video yet.',
-    noResults: 'No matching content found.',
-    resultsCount: 'videos listed',
-    generalCategory: 'General',
-    favoriteRemoved: 'Removed from favorites.',
-    favoriteAddedToast: 'Added to favorites.',
-    confirmDelete: 'Are you sure you want to delete this video?',
-    deleteSuccess: 'Video deleted.',
-    deleteFail: 'Delete failed.',
-    connectionError: 'Connection error.',
-    serverError: 'Server connection error.',
-    discover: 'Discover',
-    home: 'Home',
-    trending: 'Trending',
-    new: 'New Additions',
-    random: 'Random',
-    categories: 'Categories',
-    romantic: 'Romantic',
-    action: 'Action',
-    fantasy: 'Fantasy',
-    comedy: 'Comedy',
-    legal: 'Legal',
-    terms: 'Terms',
-    privacy: 'Privacy',
-    dmca: 'DMCA',
-    recommendedVideos: 'Recommended Videos',
-    recommendedDesc: 'Randomly selected content',
-    featured: 'Featured',
-    loadingVideos: 'Loading videos...',
-    randomPick: 'Random pick',
-    all: 'All',
-    popular: 'Popular',
-    newFilter: 'New',
-    searchPlaceholder: 'Search videos, categories or tags...',
-    notification: 'Notifications are up to date.',
-    videosError: 'An error occurred while loading videos.',
-    downloadVideo: 'Download Video',
-    copyLink: 'Copy Link',
-    linkCopied: 'Link copied to clipboard!',
-    downloadStarted: 'Opening download page...'
-  },
-  ja: {
-    ageGateText: 'このプラットフォームは18歳以上の成人向けコンテンツ用です。',
-    ageWarning: '続行することで、18歳以上であり、お住まいの地域の法律を遵守することを確認します。',
-    enter18: '18歳以上として入場',
-    exit: '退出',
-    adultMode: '18歳以上モード',
-    adultCatalog: '成人向けコンテンツのカタログインターフェース。',
-    systemReady: 'システム準備完了',
-    videoStat: '動画',
-    noVideos: '動画はまだありません',
-    noVideosHint: '外部の埋め込み動画が追加されると、ここに表示されます。',
-    backToCatalog: 'カタログに戻る',
-    favorite: 'お気に入り',
-    favoriteAdded: 'お気に入りに追加済み',
-    delete: '削除',
-    videoTitleDefault: '動画タイトル',
-    categoryTag: 'カテゴリー',
-    videoDescDefault: 'この動画にはまだ説明がありません。',
-    noResults: '一致するコンテンツがありません。',
-    resultsCount: '件の動画',
-    generalCategory: '一般',
-    favoriteRemoved: 'お気に入りから削除しました。',
-    favoriteAddedToast: 'お気に入りに追加しました。',
-    confirmDelete: 'この動画を削除してもよろしいですか？',
-    deleteSuccess: '動画を削除しました。',
-    deleteFail: '削除に失敗しました。',
-    connectionError: '接続エラーです。',
-    serverError: 'サーバー接続エラーです。',
-    discover: '探索',
-    home: 'ホーム',
-    trending: 'トレンド',
-    new: '新着',
-    random: 'ランダム',
-    categories: 'カテゴリー',
-    romantic: 'ロマンス',
-    action: 'アクション',
-    fantasy: 'ファンタジー',
-    comedy: 'コメディ',
-    legal: '法的情報',
-    terms: '利用規約',
-    privacy: 'プライバシー',
-    dmca: 'DMCA',
-    recommendedVideos: 'おすすめ動画',
-    recommendedDesc: 'ランダムに選ばれたコンテンツ',
-    featured: 'おすすめ',
-    loadingVideos: '動画を読み込んでいます...',
-    randomPick: 'ランダムに選ぶ',
-    all: 'すべて',
-    popular: '人気',
-    newFilter: '新着',
-    searchPlaceholder: '動画、カテゴリー、タグを検索...',
-    notification: '通知は最新です。',
-    videosError: '動画の読み込み中にエラーが発生しました。',
-    downloadVideo: '動画をダウンロード',
-    copyLink: 'リンクをコピー',
-    linkCopied: 'リンクをクリップボードにコピーしました！',
-    downloadStarted: 'ダウンロードページを開いています...'
-  },
-  ru: {
-    ageGateText: 'Эта платформа предназначена для взрослых материалов 18+.',
-    ageWarning: 'Продолжая, вы подтверждаете, что вам исполнилось 18 лет и вы соблюдаете законы своего региона.',
-    enter18: 'Войти 18+',
-    exit: 'Выйти',
-    adultMode: 'Режим 18+',
-    adultCatalog: 'Каталог для взрослых материалов.',
-    systemReady: 'Система готова',
-    videoStat: 'Видео',
-    noVideos: 'Видео пока нет',
-    noVideosHint: 'Внешние встроенные видео появятся здесь после добавления.',
-    backToCatalog: 'Вернуться в каталог',
-    favorite: 'Избранное',
-    favoriteAdded: 'В избранном',
-    delete: 'Удалить',
-    videoTitleDefault: 'Название видео',
-    categoryTag: 'Категория',
-    videoDescDefault: 'Для этого видео пока нет описания.',
-    noResults: 'Подходящий контент не найден.',
-    resultsCount: 'видео',
-    generalCategory: 'Общее',
-    favoriteRemoved: 'Удалено из избранного.',
-    favoriteAddedToast: 'Добавлено в избранное.',
-    confirmDelete: 'Вы действительно хотите удалить это видео?',
-    deleteSuccess: 'Видео удалено.',
-    deleteFail: 'Не удалось удалить видео.',
-    connectionError: 'Ошибка соединения.',
-    serverError: 'Ошибка подключения к серверу.',
-    discover: 'Обзор',
-    home: 'Главная',
-    trending: 'В тренде',
-    new: 'Новые',
-    random: 'Случайное',
-    categories: 'Категории',
-    romantic: 'Романтика',
-    action: 'Экшен',
-    fantasy: 'Фэнтези',
-    comedy: 'Комедия',
-    legal: 'Правовая информация',
-    terms: 'Условия',
-    privacy: 'Конфиденциальность',
-    dmca: 'DMCA',
-    recommendedVideos: 'Рекомендуемые видео',
-    recommendedDesc: 'Случайно выбранный контент',
-    featured: 'Рекомендуемое',
-    loadingVideos: 'Загрузка видео...',
-    randomPick: 'Выбрать случайное',
-    all: 'Все',
-    popular: 'Популярные',
-    newFilter: 'Новые',
-    searchPlaceholder: 'Поиск видео, категорий или тегов...',
-    notification: 'Уведомления обновлены.',
-    videosError: 'Произошла ошибка при загрузке видео.'
-  },
-  it: {
-    ageGateText: 'Questa piattaforma è destinata a contenuti per adulti 18+.',
-    ageWarning: 'Continuando, confermi di avere almeno 18 anni e di rispettare le leggi della tua regione.',
-    enter18: 'Entra 18+',
-    exit: 'Esci',
-    adultMode: 'Modalità 18+',
-    adultCatalog: 'Interfaccia catalogo per contenuti adulti.',
-    systemReady: 'Sistema pronto',
-    videoStat: 'Video',
-    noVideos: 'Nessun video disponibile',
-    noVideosHint: 'I video incorporati esterni appariranno qui quando verranno aggiunti.',
-    backToCatalog: 'Torna al catalogo',
-    favorite: 'Preferiti',
-    favoriteAdded: 'Nei preferiti',
-    delete: 'Elimina',
-    videoTitleDefault: 'Titolo del video',
-    categoryTag: 'Categoria',
-    videoDescDefault: 'Non è stata ancora inserita una descrizione per questo video.',
-    noResults: 'Nessun contenuto corrispondente trovato.',
-    resultsCount: 'video elencati',
-    generalCategory: 'Generale',
-    favoriteRemoved: 'Rimosso dai preferiti.',
-    favoriteAddedToast: 'Aggiunto ai preferiti.',
-    confirmDelete: 'Vuoi davvero eliminare questo video?',
-    deleteSuccess: 'Video eliminato.',
-    deleteFail: 'Eliminazione non riuscita.',
-    connectionError: 'Errore di connessione.',
-    serverError: 'Errore di connessione al server.',
-    discover: 'Scopri',
-    home: 'Home',
-    trending: 'Di tendenza',
-    new: 'Nuovi arrivi',
-    random: 'Casuale',
-    categories: 'Categorie',
-    romantic: 'Romantico',
-    action: 'Azione',
-    fantasy: 'Fantasy',
-    comedy: 'Commedia',
-    legal: 'Informazioni legali',
-    terms: 'Termini',
-    privacy: 'Privacy',
-    dmca: 'DMCA',
-    recommendedVideos: 'Video consigliati',
-    recommendedDesc: 'Contenuti selezionati casualmente',
-    featured: 'In evidenza',
-    loadingVideos: 'Caricamento video...',
-    randomPick: 'Scelta casuale',
-    all: 'Tutti',
-    popular: 'Popolari',
-    newFilter: 'Nuovi',
-    searchPlaceholder: 'Cerca video, categorie o tag...',
-    notification: 'Le notifiche sono aggiornate.',
-    videosError: 'Si è verificato un errore durante il caricamento dei video.',
-    downloadVideo: 'Scarica video',
-    copyLink: 'Copia link',
-    linkCopied: 'Link copiato negli appunti!',
-    downloadStarted: 'Apertura pagina di download...'
-  },
-  hi: {
-    ageGateText: 'यह प्लेटफ़ॉर्म 18+ वयस्क सामग्री के लिए है।',
-    ageWarning: 'जारी रखकर आप पुष्टि करते हैं कि आपकी आयु 18 वर्ष या उससे अधिक है और आप अपने क्षेत्र के कानूनों का पालन करते हैं।',
-    enter18: '18+ प्रवेश',
-    exit: 'बाहर निकलें',
-    adultMode: '18+ मोड',
-    adultCatalog: 'वयस्क सामग्री के लिए कैटलॉग इंटरफ़ेस।',
-    systemReady: 'सिस्टम तैयार है',
-    videoStat: 'वीडियो',
-    noVideos: 'अभी कोई वीडियो नहीं है',
-    noVideosHint: 'बाहरी एम्बेड किए गए वीडियो जोड़ने पर यहां दिखाई देंगे।',
-    backToCatalog: 'कैटलॉग पर वापस जाएं',
-    favorite: 'पसंदीदा',
-    favoriteAdded: 'पसंदीदा में जोड़ा गया',
-    delete: 'हटाएं',
-    videoTitleDefault: 'वीडियो का शीर्षक',
-    categoryTag: 'श्रेणी',
-    videoDescDefault: 'इस वीडियो के लिए अभी कोई विवरण नहीं है।',
-    noResults: 'कोई मिलती-जुलती सामग्री नहीं मिली।',
-    resultsCount: 'वीडियो सूचीबद्ध',
-    generalCategory: 'सामान्य',
-    favoriteRemoved: 'पसंदीदा से हटा दिया गया।',
-    favoriteAddedToast: 'पसंदीदा में जोड़ दिया गया।',
-    confirmDelete: 'क्या आप वाकई यह वीडियो हटाना चाहते हैं?',
-    deleteSuccess: 'वीडियो हटा दिया गया।',
-    deleteFail: 'वीडियो हटाया नहीं जा सका।',
-    connectionError: 'कनेक्शन त्रुटि।',
-    serverError: 'सर्वर कनेक्शन त्रुटि।',
-    discover: 'खोजें',
-    home: 'होम',
-    trending: 'ट्रेंडिंग',
-    new: 'नए वीडियो',
-    random: 'रैंडम',
-    categories: 'श्रेणियां',
-    romantic: 'रोमांटिक',
-    action: 'एक्शन',
-    fantasy: 'फैंटेसी',
-    comedy: 'कॉमेडी',
-    legal: 'कानूनी',
-    terms: 'शर्तें',
-    privacy: 'गोपनीयता',
-    dmca: 'DMCA',
-    recommendedVideos: 'अनुशंसित वीडियो',
-    recommendedDesc: 'यादृच्छिक रूप से चुनी गई सामग्री',
-    featured: 'विशेष वीडियो',
-    loadingVideos: 'वीडियो लोड हो रहे हैं...',
-    randomPick: 'रैंडम चुनें',
-    all: 'सभी',
-    popular: 'लोकप्रिय',
-    newFilter: 'नए',
-    searchPlaceholder: 'वीडियो, श्रेणियां या टैग खोजें...',
-    notification: 'सूचनाएं अपडेट हैं।',
-    videosError: 'वीडियो लोड करते समय त्रुटि हुई।',
-    downloadVideo: 'वीडियो डाउनलोड करें',
-    copyLink: 'लिंक कॉपी करें',
-    linkCopied: 'लिंक क्लिपबोर्ड पर कॉपी हो गया!',
-    downloadStarted: 'डाउनलोड पेज खुल रहा है...'
-  },
-  ko: {
-    ageGateText: '이 플랫폼은 18세 이상 성인 콘텐츠를 위한 공간입니다.',
-    ageWarning: '계속 진행하면 만 18세 이상이며 거주 지역의 법률을 준수한다는 데 동의하는 것입니다.',
-    enter18: '18세 이상 입장',
-    exit: '나가기',
-    adultMode: '18세 이상 모드',
-    adultCatalog: '성인 콘텐츠 카탈로그 인터페이스입니다.',
-    systemReady: '시스템 준비 완료',
-    videoStat: '동영상',
-    noVideos: '아직 동영상이 없습니다',
-    noVideosHint: '외부 임베드 동영상이 추가되면 여기에 표시됩니다.',
-    backToCatalog: '카탈로그로 돌아가기',
-    favorite: '즐겨찾기',
-    favoriteAdded: '즐겨찾기에 추가됨',
-    delete: '삭제',
-    videoTitleDefault: '동영상 제목',
-    categoryTag: '카테고리',
-    videoDescDefault: '이 동영상에는 아직 설명이 없습니다.',
-    noResults: '일치하는 콘텐츠가 없습니다.',
-    resultsCount: '개 동영상',
-    generalCategory: '일반',
-    favoriteRemoved: '즐겨찾기에서 삭제했습니다.',
-    favoriteAddedToast: '즐겨찾기에 추가했습니다.',
-    confirmDelete: '이 동영상을 삭제하시겠습니까?',
-    deleteSuccess: '동영상을 삭제했습니다.',
-    deleteFail: '동영상을 삭제하지 못했습니다.',
-    connectionError: '연결 오류입니다.',
-    serverError: '서버 연결 오류입니다.',
-    discover: '탐색',
-    home: '홈',
-    trending: '인기 동영상',
-    new: '최신 동영상',
-    random: '랜덤',
-    categories: '카테고리',
-    romantic: '로맨스',
-    action: '액션',
-    fantasy: '판타지',
-    comedy: '코미디',
-    legal: '법률 정보',
-    terms: '이용약관',
-    privacy: '개인정보 처리방침',
-    dmca: 'DMCA',
-    recommendedVideos: '추천 동영상',
-    recommendedDesc: '무작위로 선택된 콘텐츠',
-    featured: '추천 동영상',
-    loadingVideos: '동영상을 불러오는 중...',
-    randomPick: '랜덤 선택',
-    all: '전체',
-    popular: '인기',
-    newFilter: '최신',
-    searchPlaceholder: '동영상, 카테고리 또는 태그 검색...',
-    notification: '알림이 최신 상태입니다.',
-    videosError: '동영상을 불러오는 중 오류가 발생했습니다.',
-    downloadVideo: '동영상 다운로드',
-    copyLink: '링크 복사',
-    linkCopied: '링크가 클립보드에 복사되었습니다!',
-    downloadStarted: '다운로드 페이지를 열고 있습니다...'
-  },
-  fr: {
-    ageGateText: 'Cette plateforme est destinée aux contenus pour adultes de 18 ans et plus.',
-    ageWarning: 'En continuant, vous confirmez avoir au moins 18 ans et respecter les lois de votre région.',
-    enter18: 'Entrer 18+',
-    exit: 'Quitter',
-    adultMode: 'Mode 18+',
-    adultCatalog: 'Interface de catalogue pour contenus adultes.',
-    systemReady: 'Système prêt',
-    videoStat: 'Vidéos',
-    noVideos: 'Aucune vidéo pour le moment',
-    noVideosHint: 'Les vidéos intégrées externes apparaîtront ici lorsqu’elles seront ajoutées.',
-    backToCatalog: 'Retour au catalogue',
-    favorite: 'Favoris',
-    favoriteAdded: 'Dans les favoris',
-    delete: 'Supprimer',
-    videoTitleDefault: 'Titre de la vidéo',
-    categoryTag: 'Catégorie',
-    videoDescDefault: 'Aucune description n’a encore été ajoutée pour cette vidéo.',
-    noResults: 'Aucun contenu correspondant trouvé.',
-    resultsCount: 'vidéos répertoriées',
-    generalCategory: 'Général',
-    favoriteRemoved: 'Retiré des favoris.',
-    favoriteAddedToast: 'Ajouté aux favoris.',
-    confirmDelete: 'Voulez-vous vraiment supprimer cette vidéo ?',
-    deleteSuccess: 'Vidéo supprimée.',
-    deleteFail: 'Échec de la suppression.',
-    connectionError: 'Erreur de connexion.',
-    serverError: 'Erreur de connexion au serveur.',
-    discover: 'Découvrir',
-    home: 'Accueil',
-    trending: 'Tendances',
-    new: 'Nouveautés',
-    random: 'Aléatoire',
-    categories: 'Catégories',
-    romantic: 'Romantique',
-    action: 'Action',
-    fantasy: 'Fantaisie',
-    comedy: 'Comédie',
-    legal: 'Mentions légales',
-    terms: 'Conditions',
-    privacy: 'Confidentialité',
-    dmca: 'DMCA',
-    recommendedVideos: 'Vidéos recommandées',
-    recommendedDesc: 'Contenu sélectionné au hasard',
-    featured: 'À la une',
-    loadingVideos: 'Chargement des vidéos...',
-    randomPick: 'Choix aléatoire',
-    all: 'Toutes',
-    popular: 'Populaires',
-    newFilter: 'Nouvelles',
-    searchPlaceholder: 'Rechercher des vidéos, catégories ou tags...',
-    notification: 'Les notifications sont à jour.',
-    videosError: 'Une erreur est survenue lors du chargement des vidéos.',
-    downloadVideo: 'Télécharger la vidéo',
-    copyLink: 'Copier le lien',
-    linkCopied: 'Lien copié dans le presse-papiers !',
-    downloadStarted: 'Ouverture de la page de téléchargement...'
-  },
-  ar: {
-    ageGateText: 'هذه المنصة مخصصة لمحتوى البالغين 18+.',
-    ageWarning: 'بالمتابعة، تؤكد أن عمرك 18 عامًا أو أكثر وأنك تلتزم بقوانين منطقتك.',
-    enter18: 'دخول +18',
-    exit: 'خروج',
-    adultMode: 'وضع +18',
-    adultCatalog: 'واجهة كتالوج للمحتوى المخصص للبالغين.',
-    systemReady: 'النظام جاهز',
-    videoStat: 'فيديو',
-    noVideos: 'لا توجد مقاطع فيديو بعد',
-    noVideosHint: 'ستظهر مقاطع الفيديو المضمّنة الخارجية هنا عند إضافتها.',
-    backToCatalog: 'العودة إلى الكتالوج',
-    favorite: 'المفضلة',
-    favoriteAdded: 'في المفضلة',
-    delete: 'حذف',
-    videoTitleDefault: 'عنوان الفيديو',
-    categoryTag: 'الفئة',
-    videoDescDefault: 'لم تتم إضافة وصف لهذا الفيديو بعد.',
-    noResults: 'لم يتم العثور على محتوى مطابق.',
-    resultsCount: 'فيديو',
-    generalCategory: 'عام',
-    favoriteRemoved: 'تمت الإزالة من المفضلة.',
-    favoriteAddedToast: 'تمت الإضافة إلى المفضلة.',
-    confirmDelete: 'هل تريد بالتأكيد حذف هذا الفيديو؟',
-    deleteSuccess: 'تم حذف الفيديو.',
-    deleteFail: 'تعذر حذف الفيديو.',
-    connectionError: 'خطأ في الاتصال.',
-    serverError: 'خطأ في الاتصال بالخادم.',
-    discover: 'استكشاف',
-    home: 'الرئيسية',
-    trending: 'الأكثر رواجًا',
-    new: 'الإضافات الجديدة',
-    random: 'عشوائي',
-    categories: 'الفئات',
-    romantic: 'رومانسي',
-    action: 'أكشن',
-    fantasy: 'فانتازيا',
-    comedy: 'كوميديا',
-    legal: 'قانوني',
-    terms: 'الشروط',
-    privacy: 'الخصوصية',
-    dmca: 'DMCA',
-    recommendedVideos: 'فيديوهات مقترحة',
-    recommendedDesc: 'محتوى المختار عشوائياً',
-    featured: 'مميز',
-    loadingVideos: 'جارٍ تحميل الفيديوهات...',
-    randomPick: 'اختيار عشوائي',
-    all: 'الكل',
-    popular: 'شائع',
-    newFilter: 'جديد',
-    searchPlaceholder: 'ابحث عن فيديوهات أو فئات أو وسوم...',
-    notification: 'الإشعارات محدثة.',
-    videosError: 'حدث خطأ أثناء تحميل الفيديوهات.',
-    downloadVideo: 'تحميل الفيديو',
-    copyLink: 'نسخ الرابط',
-    linkCopied: 'تم نسخ الرابط إلى الحافظة!',
-    downloadStarted: 'جارٍ فتح صفحة التحميل...'
-  },
-  de: {
-    ageGateText: 'Diese Plattform ist für erwachsene 18+ Hentai-/Videoinhalte konzipiert.',
-    ageWarning: 'Wenn Sie fortfahren, bestätigen Sie, dass Sie mindestens 18 Jahre alt sind und die geltenden Gesetze beachten.',
-    enter18: '18+ Eintritt',
-    exit: 'Ausgang',
-    adultMode: '18+ Inhaltsmodus',
-    adultCatalog: 'Katalogoberfläche für Erwachsene.',
-    systemReady: 'System bereit',
-    videoStat: 'Videos',
-    noVideos: 'Noch keine Videos',
-    noVideosHint: 'Externe Embed-Quellen erscheinen hier, sobald sie hinzugefügt werden.',
-    backToCatalog: 'Zurück zum Katalog',
-    favorite: 'Favorit',
-    favoriteAdded: 'Gespeichert',
-    delete: 'Löschen',
-    videoTitleDefault: 'Video-Titel',
-    categoryTag: 'Kategorie',
-    videoDescDefault: 'Für dieses Video wurde noch keine Beschreibung eingegeben.',
-    noResults: 'Keine passenden Inhalte gefunden.',
-    resultsCount: 'Videos angezeigt',
-    generalCategory: 'Allgemein',
-    favoriteRemoved: 'Aus Favoriten entfernt.',
-    favoriteAddedToast: 'Zu Favoriten hinzugefügt.',
-    confirmDelete: 'Möchten Sie dieses Video wirklich löschen?',
-    deleteSuccess: 'Video gelöscht.',
-    deleteFail: 'Löschen fehlgeschlagen.',
-    connectionError: 'Verbindungsfehler.',
-    serverError: 'Server-Verbindungsfehler.',
-    discover: 'Entdecken',
-    home: 'Startseite',
-    trending: 'Trendings',
-    new: 'Neue Einträge',
-    random: 'Zufällig',
-    categories: 'Kategorien',
-    romantic: 'Romantisch',
-    action: 'Aktion',
-    fantasy: 'Fantasy',
-    comedy: 'Komödie',
-    legal: 'Rechtlich',
-    terms: 'Bedingungen',
-    privacy: 'Datenschutz',
-    dmca: 'DMCA',
-    recommendedVideos: 'Empfohlene Videos',
-    recommendedDesc: 'Zufällig ausgewählte Inhalte',
-    featured: 'Empfohlen',
-    loadingVideos: 'Videos werden geladen...',
-    randomPick: 'Zufällige Auswahl',
-    all: 'Alle',
-    popular: 'Beliebt',
-    newFilter: 'Neu',
-    searchPlaceholder: 'Videos, Kategorien oder Tags suchen...',
-    notification: 'Benachrichtigungen sind aktuell.',
-    videosError: 'Beim Laden der Videos ist ein Fehler aufgetreten.',
-    downloadVideo: 'Video herunterladen',
-    copyLink: 'Link kopieren',
-    linkCopied: 'Link in die Zwischenablage kopiert!',
-    downloadStarted: 'Download-Seite wird geöffnet...'
+    backToCatalog: 'Back to catalog', resultsCount: 'videos listed',
+    discover: 'Discover', home: 'Home', new: 'New Additions', random: 'Random',
+    terms: 'Terms', privacy: 'Privacy', dmca: 'DMCA',
+    recommendedVideos: 'Recommended Videos', recommendedDesc: 'Randomly selected content',
+    featured: 'Featured', loadingVideos: 'Loading videos...', randomPick: 'Random pick',
+    searchPlaceholder: 'Search videos, categories or tags...', notification: 'Notifications are up to date.',
+    downloadVideo: 'Download Video', copyLink: 'Copy Link',
+    linkCopied: 'Link copied to clipboard!', downloadStarted: 'Opening download page...'
   }
 };
 
-function getLocalizedText(key) {
-  return translations[getCurrentLanguage()]?.[key] || key;
-}
-
-function getCurrentLanguage(){
-  const saved = localStorage.getItem('hm_lang');
-  return saved && translations[saved] ? saved : 'tr';
-}
+function getCurrentLanguage(){ return 'tr'; }
+function getLocalizedText(key) { return translations[getCurrentLanguage()]?.[key] || key; }
 
 function applyLanguage(lang){
   const selected = translations[lang] ? lang : 'tr';
-  localStorage.setItem('hm_lang', selected);
-  document.documentElement.dir = selected === 'ar' ? 'rtl' : 'ltr';
-
-  const langSelect = document.getElementById('langSelect');
-  if (langSelect) {
-    langSelect.value = selected;
-  }
-
   document.querySelectorAll('[data-i18n]').forEach((node) => {
     const key = node.dataset.i18n;
-    if (translations[selected][key] !== undefined) {
-      node.textContent = translations[selected][key];
-    }
+    if (translations[selected][key] !== undefined) node.textContent = translations[selected][key];
   });
-
-  document.querySelectorAll('[data-i18n-placeholder]').forEach((node) => {
-    const key = node.dataset.i18nPlaceholder;
-    const value = translations[selected][key];
-    if (value) {
-      node.setAttribute('placeholder', value);
-    }
-  });
-
-  const searchInput = document.getElementById('search');
-  if (searchInput && translations[selected].searchPlaceholder) {
-    searchInput.placeholder = translations[selected].searchPlaceholder;
-  }
-
-  const sectionTitle = document.getElementById('sectionTitle');
-  if (sectionTitle && activeFilter === 'Tümü') {
-    sectionTitle.textContent = translations[selected].featured;
-  }
-
   updateLegalModalsContent(selected);
 }
 
 function updateLegalModalsContent(lang) {
-  const currentLang = legalTranslations[lang] ? lang : (legalTranslations['en'] ? 'en' : 'tr');
-  const texts = legalTranslations[currentLang] || legalTranslations['tr'];
-
-  const dmcaTitle = document.getElementById('dmcaModalTitle');
-  const dmcaBody = document.getElementById('dmcaModalBody');
-  if (dmcaTitle) dmcaTitle.textContent = texts.dmcaTitle;
-  if (dmcaBody) dmcaBody.innerHTML = texts.dmcaContent;
-
-  const termsTitle = document.getElementById('termsModalTitle');
-  const termsBody = document.getElementById('termsModalBody');
-  if (termsTitle) termsTitle.textContent = texts.termsTitle;
-  if (termsBody) termsBody.innerHTML = texts.termsContent;
-
-  const privacyTitle = document.getElementById('privacyModalTitle');
-  const privacyBody = document.getElementById('privacyModalBody');
-  if (privacyTitle) privacyTitle.textContent = texts.privacyTitle;
-  if (privacyBody) privacyBody.innerHTML = texts.privacyContent;
-}
-
-function toggleLanguage(){
-  const nextLang = document.getElementById('langSelect')?.value || getCurrentLanguage();
-  applyLanguage(nextLang);
-}
-
-function handleLanguageSelection(event){
-  const selected = event.target.value;
-  if (selected && translations[selected]) {
-    applyLanguage(selected);
-  }
-}
-
-function allowSiteOnLoad(){
-  const ageGate = document.getElementById('ageGate');
-  if (ageGate) ageGate.style.display = 'none';
-  localStorage.setItem('age_verified', 'true');
-  loadVideos();
+  const texts = legalTranslations[lang] || legalTranslations['tr'];
+  if (document.getElementById('dmcaModalTitle')) document.getElementById('dmcaModalTitle').textContent = texts.dmcaTitle;
+  if (document.getElementById('dmcaModalBody')) document.getElementById('dmcaModalBody').innerHTML = texts.dmcaContent;
+  if (document.getElementById('termsModalTitle')) document.getElementById('termsModalTitle').textContent = texts.termsTitle;
+  if (document.getElementById('termsModalBody')) document.getElementById('termsModalBody').innerHTML = texts.termsContent;
+  if (document.getElementById('privacyModalTitle')) document.getElementById('privacyModalTitle').textContent = texts.privacyTitle;
+  if (document.getElementById('privacyModalBody')) document.getElementById('privacyModalBody').innerHTML = texts.privacyContent;
 }
 
 function enterSite(){
   const ageGate = document.getElementById('ageGate');
   if (ageGate) ageGate.style.display = 'none';
-  localStorage.setItem('age_verified', 'true');
   loadVideos();
 }
 
@@ -1271,20 +386,11 @@ function leaveSite(){
   window.location.href = "https://www.google.com";
 }
 
-if(localStorage.getItem('age_verified') === 'true'){
-  document.getElementById('ageGate').style.display = 'none';
-  loadVideos();
-} else {
-  allowSiteOnLoad();
-}
-
 function toggleSidebar(){
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('sidebarOverlay');
   sidebar.classList.toggle('open');
-  if(overlay) {
-    overlay.classList.toggle('active', sidebar.classList.contains('open'));
-  }
+  if(overlay) overlay.classList.toggle('active', sidebar.classList.contains('open'));
 }
 
 function showToast(msg){
@@ -1294,130 +400,62 @@ function showToast(msg){
   setTimeout(()=>t.classList.remove('show'), 3000);
 }
 
-function openEmbedModal(){
-  document.getElementById('embedModal').classList.add('open');
-}
-
-function closeEmbedModal(){
-  document.getElementById('embedModal').classList.remove('open');
-}
-
-async function selectVideosFile(){
-  if(!window.showOpenFilePicker){
-    showToast('Bu tarayıcı doğrudan dosyaya yazmayı desteklemiyor.');
-    return false;
-  }
-
-  try {
-    const [handle] = await window.showOpenFilePicker({
-      multiple: false,
-      types: [{description: 'JavaScript dosyası', accept: {'text/javascript': ['.js']}}]
-    });
-    videosFileHandle = handle;
-    const status = document.getElementById('videosFileStatus');
-    if(status) status.innerText = 'videos.js bağlı';
-    return true;
-  } catch (error) {
-    if(error.name !== 'AbortError') showToast('videos.js dosyası seçilemedi.');
-    return false;
-  }
-}
-
-async function addRuntimeEmbed(){
-  const title = document.getElementById('runtimeVideoTitle').value.trim() || 'Yeni Video';
-  const embedCode = document.getElementById('runtimeEmbedCode').value.trim();
-  const thumbnail = document.getElementById('runtimeThumbnail').value.trim();
-  if(!embedCode) return;
-
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(embedCode, 'text/html');
-  const iframe = doc.querySelector('iframe');
-  const embedSrc = iframe?.getAttribute('src') || embedCode;
-  if(!/^https?:\/\//i.test(embedSrc)) return;
-
-  const video = {
-    id: `runtime-${Date.now()}`,
-    title,
-    category: 'Genel',
-    type: 'embed',
-    embedSrc,
-    url: embedSrc,
-    embedCode,
-    thumbnail,
-    preview: thumbnail,
-    duration: 'HD',
-    rating: '4.8',
-    createdAt: new Date().toISOString()
-  };
-
-  allVideos.push(video);
-  const saved = await saveVideosFile();
-  if(!saved){
-    allVideos.pop();
-    return;
-  }
-
-  closeEmbedModal();
-  document.getElementById('runtimeVideoTitle').value = '';
-  document.getElementById('runtimeEmbedCode').value = '';
-  document.getElementById('runtimeThumbnail').value = '';
-  renderGrid();
-  showToast('Video aynı videos.js dosyasına yazıldı.');
-}
-
-async function saveVideosFile(){
-  if(!videosFileHandle){
-    const selected = await selectVideosFile();
-    if(!selected) return false;
-  }
-
-  const source = `window.STATIC_VIDEOS = ${JSON.stringify(allVideos, null, 2)};\n`;
-  try {
-    const writable = await videosFileHandle.createWritable();
-    await writable.write(source);
-    await writable.close();
-    return true;
-  } catch (error) {
-    showToast('videos.js dosyasına yazılamadı.');
-    return false;
-  }
-}
-
+// HEM videos.js, HEM videos.json, HEM DE Node.js (/api/videos) ÜZERİNDEN VİDEOLARI OTOMATİK YÜKLER
 async function loadVideos(){
-  localStorage.removeItem('hentaimini_runtime_videos');
-  allVideos = Array.isArray(window.STATIC_VIDEOS) ? window.STATIC_VIDEOS : [];
+  allVideos = Array.isArray(window.STATIC_VIDEOS) ? [...window.STATIC_VIDEOS] : [];
+
+  try {
+    const apiRes = await fetch('/api/videos?v=' + Date.now());
+    if (apiRes.ok) {
+      const apiData = await apiRes.json();
+      if (Array.isArray(apiData) && apiData.length > 0) allVideos = apiData;
+    }
+  } catch (e) {
+    try {
+      const jsonRes = await fetch('videos.json?v=' + Date.now());
+      if (jsonRes.ok) {
+        const jsonData = await jsonRes.json();
+        if (Array.isArray(jsonData) && jsonData.length > 0) allVideos = jsonData;
+      }
+    } catch (err) {}
+  }
+
+  if (allVideos.length === 0) {
+    try {
+      const shared = localStorage.getItem('hentaimini_shared_videos');
+      if (shared) {
+        const parsed = JSON.parse(shared);
+        if (Array.isArray(parsed) && parsed.length > 0) allVideos = parsed;
+      }
+    } catch (err) {}
+  }
+
   renderGrid();
-  
-  // URL parametresinde v (video id) varsa doğrudan aç
+
   const urlParams = new URLSearchParams(window.location.search);
   const videoId = urlParams.get('v');
   if(videoId) {
     const found = allVideos.find(v => v.id === videoId);
-    if(found) {
-      openWatch(videoId);
-    }
+    if(found) openWatch(videoId);
   }
 }
 
 function renderGrid(){
   const grid = document.getElementById('grid');
   const empty = document.getElementById('empty');
+  const searchQuery = (document.getElementById('search')?.value || '').toLowerCase().trim();
 
   let filtered = allVideos.filter(v => {
-    const matchesFilter = activeFilter === 'Tümü' || v.category === activeFilter || (activeFilter === 'Popüler' && Number(v.rating)>=4.8) || (activeFilter === 'Yeni');
-    return matchesFilter;
+    const matchesFilter = activeFilter === 'Tümü' || v.category === activeFilter || (activeFilter === 'Yeni');
+    const matchesSearch = !searchQuery ||
+      (v.title && v.title.toLowerCase().includes(searchQuery)) ||
+      (v.category && v.category.toLowerCase().includes(searchQuery)) ||
+      (Array.isArray(v.tags) && v.tags.some(t => t.toLowerCase().includes(searchQuery)));
+    return matchesFilter && matchesSearch;
   });
 
   if (activeFilter === 'Yeni') {
-    filtered.sort((a, b) => {
-      if (a.createdAt && b.createdAt) {
-        return new Date(b.createdAt) - new Date(a.createdAt);
-      }
-      if (!a.createdAt && !b.createdAt) {
-        return allVideos.indexOf(b) - allVideos.indexOf(a);
-      }
-      return a.createdAt ? 1 : -1;
-    });
+    filtered.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
   }
 
   if(filtered.length === 0){
@@ -1431,16 +469,24 @@ function renderGrid(){
   document.getElementById('sectionDesc').innerText = `${filtered.length} ${getLocalizedText('resultsCount')}`;
 
   grid.innerHTML = filtered.map(v => {
-    const hasThumb = v.thumbnail && v.thumbnail.length > 5;
-    const hasPreview = v.preview && v.preview.length > 5;
+    const thumbUrl = v.thumbnail || v.poster || '';
+    const hasThumb = thumbUrl.length > 5;
+    const epBadge = v.episode || 'HD';
 
     return `
       <div class="card" onclick="openWatch('${v.id}')">
         <div class="thumb">
           <div class="thumb-art"><i class="fa-solid fa-play"></i></div>
-          ${hasThumb ? `<img class="thumb-img" src="${encodeURI(v.thumbnail)}" alt="${v.title}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';">` : ''}
-          ${hasPreview ? `<img class="thumb-preview" src="${encodeURI(v.preview)}" alt="preview" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';">` : ''}
+          ${hasThumb ? `<img class="thumb-img" src="${encodeURI(thumbUrl)}" alt="${v.title}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';">` : ''}
+          <span class="quality">${epBadge}</span>
+          <span class="duration">${v.censor || '1080p'}</span>
           <div class="play"><span><i class="fa-solid fa-play" style="color:#fff;margin-left:2px"></i></span></div>
+        </div>
+        <div class="info">
+          <div class="title">${v.title}</div>
+          <div class="meta">
+            <span class="tag">${v.language || v.category || 'TR Altyazılı'}</span>
+          </div>
         </div>
       </div>
     `;
@@ -1449,14 +495,6 @@ function renderGrid(){
 
 function setFilter(category){
   activeFilter = category;
-  document.querySelectorAll('.filter').forEach(f => {
-    f.classList.toggle('active', f.getAttribute('data-filter') === category);
-  });
-  const title = document.getElementById('sectionTitle');
-  const lang = getCurrentLanguage();
-  if (title) {
-    title.innerText = category === 'Tümü' ? translations[lang].featured : `${category} ${translations[lang].videoStat}`;
-  }
   goHome();
   renderGrid();
 }
@@ -1464,14 +502,12 @@ function setFilter(category){
 function goHome(){
   document.getElementById('watchView').classList.remove('active');
   document.getElementById('homeView').style.display = 'block';
+  document.getElementById('playerLargeBox').innerHTML = '';
   currentVideoId = null;
-  
-  // URL'den v parametresini kaldır (sayfa yenilenmeden)
   if(window.history && window.history.replaceState) {
     const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
     window.history.replaceState({path: cleanUrl}, '', cleanUrl);
   }
-  
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
@@ -1485,160 +521,83 @@ function openWatch(id){
   const video = allVideos.find(v => v.id === id);
   if(!video) return;
   currentVideoId = id;
-  const lang = getCurrentLanguage();
 
   document.getElementById('homeView').style.display = 'none';
   const watchView = document.getElementById('watchView');
   watchView.classList.add('active');
 
   document.getElementById('watchTitle').innerText = video.title;
-  const localeMap = { tr: 'tr-TR', en: 'en-US', de: 'de-DE' };
-  document.getElementById('watchDate').innerText = new Date(video.createdAt || Date.now()).toLocaleDateString(localeMap[lang] || 'tr-TR');
+  document.getElementById('watchDate').innerText = new Date(video.createdAt || Date.now()).toLocaleDateString('tr-TR');
+  document.getElementById('watchExtraMeta').innerText = `${video.censor || 'Sansürsüz'} • ${video.language || 'TR Altyazılı'}`;
+  document.getElementById('watchDesc').innerText = video.description || '';
   renderRecommendations(id);
 
   const playerBox = document.getElementById('playerLargeBox');
-  let src = video.embedSrc || video.url || '';
+  let src = video.embedSrc || video.voeEmbedUrl || video.url || '';
 
-  if(src.includes('iframe') || src.includes('<')) {
+  if(src.includes('<iframe')) {
     playerBox.innerHTML = src;
-  } else if(src.endsWith('.mp4') || src.endsWith('.webm') || src.startsWith('blob:')) {
-    playerBox.innerHTML = `<video src="${src}" controls autoplay playsinline style="width:100%;height:100%"></video>`;
-  } else if(src.includes('youtube.com') || src.includes('youtu.be')) {
-    let ytId = '';
-    const m = src.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
-    if(m && m[1]) ytId = m[1];
-    playerBox.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
   } else {
-    playerBox.innerHTML = `<iframe src="${src}" allowfullscreen></iframe>`;
+    playerBox.innerHTML = `<iframe src="${src}" scrolling="no" frameborder="0" allowfullscreen></iframe>`;
   }
 
-  // URL query güncelle (örneğin: ?v=runtime-12345)
   if(window.history && window.history.replaceState) {
     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?v=' + id;
     window.history.replaceState({path: newUrl}, '', newUrl);
   }
-
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
-// Videoyu İndir Fonksiyonu
 function downloadCurrentVideo(){
   if(!currentVideoId) return;
   const video = allVideos.find(v => v.id === currentVideoId);
   if(!video) return;
-
-  const targetUrl = video.url || video.embedSrc || '';
-  if(!targetUrl) {
-    showToast('İndirme bağlantısı bulunamadı.');
-    return;
-  }
-
+  const targetUrl = video.url || video.embedSrc || video.voeEmbedUrl || '';
+  if(!targetUrl) return;
   showToast(getLocalizedText('downloadStarted'));
-
-  // Doğrudan video dosyası (.mp4 / .webm) ise indirmeyi başlat
-  if(targetUrl.endsWith('.mp4') || targetUrl.endsWith('.webm')) {
-    const a = document.createElement('a');
-    a.href = targetUrl;
-    a.download = (video.title || 'video').replace(/[^a-zA-Z0-9_-]/g, '_') + (targetUrl.endsWith('.webm') ? '.webm' : '.mp4');
-    a.target = '_blank';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  } else {
-    // Harici sunucu / Embed sayfası ise yeni sekmede açarak indirmeye yönlendir
-    window.open(targetUrl, '_blank', 'noopener,noreferrer');
-  }
+  window.open(targetUrl, '_blank', 'noopener,noreferrer');
 }
 
-// Bağlantıyı Kopyala Fonksiyonu
 function copyCurrentVideoLink(){
   if(!currentVideoId) return;
-  
-  // Paylaşım URL'si (Doğrudan sitenin video izleme bağlantısı)
   const shareUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?v=' + currentVideoId;
-
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(shareUrl).then(() => {
-      showToast(getLocalizedText('linkCopied'));
-    }).catch(() => {
-      fallbackCopyText(shareUrl);
-    });
-  } else {
-    fallbackCopyText(shareUrl);
-  }
-}
-
-function fallbackCopyText(text){
   const textArea = document.createElement("textarea");
-  textArea.value = text;
-  textArea.style.position = "fixed";
-  textArea.style.left = "-999999px";
-  textArea.style.top = "-999999px";
+  textArea.value = shareUrl;
   document.body.appendChild(textArea);
-  textArea.focus();
   textArea.select();
-  try {
-    document.execCommand('copy');
-    showToast(getLocalizedText('linkCopied'));
-  } catch (err) {
-    showToast('Kopyalama başarısız oldu.');
-  }
+  document.execCommand('copy');
   document.body.removeChild(textArea);
+  showToast(getLocalizedText('linkCopied'));
 }
 
 function renderRecommendations(currentId){
   const grid = document.getElementById('recommendationsGrid');
   if(!grid) return;
-
-  const candidates = allVideos
-    .filter(video => video.id !== currentId)
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 8);
-
+  const candidates = allVideos.filter(video => video.id !== currentId).slice(0, 8);
   grid.innerHTML = candidates.map(video => {
-    const hasThumb = video.thumbnail && video.thumbnail.length > 5;
-    const hasPreview = video.preview && video.preview.length > 5;
-
+    const thumbUrl = video.thumbnail || video.poster || '';
     return `
       <div class="card" onclick="openWatch('${video.id}')">
         <div class="thumb">
           <div class="thumb-art"><i class="fa-solid fa-play"></i></div>
-          ${hasThumb ? `<img class="thumb-img" src="${encodeURI(video.thumbnail)}" alt="${video.title}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';">` : ''}
-          ${hasPreview ? `<img class="thumb-preview" src="${encodeURI(video.preview)}" alt="preview" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';">` : ''}
+          ${thumbUrl ? `<img class="thumb-img" src="${encodeURI(thumbUrl)}" alt="${video.title}" loading="lazy">` : ''}
           <div class="play"><span><i class="fa-solid fa-play" style="color:#fff;margin-left:2px"></i></span></div>
         </div>
+        <div class="info"><div class="title">${video.title}</div></div>
       </div>
     `;
   }).join('');
 }
 
-function openDmca(){
-  updateLegalModalsContent(getCurrentLanguage());
-  document.getElementById('dmcaModal').classList.add('open');
-}
-function closeDmca(){
-  document.getElementById('dmcaModal').classList.remove('open');
-}
-
-function openLegal(modalId){
-  updateLegalModalsContent(getCurrentLanguage());
-  document.getElementById(modalId).classList.add('open');
-}
-function closeLegal(modalId){
-  document.getElementById(modalId).classList.remove('open');
-}
+function openDmca(){ document.getElementById('dmcaModal').classList.add('open'); }
+function closeDmca(){ document.getElementById('dmcaModal').classList.remove('open'); }
+function openLegal(modalId){ document.getElementById(modalId).classList.add('open'); }
+function closeLegal(modalId){ document.getElementById(modalId).classList.remove('open'); }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const savedLang = getCurrentLanguage();
-  applyLanguage(savedLang);
-  const langSelect = document.getElementById('langSelect');
-  if (langSelect) {
-    langSelect.value = savedLang;
-    langSelect.addEventListener('change', handleLanguageSelection);
-  }
-  if (localStorage.getItem('age_verified') !== 'true') {
-    allowSiteOnLoad();
-  }
+  applyLanguage('tr');
+  document.getElementById('ageGate').style.display = 'none';
+  loadVideos();
 });
 </script>
 </body>

@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Paneli - VOE.sx Video Yükleme ve Yönetim</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                        },
+                        dark: {
+                            800: '#18181b',
+                            900: '#0f0f12',
+                            950: '#09090b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #09090b;
+            color: #f4f4f5;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #18181b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3f3f46;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ec4899;
+        }
+        .glass-panel {
+            background: rgba(24, 24, 27, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- BİLDİRİM KUTUSU (Toast) -->
+    <div id="toastContainer" class="fixed top-5 right-5 z-50 flex flex-col gap-3 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+    <!-- 1. GİRİŞ EKRANI (Sadece Admin Yetkisi İçin Kilit Ekranı) -->
+    <div id="loginScreen" class="fixed inset-0 z-40 flex items-center justify-center p-4 bg-dark-950 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-700/20 via-dark-950 to-dark-950">
+        <div class="glass-panel w-full max-w-md p-8 rounded-2xl shadow-2xl border border-zinc-800/80 transition-all">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-gradient-to-tr from-brand-600 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-brand-500/30">
+                    <i class="fa-solid fa-user-shield text-2xl text-white"></i>
+                </div>
+                <h1 class="text-2xl font-bold tracking-tight text-white">Yönetici Girişi</h1>
+                <p class="text-sm text-zinc-400 mt-1">Video yükleme ekranına sadece yetkili erişebilir.</p>
+            </div>
+
+            <form id="loginForm" class="space-y-5">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Yönetici Kullanıcı Adı</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-zinc-500">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <input type="text" id="adminUser" required value="admin"
+                            class="w-full pl-10 pr-4 py-3 bg-dark-900 border border-zinc-800 rounded-xl focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-white text-sm transition"
+                            placeholder="Kullanıcı adınız">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Yönetici Şifresi / Gizli Anahtar</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-zinc-500">
+                            <i class="fa-solid fa-key"></i>
+                        </span>
+                        <input type="password" id="adminPass" required
+                            class="w-full pl-10 pr-10 py-3 bg-dark-900 border border-zinc-800 rounded-xl focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-white text-sm transition"
+                            placeholder="••••••••">
+                        <button type="button" id="togglePassBtn" class="absolute inset-y-0 right-0 flex items-center pr-3.5 text-zinc-500 hover:text-zinc-300">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <p class="text-xs text-zinc-500 mt-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-info text-brand-500"></i>
+                        <span>Demo varsayılan şifre: <strong class="text-zinc-300 select-all">admin123</strong></span>
+                    </p>
+                </div>
+
+                <button type="submit"
+                    class="w-full py-3.5 px-4 bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/25 transition duration-200 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-unlock-keyhole"></i>
+                    <span>Panele Giriş Yap</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. ANA YÖNETİM PANELİ (Giriş Yapıldıktan Sonra Görünür) -->
+    <div id="adminDashboard" class="hidden flex-1 flex flex-col">
+        <!-- Üst Bar (Header) -->
+        <header class="glass-panel sticky top-0 z-30 border-b border-zinc-800/80 px-4 sm:px-8 py-4">
+            <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-purple-600 flex items-center justify-center shadow-md shadow-brand-500/20">
+                        <i class="fa-solid fa-cloud-arrow-up text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="font-bold text-lg text-white">HentaiMini Admin Studio</h1>
+                            <span id="cloudSyncBadge" class="px-2 py-0.5 text-[11px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                HentaiMini Bağlı
+                            </span>
+                        </div>
+                        <p class="text-xs text-zinc-400">VOE.sx Embed Yükleme & Doğrudan videos.js / Sunucu Kayıt Paneli</p>
+                    </div>
+                </div>
+
+                <!-- GÖRÜNÜM GEÇİŞ SEKMELERİ -->
+                <div class="flex items-center bg-dark-900 p-1 rounded-xl border border-zinc-800">
+                    <button id="switchAdminTabBtn" class="px-3.5 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold transition flex items-center gap-1.5 shadow">
+                        <i class="fa-solid fa-sliders"></i>
+                        <span>Yönetim Paneli</span>
+                    </button>
+                    <button id="switchPublicSiteTabBtn" class="px-3.5 py-1.5 rounded-lg text-zinc-400 hover:text-white text-xs font-semibold transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-globe"></i>
+                        <span>Canlı Site Görünümü (Test)</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2.5">
+                    <button id="openIntegrationModalBtn" class="px-3.5 py-2 rounded-xl bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 text-xs font-semibold transition flex items-center gap-2 border border-purple-500/40">
+                        <i class="fa-solid fa-link text-purple-400"></i>
+                        <span class="hidden sm:inline">Siteme Nasıl Bağlarım?</span>
+                    </button>
+                    <button id="connectVideosJsBtn" class="px-3.5 py-2 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 text-xs font-semibold transition flex items-center gap-2 border border-emerald-500/40 shadow-lg shadow-emerald-500/10" title="Bilgisayarınızdaki videos.js dosyasını seçip doğrudan içine yazın">
+                        <i class="fa-solid fa-folder-tree text-emerald-400"></i>
+                        <span id="connectVideosJsText">videos.js Bağla</span>
+                    </button>
+                    <button id="exportVideosJsBtn" class="px-3.5 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold transition flex items-center gap-2 shadow-lg shadow-brand-600/25" title="HentaiMini index.html için hazır videos.js indir">
+                        <i class="fa-brands fa-js text-yellow-300"></i>
+                        <span>videos.js İndir</span>
+                    </button>
+                    <button id="exportJsonBtn" class="px-3.5 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-medium transition flex items-center gap-2 border border-zinc-700" title="videos.json İndir">
+                        <i class="fa-solid fa-file-code text-brand-500"></i>
+                        <span class="hidden md:inline">videos.json</span>
+                    </button>
+                    <button id="changePassModalBtn" class="px-3.5 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-medium transition flex items-center gap-2 border border-zinc-700">
+                        <i class="fa-solid fa-shield-halved text-purple-400"></i>
+                        <span class="hidden sm:inline">Şifre</span>
+                    </button>
+                    <button id="logoutBtn" class="px-3.5 py-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 text-xs font-medium transition flex items-center gap-2">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="hidden sm:inline">Çıkış</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Ana İçerik Alanı (YÖNETİM PANELİ GÖRÜNÜMÜ) -->
+        <main id="adminMainView" class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- SOL SÜTUN: VİDEO YÜKLEME FORMU (7 Sütun) -->
+            <section class="lg:col-span-7 space-y-6">
+                <div class="glass-panel rounded-2xl p-6 border border-zinc-800/80 shadow-xl">
+                    <div class="flex items-center justify-between border-b border-zinc-800 pb-4 mb-6">
+                        <div class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-plus text-brand-500 text-xl"></i>
+                            <h2 class="text-lg font-bold text-white" id="formHeaderTitle">Yeni Bölüm / Video Ekle</h2>
+                        </div>
+                        <span class="text-xs text-zinc-400">* işaretli alanlar zorunludur</span>
+                    </div>
+
+                    <form id="videoUploadForm" class="space-y-5">
+                        <input type="hidden" id="editingVideoId" value="">
+
+                        <!-- Başlık ve Bölüm -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="sm:col-span-2">
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Seri / Video Başlığı *</label>
+                                <input type="text" id="videoTitle" required
+                                    class="w-full px-4 py-2.5 bg-dark-900 border border-zinc-800 rounded-xl focus:outline-none focus:border-brand-500 text-white text-sm"
+                                    placeholder="Örn: Overflow 1. Sezon">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Bölüm No *</label>
+                                <input type="text" id="episodeNumber" required
+                                    class="w-full px-4 py-2.5 bg-dark-900 border border-zinc-800 rounded-xl focus:outline-none focus:border-brand-500 text-white text-sm"
+                                    placeholder="Örn: Bölüm 1">
+                            </div>
+                        </div>
+
+                        <!-- VOE.SX EMBED KODU ALANI -->
+                        <div class="p-4 rounded-xl bg-gradient-to-br from-dark-900 to-zinc-900/90 border border-brand-500/30 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-brand-500 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-code"></i>
+                                    <span>VOE.sx Embed Kodu veya Linki *</span>
+                                </label>
+                                <span id="voeStatusBadge" class="text-[11px] px-2 py-0.5 rounded bg-zinc-800 text-zinc-400">Kod Bekleniyor</span>
+                            </div>
+
+                            <textarea id="voeEmbedInput" rows="3" required
+                                class="w-full p-3 bg-dark-950 border border-zinc-800 rounded-xl focus:outline-none focus:border-brand-500 text-zinc-200 font-mono text-xs leading-relaxed"
+                                placeholder='<iframe src="https://voe.sx/e/xxxxxx" width="560" height="315" scrolling="no" frameborder="0" allowfullscreen></iframe> veya doğrudan https://voe.sx/e/xxxxxx yapıştırın...'></textarea>
+
+                            <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-zinc-400">
+                                <p><i class="fa-solid fa-wand-magic-sparkles text-purple-400 mr-1"></i> Tam <code>&lt;iframe&gt;</code> kodunu veya normal <code>voe.sx/xxxx</code> linkini yapıştırabilirsiniz, sistem otomatik çevirir.</p>
+                                <button type="button" id="fillSampleVoeBtn" class="text-brand-500 hover:underline font-medium">Örnek VOE Kodu Doldur</button>
+                            </div>
+                        </div>
+
+                        <!-- Poster URL ve Sansür/Dil Seçimi -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Kapak / Poster Görsel URL</label>
+                                <input type="url" id="posterUrl"
+                                    class="w-full px-4 py-2.5 bg-dark-900 border border-zinc-800 rounded-xl focus:outline-none focus:border-brand-500 text-white text-sm"
+                                    placeholder="https://.../kapak.jpg">
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Sansür Durumu</label>
+                                    <select id="censorStatus" class="w-full px-3 py-2.5 bg-dark-900 border border-zinc-800 rounded-xl focus:outline-none focus:border-brand-500 text-white text-sm">
+                                        <option value="Sansürsüz">Sansürsüz (Uncensored)</option>
+                                        <option value="Sansürlü">Sansürlü</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Altyazı / Dil</label>
+                                    <select id="subLanguage" class="w-full px-3 py-2.5 bg-dark-900 border border-zinc-800 rounded-xl focus:outline-none focus:border-brand-500 text-white text-sm">
+                                        <option value="Türkçe Altyazılı">TR Altyazılı</option>
+                                        <option value="İngilizce Altyazılı">EN Altyazılı</option>
+                                        <option value="RAW (Altyazısız)">RAW</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Etiketler / Kategoriler -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Etiketler / Kategoriler (Virgülle ayırın veya tıklayın)</label>
+                            <input type="text" id="videoTags"
+                                class="w-full px-4 py-2.5 bg-dark-900 border border-zinc-800 rounded-xl focus:outline-none focus:border-brand-500 text-white text-sm mb-2"
+                                placeholder="Örn: Romance, School, Big Breasts, Uncensored">
+                            <div class="flex flex-wrap gap-1.5" id="quickTags">
+                                <button type="button" data-tag="Uncensored" class="quick-tag px-2.5 py-1 rounded-lg bg-zinc-800/80 hover:bg-brand-600/30 hover:border-brand-500 border border-zinc-700 text-xs text-zinc-300 transition">+ Uncensored</button>
+                                <button type="button" data-tag="Vanilla" class="quick-tag px-2.5 py-1 rounded-lg bg-zinc-800/80 hover:bg-brand-600/30 hover:border-brand-500 border border-zinc-700 text-xs text-zinc-300 transition">+ Vanilla</button>
+                                <button type="button" data-tag="Romance" class="quick-tag px-2.5 py-1 rounded-lg bg-zinc-800/80 hover:bg-brand-600/30 hover:border-brand-500 border border-zinc-700 text-xs text-zinc-300 transition">+ Romance</button>
+                                <button type="button" data-tag="Fantasy" class="quick-tag px-2.5 py-1 rounded-lg bg-zinc-800/80 hover:bg-brand-600/30 hover:border-brand-500 border border-zinc-700 text-xs text-zinc-300 transition">+ Fantasy</button>
+                                <button type="button" data-tag="Maid" class="quick-tag px-2.5 py-1 rounded-lg bg-zinc-800/80 hover:bg-brand-600/30 hover:border-brand-500 border border-zinc-700 text-xs text-zinc-300 transition">+ Maid</button>
+                                <button type="button" data-tag="HD 1080p" class="quick-tag px-2.5 py-1 rounded-lg bg-zinc-800/80 hover:bg-brand-600/30 hover:border-brand-500 border border-zinc-700 text-xs text-zinc-300 transition">+ HD 1080p</button>
+                            </div>
+                        </div>
+
+                        <!-- Açıklama / Konu -->
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Bölüm Açıklaması / Konusu</label>
+                            <textarea id="videoDesc" rows="3"
+                                class="w-full p-3.5 bg-dark-900 border border-zinc-800 rounded-xl focus:outline-none focus:border-brand-500 text-white text-sm"
+                                placeholder="Bölüm hakkında kısa özet..."></textarea>
+                        </div>
+
+                        <!-- Form Butonları -->
+                        <div class="pt-2 flex flex-wrap items-center gap-3">
+                            <button type="submit" id="submitBtn"
+                                class="flex-1 py-3.5 px-6 bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/25 transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <span id="submitBtnText">Videoyu Sisteme Yükle ve Yayınla</span>
+                            </button>
+                            <button type="button" id="cancelEditBtn" class="hidden py-3.5 px-5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-medium rounded-xl transition">
+                                İptal
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- SAĞ SÜTUN: CANLI VOE.SX ÖNİZLEME & HAZIR HTML KODU (5 Sütun) -->
+            <section class="lg:col-span-5 space-y-6">
+                <!-- Canlı Player Önizleme -->
+                <div class="glass-panel rounded-2xl p-6 border border-zinc-800/80 shadow-xl">
+                    <div class="flex items-center justify-between border-b border-zinc-800 pb-4 mb-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-play text-brand-500"></i>
+                            <h3 class="font-bold text-white text-base">Canlı VOE.sx Player Önizleme</h3>
+                        </div>
+                        <span id="extractedUrlDisplay" class="text-[11px] font-mono text-zinc-400 truncate max-w-[180px]">URL Yok</span>
+                    </div>
+
+                    <!-- 16:9 Responsive Iframe Container -->
+                    <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-dark-950 border border-zinc-800 flex items-center justify-center">
+                        <div id="previewPlaceholder" class="text-center p-6">
+                            <i class="fa-solid fa-film text-4xl text-zinc-700 mb-3"></i>
+                            <p class="text-sm text-zinc-400 font-medium">VOE.sx Embed Kodu Girildiğinde</p>
+                            <p class="text-xs text-zinc-600 mt-1">Video oynatıcı burada canlı olarak test edilecektir.</p>
+                        </div>
+                        <iframe id="livePreviewIframe" class="hidden w-full h-full" src="" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                    </div>
+
+                    <!-- Sitenize Direkt Yapıştırılabilir Kart HTML Kodu -->
+                    <div class="mt-6 pt-5 border-t border-zinc-800">
+                        <div class="flex items-center justify-between mb-2">
+                            <label class="text-xs font-semibold uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-terminal text-purple-400"></i>
+                                <span>Ana Siteniz İçin Hazır Embed Kodu</span>
+                            </label>
+                            <button type="button" id="copyGeneratedHtmlBtn" class="text-xs px-2.5 py-1 rounded-lg bg-brand-500/20 hover:bg-brand-500/30 text-brand-400 font-medium transition flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i>
+                                <span>Kodu Kopyala</span>
+                            </button>
+                        </div>
+                        <textarea id="generatedHtmlOutput" readonly rows="4"
+                            class="w-full p-3 bg-dark-950 border border-zinc-800 rounded-xl text-zinc-400 font-mono text-[11px] focus:outline-none"
+                            placeholder="Formu doldurduğunuzda ana sitenize ekleyebileceğiniz temiz HTML/Iframe kodu burada oluşur..."></textarea>
+                    </div>
+                </div>
+
+                <!-- İstatistik Özeti -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="glass-panel p-4 rounded-2xl border border-zinc-800/80 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-500 text-xl">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-zinc-400">Toplam Yüklenen</p>
+                            <p class="text-2xl font-bold text-white" id="statTotalVideos">0</p>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-4 rounded-2xl border border-zinc-800/80 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-xl">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-zinc-400">Aktif Sunucu</p>
+                            <p class="text-lg font-bold text-white">VOE.sx HD</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ALT TAM GENİŞLİK: YÜKLENEN VİDEOLAR LİSTESİ (12 Sütun) -->
+            <section class="lg:col-span-12">
+                <div class="glass-panel rounded-2xl p-6 border border-zinc-800/80 shadow-xl">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800 pb-4 mb-6">
+                        <div>
+                            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-layer-group text-brand-500"></i>
+                                <span>Yüklenen Videolarınız (Yönetim Listesi)</span>
+                            </h2>
+                            <p class="text-xs text-zinc-400 mt-0.5">Eklediğiniz tüm VOE.sx bölümlerini buradan izleyebilir, düzenleyebilir veya silebilirsiniz.</p>
+                        </div>
+                        <div class="relative w-full sm:w-72">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500 text-xs"></i>
+                            <input type="text" id="searchVideosInput"
+                                class="w-full pl-9 pr-4 py-2 bg-dark-900 border border-zinc-800 rounded-xl text-sm text-white focus:outline-none focus:border-brand-500"
+                                placeholder="Bölüm veya etiket ara...">
+                        </div>
+                    </div>
+
+                    <!-- Video Grid Listesi -->
+                    <div id="videosGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- JS ile doldurulacak -->
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- CANLI SİTE GÖRÜNÜMÜ -->
+        <section id="publicSiteView" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 sm:p-8 space-y-8">
+            <div class="p-4 rounded-2xl bg-gradient-to-r from-purple-900/40 via-brand-900/30 to-dark-900 border border-brand-500/30 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/20 border border-brand-500/40 flex items-center justify-center text-brand-400">
+                        <i class="fa-solid fa-satellite-dish"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-white">Ziyaretçi / Ana Site Önizleme Modu</h3>
+                        <p class="text-xs text-zinc-300">Yönetici panelinden eklediğiniz her VOE.sx videosu, ana sitenizde ziyaretçilere tam olarak bu şekilde yansır.</p>
+                    </div>
+                </div>
+                <button id="openGuideFromPreviewBtn" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold transition">
+                    Ana Sitemin Kodunu Al
+                </button>
+            </div>
+
+            <div class="glass-panel rounded-2xl p-5 sm:p-6 border border-zinc-800/90 shadow-2xl space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span id="publicActiveEpisodeBadge" class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-brand-600 text-white">Bölüm 1</span>
+                            <h2 id="publicActiveTitle" class="text-xl font-bold text-white">Video Seçin</h2>
+                        </div>
+                        <p id="publicActiveDesc" class="text-xs text-zinc-400 mt-1">Aşağıdaki listeden bir bölüme tıkladığınızda VOE.sx oynatıcısı burada başlar.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span id="publicActiveCensor" class="px-3 py-1 rounded-lg bg-zinc-800 text-zinc-200 text-xs font-medium">Sansürsüz</span>
+                        <span id="publicActiveLang" class="px-3 py-1 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/30 text-xs font-medium">TR Altyazılı</span>
+                    </div>
+                </div>
+
+                <div class="aspect-video w-full rounded-xl overflow-hidden bg-black border border-zinc-800 shadow-inner">
+                    <iframe id="publicMainIframe" class="w-full h-full" src="" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                </div>
+
+                <div id="publicActiveTags" class="flex flex-wrap gap-1.5 pt-1"></div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-fire text-brand-500"></i>
+                        <span>Son Yüklenen Bölümler</span>
+                    </h3>
+                    <span class="text-xs text-zinc-400">İzlemek istediğiniz bölüme tıklayın</span>
+                </div>
+                <div id="publicVideosGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SİTEYE BAĞLAMA (ENTEGRASYON SİHİRBAZI) MODAL EKRANI -->
+    <div id="integrationModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-4xl rounded-2xl border border-zinc-700 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="flex items-center justify-between px-6 py-4 bg-dark-900 border-b border-zinc-800">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-brand-500/20 border border-brand-500/30 flex items-center justify-center text-brand-400">
+                        <i class="fa-solid fa-link"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-base">Bu Paneli Ana Sitenize Nasıl Bağlarsınız?</h3>
+                        <p class="text-xs text-zinc-400">Altyapınıza uygun olan yöntemi seçip kullanabilirsiniz.</p>
+                    </div>
+                </div>
+                <button id="closeIntegrationModalBtn" class="w-9 h-9 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto space-y-6 text-sm">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 rounded-xl bg-dark-900 border border-brand-500/40 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase text-brand-400">Yöntem 1 (Önerilen)</span>
+                            <i class="fa-solid fa-file-code text-brand-500"></i>
+                        </div>
+                        <h4 class="font-bold text-white">videos.js ile Otomatik</h4>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            Üst bardaki <strong>"videos.js Bağla"</strong> veya <strong>"videos.js İndir"</strong> butonuyla <code>videos.js</code> dosyasını ana sitenizle aynı klasöre koyun. Siteniz tüm videoları otomatik çeker!
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-dark-900 border border-purple-500/40 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase text-purple-400">Yöntem 2</span>
+                            <i class="fa-solid fa-server text-purple-400"></i>
+                        </div>
+                        <h4 class="font-bold text-white">Node.js Sunucu (Anında)</h4>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            <code>npm start</code> ile çalıştırdığınızda eklediğiniz her video otomatik olarak <code>videos.json</code> ve <code>videos.js</code> içine kaydedilir.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-dark-900 border border-zinc-700 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase text-zinc-400">Yöntem 3</span>
+                            <i class="fa-solid fa-copy text-zinc-400"></i>
+                        </div>
+                        <h4 class="font-bold text-white">Tekil Iframe Kopyala</h4>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            Her videonun altındaki <strong>"Iframe Kopyala"</strong> butonuna basıp doğrudan kendi HTML sayfanızda istediğiniz yere yapıştırabilirsiniz.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between">
+                        <label class="text-xs font-bold uppercase tracking-wider text-zinc-300 flex items-center gap-2">
+                            <i class="fa-solid fa-code text-brand-500"></i>
+                            <span>Ana Site Entegrasyon Kodu</span>
+                        </label>
+                        <button type="button" id="copyIntegrationSnippetBtn" class="px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold transition flex items-center gap-1.5">
+                            <i class="fa-regular fa-copy"></i>
+                            <span>Entegrasyon Kodunu Kopyala</span>
+                        </button>
+                    </div>
+                    <textarea id="integrationSnippetTextarea" readonly rows="10"
+                        class="w-full p-4 bg-dark-950 border border-zinc-800 rounded-xl text-emerald-400 font-mono text-xs leading-relaxed focus:outline-none"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VİDEO OYNATMA MODALI -->
+    <div id="playerModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-3xl rounded-2xl border border-zinc-700 shadow-2xl overflow-hidden">
+            <div class="flex items-center justify-between px-6 py-4 bg-dark-900 border-b border-zinc-800">
+                <div>
+                    <h3 id="modalVideoTitle" class="font-bold text-white text-base">Video Başlığı</h3>
+                    <p id="modalVideoMeta" class="text-xs text-zinc-400 mt-0.5"></p>
+                </div>
+                <button id="closePlayerModalBtn" class="w-9 h-9 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="aspect-video w-full bg-black">
+                <iframe id="modalPlayerIframe" class="w-full h-full" src="" frameborder="0" scrolling="no" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- ŞİFRE DEĞİŞTİRME MODALI -->
+    <div id="passModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-md rounded-2xl border border-zinc-700 shadow-2xl p-6 space-y-4">
+            <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+                <h3 class="font-bold text-white text-base">Yönetici Şifresini Değiştir</h3>
+                <button id="closePassModalBtn" class="text-zinc-400 hover:text-white">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="changePassForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Yeni Yönetici Şifresi</label>
+                    <input type="password" id="newAdminPassInput" required minlength="4"
+                        class="w-full px-4 py-2.5 bg-dark-900 border border-zinc-800 rounded-xl focus:outline-none focus:border-brand-500 text-white text-sm"
+                        placeholder="En az 4 karakter...">
+                </div>
+                <div class="flex items-center justify-end gap-2 pt-2">
+                    <button type="button" id="cancelPassModalBtn" class="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-medium">İptal</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold">Şifreyi Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // --- YÖNETİCİ KİMLİK VE VERİ DURUMU ---
+        const adminCredentials = {
+            username: 'admin',
+            passwordHash: 'admin123'
+        };
+        let isAuthenticated = false;
+        let videosList = [];
+        let videosJsFileHandle = null;
+
+        // HentaiMini (index.html) formatına dönüştürücü
+        function toHentaiMiniFormat(v) {
+            const fullTitle = v.episode && !v.title.includes(v.episode)
+                ? `${v.title} - ${v.episode}`
+                : v.title;
+            return {
+                id: v.id || `runtime-${Date.now()}`,
+                title: fullTitle,
+                episode: v.episode || 'Bölüm 1',
+                category: (v.tags && v.tags[0]) ? v.tags[0] : 'Genel',
+                type: 'embed',
+                embedSrc: v.voeEmbedUrl || v.embedSrc,
+                voeEmbedUrl: v.voeEmbedUrl || v.embedSrc,
+                url: v.voeEmbedUrl || v.embedSrc,
+                embedCode: `<iframe src="${v.voeEmbedUrl || v.embedSrc}" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen></iframe>`,
+                thumbnail: v.poster || v.thumbnail || '',
+                poster: v.poster || v.thumbnail || '',
+                preview: v.poster || v.thumbnail || '',
+                censor: v.censor || 'Sansürsüz',
+                language: v.language || 'Türkçe Altyazılı',
+                tags: Array.isArray(v.tags) ? v.tags : ['Uncensored', 'HD'],
+                description: v.description || '',
+                duration: 'HD',
+                rating: '4.9',
+                createdAt: v.isoDate || new Date().toISOString(),
+                timestamp: v.timestamp || Date.now()
+            };
+        }
+
+        // Node.js Sunucusundan (/api/videos) veya yerel bellekten mevcut videoları çek
+        async function loadFromLocalServer() {
+            try {
+                const res = await fetch('/api/videos');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (Array.isArray(data) && data.length > 0) {
+                        videosList = data.map(item => ({
+                            id: item.id,
+                            title: item.title,
+                            episode: item.episode || 'Bölüm 1',
+                            voeEmbedUrl: item.embedSrc || item.voeEmbedUrl || item.url,
+                            rawInput: item.embedCode || item.embedSrc || item.url,
+                            poster: item.thumbnail || item.poster,
+                            censor: item.censor || 'Sansürsüz',
+                            language: item.language || 'Türkçe Altyazılı',
+                            tags: item.tags || [item.category || 'Genel'],
+                            description: item.description || '',
+                            createdAt: new Date(item.createdAt || Date.now()).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }),
+                            isoDate: item.createdAt || new Date().toISOString(),
+                            timestamp: item.timestamp || Date.now()
+                        }));
+                        renderVideosList();
+                        renderPublicSiteView();
+                        return;
+                    }
+                }
+            } catch (e) {}
+
+            // Sunucu yoksa localStorage yedeğini kontrol et
+            try {
+                const localRaw = localStorage.getItem('hentaimini_admin_videos');
+                if (localRaw) {
+                    const parsed = JSON.parse(localRaw);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        videosList = parsed;
+                        renderVideosList();
+                        renderPublicSiteView();
+                    }
+                }
+            } catch (err) {}
+        }
+
+        // Yerel videos.js dosyasına ve Node.js sunucusuna otomatik kayıt
+        async function syncWithHentaiMiniSite() {
+            const formattedList = videosList.map(toHentaiMiniFormat);
+
+            // 1. Tarayıcı LocalStorage üzerine kaydet
+            try {
+                localStorage.setItem('hentaimini_admin_videos', JSON.stringify(videosList));
+                localStorage.setItem('hentaimini_shared_videos', JSON.stringify(formattedList));
+            } catch (e) {}
+
+            // 2. Eğer kullanıcı videos.js dosyasını bağladıysa doğrudan diske yaz
+            if (videosJsFileHandle) {
+                try {
+                    const jsContent = `window.STATIC_VIDEOS = ${JSON.stringify(formattedList, null, 2)};\n`;
+                    const writable = await videosJsFileHandle.createWritable();
+                    await writable.write(jsContent);
+                    await writable.close();
+                    showToast('videos.js dosyası otomatik güncellendi!', 'success');
+                } catch (err) {
+                    console.error('videos.js yazma hatası:', err);
+                }
+            }
+
+            // 3. Eğer Node.js (server.js) çalışıyorsa API üzerinden hem videos.json hem videos.js'i güncelle
+            try {
+                await fetch('/api/videos/sync', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'x-admin-pass': adminCredentials.passwordHash },
+                    body: JSON.stringify({ videos: formattedList })
+                });
+            } catch (e) {}
+        }
+
+        // --- DOM ELEMENTLERİ ---
+        const loginScreen = document.getElementById('loginScreen');
+        const adminDashboard = document.getElementById('adminDashboard');
+        const loginForm = document.getElementById('loginForm');
+        const adminUser = document.getElementById('adminUser');
+        const adminPass = document.getElementById('adminPass');
+        const togglePassBtn = document.getElementById('togglePassBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Form Elementleri
+        const videoUploadForm = document.getElementById('videoUploadForm');
+        const editingVideoId = document.getElementById('editingVideoId');
+        const videoTitle = document.getElementById('videoTitle');
+        const episodeNumber = document.getElementById('episodeNumber');
+        const voeEmbedInput = document.getElementById('voeEmbedInput');
+        const voeStatusBadge = document.getElementById('voeStatusBadge');
+        const posterUrl = document.getElementById('posterUrl');
+        const censorStatus = document.getElementById('censorStatus');
+        const subLanguage = document.getElementById('subLanguage');
+        const videoTags = document.getElementById('videoTags');
+        const videoDesc = document.getElementById('videoDesc');
+        const submitBtnText = document.getElementById('submitBtnText');
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+        const formHeaderTitle = document.getElementById('formHeaderTitle');
+
+        // Önizleme Elementleri
+        const livePreviewIframe = document.getElementById('livePreviewIframe');
+        const previewPlaceholder = document.getElementById('previewPlaceholder');
+        const extractedUrlDisplay = document.getElementById('extractedUrlDisplay');
+        const generatedHtmlOutput = document.getElementById('generatedHtmlOutput');
+        const copyGeneratedHtmlBtn = document.getElementById('copyGeneratedHtmlBtn');
+        const fillSampleVoeBtn = document.getElementById('fillSampleVoeBtn');
+
+        // Liste ve Arama Elementleri
+        const videosGrid = document.getElementById('videosGrid');
+        const searchVideosInput = document.getElementById('searchVideosInput');
+        const statTotalVideos = document.getElementById('statTotalVideos');
+
+        // Modallar
+        const playerModal = document.getElementById('playerModal');
+        const modalPlayerIframe = document.getElementById('modalPlayerIframe');
+        const modalVideoTitle = document.getElementById('modalVideoTitle');
+        const modalVideoMeta = document.getElementById('modalVideoMeta');
+        const closePlayerModalBtn = document.getElementById('closePlayerModalBtn');
+
+        const passModal = document.getElementById('passModal');
+        const changePassModalBtn = document.getElementById('changePassModalBtn');
+        const closePassModalBtn = document.getElementById('closePassModalBtn');
+        const cancelPassModalBtn = document.getElementById('cancelPassModalBtn');
+        const changePassForm = document.getElementById('changePassForm');
+        const newAdminPassInput = document.getElementById('newAdminPassInput');
+
+        // Sekme ve Entegrasyon Elementleri
+        const switchAdminTabBtn = document.getElementById('switchAdminTabBtn');
+        const switchPublicSiteTabBtn = document.getElementById('switchPublicSiteTabBtn');
+        const adminMainView = document.getElementById('adminMainView');
+        const publicSiteView = document.getElementById('publicSiteView');
+        const openIntegrationModalBtn = document.getElementById('openIntegrationModalBtn');
+        const openGuideFromPreviewBtn = document.getElementById('openGuideFromPreviewBtn');
+        const integrationModal = document.getElementById('integrationModal');
+        const closeIntegrationModalBtn = document.getElementById('closeIntegrationModalBtn');
+        const integrationSnippetTextarea = document.getElementById('integrationSnippetTextarea');
+        const copyIntegrationSnippetBtn = document.getElementById('copyIntegrationSnippetBtn');
+
+        // --- GÖRÜNÜM GEÇİŞLERİ (ADMİN <-> CANLI SİTE) ---
+        function showAdminTab() {
+            adminMainView.classList.remove('hidden');
+            publicSiteView.classList.add('hidden');
+            switchAdminTabBtn.className = 'px-3.5 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold transition flex items-center gap-1.5 shadow';
+            switchPublicSiteTabBtn.className = 'px-3.5 py-1.5 rounded-lg text-zinc-400 hover:text-white text-xs font-semibold transition flex items-center gap-1.5';
+        }
+
+        function showPublicSiteTab() {
+            adminMainView.classList.add('hidden');
+            publicSiteView.classList.remove('hidden');
+            switchPublicSiteTabBtn.className = 'px-3.5 py-1.5 rounded-lg bg-brand-600 text-white text-xs font-semibold transition flex items-center gap-1.5 shadow';
+            switchAdminTabBtn.className = 'px-3.5 py-1.5 rounded-lg text-zinc-400 hover:text-white text-xs font-semibold transition flex items-center gap-1.5';
+            renderPublicSiteView();
+        }
+
+        switchAdminTabBtn.addEventListener('click', showAdminTab);
+        switchPublicSiteTabBtn.addEventListener('click', showPublicSiteTab);
+
+        // --- ENTEGRASYON SİHİRBAZI KOD ÜRETİCİ ---
+        function updateIntegrationSnippet() {
+            const formattedList = videosList.map(toHentaiMiniFormat);
+            integrationSnippetTextarea.value = `window.STATIC_VIDEOS = ${JSON.stringify(formattedList, null, 2)};\n`;
+        }
+
+        openIntegrationModalBtn.addEventListener('click', () => {
+            updateIntegrationSnippet();
+            integrationModal.classList.remove('hidden');
+        });
+        openGuideFromPreviewBtn.addEventListener('click', () => {
+            updateIntegrationSnippet();
+            integrationModal.classList.remove('hidden');
+        });
+        closeIntegrationModalBtn.addEventListener('click', () => integrationModal.classList.add('hidden'));
+
+        copyIntegrationSnippetBtn.addEventListener('click', () => {
+            integrationSnippetTextarea.select();
+            document.execCommand('copy');
+            showToast('Ana site videos.js kodu panoya kopyalandı!');
+        });
+
+        // --- CANLI SİTE GÖRÜNÜMÜNÜ RENDER ETME ---
+        let activePublicVideoId = null;
+
+        function renderPublicSiteView() {
+            const publicGrid = document.getElementById('publicVideosGrid');
+            if (!videosList.length) {
+                publicGrid.innerHTML = `<p class="text-zinc-400 text-sm col-span-full">Henüz video yüklenmedi.</p>`;
+                return;
+            }
+
+            const activeVideo = videosList.find(v => v.id === activePublicVideoId) || videosList[0];
+            activePublicVideoId = activeVideo.id;
+
+            document.getElementById('publicActiveEpisodeBadge').textContent = activeVideo.episode;
+            document.getElementById('publicActiveTitle').textContent = activeVideo.title;
+            document.getElementById('publicActiveDesc').textContent = activeVideo.description;
+            document.getElementById('publicActiveCensor').textContent = activeVideo.censor;
+            document.getElementById('publicActiveLang').textContent = activeVideo.language;
+
+            const publicIframe = document.getElementById('publicMainIframe');
+            if (publicIframe.src !== activeVideo.voeEmbedUrl) {
+                publicIframe.src = activeVideo.voeEmbedUrl;
+            }
+
+            document.getElementById('publicActiveTags').innerHTML = (activeVideo.tags || []).map(t =>
+                `<span class="text-xs px-2.5 py-1 rounded-lg bg-zinc-800 text-zinc-300 border border-zinc-700">#${t}</span>`
+            ).join('');
+
+            publicGrid.innerHTML = videosList.map(v => {
+                const isPlaying = v.id === activePublicVideoId;
+                return `
+                    <div onclick="selectPublicVideo('${v.id}')" class="cursor-pointer bg-dark-900 rounded-xl overflow-hidden border ${isPlaying ? 'border-brand-500 ring-2 ring-brand-500/30' : 'border-zinc-800 hover:border-zinc-700'} transition group">
+                        <div class="relative aspect-video bg-dark-950 overflow-hidden">
+                            <img src="${v.poster}" alt="${v.title}" onerror="this.src='https://placehold.co/600x340/18181b/ec4899?text=Poster'" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            <span class="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold bg-brand-600 text-white">${v.episode}</span>
+                            ${isPlaying ? '<span class="absolute bottom-2 right-2 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-600 text-white"><i class="fa-solid fa-play mr-1"></i>Oynatılıyor</span>' : ''}
+                        </div>
+                        <div class="p-3.5">
+                            <h4 class="font-bold text-white text-sm truncate group-hover:text-brand-400 transition">${v.title}</h4>
+                            <p class="text-[11px] text-zinc-400 mt-1">${v.language} • ${v.censor}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.selectPublicVideo = function(id) {
+            activePublicVideoId = id;
+            renderPublicSiteView();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        // --- BİLDİRİM (TOAST) FONKSİYONU ---
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            const colors = {
+                success: 'bg-zinc-900 border-emerald-500/50 text-emerald-400',
+                error: 'bg-zinc-900 border-red-500/50 text-red-400',
+                info: 'bg-zinc-900 border-brand-500/50 text-brand-400'
+            };
+            const icons = {
+                success: 'fa-circle-check',
+                error: 'fa-triangle-exclamation',
+                info: 'fa-circle-info'
+            };
+
+            toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3.5 rounded-xl border shadow-2xl backdrop-blur-md transition-all duration-300 ${colors[type]}`;
+            toast.innerHTML = `
+                <i class="fa-solid ${icons[type]} text-lg"></i>
+                <span class="text-xs font-medium text-zinc-100">${message}</span>
+            `;
+
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-x-4');
+                setTimeout(() => toast.remove(), 300);
+            }, 3200);
+        }
+
+        // --- VOE.SX EMBED AYRIŞTIRICI (AKILLI PARSER) ---
+        function parseVoeEmbed(inputStr) {
+            if (!inputStr || !inputStr.trim()) return null;
+            const trimmed = inputStr.trim();
+
+            const iframeSrcMatch = trimmed.match(/src=["']([^"']+)["']/i);
+            let url = iframeSrcMatch ? iframeSrcMatch[1] : trimmed;
+
+            try {
+                if (url.startsWith('//')) {
+                    url = 'https:' + url;
+                }
+                const parsedUrl = new URL(url);
+                const pathParts = parsedUrl.pathname.split('/').filter(Boolean);
+                if (parsedUrl.hostname.includes('voe') && pathParts.length === 1 && pathParts[0] !== 'e') {
+                    parsedUrl.pathname = `/e/${pathParts[0]}`;
+                    return parsedUrl.toString();
+                }
+                return parsedUrl.toString();
+            } catch (err) {
+                return null;
+            }
+        }
+
+        // --- CANLI ÖNİZLEME VE HTML ÜRETİCİ GÜNCELLEME ---
+        function updateLivePreviewAndCode() {
+            const rawCode = voeEmbedInput.value;
+            const cleanEmbedUrl = parseVoeEmbed(rawCode);
+            const titleVal = videoTitle.value.trim() || 'Video Başlığı';
+            const epVal = episodeNumber.value.trim() || 'Bölüm 1';
+
+            if (cleanEmbedUrl) {
+                voeStatusBadge.textContent = 'Geçerli VOE.sx Embed';
+                voeStatusBadge.className = 'text-[11px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-medium';
+                
+                extractedUrlDisplay.textContent = cleanEmbedUrl;
+                previewPlaceholder.classList.add('hidden');
+                livePreviewIframe.classList.remove('hidden');
+                
+                if (livePreviewIframe.src !== cleanEmbedUrl) {
+                    livePreviewIframe.src = cleanEmbedUrl;
+                }
+
+                generatedHtmlOutput.value = `<!-- ${titleVal} - ${epVal} (VOE.sx Player) -->\n<div class="video-container" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;background:#000;">\n  <iframe src="${cleanEmbedUrl}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" scrolling="no" frameborder="0" allowfullscreen></iframe>\n</div>`;
+            } else {
+                voeStatusBadge.textContent = rawCode.trim() ? 'Geçersiz Kod / Link' : 'Kod Bekleniyor';
+                voeStatusBadge.className = rawCode.trim() 
+                    ? 'text-[11px] px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30'
+                    : 'text-[11px] px-2 py-0.5 rounded bg-zinc-800 text-zinc-400';
+
+                extractedUrlDisplay.textContent = 'URL Yok';
+                livePreviewIframe.src = '';
+                livePreviewIframe.classList.add('hidden');
+                previewPlaceholder.classList.remove('hidden');
+                generatedHtmlOutput.value = '';
+            }
+        }
+
+        voeEmbedInput.addEventListener('input', updateLivePreviewAndCode);
+        videoTitle.addEventListener('input', updateLivePreviewAndCode);
+        episodeNumber.addEventListener('input', updateLivePreviewAndCode);
+
+        // Örnek VOE Kodu Doldurma
+        fillSampleVoeBtn.addEventListener('click', () => {
+            voeEmbedInput.value = '<iframe src="https://voe.sx/e/d8a9f7g6h5j4" width="560" height="315" scrolling="no" frameborder="0" allowfullscreen></iframe>';
+            if (!videoTitle.value) videoTitle.value = 'Isekai Harem Monogatari';
+            if (!episodeNumber.value) episodeNumber.value = 'Bölüm 2';
+            updateLivePreviewAndCode();
+            showToast('Örnek VOE.sx embed kodu yerleştirildi.', 'info');
+        });
+
+        // Hızlı Etiket Ekleme
+        document.querySelectorAll('.quick-tag').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tag = btn.getAttribute('data-tag');
+                const currentTags = videoTags.value.split(',').map(t => t.trim()).filter(Boolean);
+                if (!currentTags.includes(tag)) {
+                    currentTags.push(tag);
+                    videoTags.value = currentTags.join(', ');
+                }
+            });
+        });
+
+        // Hazır HTML Kodunu Kopyalama
+        copyGeneratedHtmlBtn.addEventListener('click', () => {
+            if (!generatedHtmlOutput.value) {
+                showToast('Önce geçerli bir VOE.sx embed kodu girin!', 'error');
+                return;
+            }
+            generatedHtmlOutput.select();
+            document.execCommand('copy');
+            showToast('Hazır HTML embed kodu panoya kopyalandı!');
+        });
+
+        // --- GİRİŞ / YETKİ KONTROLÜ ---
+        togglePassBtn.addEventListener('click', () => {
+            const isPass = adminPass.type === 'password';
+            adminPass.type = isPass ? 'text' : 'password';
+            togglePassBtn.innerHTML = isPass ? '<i class="fa-solid fa-eye-slash"></i>' : '<i class="fa-solid fa-eye"></i>';
+        });
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const u = adminUser.value.trim();
+            const p = adminPass.value;
+
+            if (u === adminCredentials.username && p === adminCredentials.passwordHash) {
+                isAuthenticated = true;
+                loginScreen.classList.add('hidden');
+                adminDashboard.classList.remove('hidden');
+                adminPass.value = '';
+                renderVideosList();
+                showToast('Yönetici girişi başarılı. Hoş geldiniz!');
+            } else {
+                showToast('Hatalı yönetici kullanıcı adı veya şifre!', 'error');
+            }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            isAuthenticated = false;
+            adminDashboard.classList.add('hidden');
+            loginScreen.classList.remove('hidden');
+            showToast('Güvenli çıkış yapıldı.', 'info');
+        });
+
+        // --- VİDEO EKLEME / GÜNCELLEME İŞLEMİ ---
+        videoUploadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!isAuthenticated) {
+                showToast('Yetkisiz işlem engellendi!', 'error');
+                return;
+            }
+
+            const cleanEmbedUrl = parseVoeEmbed(voeEmbedInput.value);
+            if (!cleanEmbedUrl) {
+                showToast('Lütfen geçerli bir VOE.sx iframe kodu veya linki girin!', 'error');
+                return;
+            }
+
+            const tagsArray = videoTags.value
+                .split(',')
+                .map(t => t.trim())
+                .filter(Boolean);
+
+            const defaultPoster = `https://placehold.co/600x340/1f122b/ec4899?text=${encodeURIComponent(videoTitle.value.trim() + ' - ' + episodeNumber.value.trim())}`;
+
+            const videoData = {
+                id: editingVideoId.value || 'vid-' + Date.now(),
+                title: videoTitle.value.trim(),
+                episode: episodeNumber.value.trim(),
+                voeEmbedUrl: cleanEmbedUrl,
+                rawInput: voeEmbedInput.value.trim(),
+                poster: posterUrl.value.trim() || defaultPoster,
+                censor: censorStatus.value,
+                language: subLanguage.value,
+                tags: tagsArray.length ? tagsArray : ['Uncensored', 'HD'],
+                description: videoDesc.value.trim() || 'Açıklama belirtilmedi.',
+                createdAt: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }),
+                isoDate: new Date().toISOString(),
+                timestamp: Date.now()
+            };
+
+            if (editingVideoId.value) {
+                const index = videosList.findIndex(v => v.id === editingVideoId.value);
+                if (index !== -1) {
+                    videosList[index] = videoData;
+                    showToast('Video bilgileri ve VOE.sx embed kodu güncellendi!');
+                }
+            } else {
+                videosList.unshift(videoData);
+                showToast('Yeni bölüm başarıyla yüklendi ve ana siteyle eşitlendi!');
+            }
+
+            syncWithHentaiMiniSite();
+            resetUploadForm();
+            renderVideosList();
+            renderPublicSiteView();
+            updateIntegrationSnippet();
+        });
+
+        function resetUploadForm() {
+            videoUploadForm.reset();
+            editingVideoId.value = '';
+            formHeaderTitle.textContent = 'Yeni Bölüm / Video Ekle';
+            submitBtnText.textContent = 'Videoyu Sisteme Yükle ve Yayınla';
+            cancelEditBtn.classList.add('hidden');
+            updateLivePreviewAndCode();
+        }
+
+        cancelEditBtn.addEventListener('click', resetUploadForm);
+
+        // --- VİDEO LİSTESİNİ RENDER ETME ---
+        function renderVideosList() {
+            const query = searchVideosInput.value.toLowerCase().trim();
+            const filtered = videosList.filter(v => 
+                v.title.toLowerCase().includes(query) ||
+                v.episode.toLowerCase().includes(query) ||
+                (v.tags || []).some(t => t.toLowerCase().includes(query))
+            );
+
+            statTotalVideos.textContent = videosList.length;
+
+            if (filtered.length === 0) {
+                videosGrid.innerHTML = `
+                    <div class="col-span-full py-12 text-center border border-dashed border-zinc-800 rounded-2xl">
+                        <i class="fa-solid fa-folder-open text-3xl text-zinc-600 mb-2"></i>
+                        <p class="text-sm text-zinc-400">Henüz eşleşen bir video bulunamadı.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            videosGrid.innerHTML = filtered.map(video => `
+                <div class="bg-dark-900 border border-zinc-800/90 rounded-2xl overflow-hidden flex flex-col justify-between group hover:border-brand-500/50 transition duration-200 shadow-lg">
+                    <div>
+                        <div class="relative aspect-video bg-dark-950 overflow-hidden">
+                            <img src="${video.poster}" alt="${video.title}" 
+                                onerror="this.src='https://placehold.co/600x340/18181b/ec4899?text=Gorsel+Yok'"
+                                class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            
+                            <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-brand-600 text-white shadow">
+                                    ${video.episode}
+                                </span>
+                                <span class="px-2.5 py-0.5 rounded-md text-[11px] font-semibold bg-black/70 text-zinc-200 backdrop-blur-sm border border-white/10">
+                                    ${video.censor}
+                                </span>
+                            </div>
+
+                            <button onclick="openPlayerModal('${video.id}')" 
+                                class="absolute inset-0 m-auto w-12 h-12 rounded-full bg-brand-600/90 hover:bg-brand-500 text-white flex items-center justify-center shadow-lg shadow-brand-600/40 transform scale-90 group-hover:scale-100 transition">
+                                <i class="fa-solid fa-play ml-0.5"></i>
+                            </button>
+
+                            <span class="absolute bottom-2.5 right-3 text-[11px] text-zinc-300 bg-black/60 px-2 py-0.5 rounded">
+                                <i class="fa-solid fa-server text-brand-400 mr-1"></i>VOE.sx
+                            </span>
+                        </div>
+
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-2">
+                                <h3 class="font-bold text-white text-base line-clamp-1">${video.title}</h3>
+                                <span class="text-[11px] text-zinc-500 whitespace-nowrap">${video.createdAt}</span>
+                            </div>
+                            <p class="text-xs text-zinc-400 mt-1 line-clamp-2">${video.description}</p>
+
+                            <div class="flex flex-wrap gap-1.5 mt-3">
+                                <span class="text-[10px] px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20">${video.language}</span>
+                                ${(video.tags || []).map(t => `<span class="text-[10px] px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">${t}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-4 py-3 bg-dark-950/60 border-t border-zinc-800/80 flex items-center justify-between gap-2">
+                        <button onclick="copySingleEmbed('${video.id}')" class="text-xs text-zinc-300 hover:text-brand-400 flex items-center gap-1.5 transition" title="Embed Kodunu Kopyala">
+                            <i class="fa-solid fa-code text-brand-500"></i>
+                            <span>Iframe Kopyala</span>
+                        </button>
+
+                        <div class="flex items-center gap-2">
+                            <button onclick="editVideo('${video.id}')" class="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs transition" title="Düzenle">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <button onclick="deleteVideo('${video.id}')" class="px-2.5 py-1 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs transition" title="Sil">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        searchVideosInput.addEventListener('input', renderVideosList);
+
+        // --- KART AKSİYON FONKSİYONLARI ---
+        window.openPlayerModal = function(id) {
+            const video = videosList.find(v => v.id === id);
+            if (!video) return;
+            modalVideoTitle.textContent = `${video.title} - ${video.episode}`;
+            modalVideoMeta.textContent = `${video.censor} • ${video.language} • Kaynak: ${video.voeEmbedUrl}`;
+            modalPlayerIframe.src = video.voeEmbedUrl;
+            playerModal.classList.remove('hidden');
+        };
+
+        closePlayerModalBtn.addEventListener('click', () => {
+            playerModal.classList.add('hidden');
+            modalPlayerIframe.src = '';
+        });
+
+        window.copySingleEmbed = function(id) {
+            const video = videosList.find(v => v.id === id);
+            if (!video) return;
+            const tempInput = document.createElement('textarea');
+            tempInput.value = `<iframe src="${video.voeEmbedUrl}" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen></iframe>`;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            tempInput.remove();
+            showToast(`${video.title} (${video.episode}) iframe kodu kopyalandı!`);
+        };
+
+        window.editVideo = function(id) {
+            const video = videosList.find(v => v.id === id);
+            if (!video) return;
+
+            editingVideoId.value = video.id;
+            videoTitle.value = video.title;
+            episodeNumber.value = video.episode;
+            voeEmbedInput.value = video.rawInput || video.voeEmbedUrl;
+            posterUrl.value = (video.poster && video.poster.includes('placehold.co')) ? '' : (video.poster || '');
+            censorStatus.value = video.censor;
+            subLanguage.value = video.language;
+            videoTags.value = (video.tags || []).join(', ');
+            videoDesc.value = video.description;
+
+            formHeaderTitle.textContent = `Bölümü Düzenle: ${video.title}`;
+            submitBtnText.textContent = 'Değişiklikleri Kaydet';
+            cancelEditBtn.classList.remove('hidden');
+
+            updateLivePreviewAndCode();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            showToast('Video düzenleme moduna alındı.', 'info');
+        };
+
+        window.deleteVideo = function(id) {
+            videosList = videosList.filter(v => v.id !== id);
+            syncWithHentaiMiniSite();
+            renderVideosList();
+            renderPublicSiteView();
+            updateIntegrationSnippet();
+            showToast('Video listeden kaldırıldı.', 'info');
+        };
+
+        // --- DOĞRUDAN BİLGİSAYARDAKİ VIDEOS.JS DOSYASINI BAĞLAMA ---
+        document.getElementById('connectVideosJsBtn').addEventListener('click', async () => {
+            if (!window.showOpenFilePicker) {
+                showToast('Tarayıcınız doğrudan dosya bağlamayı desteklemiyor, "videos.js İndir" butonunu kullanabilirsiniz.', 'error');
+                return;
+            }
+            try {
+                const [handle] = await window.showOpenFilePicker({
+                    multiple: false,
+                    types: [{ description: 'HentaiMini videos.js Dosyası', accept: { 'text/javascript': ['.js'] } }]
+                });
+                videosJsFileHandle = handle;
+                document.getElementById('connectVideosJsText').textContent = 'videos.js Bağlandı ✓';
+                await syncWithHentaiMiniSite();
+                showToast('videos.js bağlandı! Eklediğiniz her video otomatik olarak sitenize yazılacak.');
+            } catch (err) {
+                if (err.name !== 'AbortError') showToast('Dosya seçilemedi.', 'error');
+            }
+        });
+
+        // --- HENTAIMINI İÇİN HAZIR VIDEOS.JS İNDİRME ---
+        document.getElementById('exportVideosJsBtn').addEventListener('click', () => {
+            const formattedList = videosList.map(toHentaiMiniFormat);
+            const jsContent = `window.STATIC_VIDEOS = ${JSON.stringify(formattedList, null, 2)};\n`;
+            const dataStr = "data:text/javascript;charset=utf-8," + encodeURIComponent(jsContent);
+            const dlAnchorElem = document.createElement('a');
+            dlAnchorElem.setAttribute("href", dataStr);
+            dlAnchorElem.setAttribute("download", "videos.js");
+            document.body.appendChild(dlAnchorElem);
+            dlAnchorElem.click();
+            dlAnchorElem.remove();
+            showToast('HentaiMini uyumlu videos.js indirildi! Sitenizin ana dizinine atabilirsiniz.');
+        });
+
+        // --- JSON ÇIKTISI ALMA (videos.json) ---
+        document.getElementById('exportJsonBtn').addEventListener('click', () => {
+            const formattedList = videosList.map(toHentaiMiniFormat);
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(formattedList, null, 2));
+            const dlAnchorElem = document.createElement('a');
+            dlAnchorElem.setAttribute("href", dataStr);
+            dlAnchorElem.setAttribute("download", "videos.json");
+            document.body.appendChild(dlAnchorElem);
+            dlAnchorElem.click();
+            dlAnchorElem.remove();
+            showToast('videos.json dosyası indirildi!');
+        });
+
+        // --- ŞİFRE DEĞİŞTİRME MODALI ---
+        changePassModalBtn.addEventListener('click', () => passModal.classList.remove('hidden'));
+        closePassModalBtn.addEventListener('click', () => passModal.classList.add('hidden'));
+        cancelPassModalBtn.addEventListener('click', () => passModal.classList.add('hidden'));
+
+        changePassForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newPass = newAdminPassInput.value.trim();
+            if (newPass.length >= 4) {
+                adminCredentials.passwordHash = newPass;
+                newAdminPassInput.value = '';
+                passModal.classList.add('hidden');
+                showToast('Yönetici şifreniz başarıyla güncellendi!');
+            }
+        });
+
+        // Başlangıçta mevcut videoları yükle
+        loadFromLocalServer();
+    </script>
+</body>
+</html>
